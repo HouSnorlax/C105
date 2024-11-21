@@ -2,32 +2,98 @@ import tkinter
 import sys
 from tkinter import ttk
 
+#掲示板を作り変える関数
 def createwindow():
+    #会場名変更
     joumei.configure(text = "\n".join(box1.get()))
     if (box2.get() == '10') or (box2.get() == '11') or (box2.get() == '12'):
         race1.configure(text = box2.get(),font=("MSゴシック", "50", "bold"))
         race1.place(x = 75, y = 23)
     else:
         race1.configure(text = box2.get(),font=("MSゴシック", "70", "bold"))
-        race1.place(x = 80, y = 11)
+        race1.place(x = 85, y = 8)
+    #馬番変更
     first_h.configure(text = box3.get())
     second_h.configure(text = box4.get())
     third_h.configure(text = box5.get())
     fourth_h.configure(text = box6.get())
     fifth_h.configure(text = box7.get())
+    #馬場状態変更
     siba2.configure(text = box12.get())
     dirt2.configure(text = box13.get())
+    #右上のランプ変更
     if box14.get() == '確定':
         now.configure(text = box14.get(), font=("MSゴシック", "90", "bold"), width = 3,foreground = 'white' ,bg = 'red')
     elif box14.get() == '審議':
         now.configure(text = box14.get(), font=("MSゴシック", "90", "bold"), width = 3,foreground = 'white' ,bg = 'blue')
     else:
         now.configure(text = box14.get(), font=("MSゴシック", "90", "bold"), width = 3,foreground = 'white' ,bg = '#696969')
+    #着差変更
+    first_s.configure(text = box8.get())
+    second_s.configure(text = box9.get())
+    third_s.configure(text = box10.get())
+    fourth_s.configure(text = box11.get())
+    #レコード変更
+    record.configure(text = box15.get())
+    #タイム変更
+    time_min.configure(text = box16.get())
+    time_sec.configure(text = box17.get())
+    time_sec10.configure(text = box18.get())
+    #4F変更
+    fourf_sec.configure(text = box19.get())
+    fourf_sec10.configure(text = box20.get())
+    #3F変更
+    threef_sec.configure(text = box21.get())
+    threef_sec10.configure(text = box22.get())
+    #同着処理
+    if box8.get() == '同着':
+        second.configure(text = 'Ⅰ')
+        dou = 1
+    else:
+        second.configure(text = 'Ⅱ')
+        dou = 0
+
+    if box9.get() == '同着':
+        if dou == 1:
+            third.configure(text = 'Ⅰ')
+            dou = 1
+        elif dou == 0:
+            third.configure(text = 'Ⅱ')
+            dou = 2
+    else:
+        third.configure(text = 'Ⅲ')
+        dou = 0
+
+    if box10.get() == '同着':
+        if dou == 1:
+            fourth.configure(text = 'Ⅰ')
+            dou = 1
+        elif dou == 2:
+            fourth.configure(text = 'Ⅱ')
+            dou = 2
+        elif dou == 0:
+            fourth.configure(text = 'Ⅲ')
+            dou = 3
+    else:
+        fourth.configure(text = 'Ⅳ')
+        dou = 4
+
+    if box11.get() == '同着':
+        if dou == 1:
+            fifth.configure(text = 'Ⅰ')
+        elif dou == 2:
+            fifth.configure(text = 'Ⅱ')
+        elif dou == 3:
+            fifth.configure(text = 'Ⅲ')
+        elif dou == 4:
+            fifth.configure(text = 'Ⅳ')
+    else:
+        fifth.configure(text = 'Ⅴ')
 
 #ウィンドウ作成
 root = tkinter.Tk()
 root2 = tkinter.Tk()
-root.geometry('250x450')
+root.geometry('250x550')
 root2.geometry('500x850')
 root2.configure(bg = 'black')
 root.title('設定画面')
@@ -37,7 +103,7 @@ canvas = tkinter.Canvas(root2, bg = 'black', height = 900, width = 500 )
 #rootの内容
 label1 = tkinter.Label(root, text = '場名')
 box1 = ttk.Combobox(root,  values=['　　','東京','中山','阪神','京都','中京','小倉','新潟','福島','札幌','函館'], width = 4)
-box１.current(0)
+box1.current(0)
 label2 = tkinter.Label(root, text = 'R')
 box2 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12], width = 2)
 box2.current(0)
@@ -75,6 +141,23 @@ box13.current(0)
 label14 = tkinter.Label(root, text = '状況')
 box14 = ttk.Combobox(root, state="readonly", values=['　','確定','審議'], width = 4)
 box14.current(0)
+label15 = tkinter.Label(root, text = 'レコード')
+box15 = ttk.Combobox(root, state="readonly", values=['　','ﾚｺｰﾄﾞ','ﾃｽﾄ*'], width = 4)
+box15.current(0)
+label16 =tkinter.Label(root, text = 'time min.')
+box16 = tkinter.Entry(root)
+label17 =tkinter.Label(root, text = 'time sec')
+box17 = tkinter.Entry(root)
+label18 =tkinter.Label(root, text = 'time sec 1/10')
+box18 = tkinter.Entry(root)
+label19 =tkinter.Label(root, text = '4F sec')
+box19 = tkinter.Entry(root)
+label20 =tkinter.Label(root, text = '4F sec 1/10')
+box20 = tkinter.Entry(root)
+label21 =tkinter.Label(root, text = '3F sec')
+box21 = tkinter.Entry(root)
+label22 =tkinter.Label(root, text = '3F sec 1/10')
+box22 = tkinter.Entry(root)
 
 #root2の内容
 joumei = tkinter.Label(root2,text="\n".join('　　'), font=("MSゴシック", "33", "bold"), foreground = 'white', bg = 'black')
@@ -95,6 +178,28 @@ siba2 = tkinter.Label(root2,text = ' ', font=("MSゴシック", "60", "bold"), w
 dirt1 = tkinter.Label(root2,text = 'ダート', font=("MSゴシック", "33", "bold"), foreground = 'white' ,bg = 'black')
 dirt2 = tkinter.Label(root2,text = ' ', font=("MSゴシック", "60", "bold"), width = 3,foreground = 'yellow' ,bg = '#696969', anchor = 'center')
 now = tkinter.Label(root2,text = ' ', font=("MSゴシック", "90", "bold"), width = 3,foreground = 'white' ,bg = '#696969')
+first_s = tkinter.Label(root2,text = ' ', font=("MSゴシック", "40", "bold"), width = 4,foreground = 'yellow' ,bg = '#696969', anchor = 'center')
+second_s = tkinter.Label(root2,text = ' ', font=("MSゴシック", "40", "bold"), width = 4,foreground = 'yellow' ,bg = '#696969', anchor = 'center')
+third_s = tkinter.Label(root2,text = ' ', font=("MSゴシック", "40", "bold"), width = 4,foreground = 'yellow' ,bg = '#696969', anchor = 'center')
+fourth_s = tkinter.Label(root2,text = ' ', font=("MSゴシック", "40", "bold"), width = 4,foreground = 'yellow' ,bg = '#696969', anchor = 'center')
+record = tkinter.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 4,foreground = 'red' ,bg = '#696969')
+time = tkinter.Label(root2,text = 'タイム', font=("MSゴシック", "27", "bold"), foreground = 'white' ,bg = 'black')
+fourf = tkinter.Label(root2,text = '４Ｆ', font=("MSゴシック", "27", "bold"),foreground = 'white' ,bg = 'black')
+threef = tkinter.Label(root2,text = '３Ｆ', font=("MSゴシック", "27", "bold"), foreground = 'white' ,bg = 'black')
+time_min = tkinter.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 1,foreground = 'yellow' ,bg = '#696969')
+time_sec = tkinter.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 2,foreground = 'yellow' ,bg = '#696969')
+time_sec10 = tkinter.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 1,foreground = 'yellow' ,bg = '#696969')
+dot = tkinter.Label(root2,text = '.', font=("MSゴシック", "30", "bold"),width = 1, foreground = 'white' ,bg = 'black')
+dot2 = tkinter.Label(root2,text = '.', font=("MSゴシック", "30", "bold"),width = 1, foreground = 'white' ,bg = 'black')
+dot3 = tkinter.Label(root2,text = '.', font=("MSゴシック", "30", "bold"),width = 1, foreground = 'white' ,bg = 'black')
+dot4 = tkinter.Label(root2,text = '.', font=("MSゴシック", "30", "bold"),width = 1, foreground = 'white' ,bg = 'black')
+none = tkinter.Label(root2,text = '', font=("MSゴシック", "1", "bold"),width = 1, foreground = 'white' ,bg = 'black')
+none2 = tkinter.Label(root2,text = '', font=("MSゴシック", "1", "bold"),width = 1, foreground = 'white' ,bg = 'black')
+none3 = tkinter.Label(root2,text = '', font=("MSゴシック", "1", "bold"),width = 1, foreground = 'white' ,bg = 'black')
+fourf_sec = tkinter.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 2,foreground = 'yellow' ,bg = '#696969')
+fourf_sec10 = tkinter.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 1,foreground = 'yellow' ,bg = '#696969')
+threef_sec = tkinter.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 2,foreground = 'yellow' ,bg = '#696969')
+threef_sec10 = tkinter.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 1,foreground = 'yellow' ,bg = '#696969')
 
 #canvasの内容
 canvas.create_oval(10,120,90,200,fill = 'blue')
@@ -102,7 +207,6 @@ canvas.create_oval(10,210,90,290,fill = 'blue')
 canvas.create_oval(10,300,90,380,fill = 'blue')
 canvas.create_oval(10,390,90,470,fill = 'blue')
 canvas.create_oval(10,480,90,560,fill = 'blue')
-
 
 #canvas pack
 canvas.pack()
@@ -136,8 +240,24 @@ label13.grid(column = 0 ,row = 12)
 box13.grid(column = 1, row = 12)
 label14.grid(column = 0 ,row = 13)
 box14.grid(column = 1, row = 13)
-createbutton.grid(column = 0, row = 14)
-exitbutton.grid(column = 1, row = 14)
+label15.grid(column = 0 ,row = 14)
+box15.grid(column = 1, row = 14)
+label16.grid(column = 0 ,row = 15)
+box16.grid(column = 1, row = 15)
+label17.grid(column = 0 ,row = 16)
+box17.grid(column = 1, row = 16)
+label18.grid(column = 0 ,row = 17)
+box18.grid(column = 1, row = 17)
+label19.grid(column = 0 ,row = 18)
+box19.grid(column = 1, row = 18)
+label20.grid(column = 0 ,row = 19)
+box20.grid(column = 1, row = 19)
+label21.grid(column = 0 ,row = 20)
+box21.grid(column = 1, row = 20)
+label22.grid(column = 0 ,row = 21)
+box22.grid(column = 1, row = 21)
+createbutton.grid(column = 0, row = 22)
+exitbutton.grid(column = 1, row = 22)
 
 #root2 place
 joumei.place(x = 20, y = 10)
@@ -158,6 +278,28 @@ siba2.place(x = 15, y = 610, height = 75)
 dirt1.place(x = 22, y = 700)
 dirt2.place(x = 15, y = 750, height = 75)
 now.place(x = 250 , y = 10, height = 120)
+first_s.place(x = 290, y = 165, height = 60)
+second_s.place(x = 290, y = 260, height = 60)
+third_s.place(x = 290, y = 355, height = 60)
+fourth_s.place(x = 290, y = 450, height = 60)
+record.place(x = 290, y = 550, height = 55)
+time.place(x = 170, y = 645)
+fourf.place(x = 205, y = 715)
+threef.place(x = 205, y = 780)
+time_min.place(x = 283, y = 630, height = 55)
+dot.place(x = 323, y = 623, height = 100)
+time_sec.place(x = 350, y = 630, height = 55)
+dot2.place(x = 425, y = 623, height = 100)
+time_sec10.place(x = 452, y = 630,height = 55)
+none.place(x = 490, y = 623, height = 100)
+fourf_sec.place(x = 350, y = 700, height = 55)
+dot3.place(x = 425, y = 693, height = 100)
+fourf_sec10.place(x = 452, y = 700, height = 55)
+none2.place(x = 490, y = 693, height = 100)
+threef_sec.place(x = 350, y = 770, height = 55)
+dot4.place(x = 425, y = 773, height = 75)
+threef_sec10.place(x = 452, y = 770, height = 55)
+none3.place(x = 490, y = 763, height = 80)
 #実行
 root.mainloop()
 root2.mainloop()
