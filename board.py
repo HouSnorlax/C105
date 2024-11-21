@@ -57,44 +57,41 @@ def createwindow():
     #同着処理
     if box8.get() == '同着': #1着同着の場合
         second.configure(text = 'Ⅰ')
-        dou = 1
+        same = 1
     else:
         second.configure(text = 'Ⅱ')
-        dou = 0
+        same = 0
 
     if box9.get() == '同着': #2着同着の場合
-        if dou == 1:
+        if same == 1:
             third.configure(text = 'Ⅰ')
-            dou = 1
-        elif dou == 0:
+        elif same == 0:
             third.configure(text = 'Ⅱ')
-            dou = 2
+            same = 2
     else:
         third.configure(text = 'Ⅲ')
-        dou = 0
+        same = 0
 
     if box10.get() == '同着': #3着同着の場合
-        if dou == 1:
+        if same == 1:
             fourth.configure(text = 'Ⅰ')
-            dou = 1
-        elif dou == 2:
+        elif same == 2:
             fourth.configure(text = 'Ⅱ')
-            dou = 2
-        elif dou == 0:
+        elif same == 0:
             fourth.configure(text = 'Ⅲ')
-            dou = 3
+            same = 3
     else:
         fourth.configure(text = 'Ⅳ')
-        dou = 4
+        same = 4
 
     if box11.get() == '同着': #4着同着の場合
-        if dou == 1:
+        if same == 1:
             fifth.configure(text = 'Ⅰ')
-        elif dou == 2:
+        elif same == 2:
             fifth.configure(text = 'Ⅱ')
-        elif dou == 3:
+        elif same == 3:
             fifth.configure(text = 'Ⅲ')
-        elif dou == 4:
+        elif same == 4:
             fifth.configure(text = 'Ⅳ')
     else:
         fifth.configure(text = 'Ⅴ')
@@ -248,7 +245,7 @@ canvas.create_oval(10,480,90,560,fill = 'blue')
 canvas.pack()
 
 #設定画面のウイジェットを配置
-label1.grid(column = 0 ,row = 0, padx = [10,10])
+label1.grid(column = 0 ,row = 0)
 box1.grid(column = 1, row = 0, )
 label2.grid(column = 0 ,row = 1)
 box2.grid(column = 1, row = 1)
