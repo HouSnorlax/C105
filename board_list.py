@@ -109,8 +109,9 @@ root2.title('掲示板')
 canvas = tk.Canvas(root2, bg = 'black', height = 900, width = 500 )
 
 #root(表示内容の設定)のウィジェット
+labels = []
 #場名の設定
-label1 = tk.Label(root, text = '場名')
+labels.append(tk.Label(root, text = '場名'))
 box1 = ttk.Combobox(root,  values=['　　','東京','中山','阪神','京都','中京','小倉','新潟','福島','札幌','函館'], width = 4)
 
 #馬番の設定
@@ -245,7 +246,7 @@ canvas.create_oval(10,480,90,560,fill = 'blue')
 canvas.pack()
 
 #設定画面のウイジェットを配置
-label1.grid(column = 0 ,row = 0)
+labels[0].grid(column = 0 ,row = 0)
 box1.grid(column = 1, row = 0, )
 label2.grid(column = 0 ,row = 1)
 box2.grid(column = 1, row = 1)
