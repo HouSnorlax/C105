@@ -106,12 +106,20 @@ def clone(widget):
         clone.configure({key: widget.cget(key)})
     return clone
 
+#入力できる数字の制限
+def validate_input(n, limit):
+    if (n.isdigit()):
+        return int(n) <= int(limit)
+    else:
+        return n == ""
+
 #ウィンドウ作成
 #設定画面
 root = tk.Tk()
 root.geometry('250x500')
 root.resizable(False, False)
 root.title('設定画面')
+
 #着順掲示板
 root2 = tk.Tk()
 root2.geometry('510x850')
@@ -123,41 +131,27 @@ canvas = tk.Canvas(root2, bg = 'black', height = 900, width = 500 )
 #root(表示内容の設定)のウィジェット
 labels = []
 box = []
+vc = root.register(validate_input)
 #場名の設定
 labels.append(tk.Label(root, text = '場名'))
 box.append(ttk.Combobox(root,  values=['　　','東京','中山','阪神','京都','中京','小倉','新潟','福島','札幌','函館'], width = 4))
 
 #レース番号の設定
-labels.append(tk.Label(root, text = 'R'))
-box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12], width = 2))
+labels.append(tk.Label(root, text = 'レース数'))
+box.append(tk.Entry(root, validate="key", validatecommand=(vc, "%P", 12), width = 3))
 
 #馬番の設定
-labels.append(tk.Label(root, text = '1'))
-box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
-labels.append(tk.Label(root, text = '2'))
-box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
-labels.append(tk.Label(root, text = '3'))
-box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
-labels.append(tk.Label(root, text = '4'))
-box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
-labels.append(tk.Label(root, text = '5'))
-box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
+[labels.append(tk.Label(root, text = str(i) + "着馬")) for i in range(1,6)]
+[box.append(tk.Entry(root, validate="key", validatecommand=(vc, "%P", 18), width = 3)) for i in range(5)]
 
 #着差の設定
-labels.append(tk.Label(root, text = '1,2'))
-box.append(tk.Entry(root))
-labels.append(tk.Label(root, text = '2,3'))
-box.append(tk.Entry(root))
-labels.append(tk.Label(root, text = '3,4'))
-box.append(tk.Entry(root))
-labels.append(tk.Label(root, text = '4,5'))
-box.append(tk.Entry(root))
+[labels.append(tk.Label(root, text = '着差' + str(i) + "," + str(i+1))) for i in range(1,5)]
+[box.append(tk.Entry(root)) for i in range(4)]
 
 #馬場状態の設定
 labels.append(tk.Label(root, text = '芝'))
-box.append(ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4))
 labels.append(tk.Label(root, text = 'ダート'))
-box.append(ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4))
+[box.append(ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4)) for i in range(2)]
 
 #確定状況の設定
 labels.append(tk.Label(root, text = '状況'))
@@ -168,21 +162,19 @@ labels.append(tk.Label(root, text = 'レコード'))
 box.append(ttk.Combobox(root, state="readonly", values=['　','ﾚｺｰﾄﾞ','ﾃｽﾄ*'], width = 4))
 #入線タイム
 labels.append(tk.Label(root, text = 'time min.'))
-box.append(tk.Entry(root))
+box.append(tk.Entry(root, validate="key", validatecommand=(vc, "%P", 9), width = 2))
 labels.append(tk.Label(root, text = 'time sec'))
-box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = 'time sec 1/10'))
-box.append(tk.Entry(root))
 #4ハロン
 labels.append(tk.Label(root, text = '4F sec'))
-box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = '4F sec 1/10'))
-box.append(tk.Entry(root))
 #3ハロン
 labels.append(tk.Label(root, text = '3F sec'))
-box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = '3F sec 1/10'))
-box.append(tk.Entry(root))
+
+for i in range(3):
+    box.append(tk.Entry(root, validate="key", validatecommand=(vc, "%P", 59), width = 3))
+    box.append(tk.Entry(root, validate="key", validatecommand=(vc, "%P", 9), width = 3))
 
 #設定内容の反映ボタン
 createbutton = tk.Button(root, text = 'create' ,command = createwindow)
