@@ -113,9 +113,11 @@ canvas = tk.Canvas(root2, bg = 'black', height = 900, width = 500 )
 label1 = tk.Label(root, text = '場名')
 box1 = ttk.Combobox(root,  values=['　　','東京','中山','阪神','京都','中京','小倉','新潟','福島','札幌','函館'], width = 4)
 
-#馬番の設定
+#レース番号の設定
 label2 = tk.Label(root, text = 'R')
 box2 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12], width = 2)
+
+#馬番の設定
 label3 =tk.Label(root, text = '1')
 box3 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2)
 label4 = tk.Label(root, text = '2')

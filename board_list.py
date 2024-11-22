@@ -5,64 +5,36 @@ import sys
 #掲示板を作り変える関数
 def createwindow():
     #会場名変更
-    joumei.configure(text = "\n".join(box1.get()))
-    if (box2.get() == '10') or (box2.get() == '11') or (box2.get() == '12'):
-        race1.configure(text = box2.get(),font=("MSゴシック", "50", "bold"))
+    joumei.configure(text = "\n".join(box[0].get()))
+    if (int(box[1].get()) >= 10):
+        race1.configure(text = box[1].get(),font=("MSゴシック", "50", "bold"))
         race1.place(x = 75, y = 23)
     else:
-        race1.configure(text = box2.get(),font=("MSゴシック", "70", "bold"))
+        race1.configure(text = box[1].get(),font=("MSゴシック", "70", "bold"))
         race1.place(x = 85, y = 8)
 
     #馬番変更
-    first_h.configure(text = box3.get())
-    second_h.configure(text = box4.get())
-    third_h.configure(text = box5.get())
-    fourth_h.configure(text = box6.get())
-    fifth_h.configure(text = box7.get())
-
-    #馬場状態変更
-    siba2.configure(text = box12.get())
-    dirt2.configure(text = box13.get())
-
-    #確定状況変更
-    if box14.get() == '確定':
-        now.configure(text = box14.get(), font=("MSゴシック", "90", "bold"), width = 3,foreground = 'white' ,bg = 'red')
-    elif box14.get() == '審議':
-        now.configure(text = box14.get(), font=("MSゴシック", "90", "bold"), width = 3,foreground = 'white' ,bg = 'blue')
-    else:
-        now.configure(text = box14.get(), font=("MSゴシック", "90", "bold"), width = 3,foreground = 'white' ,bg = '#696969')
+    first_h.configure(text = box[2].get())
+    second_h.configure(text = box[3].get())
+    third_h.configure(text = box[4].get())
+    fourth_h.configure(text = box[5].get())
+    fifth_h.configure(text = box[6].get())
     
     #着差変更
-    first_s.configure(text = box8.get())
-    second_s.configure(text = box9.get())
-    third_s.configure(text = box10.get())
-    fourth_s.configure(text = box11.get())
-
-    #レコード変更
-    record.configure(text = box15.get())
-
-    #タイム変更
-    time_min.configure(text = box16.get())
-    time_sec.configure(text = box17.get())
-    time_sec10.configure(text = box18.get())
-
-    #4ハロン変更
-    fourf_sec.configure(text = box19.get())
-    fourf_sec10.configure(text = box20.get())
-
-    #3ハロン変更
-    threef_sec.configure(text = box21.get())
-    threef_sec10.configure(text = box22.get())
+    first_s.configure(text = box[7].get())
+    second_s.configure(text = box[8].get())
+    third_s.configure(text = box[9].get())
+    fourth_s.configure(text = box[10].get())
 
     #同着処理
-    if box8.get() == '同着': #1着同着の場合
+    if box[7].get() == '同着': #1着同着の場合
         second.configure(text = 'Ⅰ')
         same = 1
     else:
         second.configure(text = 'Ⅱ')
         same = 0
 
-    if box9.get() == '同着': #2着同着の場合
+    if box[8].get() == '同着': #2着同着の場合
         if same == 1:
             third.configure(text = 'Ⅰ')
         elif same == 0:
@@ -72,7 +44,7 @@ def createwindow():
         third.configure(text = 'Ⅲ')
         same = 0
 
-    if box10.get() == '同着': #3着同着の場合
+    if box[9].get() == '同着': #3着同着の場合
         if same == 1:
             fourth.configure(text = 'Ⅰ')
         elif same == 2:
@@ -84,7 +56,7 @@ def createwindow():
         fourth.configure(text = 'Ⅳ')
         same = 4
 
-    if box11.get() == '同着': #4着同着の場合
+    if box[10].get() == '同着': #4着同着の場合
         if same == 1:
             fifth.configure(text = 'Ⅰ')
         elif same == 2:
@@ -95,6 +67,34 @@ def createwindow():
             fifth.configure(text = 'Ⅳ')
     else:
         fifth.configure(text = 'Ⅴ')
+
+    #馬場状態変更
+    siba2.configure(text = box[11].get())
+    dirt2.configure(text = box[12].get())
+
+    #確定状況変更
+    if ((text := box[13].get()) == '確定'):
+        now.configure(text = text, font=("MSゴシック", "90", "bold"), width = 3, foreground = 'white', bg = 'red')
+    elif (text == '審議'):
+        now.configure(text = text, font=("MSゴシック", "90", "bold"), width = 3, foreground = 'white', bg = 'blue')
+    else:
+        now.configure(text = "", font=("MSゴシック", "90", "bold"), width = 3, foreground = 'white', bg = '#696969')
+
+    #レコード変更
+    record.configure(text = box[14].get())
+
+    #タイム変更
+    time_min.configure(text = box[15].get())
+    time_sec.configure(text = box[16].get())
+    time_sec10.configure(text = box[17].get())
+
+    #4ハロン変更
+    fourf_sec.configure(text = box[18].get())
+    fourf_sec10.configure(text = box[19].get())
+
+    #3ハロン変更
+    threef_sec.configure(text = box[20].get())
+    threef_sec10.configure(text = box[21].get())
 
 #ウィンドウ作成
 #設定画面
@@ -110,65 +110,67 @@ canvas = tk.Canvas(root2, bg = 'black', height = 900, width = 500 )
 
 #root(表示内容の設定)のウィジェット
 labels = []
-boxes = []
+box = []
 #場名の設定
 labels.append(tk.Label(root, text = '場名'))
-box1 = ttk.Combobox(root,  values=['　　','東京','中山','阪神','京都','中京','小倉','新潟','福島','札幌','函館'], width = 4)
+box.append(ttk.Combobox(root,  values=['　　','東京','中山','阪神','京都','中京','小倉','新潟','福島','札幌','函館'], width = 4))
+
+#レース番号の設定
+labels.append(tk.Label(root, text = 'R'))
+box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12], width = 2))
 
 #馬番の設定
-labels.append(tk.Label(root, text = 'R'))
-box2 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12], width = 2)
 labels.append(tk.Label(root, text = '1'))
-box3 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2)
+box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
 labels.append(tk.Label(root, text = '2'))
-box4 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2)
+box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
 labels.append(tk.Label(root, text = '3'))
-box5 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2)
+box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
 labels.append(tk.Label(root, text = '4'))
-box6 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2)
+box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
 labels.append(tk.Label(root, text = '5'))
-box7 = ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2)
+box.append(ttk.Combobox(root, state="readonly", values=[' ',1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35], width = 2))
 
 #着差の設定
 labels.append(tk.Label(root, text = '1,2'))
-box8 = tk.Entry(root)
+box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = '2,3'))
-box9 = tk.Entry(root)
+box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = '3,4'))
-box10 = tk.Entry(root)
+box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = '4,5'))
-box11 = tk.Entry(root)
+box.append(tk.Entry(root))
 
 #馬場状態の設定
 labels.append(tk.Label(root, text = '芝'))
-box12 = ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4)
+box.append(ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4))
 labels.append(tk.Label(root, text = 'ダート'))
-box13 = ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4)
+box.append(ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4))
 
 #確定状況の設定
 labels.append(tk.Label(root, text = '状況'))
-box14 = ttk.Combobox(root, state="readonly", values=['　','確定','審議'], width = 4)
+box.append(ttk.Combobox(root, state="readonly", values=['　','確定','審議'], width = 4))
 
 #タイム関連の設定
 labels.append(tk.Label(root, text = 'レコード'))
-box15 = ttk.Combobox(root, state="readonly", values=['　','ﾚｺｰﾄﾞ','ﾃｽﾄ*'], width = 4)
+box.append(ttk.Combobox(root, state="readonly", values=['　','ﾚｺｰﾄﾞ','ﾃｽﾄ*'], width = 4))
 #入線タイム
 labels.append(tk.Label(root, text = 'time min.'))
-box16 = tk.Entry(root)
+box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = 'time sec'))
-box17 = tk.Entry(root)
+box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = 'time sec 1/10'))
-box18 = tk.Entry(root)
+box.append(tk.Entry(root))
 #4ハロン
 labels.append(tk.Label(root, text = '4F sec'))
-box19 = tk.Entry(root)
+box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = '4F sec 1/10'))
-box20 = tk.Entry(root)
+box.append(tk.Entry(root))
 #3ハロン
 labels.append(tk.Label(root, text = '3F sec'))
-box21 = tk.Entry(root)
+box.append(tk.Entry(root))
 labels.append(tk.Label(root, text = '3F sec 1/10'))
-box22 = tk.Entry(root)
+box.append(tk.Entry(root))
 
 #設定内容の反映ボタン
 createbutton = tk.Button(root, text = 'create' ,command = createwindow)
@@ -248,30 +250,9 @@ canvas.pack()
 
 #設定画面のウイジェットを配置
 [labels[i].grid(column = 0, row = i) for i in range(len(labels))]
-box1.grid(column = 1, row = 0)
-box2.grid(column = 1, row = 1)
-box3.grid(column = 1, row = 2,)
-box4.grid(column = 1, row = 3)
-box5.grid(column = 1, row = 4)
-box6.grid(column = 1, row = 5)
-box7.grid(column = 1, row = 6)
-box8.grid(column = 1, row = 7)
-box9.grid(column = 1, row = 8)
-box10.grid(column = 1, row = 9)
-box11.grid(column = 1, row = 10)
-box12.grid(column = 1, row = 11)
-box13.grid(column = 1, row = 12)
-box14.grid(column = 1, row = 13)
-box15.grid(column = 1, row = 14)
-box16.grid(column = 1, row = 15)
-box17.grid(column = 1, row = 16)
-box18.grid(column = 1, row = 17)
-box19.grid(column = 1, row = 18)
-box20.grid(column = 1, row = 19)
-box21.grid(column = 1, row = 20)
-box22.grid(column = 1, row = 21)
-createbutton.grid(column = 0, row = 22)
-exitbutton.grid(column = 1, row = 22)
+[box[i].grid(column = 1, row = i) for i in range(len(box))]
+createbutton.grid(column = 0, row = len(labels))
+exitbutton.grid(column = 1, row = len(labels))
 
 #掲示板のウィジェットを配置
 joumei.place(x = 20, y = 10)
