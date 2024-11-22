@@ -6,7 +6,7 @@ import sys
 def createwindow():
     #会場名変更
     joumei.configure(text = "\n".join(box[0].get()))
-    if (int(box[1].get()) >= 10):
+    if (len(box[1].get()) == 2):
         race1.configure(text = box[1].get(),font=("MSゴシック", "50", "bold"))
         race1.place(x = 75, y = 23)
     else:
@@ -99,7 +99,7 @@ def createwindow():
 #ウィンドウ作成
 #設定画面
 root = tk.Tk()
-root.geometry('250x550')
+root.geometry('250x500')
 root.title('設定画面')
 #着順掲示板
 root2 = tk.Tk()
