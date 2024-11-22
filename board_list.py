@@ -96,14 +96,26 @@ def createwindow():
     threef_sec.configure(text = box[20].get())
     threef_sec10.configure(text = box[21].get())
 
+#ウィジェットの複製関数
+def clone(widget):
+    parent = widget.nametowidget(widget.winfo_parent())
+    cls = widget.__class__
+
+    clone = cls(parent)
+    for key in widget.configure():
+        clone.configure({key: widget.cget(key)})
+    return clone
+
 #ウィンドウ作成
 #設定画面
 root = tk.Tk()
 root.geometry('250x500')
+root.resizable(False, False)
 root.title('設定画面')
 #着順掲示板
 root2 = tk.Tk()
-root2.geometry('500x850')
+root2.geometry('510x850')
+root2.resizable(False, False)
 root2.configure(bg = 'black')
 root2.title('掲示板')
 canvas = tk.Canvas(root2, bg = 'black', height = 900, width = 500 )
@@ -225,12 +237,6 @@ time_min = tk.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), wid
 time_sec = tk.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 2,foreground = 'yellow' ,bg = '#696969')
 time_sec10 = tk.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 1,foreground = 'yellow' ,bg = '#696969')
 dot = tk.Label(root2,text = '.', font=("MSゴシック", "30", "bold"),width = 1, foreground = 'white' ,bg = 'black')
-dot2 = tk.Label(root2,text = '.', font=("MSゴシック", "30", "bold"),width = 1, foreground = 'white' ,bg = 'black')
-dot3 = tk.Label(root2,text = '.', font=("MSゴシック", "30", "bold"),width = 1, foreground = 'white' ,bg = 'black')
-dot4 = tk.Label(root2,text = '.', font=("MSゴシック", "30", "bold"),width = 1, foreground = 'white' ,bg = 'black')
-none = tk.Label(root2,text = '', font=("MSゴシック", "1", "bold"),width = 1, foreground = 'white' ,bg = 'black')
-none2 = tk.Label(root2,text = '', font=("MSゴシック", "1", "bold"),width = 1, foreground = 'white' ,bg = 'black')
-none3 = tk.Label(root2,text = '', font=("MSゴシック", "1", "bold"),width = 1, foreground = 'white' ,bg = 'black')
 #4ハロン
 fourf_sec = tk.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 2,foreground = 'yellow' ,bg = '#696969')
 fourf_sec10 = tk.Label(root2,text = ' ', font=("MSゴシック", "45", "bold"), width = 1,foreground = 'yellow' ,bg = '#696969')
@@ -284,17 +290,14 @@ threef.place(x = 205, y = 780)
 time_min.place(x = 283, y = 630, height = 55)
 dot.place(x = 323, y = 623, height = 100)
 time_sec.place(x = 350, y = 630, height = 55)
-dot2.place(x = 425, y = 623, height = 100)
+clone(dot).place(x = 425, y = 623, height = 100)
 time_sec10.place(x = 452, y = 630,height = 55)
-none.place(x = 490, y = 623, height = 100)
 fourf_sec.place(x = 350, y = 700, height = 55)
-dot3.place(x = 425, y = 693, height = 100)
+clone(dot).place(x = 425, y = 693, height = 100)
 fourf_sec10.place(x = 452, y = 700, height = 55)
-none2.place(x = 490, y = 693, height = 100)
 threef_sec.place(x = 350, y = 770, height = 55)
-dot4.place(x = 425, y = 773, height = 75)
+clone(dot).place(x = 425, y = 773, height = 75)
 threef_sec10.place(x = 452, y = 770, height = 55)
-none3.place(x = 490, y = 763, height = 80)
 
 #実行
 root.mainloop()
