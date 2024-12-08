@@ -1,0 +1,1119 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>よりよい本づくり | 【Python】Tkinterで競馬の着順掲示板を作る</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css" />
+    <link rel="next" title="Re:VIEWとの差分" href="91-compare.html">
+    <link rel="prev" title="FAQ" href="05-faq.html">
+    <meta name="generator" content="Re:VIEW Starter">
+  </head>
+  <body>
+    <div class="page-outer">
+      <nav class="side-content">
+                <div class="rebuild">
+          <a href="javascript:void(0)" onclick="rebuildAndReloadForcedly()">Rebuild and Reload</a>
+        </div>
+                <a class="nav-title" href="index.html">【Python】Tkinterで競馬の着順掲示板を作る</a>
+<ul class="toc toc-1">
+    <li class="toc-chapter"><a href="./00-preface.html">まえがき / はじめに</a></li>
+    <li class="toc-chapter"><a href="./01-install.html">1 インストール</a></li>
+    <li class="toc-chapter"><a href="./02-tuto.html">2 チュートリアル</a></li>
+    <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a></li>
+    <li class="toc-chapter"><a href="./02-tutorial.html">4 チュート</a></li>
+    <li class="toc-chapter"><a href="./03-syntax.html">5 記法</a></li>
+    <li class="toc-chapter"><a href="./04-customize.html">6 カスタマイズ</a></li>
+    <li class="toc-chapter"><a href="./05-faq.html">7 FAQ</a></li>
+    <li class="toc-chapter"><a href="./06-bestpractice.html">8 よりよい本づくり</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h8-1">8.1 まえがき</a></li>
+        <li class="toc-section"><a href="#h8-2">8.2 初心者向け入門書</a></li>
+        <li class="toc-section"><a href="#h8-3">8.3 箇条書き</a></li>
+        <li class="toc-section"><a href="#h8-4">8.4 本文</a></li>
+        <li class="toc-section"><a href="#h8-5">8.5 見出し</a></li>
+        <li class="toc-section"><a href="#h8-6">8.6 プログラムコード</a></li>
+        <li class="toc-section"><a href="#h8-7">8.7 図表</a></li>
+        <li class="toc-section"><a href="#h8-8">8.8 ページデザイン</a></li>
+        <li class="toc-section"><a href="#h8-9">8.9 大扉</a></li>
+        <li class="toc-section"><a href="#h8-10">8.10 奥付</a></li>
+        <li class="toc-section"><a href="#h8-11">8.11 textlintによる文章チェック</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a></li>
+    <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
+    <li class="toc-chapter"><a href="./93-background.html">開発の背景</a></li>
+    <li class="toc-chapter"><a href="./99-postface.html">あとがき / おわりに</a></li>
+</ul>
+      </nav>
+      <div class="page-inner">
+        <header class="page-header">
+        </header>
+        <main class="page-main">
+<h1 class="boldlines center twolines"><a id="h8"></a><span class="secno">第8章</span> <br/>よりよい本づくり</h1>
+<div class="abstract">
+<p>せっかく本を作るなら、よりよい本づくりを目指しましょう。</p>
+<p>この章では、よりよい本にするためのポイントを紹介します。</p>
+</div>
+
+<h2 class="leftline"><a id="h8-1"></a><span class="secno">8.1</span> まえがき</h2>
+
+<h3 class="none"><a id="h8-1-1"></a><span class="secno">8.1.1</span> まえがきには章番号をつけない</h3>
+<p>ときどき、「まえがき」に章番号がついている技術系同人誌を見かけます（<span class="imgref"><a href="./06-bestpractice.html#preface_numbered">図8.1</a></span>）。しかし一般的には、「まえがき」や「あとがき」には章番号はつけません。</p>
+<div id="preface_numbered" class="image">
+<img src="images/06-bestpractice/preface_numbered.png" alt="間違って章番号がついた「まえがき」" class="img width-080per border" />
+<p class="caption">
+図8.1: 間違って章番号がついた「まえがき」
+</p>
+</div>
+<p>Re:VIEWおよびStarterでは、「<span class="file">catalog.yml</span>」の「<code class="inline-code">PREDEF:</code>」や「<code class="inline-code">POSTDEF:</code>」に指定した原稿ファイルには、章番号がつきません。これを間違えて「<code class="inline-code">CHAPS:</code>」に含めてしまうと、「まえがき」や「あとがき」に章番号がついてしまうので気をつけてください。</p>
+
+<h3 class="none"><a id="h8-1-2"></a><span class="secno">8.1.2</span> まえがきに「本書の目的」を入れる</h3>
+<p>「まえがき」に本の概要や目的があると、本を手にとった人がその本を買うかどうかを判断できます。</p>
+<p>次のは「本書の目的」のサンプルです。</p>
+<div class="sampleoutput">
+<span class="caption">サンプル</span>
+<div class="sampleoutput-inner">
+
+<h4 id="notoc"><a id="h8-1-2-1"></a>本書の目的</h4>
+<p>本書の目的は、SQLを初めてさわる初心者が、簡単な検索と集計をSQLでできるようになることです。マーケティング部に配属された新卒1年目の人が、SQLで簡単なデータ分析をできるようになりたいなら、この本はぴったりです。</p>
+<p>SQLのチューニングや、データベース設計といった内容は、本書の範囲ではありません。</p>
+</div></div>
+
+<h3 class="none"><a id="h8-1-3"></a><span class="secno">8.1.3</span> まえがきに「対象読者」を入れる</h3>
+<p>先ほどの話と似ていますが、まえがきに「本の対象読者」を書きましょう。本を手にとった人が、自分がその本の対象読者かどうか判断できます。</p>
+<p>このとき、「初心者」と「初級者」をちゃんと区別するといいでしょう。</p>
+<ul>
+<li>「初心者」は入門書をまだ読んでいない人や読んでる途中の人
+</li>
+<li>「初級者」は入門書を読み終えた人、実務での経験が浅い人
+</li>
+</ul>
+<p>次のは「対象読者」のサンプルです。</p>
+<div class="sampleoutput">
+<span class="caption">サンプル</span>
+<div class="sampleoutput-inner">
+
+<h4 id="notoc"><a id="h8-1-3-1"></a>本書の対象読者</h4>
+<p>本書は、何らかのオブジェクト指向言語の入門書を読み終えた初級者を対象としています。そのため、「オブジェクト」「クラス」「メソッド」などの用語は説明なしに使用します。まったくの初心者は本書の対象ではないので注意してください。</p>
+</div></div>
+
+<h3 class="none"><a id="h8-1-4"></a><span class="secno">8.1.4</span> まえがきに「前提知識」を入れる</h3>
+<p>これまでの話と似ていますが、その本を読むのにどんな前提知識がどのくらいのレベルで必要かを「まえがき」に書いておくと、本を手にとった人は買うかどうかの判断がしやすいです。</p>
+<p>このとき、具体例を添えておくといいでしょう。たとえば「Linuxの基礎知識を前提とします」だけでは、どんな基礎知識がどのレベルで必要なのか、よくわかりません。もしこれが「<code class="inline-code">ln -s</code>でシンボリックリンクが作れること」「<code class="inline-code">ps -ef|grep gzip</code>が何をしているのか分かること」「パイプとリダイレクトの違いが説明できること」だと、必要な前提知識のレベルがよく分かります。</p>
+<p>次のは「前提知識」のサンプルです。</p>
+<div class="sampleoutput">
+<span class="caption">サンプル</span>
+<div class="sampleoutput-inner">
+
+<h4 id="notoc"><a id="h8-1-4-1"></a>本書の前提知識</h4>
+<p>本書は、Python をある程度使いこなしている中級者以上を対象にしています。そのため、Pythonの基礎知識を持っていることを前提とします。</p>
+<p>具体的には、次のことがすべて分かることが前提となります。</p>
+<ul>
+<li>「<code class="inline-code">[x for x in range(1, 11) if x % 2]</code>」の意味が分かる
+</li>
+<li>「<code class="inline-code">(lambda x, y: x + y)(3, 4)</code>」の結果が予想できる
+</li>
+<li>「<code class="inline-code">x=1</code>」と「<code class="inline-code">fn(x=1)</code>」の違いが分かる
+</li>
+<li>「<code class="inline-code">return</code>」と「<code class="inline-code">yield</code>」の違いが説明できる
+</li>
+<li>「<code class="inline-code">@property</code>」が何か分かる
+</li>
+</ul>
+</div></div>
+
+<h3 class="none"><a id="h8-1-5"></a><span class="secno">8.1.5</span> まえがきにサポートサイトのURLを載せる</h3>
+<p>本の正誤表が載っていたり、サンプルコードがダウンロードできるサイトのことをここでは「サポートサイト」と呼ぶことにします。</p>
+<p>本や同人誌を書いたら、ぜひサポートサイトを用意しましょう。そして正誤表とサンプルコード、できれば質問ができる連絡先を用意しましょう。</p>
+<p>そしてそのURLをまえがき（と奥付）に載せましょう。</p>
+<p>次のはサポートサイト紹介文のサンプルです。</p>
+<div class="sampleoutput">
+<span class="caption">サンプル</span>
+<div class="sampleoutput-inner">
+
+<h4><a id="h8-1-5-1"></a>サポートサイト</h4>
+<p>本書の正誤表は次のサイトに載っています。サンプルコードもここからダウンロードできます。</p>
+<ul>
+<li><a href="https://www.example.com/mygreatbook/" class="link">https://www.example.com/mygreatbook/</a>
+</li>
+</ul>
+</div></div>
+
+<h3 class="none"><a id="h8-1-6"></a><span class="secno">8.1.6</span> まえがきに謝辞を載せる</h3>
+<p>レビューしてくれた人や編集者がいたら、まえがきに謝辞を書きましょう。家族への謝辞を入れるのもよくあります。</p>
+<p>謝辞を忘れるのはかなり失礼な行為に当たります。また名前を間違ったり、名前が抜けるのも大変失礼です。締切間際に謝辞を書くと間違える可能性が高いので、執筆期間の早いうちに謝辞を書いておきましょう。</p>
+
+<h3 class="none"><a id="h8-1-7"></a><span class="secno">8.1.7</span> まえがきにソフトウェアのバージョンを載せる</h3>
+<p>まえがきに、使用した（または動作検証した）ソフトウェアのバージョンを載せるといいでしょう。</p>
+<p>たとえばPythonの2.7なのか3.Xなのかは大きな問題です。またLinuxだとCentOSなのかUbuntuなのか、Ubuntuなら18.04なのか20.04なのか、といった情報をまえがきに書いておきましょう。</p>
+
+<h3 class="none"><a id="h8-1-8"></a><span class="secno">8.1.8</span> まえがきの章タイトル以外は目次に載せない</h3>
+<p>目次には「まえがき」だけが載っていればよく、「本書の目的」や「対象読者」や「謝辞」などは目次に載せる必要はありません。</p>
+<p>これらを目次に載せないための方法は2つあります。</p>
+<p>ひとつは、節(Section)や項(Subsection)のタイトルに「<code class="inline-code">[notoc]</code>」オプションをつけることです。これをつけると、その節や項は目次に載りません。</p>
+<div class="caption-code">
+<pre class="emlist">= はじめに
+
+==<b>[notoc]</b> 本書の目的
+
+==<b>[notoc]</b> 対象読者
+
+==<b>[notoc]</b> 謝辞
+
+</pre>
+</div>
+<p>もうひとつは、節(Section)や項(Subsection)を飛ばして目(Subsubsection)を使うことです。通常、目次に乗るのは項までで目は載りません。そこで、次のような見出しにすれば「本書の目的」や「対象読者」や「謝辞」は目次に載りません。</p>
+<div class="caption-code">
+<pre class="emlist">= はじめに
+
+<b>====</b> 本書の目的
+
+<b>====</b> 対象読者
+
+<b>====</b> 謝辞
+
+</pre>
+</div>
+<p>この方法は見出しのレベルを飛ばしているので、本文で使うのはよくありません。しかし目次に載らないところで使うなら、あまり気にしなくてもいいでしょう。</p>
+
+<h2 class="leftline"><a id="h8-2"></a><span class="secno">8.2</span> 初心者向け入門書</h2>
+
+<h3 class="none"><a id="h8-2-1"></a><span class="secno">8.2.1</span> 初心者向け入門書ではフォントを大きめにする</h3>
+<p>Starterでは、デフォルトでは次のようなフォントサイズにしています。</p>
+<ul>
+<li>ページがB5サイズなら、フォントは10pt
+</li>
+<li>ページがA5サイズなら、フォントは9pt
+</li>
+</ul>
+<p>しかし初心者向けの入門書では、次のように少し大きめのフォントを使ったほうが、紙面から受ける圧迫感が減ります<sup><a id="fnb-fn-8ow3e" href="#fn-fn-8ow3e" class="noteref" epub:type="noteref">*1</a></sup>。</p>
+<ul>
+<li>ページがB5サイズなら、フォントは11pt
+</li>
+<li>ページがA5サイズなら、フォントは10pt
+</li>
+</ul>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-8ow3e" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*1] </span>興味のある人は本屋に行って、入門書とオライリー本の本文を比べてみるといいでしょう。</p></div>
+</div><!--/.footnote-list-->
+<p>とはいえフォントを大きくしていない入門書もよく見かけます。フォントを大きくするとページ数が増えてその分印刷代が高くなるので、どうするかはよく考えてください。</p>
+<p>Starterで本文のフォントサイズを変える方法は、「<a href="04-customize.html#h6-3-1">6.3.1 [PDF] フォントサイズを変更する</a>」を参照してください。またそれに合わせて本文の幅も変更する必要があるので、「<a href="04-customize.html#h6-2-2">6.2.2 [PDF] 本文の幅を指定する</a>」を参照してください。</p>
+
+<h3 class="none"><a id="h8-2-2"></a><span class="secno">8.2.2</span> 初心者向け入門書では節と項の見分けをつきやすくする</h3>
+<p>Re:VIEWではLaTeXのデザインをそのまま使っているので、節(Section)と項(Subsection)のデザインがよく似ており、見分けにくいです（<span class="imgref"><a href="./06-bestpractice.html#heading_design1">図8.2</a></span>）。初心者は本を読み慣れていないので、このデザインでは節と項の違いが分からず、結果として文書構造を理解しないまま読み進めてしまいます。</p>
+<div id="heading_design1" class="image">
+<img src="images/06-bestpractice/heading_design1.png" alt="Re:VIEWでは節(Section)と項(Subsection)が見分けにくい" class="img width-090per border" />
+<p class="caption">
+図8.2: Re:VIEWでは節(Section)と項(Subsection)が見分けにくい
+</p>
+</div>
+<p>Starterでは、節と項のデザインを大きく変えており、見分けやすくなっています（<span class="imgref"><a href="./06-bestpractice.html#heading_design2">図8.3</a></span>）。これは、初心者でも節と項の違いがすぐに分かり、文書構造を把握できるようにするための配慮です。</p>
+<div id="heading_design2" class="image">
+<img src="images/06-bestpractice/heading_design2.png" alt="Starterでは節(Section)と項(Subsection)が見分けやすい" class="img width-090per border" />
+<p class="caption">
+図8.3: Starterでは節(Section)と項(Subsection)が見分けやすい
+</p>
+</div>
+
+<h3 class="none"><a id="h8-2-3"></a><span class="secno">8.2.3</span> 初心者向け入門書では節ごとに改ページする</h3>
+<p>初心者向けの入門書では、節(Section)ごとに改ページしていることが多いです。そもそも初心者は本自体を読み慣れていないことが多いので、節ごとに改ページしてあげることで、文章の構造を分かりやすく示せます。</p>
+<p>Starterでは節ごとに改ページする設定が用意されています。詳しくは「<a href="04-customize.html#h6-5-7">6.5.7 [PDF] 節ごとに改ページする</a>」を参照してください。</p>
+<p>ただし節ごとに改ページすると、当然ですが全体のページ数は増え、それを調整するために本文をあれこれ変更する必要があります。実践するのは時間とお金（印刷代）に余裕がある場合だけにしましょう<sup><a id="fnb-fn-njede" href="#fn-fn-njede" class="noteref" epub:type="noteref">*2</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-njede" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*2] </span>逆にいうと、商業の入門書はそれだけのコストを掛けて制作されているということです。</p></div>
+</div><!--/.footnote-list-->
+
+<h2 class="leftline"><a id="h8-3"></a><span class="secno">8.3</span> 箇条書き</h2>
+
+<h3 id="sec-goodenumerate" class="none"><a id="h8-3-1"></a><span class="secno">8.3.1</span> 箇条書きを正しく使い分ける</h3>
+<p>箇条書きには「番号なし」「番号つき」「ラベルつき」の3つがあります。</p>
+<p>番号なしの箇条書きは、項目に順序がないか、あっても重要ではない場合に使います。たとえば次の例では、公開された順に項目が並んでいるもののそこはあまり重要ではなく、項目の順番を入れ替えても文章の意味が成り立つので、番号なしの箇条書きを使います。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">スタジオジブリ初期の代表作は次の通りです。
+
+ * 風の谷のナウシカ
+ * 天空の城ラピュタ
+ * となりのトトロ
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>スタジオジブリ初期の代表作は次の通りです。</p>
+<ul>
+<li>風の谷のナウシカ
+</li>
+<li>天空の城ラピュタ
+</li>
+<li>となりのトトロ
+</li>
+</ul>
+</div></div>
+<p>番号つきの箇条書きは、手順や順位など、項目の順序が重要な場合に使います。たとえば次の例では項目の順序が重要なので、番号つきの箇条書きを使います。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">スタジオジブリ初期の代表作を、好きな順に並べました。
+
+ 1. 風の谷のナウシカ
+ 2. 天空の城ラピュタ
+ 3. となりのトトロ
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>スタジオジブリ初期の代表作を、好きな順に並べました。</p>
+<ol start="1" type="1">
+<li>風の谷のナウシカ</li>
+<li>天空の城ラピュタ</li>
+<li>となりのトトロ</li>
+</ol>
+</div></div>
+<p>ラベルつきの箇条書きは、一見すると番号つき箇条書きに似ていますが、数字ではなくアルファベットや文字を使う点が違います。またラベルはあとから参照しやすくするために使い、順番を表すためには使いません。そのため、ラベルつきの箇条書きは「番号なし箇条書きにラベルをつけたもの」として使います。</p>
+<p>たとえば次の例では、項目の順序はさほど重要でないので番号なし箇条書きでもいいのですが、あとから項目を参照するのでラベルつき箇条書きにしています。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">スタジオジブリ初期の代表作は次の通りです。
+
+ - (A) 風の谷のナウシカ
+ - (B) 天空の城ラピュタ
+ - (C) となりのトトロ
+
+興行収入を調べると、(A)が14.8億円、(B)が11.6億円、(C)が11.7億円でした。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>スタジオジブリ初期の代表作は次の通りです。</p>
+<ol class="ol-none">
+<li data-mark="(A)"><span class="li-mark">(A) </span>風の谷のナウシカ
+</li>
+<li data-mark="(B)"><span class="li-mark">(B) </span>天空の城ラピュタ
+</li>
+<li data-mark="(C)"><span class="li-mark">(C) </span>となりのトトロ
+</li>
+</ol>
+<p>興行収入を調べると、(A)が14.8億円、(B)が11.6億円、(C)が11.7億円でした。</p>
+</div></div>
+<p>番号つき箇条書きとラベルつき箇条書きは、きちんと使い分けましょう。前者は順序に強い意味がある場合、後者は順序に意味がないまたは弱い場合に使います。</p>
+
+<h3 class="none"><a id="h8-3-2"></a><span class="secno">8.3.2</span> 箇条書き直後に継続する段落は字下げしない</h3>
+<p>段落の途中に箇条書きを入れる場合、箇条書きの直後は字下げ（インデント）をしないようにしましょう。</p>
+<p>次の例を見てください。箇条書きの直後に「<code class="inline-code">//noindent</code>」を入れることで、字下げしないようにしています。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">スタジオジブリ初期の代表作には、
+
+ * 風の谷のナウシカ
+ * 天空の城ラピュタ
+ * となりのトトロ
+
+<b>//noindent</b>
+が挙げられます。
+
+しかしスタジオジブリが発足したのは実はラピュタからであり、ナウシカは厳密にはスタジオジブリの制作ではないのです。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>スタジオジブリ初期の代表作には、</p>
+<ul>
+<li>風の谷のナウシカ
+</li>
+<li>天空の城ラピュタ
+</li>
+<li>となりのトトロ
+</li>
+</ul>
+<p class="noindent">が挙げられます。</p>
+<p>しかしスタジオジブリが発足したのは実はラピュタからであり、ナウシカは厳密にはスタジオジブリの制作ではないのです。</p>
+</div></div>
+<p>字下げは段落の始まりを表すために使います。しかし上の例の「が挙げられます。」は段落の始まりではなく途中だと考えられるため、字下げは行いません。</p>
+<p>もっとも、段落の途中に箇条書きを入れること自体がよくありません。この例なら、次のように書き換えるといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">スタジオジブリ初期の代表作には、<b>次の3つが挙げられます。</b>
+
+ * 風の谷のナウシカ
+ * 天空の城ラピュタ
+ * となりのトトロ
+
+しかしスタジオジブリが発足したのは実はラピュタからであり、ナウシカは厳密にはスタジオジブリの制作ではないのです。
+</pre>
+</div>
+
+<h2 class="leftline"><a id="h8-4"></a><span class="secno">8.4</span> 本文</h2>
+
+<h3 class="none"><a id="h8-4-1"></a><span class="secno">8.4.1</span> 強調箇所は太字のゴシック体にする</h3>
+<p>日本語の文章では本文が明朝体の場合、強調箇所は太字にするだけでなく、ゴシック体にするのがよいとされています。そのため、強調には「<code class="inline-code">@&lt;b&gt;{...}</code>」ではなく「<code class="inline-code">@&lt;B&gt;{...}</code>」または「<code class="inline-code">@&lt;strong&gt;{...}</code>」を使ってください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">本文本文<b>@&lt;B&gt;{強調}</b>本文本文。@&lt;balloon&gt;{ゴシック体なので望ましい}
+
+本文本文<b>@&lt;b&gt;{太字}</b>本文本文。@&lt;balloon&gt;{明朝体のままなので望ましくない}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>本文本文<strong>強調</strong>本文本文。<span class="balloon">← ゴシック体なので望ましい</span></p>
+<p>本文本文<b>太字</b>本文本文。<span class="balloon">← 明朝体のままなので望ましくない</span></p>
+</div></div>
+
+<h3 class="none"><a id="h8-4-2"></a><span class="secno">8.4.2</span> 強調と傍点を使い分ける</h3>
+<p>傍点とは<span class="bou">このように</span>文章の上についた小さな点のことであり、Re:VIEWやStarterなら「<code class="inline-code">@&lt;bou&gt;{...}</code>」でつけられます。</p>
+<p>傍点は強調とよく似ていますが、強調は「重要な箇所」を表すのに対し、傍点は「重要ではないけど他と区別したい・注意を向けたい」という用途で使います。</p>
+<p>たとえば次の例では、否定文であることが見落とされないよう、傍点を使っています。ここは重要箇所ではないので、強調は使わないほうがいいでしょう。</p>
+<blockquote class="blockquote">
+<p class="noindent">Re:VIEW Starterではアップグレード用スクリプトを用意して<span class="bou">いません</span>。</p>
+</blockquote>
+<p>また技術系の文書ではほとんど見かけませんが、小説や漫画では「何か含みを持たせた表現」や「のちの伏線になる箇所」に傍点を使います。参考までに、『ワールドトリガー』22巻<sup><a id="fnb-fn-z94o3" href="#fn-fn-z94o3" class="noteref" epub:type="noteref">*3</a></sup>から傍点を使った例を（ネタバレは避けつつ）引用します。</p>
+<blockquote class="blockquote">
+<p class="noindent">その<ruby>追尾弾<rp>（</rp><rt>ハウンド</rt><rp>）</rp></ruby>は<span class="bou">相手を動かすため</span>の<ruby>追尾弾<rp>（</rp><rt>ハウンド</rt><rp>）</rp></ruby>なのよ <small style="font-size:small">(p.132)</small></p>
+</blockquote>
+<blockquote class="blockquote">
+<p class="noindent">だとすると、<ruby>雨取<rp>（</rp><rt>あまとり</rt><rp>）</rp></ruby>ちゃんは人を<span class="bou">狙って撃てない</span>のか？ <small style="font-size:small">(p.133)</small></p>
+</blockquote>
+<blockquote class="blockquote">
+<p class="noindent">今の<ruby>千佳<rp>（</rp><rt>ちか</rt><rp>）</rp></ruby>は間違いなくちゃんと<span class="bou">戦う意志</span>を持ってますよ <small style="font-size:small">(p.134)</small></p>
+</blockquote>
+<blockquote class="blockquote">
+<p class="noindent">さっきの<ruby>弾<rp>（</rp><rt>たま</rt><rp>）</rp></ruby>は<span class="bou">■■■■を■った</span>■■■か……!? <small style="font-size:small">(p.174)</small></p>
+</blockquote>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-z94o3" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*3] </span>『ワールドトリガー』22巻（葦原大介、集英社、2020年）</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h8-4-3"></a><span class="secno">8.4.3</span> [PDF] 記号と日本語はくっつくことに注意する</h3>
+<p>PDFでは、読みやすさのために日本語と英数字の間に少しアキ（隙間）が入ります。これは内部で使っている組版用ソフト「LaTeX」の仕様です。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">あいうえおABC DEFかきくけこ123。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>あいうえおABC DEFかきくけこ123。</p>
+</div></div>
+<p>しかし記号の場合はアキが入りません。たとえば次の例では、「ン」と「-」の間にはアキが入っていません。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">オプション-pを使う。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>オプション-pを使う。</p>
+</div></div>
+<p>このような場合は、半角空白を入れるか、またはカッコでくくるといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">オプション -p を使う。
+
+オプション「-p」を使う。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>オプション -p を使う。</p>
+<p>オプション「-p」を使う。</p>
+</div></div>
+
+<h3 class="none"><a id="h8-4-4"></a><span class="secno">8.4.4</span> [PDF] 等幅フォントで余計な空白が入るのを防ぐ</h3>
+<p>Re:VIEWやStarterでは、PDFを作成するために「LaTeX」という組版ソフトを使っています。このLaTeXでは、半角空白は次のように扱われます。</p>
+<ul>
+<li>文章中の半角空白は、何個連続していても1個分の空白しか出力されない。
+</li>
+<li>ただし「.」と「:」と「!」と「?」の直後の半角空白は、1個しかなくても2個分の空白が出力される。
+</li>
+</ul>
+<p>このルールは、英語の文章を書くうえでは妥当な仕様です。そしてこのルールは、フォントに依らず適用されます。そのため等幅フォントを使っているときでも、「.」と「:」と「!」と「?」の直後に半角空白があると2個分の空白が出力されます。</p>
+<p>しかし、等幅フォントを使うのはたいていプログラムコードやコマンドを表す場合なので、半角空白が勝手に2個出力されてしまうのは困りものです。たとえば、<br />「<code class="inline-code">{a: 1}</code>」と書いたつもりが、<br />「<code class="inline-code">{a:  1}</code>」と表示されるのは、意図したことではないでしょう。</p>
+<p>そこでStarterでは、等幅フォントの場合はこのルールを適用しないようにしています。そのための「<code class="inline-code">\frenchspacing</code>」<sup><a id="fnb-fn-2zb8y" href="#fn-fn-2zb8y" class="noteref" epub:type="noteref">*4</a></sup>というマクロがLaTeXにはあるので、これを使います。具体的には、LaTeXマクロを次のように上書きしています。</p>
+<div class="caption-code">
+<pre class="emlist">%% 「<tt></tt>」を上書き
+\renewcommand{\reviewtt}[1]{{%
+  <b>\frenchspacing</b>%   % 「! ? : .」の直後の空白が2文字分になるのを防ぐ
+  \texttt{#1}%      % 等幅フォントで表示
+}}
+</pre>
+</div>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-2zb8y" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*4] </span>「<code class="inline-code">\frenchspacing</code>」というのは、「フランス流の空白の入れ方」という意味です。フランス語では「. : ! ?」の直後でも空白は1個なようです。</p></div>
+</div><!--/.footnote-list-->
+<p>「<code class="inline-code">@&lt;code&gt;{}</code>」が呼び出す「<code class="inline-code">\reviewcode</code>」マクロにも同じ変更をしています。このおかげで、Starterでは「<code class="inline-code">@&lt;tt&gt;{}</code>」や「<code class="inline-code">@&lt;code&gt;{}</code>」を使ったときに空白が2個出力されるのを防いでいます。</p>
+<p>ただし、本来このようなルール変更は「<code class="inline-code">@&lt;code&gt;{}</code>」にだけ行うべきであり、「<code class="inline-code">@&lt;tt&gt;{}</code>」では変更すべきではありません。現実には「<code class="inline-code">@&lt;tt&gt;{}</code>」がプログラムコードを表すのに広く使われていることを鑑みて、Starterでは「<code class="inline-code">@&lt;tt&gt;{}</code>」でもルール変更をしています。しかし本来はすべきでないと知っておいてください。</p>
+<p>なお「<code class="inline-code">@&lt;tt&gt;{}</code>」を本来の動作に戻すには、<span class="file">sty/mystyle.sty</span>に次のマクロ定義を追加してください。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sty/mystyle.sty&lt;/span&gt;</span>
+<pre class="list">%% @&lt;tt&gt;{} を本来の動作に戻す
+\renewcommand{\reviewtt}[1]{%
+  \texttt{#1}%      % 等幅フォントで表示
+}
+</pre>
+</div>
+
+<h3 class="none"><a id="h8-4-5"></a><span class="secno">8.4.5</span> 文章中のコードは折り返しする</h3>
+<p>(TODO)</p>
+
+<h3 class="none"><a id="h8-4-6"></a><span class="secno">8.4.6</span> ノートとコラムを使い分ける</h3>
+<p>ノートとコラムはよく似ています。次のように使い分けるといいでしょう。</p>
+<ul>
+<li>本文に対する補足情報は、ノートを使う。
+   あくまで補足情報なので、文章が長くなりすぎないよう注意する。
+</li>
+<li>章(Chapter)の終わりに、長めの関連情報やエッセーを書く場合はコラムを使う。
+   これは節(Section)と同じ扱いにするので、「<code class="inline-code">==[column]</code>」を使う。
+</li>
+</ul>
+<p>ときどき、ノートで書くべきことをすべてコラムで書いている同人誌を見かけます。あまりよいことではないので、ノートとコラムの使い分けを検討してみてください。また使い分けがよく分からないと思ったら、商業の技術書籍をいくつか参考にしてみてください。</p>
+
+<h2 class="leftline"><a id="h8-5"></a><span class="secno">8.5</span> 見出し</h2>
+
+<h3 class="none"><a id="h8-5-1"></a><span class="secno">8.5.1</span> 節タイトルが複数行になるなら下線や背景色を使わない</h3>
+<p>Starterでは節(Section)のタイトルに下線や背景色をつけられます。しかしそれらは節タイトルが1行に収まる場合だけを想定しており、複数行の場合は考慮されていません（<span class="imgref"><a href="./06-bestpractice.html#section_title_wlines">図8.4</a></span>）。</p>
+<div id="section_title_wlines" class="image">
+<img src="images/06-bestpractice/section_title_wlines.png" alt="節タイトルが長くて複数行になった場合" class="img width-090per border" />
+<p class="caption">
+図8.4: 節タイトルが長くて複数行になった場合
+</p>
+</div>
+<p>複数行になるぐらいの長い節タイトルがある場合は、下線も背景色も使わないデザインを選びましょう。Starterであれば、次のどれかを選ぶといいでしょう。</p>
+<ul>
+<li>「<code class="inline-code">numbox</code>」… 節番号を白ヌキ文字（<span class="imgref"><a href="./06-bestpractice.html#section_title_wlines">図8.4</a></span>上から2番目）
+</li>
+<li>「<code class="inline-code">leftline</code>」… 節タイトル左に縦線（<span class="imgref"><a href="./06-bestpractice.html#section_title_wlines">図8.4</a></span>上から4番目）
+</li>
+<li>「<code class="inline-code">circle</code>」… 大きい円に白ヌキ文字（<span class="imgref"><a href="./06-bestpractice.html#section_title_wlines">図8.4</a></span>上から5番目）
+</li>
+</ul>
+<p>このうち「<code class="inline-code">circle</code>」は、節タイトルが1行の場合でも2行分の高さを必要とするので、他のデザインと比べてページ数が若干増えることに注意してください。</p>
+<p>なおStarterにおける節タイトルのデザインを変更する方法は、「<a href="04-customize.html#h6-5-2">6.5.2 節のタイトルデザインを変更する</a>」を参照してください。</p>
+
+<h3 class="none"><a id="h8-5-2"></a><span class="secno">8.5.2</span> 項を参照するなら項番号をつける</h3>
+<p>「<code class="inline-code">@&lt;secref&gt;{}</code>」や「<code class="inline-code">@&lt;hd&gt;{}</code>」で項(Subsection)を参照するなら、項にも番号をつけましょう。番号のついていない見出しを参照するのは止めておいたほうがいいでしょう。</p>
+<p>項に番号をつける方法は、「<a href="04-customize.html#h6-5-8">6.5.8 項に番号をつける</a>」を参照してください。</p>
+
+<h2 class="leftline"><a id="h8-6"></a><span class="secno">8.6</span> プログラムコード</h2>
+
+<h3 class="none"><a id="h8-6-1"></a><span class="secno">8.6.1</span> 0とOや1とlが見分けやすいフォントを使う</h3>
+<p>プログラムコードやターミナルでは、0とOや、1とlが見分けやすい等幅フォントを使ってください（<span class="imgref"><a href="./06-bestpractice.html#font_beramono">図8.5</a></span>）。具体的には「<em>beramono</em>」フォントか「<em>inconsolata</em>」フォントを使うといいでしょう。</p>
+<div id="font_beramono" class="image">
+<img src="images/06-bestpractice/font_beramono.png" alt="0とOや、1とlが見分けやすい等幅フォントを使う" class="img width-080per" />
+<p class="caption">
+図8.5: 0とOや、1とlが見分けやすい等幅フォントを使う
+</p>
+</div>
+<p>Starterでは、プログラムコードやターミナルの等幅フォントを選べる設定を用意しています。詳しくは「<a href="04-customize.html#h6-4-2">6.4.2 [PDF] プログラムコードのフォントを変更する</a>」を参照してください。</p>
+
+<h3 class="none"><a id="h8-6-2"></a><span class="secno">8.6.2</span> フォントを小さくしすぎない</h3>
+<p>プログラムコードやターミナルのフォントサイズが小さすぎると、とても読みづらくなります。具体的には、8pt以下<sup><a id="fnb-fn-5c1j2" href="#fn-fn-5c1j2" class="noteref" epub:type="noteref">*5</a></sup>にするのはやめましょう。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-5c1j2" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*5] </span>念のために説明すると、「8pt以下」には8ptも含まれます。</p></div>
+</div><!--/.footnote-list-->
+<p>昔は長い行をページ内に収める必要があったため、プログラムコードのフォントサイズを小さくする必要がありました。しかし今は長い行を自動的に折り返す機能があるので、小さいフォントを使う必要性は薄れています。また、たとえば「<em>inconsolata</em>」フォントはLaTeXのデフォルトフォントと比べて小さめに表示されるため、このフォントを選ぶと必要以上に小さく見えます。</p>
+<p>Starterのデフォルトでは、本文のフォントサイズに関わらず、A5サイズなら9pt、B5サイズなら10ptのフォントサイズが使われます。</p>
+<ul>
+<li>A5サイズなら、本文が9ptと10ptのどちらであっても、プログラムコードはデフォルトで9pt
+</li>
+<li>B5サイズなら、本文が10ptと11ptのどちらであっても、プログラムコードはデフォルトで10pt
+</li>
+</ul>
+<p>この調整は、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">program_default_options:</code>」と「<code class="inline-code">terminal_default_options:</code>」の中の、「<code class="inline-code">fontsize:</code>」で行われています<sup><a id="fnb-k7dzw" href="#fn-k7dzw" class="noteref" epub:type="noteref">*6</a></sup>。これらの値は、本文がA5サイズ10ptまたはB5サイズ11ptなら「<code class="inline-code">small</code>」に設定され、A5サイズ9ptまたはB5サイズ10ptなら「<code class="inline-code">null</code>」に設定されます。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-k7dzw" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*6] </span>以前は「<code class="inline-code">progoram_fontsize:</code>」と「<code class="inline-code">terminal_fontsize:</code>」という設定項目がありましたが、廃止されました。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h8-6-3"></a><span class="secno">8.6.3</span> 重要箇所を目立たせる</h3>
+<p>プログラムコードが5行以上あると、読者はコードのどこに注目すればいいか、分からなくなります。もし注目してほしい箇所が強調されていれば、読者にとってとても理解しやすくなります。</p>
+<p>プログラムコードの中で注目してほしい箇所は、ぜひ太字にして目立たせましょう。たとえば次の例は再帰プログラムの説明なので、再帰している箇所を太字にして目立たせています。</p>
+<div class="caption-code">
+<span class="caption">再帰プログラムの例</span>
+<pre class="list">function <b>fib(n)</b> {
+    if (n &lt;= 1) {
+        return n;
+    } else {
+        return <b>fib(n-1)</b> + <b>fib(n-2)</b>;
+    }
+}
+</pre>
+</div>
+<p>なおプログラムコードを太字にするときは、「<code class="inline-code">@&lt;B&gt;{}</code>」ではなく「<code class="inline-code">@&lt;b&gt;{}</code>」を使ってください。「<code class="inline-code">@&lt;B&gt;{}</code>」だと等幅フォントのはずがゴシック体に変わってしまいます。「<code class="inline-code">@&lt;b&gt;{}</code>」だと太字にするだけなので等幅フォントのままで変わりません。</p>
+<div class="note">
+<h5>太字では目立たないことがある</h5>
+<p>太字にしても目立たない文字や記号があるので注意してください<sup><a id="fnb-fn-owu4i" href="#fn-fn-owu4i" class="noteref" epub:type="noteref">*7</a></sup>。</p>
+<p>たとえば空白やタブ文字は、目に見えないので太字にしても見えません。またピリオド「<code class="inline-code">.</code>」やカンマ「<code class="inline-code">,</code>」やハイフン「<code class="inline-code">-</code>」やクオート「<code class="inline-code">'&quot;`</code>」などは、太字にしても目立たず、読者には気づいてもらえない可能性が高いです。</p>
+<p>解決策としては、文字の色を変えるか、背景色を変えることです。Starterではどのような方法にするかを検討中です。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-owu4i" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*7] </span>重要でない箇所を薄く表示したり、削除したコードに取り消し線をつける場合でも、同様の問題が起こります。</p></div>
+</div><!--/.footnote-list-->
+</div>
+
+<h3 class="none"><a id="h8-6-4"></a><span class="secno">8.6.4</span> 重要でない箇所を目立たせない</h3>
+<p>Javaの「<code class="inline-code">public static void main(String[] args)</code>」や、PHPの「<code class="inline-code">&lt;?php ?&gt;</code>」は、プログラムコードの説明において重要ではないので、目立たせないようにするといいでしょう。</p>
+<p>Starterでは「<code class="inline-code">@&lt;weak&gt;{...}</code>」を使うと、プログラムコードの一部を目立たせないようにできます。</p>
+<div class="caption-code">
+<span class="caption">重要でない箇所を目立たせなくした例</span>
+<pre class="list"><span class="weak">public class Example {</span>
+<span class="weak">    public static void main(String[] args) {</span>
+        System.out.println(&quot;Hello, world!&quot;);
+<span class="weak">    }</span>
+<span class="weak">}</span>
+</pre>
+</div>
+
+<h3 class="none"><a id="h8-6-5"></a><span class="secno">8.6.5</span> 差分（追加と削除）の箇所を明示する</h3>
+<p>サンプルコードを徐々に改善するような内容の場合は、次のようにすると差分が分かりやすくなります。</p>
+<ul>
+<li>削除した行に「<code class="inline-code">@&lt;del&gt;{}</code>」で取り消し線を引く。
+</li>
+<li>追加した行を「<code class="inline-code">@&lt;ins&gt;{}</code>」で太字にする。
+</li>
+</ul>
+<p>たとえば次のようなサンプルコードがあるとします。</p>
+<div class="caption-code">
+<span class="caption">最初のサンプルコード</span>
+<pre class="list">/// ボタンを押すたびにラベルを入れ替える
+$('#button').on('click', function(ev) {
+  let $this = $(this);
+  let prev = $this.text();
+  let next = $this.data('label');
+  $this.text(next).data('label', prev);
+});
+</pre>
+</div>
+<p>これを改善して、次のようなコードにしました。しかしこれだと、どこを変更したかを読者が探さないといけません。</p>
+<div class="caption-code">
+<span class="caption">改善したサンプルコード</span>
+<pre class="list">/// ボタンを押すたびにラベルを入れ替える
+function toggleLabel(ev) {
+  let $this = $(this);
+  let prev = $this.text();
+  let next = $this.data('label');
+  $this.text(next).data('label', prev);
+}
+$('#button').on('click', toggleLabel);
+</pre>
+</div>
+<p>もし次のように差分を分かりやすく表示すれば、読者は変更点をすぐに理解できるでしょう。</p>
+<div class="caption-code">
+<pre class="emlist">/// ボタンを押すたびにラベルを入れ替える
+<del>$('#button').on('click', function(ev) {</del>
+<ins>function toggleLabel(ev) {</ins>
+  let $this = $(this);
+  let prev = $this.text();
+  let next = $this.data('label');
+  $this.text(next).data('label', prev);
+<del>});</del>
+<ins>}</ins>
+<ins>$('#button').on('click', toggleLabel);</ins>
+</pre>
+</div>
+<p>この作業はとても面倒です。それでもこの面倒を乗り切った本だけが、初心者にとって分かりやすい本になるのです。</p>
+<p>このほか、Gitでの差分のような表示方法も考えられます。各自で工夫してみてください。</p>
+
+<h3 class="none"><a id="h8-6-6"></a><span class="secno">8.6.6</span> 長い行の折り返し箇所を明示する</h3>
+<p>長い行が右端で折り返されるとき、折り返された箇所が分かるような表示にするといいでしょう。そのための方法は3つあります。</p>
+<ul>
+<li>折り返し箇所に何らかの目印をつける
+</li>
+<li>行番号をつける
+</li>
+<li>行末を表す記号をつける
+</li>
+</ul>
+<p>たとえば次の例では、あたかも複数行あるかのように見えます。</p>
+<div class="caption-code">
+<pre class="emlist">*********************************************************************************************************************************************************************************************
+</pre>
+</div>
+<p>しかし折り返した箇所に折り返し記号をつけてみると、実は1行であることが分かります。</p>
+<div class="caption-code">
+<pre class="emlist">*********************************************************************************************************************************************************************************************
+</pre>
+</div>
+<p>また行番号をつけても、1行であることが分かります。</p>
+<div class="caption-code">
+<pre class="emlist"><em class="linenowidth">1: </em>*********************************************************************************************************************************************************************************************
+</pre>
+</div>
+<p>あるいは行末を表す記号をつける方法でも、折り返した行にはその記号がつかないので、1行であることが分かります。</p>
+<div class="caption-code">
+<pre class="emlist">*********************************************************************************************************************************************************************************************
+</pre>
+</div>
+<p>このように、方法は何でもいいので折り返し箇所が分かるような仕組みを使いましょう。</p>
+<p>Starterでは、デフォルトで折り返し箇所に折り返し記号がつくようになってます。また折り返し記号がプログラムコードの一部だと間違って認識されないよう、次のような工夫をしています。</p>
+<ul>
+<li>フォントの色をグレーにして薄く表示する。
+</li>
+<li>フォントの種類を等幅でなくローマン体にする。
+</li>
+</ul>
+
+<h3 class="none"><a id="h8-6-7"></a><span class="secno">8.6.7</span> 行番号を控えめに表示する</h3>
+<p>行番号は、プログラムコードと同じフォント・同じ色で表示すべきではありません。行番号はあくまで脇役なので、主役であるプログラムコードよりも目立たないようにすべきです。</p>
+<p>Starterでは、行番号をグレー表示しているので、行番号がプログラムコードよりも目立たちません。</p>
+<div class="caption-code">
+<pre class="emlist"><em class="linenowidth">1: </em>function fib(n) {
+<em class="linenowidth">2: </em>    if (n &lt;= 1) {
+<em class="linenowidth">3: </em>        return n;
+<em class="linenowidth">4: </em>    } else {
+<em class="linenowidth">5: </em>        return fib(n-1) + fib(n-2);
+<em class="linenowidth">6: </em>    }
+<em class="linenowidth">7: </em>}
+</pre>
+</div>
+
+<h3 class="none"><a id="h8-6-8"></a><span class="secno">8.6.8</span> 行番号を考慮して長い行を折り返す</h3>
+<p>長い行を自動的に折り返すとき、もし行番号があればそれを考慮した表示にすべきです。</p>
+<p>Starterではそのような表示になっています。</p>
+<div class="caption-code">
+<pre class="emlist"><em class="linenowidth">1: </em>if error:
+<em class="linenowidth">2: </em>    sys.err.write(&quot;Something error raised. Please contact to system administrator.\n&quot;)
+</pre>
+</div>
+<p>この例を見ると、折り返した行が左端には行かず、行番号の表示スペースを避けて折り返されています。これが、行番号つき折り返しの望ましい姿です。</p>
+<p>これに対し、Re:VIEWでは折り返した行が左端に到達してしまい、行番号の表示スペースを侵食します。これは行番号つき折り返しの望ましくない姿です。</p>
+
+<h3 id="subsec-programborder" class="none"><a id="h8-6-9"></a><span class="secno">8.6.9</span> ページまたぎしていることを可視化する</h3>
+<p>プログラムコードがページまたぎしていることが分かるようにしましょう。</p>
+<ul>
+<li>プログラムコードに枠線がないと、ページまたぎしたときに次のページに続いているかどうか、次のページを見ないと分かりません（<span class="imgref"><a href="./06-bestpractice.html#program_border">図8.6</a></span>左）。
+</li>
+<li>プログラムコードに枠線があれば、ページまたぎしても次のページに続いているかどうかが、次のページを見なくても分かります（<span class="imgref"><a href="./06-bestpractice.html#program_border">図8.6</a></span>右）。
+</li>
+</ul>
+<div id="program_border" class="image">
+<img src="images/06-bestpractice/program_border.png" alt="プログラムコードに枠線がない場合とある場合の違い" class="img width-100per" />
+<p class="caption">
+図8.6: プログラムコードに枠線がない場合とある場合の違い
+</p>
+</div>
+<p>Starterではデフォルトでプログラムコードに枠線がつきます。枠線をつけたくない場合は「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">program_border:</code>」を「<code class="inline-code">false</code>」に設定します。</p>
+<p>なお、プログラムコードの背景枠の四隅を角丸にすることでも、ページまたぎしていることを可視化できます。</p>
+
+<h3 class="none"><a id="h8-6-10"></a><span class="secno">8.6.10</span> インデントを可視化する</h3>
+<p>PythonやYAMLではインデントでブロック構造を表すので、ブロックの終わりを表すキーワードや記号がありません。そのため、プログラムコードがページをまたぐとインデントが分からなくなる（つまりブロックの構造が分からなくなる）ことがあります。</p>
+<p>これを防ぐには、何らかの方法でインデントを可視化します。そうすると、プログラムコードがページをまたいでもインデントが分からなくなることはありません。</p>
+<p>Starterでは「<code class="inline-code">//list[][]<b>[indent=4]</b>{ ... //}</code>」<sup><a id="fnb-lvw95" href="#fn-lvw95" class="noteref" epub:type="noteref">*8</a></sup>のようにすることで、インデントごとに薄い縦線をつけられます。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-lvw95" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*8] </span>後方互換性のために、「<code class="inline-code">indentwidth=4</code>」という名前でも指定できます。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">薄い縦線をつけてインデントを可視化する</span>
+<pre class="list">class Fib:
+
+    def __call__(n):
+    <span class="indentbar"> </span>   if n &lt;= 1:
+    <span class="indentbar"> </span>   <span class="indentbar"> </span>   return n
+    <span class="indentbar"> </span>   else:
+    <span class="indentbar"> </span>   <span class="indentbar"> </span>   return fib(n-1) + fib(n-2)
+</pre>
+</div>
+
+<h2 class="leftline"><a id="h8-7"></a><span class="secno">8.7</span> 図表</h2>
+
+<h3 class="none"><a id="h8-7-1"></a><span class="secno">8.7.1</span> 図表が次のページに送られてもスペースを空けない</h3>
+<p>Re:VIEWではデフォルトで、図は現在位置に置かれるよう強制されます。もし現在位置に図を入れるスペースがない場合は、図は次のページに表示され、そのあとに本文が続きます。この仕様のせいで、たくさんのスペースが空いて本文がスカスカになってしまうことがあります（<span class="imgref"><a href="./06-bestpractice.html#figure_heretop">図8.7</a></span>上）。</p>
+<p>これはよくないので、Starterでは図が次のページに送られた場合、後続の本文を現在位置に流し込みます。図が現在位置に入らないからといって、スペースを空けたままにする必要はありません（<span class="imgref"><a href="./06-bestpractice.html#figure_heretop">図8.7</a></span>下）。</p>
+<div id="figure_heretop" class="image">
+<img src="images/06-bestpractice/figure_heretop.png" alt="後続の本文を現在位置に流し込むかどうか" class="img" />
+<p class="caption">
+図8.7: 後続の本文を現在位置に流し込むかどうか
+</p>
+</div>
+
+<h3 class="none"><a id="h8-7-2"></a><span class="secno">8.7.2</span> 大きい図表は独立したページに表示する</h3>
+<p>たとえば図がページの3/4を占めるようなら、そのページには後続のテキストを流しこまず、その図だけのページにしましょう。</p>
+<p>Starterだと「<code class="inline-code">//image[ファイル名][説明文][scale=1.0,<b>pos=p</b>]</code>」とすると、その図だけの独立したページに表示されます。</p>
+
+<h3 class="none"><a id="h8-7-3"></a><span class="secno">8.7.3</span> 図表は番号で参照する</h3>
+<p>図や表は、現在位置に入り切らないとき、自動的に次のページに送られます。その場合、たとえば「次の図を見てください」と書いてあると「次の図」がなくて読者が混乱します。</p>
+<p>そのため、図や表は必ず番号で参照してください。図なら「<code class="inline-code">@&lt;img&gt;{ファイル名}</code>」、表なら「<code class="inline-code">@&lt;table&gt;{ラベル}</code>」で参照します。</p>
+
+<h3 class="none"><a id="h8-7-4"></a><span class="secno">8.7.4</span> 白黒印刷でも問題ないか確認する</h3>
+<p>形は同じで色だけが違う図形を使うと、白黒印刷したときに判別がつかなくなります。</p>
+<p>白黒印刷するなら、形を変えたり線の種類を変えたりするなどして、白黒印刷しても判別できるような図にしましょう。</p>
+
+<h3 class="none"><a id="h8-7-5"></a><span class="secno">8.7.5</span> 表のカラム幅を指定する</h3>
+<p>表に長い文章を入れると、ページ横にはみ出してしまいます。</p>
+<p>このような場合は、「<code class="inline-code">//tsize[latex][<b>p{70mm}</b>]</code>」のようにカラムの幅を指定しましょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//tsize[latex][|l|<b>p{70mm}</b>|]
+//table[tbl-jqqu9][長いテキストを使ったサンプル]{
+伝承地             伝承内容
+-------------------------------------------
+風の谷             その者、蒼き衣を纏て金色の野に降り立つべし。失われし大地との絆を結び、ついに人々を青き清浄の地に導かん。
+ゴンドアの谷  リーテ・ラトバリタ・ウルス・アリアロス・バル・ネトリール
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-jqqu9" class="table">
+<p class="caption">表8.1: 長いテキストを使ったサンプル</p>
+<table>
+<tr class="hline"><th>伝承地</th><th>伝承内容</th></tr>
+<tr class="hline"><td>風の谷</td><td>その者、蒼き衣を纏て金色の野に降り立つべし。失われし大地との絆を結び、ついに人々を青き清浄の地に導かん。</td></tr>
+<tr class="hline"><td>ゴンドアの谷</td><td>リーテ・ラトバリタ・ウルス・アリアロス・バル・ネトリール</td></tr>
+</table>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h8-7-6"></a><span class="secno">8.7.6</span> 表のカラムが数値なら右寄せにする</h3>
+<p>表のカラムはデフォルトで左寄せ(l)ですが、右寄せ(r)や中央揃え(c)を指定できます。特にカラムが数値なら、右寄せにするのがいいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//tsize[latex][<b>|l|c|r|</b>]
+//table[tbl-o599k][左寄せ・中央揃え・右寄せのサンプル]{
+左寄せ             中央揃え    右寄せ
+-------------------------------------------
+1               1               1
+10              10              10
+100             100             100
+1000            1000            1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-o599k" class="table">
+<p class="caption">表8.2: 左寄せ・中央揃え・右寄せのサンプル</p>
+<table>
+<tr class="hline"><th>左寄せ</th><th>中央揃え</th><th>右寄せ</th></tr>
+<tr class="hline"><td>1</td><td>1</td><td>1</td></tr>
+<tr class="hline"><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>100</td><td>100</td><td>100</td></tr>
+<tr class="hline"><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+
+<h2 class="leftline"><a id="h8-8"></a><span class="secno">8.8</span> ページデザイン</h2>
+
+<h3 id="subsec-sidemargin" class="none"><a id="h8-8-1"></a><span class="secno">8.8.1</span> [PDF] 印刷用では左右の余白幅を充分にとる</h3>
+<p>紙の書籍では、左右いっぱいに本文を印刷してはいけません。必ずページ左右の余白を充分に確保してください（<span class="imgref"><a href="./06-bestpractice.html#margin_book">図8.8</a></span>）。</p>
+<ul>
+<li>見開きにおいて内側の余白（つまり左ページの右余白と、右ページの左余白）は、最低20mm必要です。
+   それ以上切り詰めると、本を開いたときに内側の本文がとても読みにくくなります。
+</li>
+<li>見開きにおいて外側の余白（つまり左ページの左余白と、右ページの右余白）は、10〜15mmくらい必要です。
+   それ以上切り詰めると、指が本文にかかってしまうので読みにくくなります。
+</li>
+</ul>
+<div id="margin_book" class="image">
+<img src="images/06-bestpractice/margin_book.png" alt="紙の書籍ではページ左右の余白幅が必要" class="img width-080per" />
+<p class="caption">
+図8.8: 紙の書籍ではページ左右の余白幅が必要
+</p>
+</div>
+<p>Starterではこのような制限を考慮しつつ、本文幅が最大になるよう設定しています。そのため、<strong>印刷用PDFファイルでは奇数ページと偶数ページで左右の余白幅が違います</strong>。これは意図した仕様でありバグではありません。</p>
+<p>電子用PDFファイルではこのようなことを考慮する必要はありません。そのため、電子用PDFでは左右の余白幅は同じです。</p>
+
+<h3 class="none"><a id="h8-8-2"></a><span class="secno">8.8.2</span> [PDF] タブレット向けでは余白を切り詰める</h3>
+<p>Starterでは、印刷用PDFと電子用PDFを切り替えて生成できます。このとき、電子用PDFのレイアウトは印刷用PDFをほぼ忠実に再現しています。つまり電子用PDFのレイアウトは電子用として最適化されているわけではなく、あくまで印刷用のレイアウトを流用しているだけです。</p>
+<p>もし印刷用PDFを必要とせず、電子用PDFだけを必要とするなら、レイアウトをタブレット向けに最適化するといいでしょう。タブレット向けのPDFでは、本文周辺の余白を切り詰めると、7インチや8インチのタブレットでの読みやすさが向上します。余白がまったくないのもどうかと思いますが、全角1文字分ぐらいの余白があればタブレットの画面では十分です。</p>
+<p>Starterでは、プロジェクト作成時にタブレット向けのレイアウトを選択できます。そうすると、タブレット向けに余白を切り詰めたレイアウトになります。印刷用PDFを必要としない人は試してみてください。</p>
+<p>なおタブレット向けに余白を切り詰めたA5サイズの本文幅は、切り詰めていない通常のB5サイズの本文幅とほぼ同じになります。つまりB5サイズで余白を切り詰めると本文幅が長くなりすぎるので、Starterではタブレット向けとしてはA5サイズのみを用意しています。</p>
+
+<h3 class="none"><a id="h8-8-3"></a><span class="secno">8.8.3</span> [PDF] 電子用PDFではページ番号の位置を揃える</h3>
+<p>紙の書籍においてページ番号は、見開きで左右の上隅または下隅に置かれることが多いです。紙の書籍は見開きで読めるので、ページ番号がこのような位置でも問題ありません。</p>
+<p>しかしこれと同じことを電子用PDFで行うと、ページ番号の位置が右上だったり左上だったり（あるいは右下だったり左下だったり）一定しないので、読みづらいです。なぜなら、電子用PDFをタブレットで見るときは見開きではなく1ページずつ読まれるからです。</p>
+<p>つまり紙の書籍におけるページ番号は見開きであることを前提にしており、それと同じ前提を電子用PDFにしてはいけません。</p>
+<p>電子用PDFでは、ページ番号の位置は一定であることが望ましいです。そのため、Starterではページ番号をページ下の真ん中に置いています。またこの位置は紙の書籍でも通用するので、印刷用PDFと電子用PDFとで同じページレイアウトにできます。</p>
+
+<h3 class="none"><a id="h8-8-4"></a><span class="secno">8.8.4</span> 非Retina向けには本文をゴシック体にする</h3>
+<p>Re:VIEWやStarterでは、本文のフォントを明朝体にしています。明朝体は、印刷物やRetinaディスプレイのように解像度が高いと読みやすいですが、Retinaでない（つまり高解像度でない）ディスプレイだと読みづらいです。</p>
+<p>スマートフォンやノートパソコンではRetinaディスプレイが普及しましたが、外部ディスプレイでは高解像度ではないものがまだ一般的です。</p>
+<p>もし高解像度でないディスプレイでも読みやすくしたいなら、本文をゴシック体にすることを検討しましょう。Starterでは「<span class="file">config-starter.yml</span>」の設定を変えるだけで変更できます。詳しくは「<a href="04-customize.html#h6-3-2">6.3.2 [PDF] フォントの種類を変更する</a>」を参照してください。</p>
+
+<h2 class="leftline"><a id="h8-9"></a><span class="secno">8.9</span> 大扉</h2>
+
+<h3 class="none"><a id="h8-9-1"></a><span class="secno">8.9.1</span> 長いタイトルでは改行箇所を明示する</h3>
+<p>本や同人誌のタイトルが長いと、大扉（タイトルページ）において不自然な箇所で改行されてしまいます（<span class="imgref"><a href="./06-bestpractice.html#multiline-title">図8.9</a></span>上）。</p>
+<p>これを防ぐために、Starterではタイトルを複数行で指定できるようになっています。この場合、大扉（タイトルページ）ではタイトルが1行ずつ表示されるので、自然な位置を指定して改行できます（<span class="imgref"><a href="./06-bestpractice.html#multiline-title">図8.9</a></span>下）。</p>
+<div id="multiline-title" class="image">
+<img src="images/06-bestpractice/multiline-title.png" alt="タイトルの改行位置を指定しなかった場合（上）とした場合（下）" class="img width-070per border" />
+<p class="caption">
+図8.9: タイトルの改行位置を指定しなかった場合（上）とした場合（下）
+</p>
+</div>
+
+<h3 id="subsec-visualtitlepage" class="none"><a id="h8-9-2"></a><span class="secno">8.9.2</span> 大扉を別のソフトで作成する</h3>
+<p>Re:VIEWやStarterが生成する大扉（タイトルページ）は、デザインがよくありません。PhotoshopやIllustratorやKeynoteで作成したほうが、見栄えのいいデザインになります（<span class="imgref"><a href="./06-bestpractice.html#titlepage-samples">図8.10</a></span>）。</p>
+<div id="titlepage-samples" class="image">
+<img src="images/06-bestpractice/titlepage-samples.png" alt="Keynoteで作成した大扉の例" class="img width-090per" />
+<p class="caption">
+図8.10: Keynoteで作成した大扉の例
+</p>
+</div>
+<p>Starterでは、別のソフトで作成した大扉や奥付のPDFファイルを読み込めます。やり方は「<a href="04-customize.html#h6-6-2">6.6.2 [PDF] 表紙や大扉や奥付となるPDFファイルを指定する</a>」を参照してください。</p>
+<p>またこうして読み込んだPDFファイルにも、ノンブルがつきます。以前は大扉や奥付のPDFファイルを読み込む機能がなかったため、最初にノンブルなしの印刷用PDFを生成し、大扉や奥付を差し替えてから、最後にノンブルをつける必要がありました。今は印刷用PDF生成時に大扉や奥付のPDFファイルを読み込めるので、最初からノンブルつきで印刷用PDFが生成できます。</p>
+<p>このように、別ソフトで作成さた大扉を取り込む機能がStarterでは整っています。積極的に別ソフトで作っていきましょう。なお印刷所へ入稿するなら、大扉に背景色をつける場合は塗り足し<sup><a id="fnb-fn-79q5r" href="#fn-fn-79q5r" class="noteref" epub:type="noteref">*9</a></sup>もつけましょう。「塗り足し」が分からなければ、大扉の背景色を白にしておくと入稿時のトラブルが少なくなります。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-79q5r" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*9] </span>塗り足しについては「<a href="04-customize.html#h6-2-4">6.2.4 [PDF] 塗り足しをつける</a>」を参照してください。</p></div>
+</div><!--/.footnote-list-->
+<div class="note">
+<h5>大扉をKeynoteやPagesで作成する</h5>
+<p>Keynote.appで大扉を作成しようとすると、困ったことにKeynote.appにはスライドのサイズをA5やB5にする機能がありません。かわりにスライドを次のようなカスタムサイズにすると、ちょうどA5やB5のサイズになります。</p>
+<ul>
+<li>A5の場合：419pt x 595pt
+</li>
+<li>B5の場合：516pt x 728pt
+</li>
+</ul>
+<p>またPages.appなら簡単にA5やB5にできます。B5にしたい場合は「JIS B5」を選んでください。</p>
+</div>
+
+<h2 class="leftline"><a id="h8-10"></a><span class="secno">8.10</span> 奥付</h2>
+
+<h3 id="subsec-colophonlastpage" class="none"><a id="h8-10-1"></a><span class="secno">8.10.1</span> 奥付は最後のページに置く</h3>
+<p>紙の本は必ず偶数ページになります。たとえば、ページ数が100ページの本はあっても101ページの本はありません。そのため、本の最終ページも偶数ページになります。</p>
+<p>そして奥付は、本の最後のページに置きます。言い換えると、奥付は本の最後の偶数ページに置かれるはずです。しかし、このことが考慮されていない同人誌がたまにあります。</p>
+<p>実は素のRe:VIEWではこれが考慮されておらず、奥付が奇数ページに置かれることがあります<sup><a id="fnb-fn-qzmgo" href="#fn-fn-qzmgo" class="noteref" epub:type="noteref">*10</a></sup>。Starterではこのようなことはありません。奥付は必ず最後の偶数ページに置かれます。気が利いてますね。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-qzmgo" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*10] </span>TechBoosterのテンプレートでは偶数ページに置かれるように修正されています。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h8-10-2"></a><span class="secno">8.10.2</span> 奥付に更新履歴とイベント名を記載する</h3>
+<p>一般的に、奥付には本の更新履歴が記載されます。</p>
+<p>同人誌ならそれに加えて、初出のイベント名も記載するといいでしょう。そうすると、どのイベントで手に入れたかが分かりやすくなります<sup><a id="fnb-fn-ksg34" href="#fn-fn-ksg34" class="noteref" epub:type="noteref">*11</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-ksg34" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*11] </span>少なくとも新刊はこれが当てはまります。既刊だと当てはまりませんが、初出のイベント名が分かるだけでも読者の助けになります。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h8-10-3"></a><span class="secno">8.10.3</span> 利用した素材の作者とURLを奥付に記載する</h3>
+<p>本の作成に使用した素材があれば、作者名とURLを奥付に記載するといいでしょう。</p>
+<p>たとえば表紙に写真やイラストを使ったのであれば、その作者と素材へのURLを奥付に記載しましょう。</p>
+
+<h3 class="none"><a id="h8-10-4"></a><span class="secno">8.10.4</span> 利用したソフトウェアを奥付に記載する</h3>
+<p>本や同人誌をどんなソフトウェアで作ったかを奥付に記載すると、他の人の参考になります。</p>
+<p>たとえば「InDesignで作った」「MS Word 2016で作った」「Pages 10.0で作った」「Vivliostyleで作った」という情報があると、これから本や同人誌を作ろうとする人にとって大きな手がかりとなります。</p>
+<p>またエディタに強いこだわりがある人なら「VS Codeで執筆した」「Vimで執筆した」のようにアピールするのもいいでしょう。</p>
+
+<h2 id="sec-textlint" class="leftline"><a id="h8-11"></a><span class="secno">8.11</span> textlintによる文章チェック</h2>
+<p>この章では、「textlint」というツールを使って文章をチェックする方法を紹介します。</p>
+
+<h3 class="none"><a id="h8-11-1"></a><span class="secno">8.11.1</span> textlintとは</h3>
+<p>「<a href="https://github.com/textlint/textlint" class="link">textlint</a>」とは、日本語の文章をチェックして改善点を指摘してくれるツールです。</p>
+<p>たとえば、次のような内容のファイルがあるとします。ファイル名の拡張子は「<span class="file">.rd</span>」ではなく「<span class="file">.md</span>」であることに注意してください。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sample1.md&lt;/span&gt;：改善前</span>
+<pre class="list">Re:VIEW Starterを使うと、きれいなPDFファイルを作成することができます。
+</pre>
+</div>
+<p>これをtextlintでチェックすると、「もっと簡潔に書けるよ」と指摘してくれます（textlintのインストールについてはあとで説明します）。</p>
+<div class="cmd-code">
+<pre class="emlist">$ <span class="userinput">textlint sample1.md</span>
+
+/Users/yourname/sample1.md
+  1:35  ✓ error  【dict2】 &quot;することができます&quot;は冗長な表現です。&quot;することが&quot;を省き簡潔な表現にすると文章が明瞭になります。
+解説: https://github.com/textlint-ja/textlint-rule-ja-no-redundant-expression#dict2  ja-technical-writing/ja-no-redundant-expression
+
+✖ 1 problem (1 error, 0 warnings)
+✓ 1 fixable problem.
+Try to run: $ textlint --fix [file]
+
+</pre>
+</div>
+<p>指摘された通りに改善してみましょう。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sample1.md&lt;/span&gt;：改善後</span>
+<pre class="list">Re:VIEW Starterを使うと、きれいなPDFファイルを作成<del>することが</del>できます。
+</pre>
+</div>
+<p>これをtextlintでチェックすると、指摘されなくなりました。</p>
+<div class="cmd-code">
+<pre class="emlist">$ textlint sample1.md   <span class="balloon">← 何もエラーが出ない</span>
+</pre>
+</div>
+<p>もう1つ、別の例を見てみましょう。たとえば次のような文章があるとします。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sample2.md&lt;/span&gt;：改善前</span>
+<pre class="list">ノンブルは、印刷所に入稿するときに必要です。
+</pre>
+</div>
+<p>一見すると問題がない文章ですが、textlintでチェックすると「1つの文に複数個の『に』があるよ」と指摘してくれます。</p>
+<div class="cmd-code">
+<pre class="emlist">$ textlint sample2.md
+
+/Users/yourname/sample1.md
+  1:17  error  一文に二回以上利用されている助詞 &quot;に&quot; がみつかりました。  japanese/no-doubled-joshi
+
+✖ 1 problem (1 error, 0 warnings)
+
+</pre>
+</div>
+<p>指摘されたことを改善してみましょう。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sample2.md&lt;/span&gt;：改善後</span>
+<pre class="list">ノンブルは、印刷所<del>に</del><b>へ</b>入稿するときに必要です。
+</pre>
+</div>
+<p>改善後は、指摘されなくなりました。</p>
+<div class="cmd-code">
+<pre class="emlist">$ textlint sample2.md   <span class="balloon">← 何もエラーが出ない</span>
+</pre>
+</div>
+<p>このように、textlintを使うと日本語文章の改善できそうな点が分かります。とはいえ、textlintも万能ではありません。次の項で注意点を説明します。</p>
+
+<h3 class="none"><a id="h8-11-2"></a><span class="secno">8.11.2</span> textlintの注意点</h3>
+<p>textlintは似たような文章であっても、改善点を指摘してくれないことがあります。たとえば先ほどの1番目の例である「<span class="bou">作成する</span>ことができます」だと改善点を指摘してくれますが、「<span class="bou">作る</span>ことができます」だと指摘してくれません。前者が「作成できます」に改善できたように、後者も「作れます」に改善できます。</p>
+<p>またtextlintは「どこが改善できるか」を教えてくれますが、「どう改善できるか」は必ずしも教えてくれません。先ほどの2番目の例がまさにそれで、『に』が複数あることは教えてくれますが、どう直せばいいかは自分で考える必要があります。</p>
+<p>さらにtextlintの指摘がいつも正しいわけではありません。たとえば「血も涙もない。」という文章をtextlintでチェックすると、「1つの文章に複数個の『も』があるよ」と指摘されます。しかしこの指摘がおかしいことは、明らかでしょう。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sample3.md&lt;/span&gt;：修正前</span>
+<pre class="list">血も涙もない。
+</pre>
+</div>
+<div class="cmd-code">
+<pre class="emlist">$ textlint sample3.md
+
+/Users/yourname/sample3.md
+  1:4  error  一文に二回以上利用されている助詞 &quot;も&quot; がみつかりました。  japanese/no-doubled-joshi
+
+✖ 1 problem (1 error, 0 warnings)
+
+</pre>
+</div>
+<p>『も』が複数個現れないように修正できますが、これはさすがにやりすぎです。しないほうがいいでしょう。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sample3.md&lt;/span&gt;：修正後</span>
+<pre class="list"><del>血も涙もない。</del>
+<b>血と涙のどちらも欠いている。</b>
+</pre>
+</div>
+<div class="cmd-code">
+<pre class="emlist">$ textlint sample3.md   <span class="balloon">← 何もエラーが出ない</span>
+</pre>
+</div>
+<p>このような過剰な指摘が起きたのは、Starterがデフォルトで用意したtextlint用の設定が、技術文章向けだからです。textlintは、事前に設定されたルールに従って文章をチェックするツールです。設定されたルールが小説向けであれば小説向けのチェックをし、技術文章向けであれば技術文章向けのチェックをします。</p>
+<p>textlintの設定は、プロジェクトフォルダの直下にある「<span class="file">.textlintrc</span>」というファイルで変更できます。たとえば次のように変更すると、複数の『も』が登場してもエラーにならなくなります。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;.textlintrc&lt;/span&gt;</span>
+<pre class="list">{
+  &quot;filters&quot;: {
+  }
+, &quot;rules&quot;: {
+    &quot;preset-japanese&quot;: false
+  <del>, &quot;preset-ja-technical-writing&quot;: true</del>
+  <b>, &quot;preset-ja-technical-writing&quot;: {</b>
+      <b>&quot;no-doubled-joshi&quot;: {</b>
+        <b>&quot;allow&quot;: [&quot;も&quot;]</b>
+      <b>}</b>
+    <b>}</b>
+  , &quot;preset-jtf-style&quot;: false
+  , &quot;preset-ja-spacing&quot;: false
+  , &quot;preset-ja-engineering-paper&quot;: false
+  }
+</pre>
+</div>
+<p>「<span class="file">.textlintrc</span>」についてこれ以上の解説はしません。詳しく知りたい人は「textlint 使い方」でGoogle検索してください。</p>
+<p>ここまでが、textlintについての一般的な説明でした。次の項から、Starterでtextlintを使う方法を説明します。</p>
+
+<h3 class="none"><a id="h8-11-3"></a><span class="secno">8.11.3</span> Starterのプロジェクトでtextlintを使う</h3>
+<p>Starterのプロジェクトでtextlintを使うには、次のようにします。</p>
+<ol class="ol-none">
+<li data-mark="(1)"><span class="li-mark">(1) </span>Node.jsとnpmコマンドをインストールする。
+</li>
+<li data-mark="(2)"><span class="li-mark">(2) </span>textlintをインストールする。
+</li>
+<li data-mark="(3)"><span class="li-mark">(3) </span>textlintで原稿をチェックする。
+</li>
+</ol>
+<p>(1)と(2)は準備なので、プロジェクトごとに一度だけ行います。</p>
+<p>それぞれ順番に説明します。</p>
+
+<h4><a id="h8-11-3-1"></a>(1) Node.jsとnpmコマンドをインストール</h4>
+<p>textlintを実行するには、<a href="https://nodejs.org/" class="link">Node.js</a>とnpmコマンドをインストールする必要があります。</p>
+<ul>
+<li>Dockerを使っている場合は、Dockerイメージの中にNode.jsとnpmコマンドがインストール済みなので、何もする必要がありません。
+</li>
+<li>Dockerを使っていない場合は、<a href="https://nodejs.org/" class="link">https://nodejs.org/</a>にアクセスしてNode.jsをインストールしてください。
+   npmコマンドも自動的にインストールされます。
+</li>
+</ul>
+<div class="note">
+<h5>Node.jsのバージョンについて</h5>
+<p>インストールするNode.jsのバージョンは、「LTS」と書かれたほうを選ぶといいでしょう。Current」と書かれたほうのバージョンでも動作しますが、こちらは上級者向けです。</p>
+</div>
+
+<h4><a id="h8-11-3-2"></a>(2) textlintをインストール</h4>
+<p>次に、textlintとその関連ライブラリをインストールします。StarterではそのためのRakeタスクが用意されているので、次のコマンドを実行してください。</p>
+<div class="cmd-code">
+<span class="caption">textlintと関連ライブラリをインストール</span>
+<pre class="list">$ <span class="userinput">rake textlint:setup</span>         <span class="balloon">← Dockerを使わない場合</span>
+$ <span class="userinput">rake docker:textlint:setup</span>  <span class="balloon">← Dockerを使う場合</span>
+</pre>
+</div>
+<p>これでtextlintのインストールは完了しました。</p>
+
+<h4><a id="h8-11-3-3"></a>(3) textlintで原稿をチェック</h4>
+<p>textlintを使って原稿の文章をチェックするには、「<code class="inline-code">rake textlint</code>」（または「<code class="inline-code">rake docker:textlint</code>」）を実行してください。</p>
+<div class="cmd-code">
+<span class="caption">textlintで原稿の文章をチェックする（結果は省略）</span>
+<pre class="list">$ <span class="userinput">rake textlint</span>         <span class="balloon">← Dockerを使わない場合</span>
+$ <span class="userinput">rake docker:textlint</span>  <span class="balloon">← Dockerを使う場合</span>
+</pre>
+</div>
+<p>たくさんのエラーが出るので驚くでしょう。指摘された点のすべてを修正する必要はありません。自分で納得できたことだけを修正すればいいです。</p>
+<p>ただし出力結果を見ると、ファイル名と行番号が原稿とは違うことに気づくはずです。この理由を次の項で説明します。</p>
+
+<h3 class="none"><a id="h8-11-4"></a><span class="secno">8.11.4</span> Starterにおけるtextlint実行の仕組み</h3>
+<p>textlintは、Starterの原稿ファイル(<span class="file">*.re</span>)には対応していません。そこでStarterでは、次のような仕組みでtextlintを実行します。</p>
+<ol class="ol-none">
+<li data-mark="(1)"><span class="li-mark">(1) </span>原稿ファイル(<span class="file">*.re</span>)をMarkdown形式のファイル(<span class="file">*.md</span>)に変換する。
+</li>
+<li data-mark="(2)"><span class="li-mark">(2) </span>Markdown形式のファイルをtextlintでチェックする。
+</li>
+</ol>
+<p>このような仕組みのため、textlintが報告するのはMarkdown形式のファイルにおける行番号であり、原稿ファイルの行番号ではありません。よってtextlintの指摘事項を反映するには、出力された行番号をもとにMarkdownファイルを見て指摘内容を確認し、原稿ファイルに戻って修正するという手順になります。</p>
+<p>これは理想的とは言い難いです。解決方法は3つ考えられます。</p>
+<ol class="ol-none">
+<li data-mark="(A)"><span class="li-mark">(A) </span>textlintを改造して、Starterの原稿ファイルを直接読んで解釈できるようにする。
+</li>
+<li data-mark="(B)"><span class="li-mark">(B) </span>原稿ファイルとMarkdownファイルの行番号が一致するように変換する。
+</li>
+<li data-mark="(C)"><span class="li-mark">(C) </span>原稿ファイルとMarkdownファイルとの行番号のマッピングデータを生成し、それを利用してtextlintの出力結果に含まれる行番号をMarkdownファイルの行番号から原稿ファイルの行番号に書き換える。
+</li>
+</ol>
+<p>どれも手間のかかる作業になるので、将来も含めて対応はあまり期待しないでください。</p>
+<p>もしもっといい方法を思いついた人がいたら、ぜひ教えてくださるようお願いします。</p>
+<div class="note">
+<h5>Markdownへの変換は精度がよくない</h5>
+<p>StarterにおけるMarkdown形式への変換機能はtextlintで使うために実装したので、「textlintで使えればそれでいい」という割り切りをしています。そのため、Markdown形式への変換は精度があまりよくありません。</p>
+<p>「こう改善してほしい」と具体的に提案していただければ対応しますが、そもそもあまり力を入れた機能ではないことをご了承ください。</p>
+</div>
+
+        </main>
+        <nav class="page-navi">
+          <a href="05-faq.html" class="page-prev">&#9664;</a>
+          <a href="91-compare.html" class="page-next">&#9654;</a>
+        </nav>
+        <footer>
+        </footer>
+      </div>
+    </div>
+    <script>
+function rebuildAndReloadForcedly() {
+  fetch('/rebuild.js').then((resp)=>{
+    resp.text().then((text)=>{ eval(text); });
+  });
+}
+    </script>
+    <script src="/rebuild.js?file=06-bestpractice.re"></script>
+  </body>
+</html>
+<!-- layout.html5.erb -->

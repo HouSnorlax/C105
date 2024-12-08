@@ -1,0 +1,4048 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>記法 | 【Python】Tkinterで競馬の着順掲示板を作る</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css" />
+    <link rel="next" title="カスタマイズ" href="04-customize.html">
+    <link rel="prev" title="チュート" href="02-tutorial.html">
+    <meta name="generator" content="Re:VIEW Starter">
+  </head>
+  <body>
+    <div class="page-outer">
+      <nav class="side-content">
+                <div class="rebuild">
+          <a href="javascript:void(0)" onclick="rebuildAndReloadForcedly()">Rebuild and Reload</a>
+        </div>
+                <a class="nav-title" href="index.html">【Python】Tkinterで競馬の着順掲示板を作る</a>
+<ul class="toc toc-1">
+    <li class="toc-chapter"><a href="./00-preface.html">まえがき / はじめに</a></li>
+    <li class="toc-chapter"><a href="./01-install.html">1 インストール</a></li>
+    <li class="toc-chapter"><a href="./02-tuto.html">2 チュートリアル</a></li>
+    <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a></li>
+    <li class="toc-chapter"><a href="./02-tutorial.html">4 チュート</a></li>
+    <li class="toc-chapter"><a href="./03-syntax.html">5 記法</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h5-1">5.1 コメント</a></li>
+        <li class="toc-section"><a href="#h5-2">5.2 段落と改行と空行</a></li>
+        <li class="toc-section"><a href="#h5-3">5.3 見出し</a></li>
+        <li class="toc-section"><a href="#h5-4">5.4 箇条書きと定義リスト</a></li>
+        <li class="toc-section"><a href="#h5-5">5.5 インライン命令とブロック命令</a></li>
+        <li class="toc-section"><a href="#h5-6">5.6 強調と装飾</a></li>
+        <li class="toc-section"><a href="#h5-7">5.7 プログラムリスト</a></li>
+        <li class="toc-section"><a href="#h5-8">5.8 行番号</a></li>
+        <li class="toc-section"><a href="#h5-9">5.9 ターミナル</a></li>
+        <li class="toc-section"><a href="#h5-10">5.10 脚注</a></li>
+        <li class="toc-section"><a href="#h5-11">5.11 ノート</a></li>
+        <li class="toc-section"><a href="#h5-12">5.12 コラム</a></li>
+        <li class="toc-section"><a href="#h5-13">5.13 画像</a></li>
+        <li class="toc-section"><a href="#h5-14">5.14 表</a></li>
+        <li class="toc-section"><a href="#h5-15">5.15 数式</a></li>
+        <li class="toc-section"><a href="#h5-16">5.16 会話形式</a></li>
+        <li class="toc-section"><a href="#h5-17">5.17 用語、索引</a></li>
+        <li class="toc-section"><a href="#h5-18">5.18 単語展開</a></li>
+        <li class="toc-section"><a href="#h5-19">5.19 その他</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./04-customize.html">6 カスタマイズ</a></li>
+    <li class="toc-chapter"><a href="./05-faq.html">7 FAQ</a></li>
+    <li class="toc-chapter"><a href="./06-bestpractice.html">8 よりよい本づくり</a></li>
+    <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a></li>
+    <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
+    <li class="toc-chapter"><a href="./93-background.html">開発の背景</a></li>
+    <li class="toc-chapter"><a href="./99-postface.html">あとがき / おわりに</a></li>
+</ul>
+      </nav>
+      <div class="page-inner">
+        <header class="page-header">
+        </header>
+        <main class="page-main">
+<h1 class="boldlines center twolines"><a id="h5"></a><span class="secno">第5章</span> <br/>記法</h1>
+<div class="abstract">
+<p>この章では、原稿ファイルの記法について詳しく説明します。初めての人は、先に「<a href="02-tutorial.html#h4-4">4.4 基本的な記法</a>」を見たほうがいいでしょう。</p>
+</div>
+
+<h2 id="sec-comment" class="leftline"><a id="h5-1"></a><span class="secno">5.1</span> コメント</h2>
+
+<h3 class="none"><a id="h5-1-1"></a><span class="secno">5.1.1</span> 行コメント</h3>
+<p>「<code class="inline-code">#@#</code>」で始まる行は行コメントであり、コンパイル時に読み飛ばされます。一般的な行コメントとは違って、行の先頭から始まる必要があるので注意してください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">本文1。
+<b>#@#</b>本文2。
+本文3。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>本文1。本文3。</p>
+</div></div>
+<div class="note">
+<h5>行コメントを空行扱いにしない</h5>
+<p>Re:VIEWでは行コメントを空行として扱います。たとえば上の例の場合、「本文1」と「本文3」が別の段落になってしまいます。ひどい仕様ですね。こんな仕様だと、段落の途中をコメントアウトするときにとても不便です。</p>
+<p>Starterでは「本文1」と「本文3」が別の段落にならないよう仕様を変更しています。</p>
+</div>
+
+<h3 class="none"><a id="h5-1-2"></a><span class="secno">5.1.2</span> 範囲コメント</h3>
+<p>「<code class="inline-code">#@+++</code>」から「<code class="inline-code">#@---</code>」までの行は範囲コメントであり、コンパイル時に読み飛ばされます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">本文1。
+
+<b>#@+++</b>
+本文2。
+
+本文3。
+<b>#@---</b>
+
+本文4。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>本文1。</p>
+<p>本文4。</p>
+</div></div>
+<p>範囲コメントは入れ子にできません。また「<code class="inline-code">+</code>」「<code class="inline-code">-</code>」の数は3つと決め打ちされてます。</p>
+<p>なお範囲コメントはStarterによる拡張機能です。</p>
+
+<h2 id="sec-paragraph" class="leftline"><a id="h5-2"></a><span class="secno">5.2</span> 段落と改行と空行</h2>
+
+<h3 class="none"><a id="h5-2-1"></a><span class="secno">5.2.1</span> 段落</h3>
+<p>空行を入れると、段落の区切りになります。空行は何行入れても、1行の空行と同じ扱いになります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">言葉を慎みたまえ。君はラピュタ王の前にいるのだ。
+
+これから王国の復活を祝って、諸君にラピュタの力を見せてやろうと思ってね。見せてあげよう、ラピュタの雷を！
+
+旧約聖書にあるソドムとゴモラを滅ぼした天の火だよ。ラーマヤーナではインドラの矢とも伝えているがね。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>言葉を慎みたまえ。君はラピュタ王の前にいるのだ。</p>
+<p>これから王国の復活を祝って、諸君にラピュタの力を見せてやろうと思ってね。見せてあげよう、ラピュタの雷を！</p>
+<p>旧約聖書にあるソドムとゴモラを滅ぼした天の火だよ。ラーマヤーナではインドラの矢とも伝えているがね。</p>
+</div></div>
+<p>段落は、PDFなら先頭の行を字下げ（インデント）し、ePubなら1行空けて表示されます。また段落の前に「<code class="inline-code">//noindent</code>」をつけると、段落の先頭の字下げ（インデント）をしなくなります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//noindent</b>
+言葉を慎みたまえ！君はラピュタ王の前にいるのだ！
+
+<b>//noindent</b>
+これから王国の復活を祝って、諸君にラピュタの力を見せてやろうと思ってね。見せてあげよう、ラピュタの雷を！
+
+<b>//noindent</b>
+旧約聖書にあるソドムとゴモラを滅ぼした天の火だよ。ラーマヤーナではインドラの矢とも伝えているがね。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p class="noindent">言葉を慎みたまえ！君はラピュタ王の前にいるのだ！</p>
+<p class="noindent">これから王国の復活を祝って、諸君にラピュタの力を見せてやろうと思ってね。見せてあげよう、ラピュタの雷を！</p>
+<p class="noindent">旧約聖書にあるソドムとゴモラを滅ぼした天の火だよ。ラーマヤーナではインドラの矢とも伝えているがね。</p>
+</div></div>
+
+<h3 class="none"><a id="h5-2-2"></a><span class="secno">5.2.2</span> 改行</h3>
+<p>改行は、無視されるか、半角空白と同じ扱いになります。正確には、次のような仕様です<sup><a id="fnb-fn-tjpa6" href="#fn-fn-tjpa6" class="noteref" epub:type="noteref">*1</a></sup>。</p>
+<ul>
+<li>改行直前の文字と直後の文字のどちらかが日本語なら、改行は無視される。
+</li>
+<li>どちらも日本語でないなら、半角空白と同じ扱いになる。
+</li>
+</ul>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-tjpa6" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*1] </span>なおこれは日本語LaTeXの仕様です。</p></div>
+</div><!--/.footnote-list-->
+<p>次の例を見てください。</p>
+<ul>
+<li>最初の段落では改行の前後（つまり行の終わりと行の始まり）がどちらも日本語なので、改行は無視されます。
+</li>
+<li>2番目の段落では改行の前後が日本語またはアルファベットなので、やはり改行は無視されます。
+</li>
+<li>3番目の段落では改行の前後がどちらもアルファベットなので、改行は半角空白扱いになります。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">あいうえ<b>お</b>
+<b>か</b>きくけ<b>こ</b>
+<b>さ</b>しすせそ。
+
+たちつてとAB<b>C</b>
+<b>な</b>にぬね<b>の</b>
+<b>D</b>EFはひふへほ。
+
+まみむめもGH<b>I</b>
+<b>J</b>KLらりるれろMN<b>O</b>
+<b>P</b>QRやゆよ。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>あいうえおかきくけこさしすせそ。</p>
+<p>たちつてとABCなにぬねのDEFはひふへほ。</p>
+<p>まみむめもGHIJKLらりるれろMNOPQRやゆよ。</p>
+</div></div>
+
+<h3 class="none"><a id="h5-2-3"></a><span class="secno">5.2.3</span> 強制改行</h3>
+<p>強制的に改行したい場合は、「<code class="inline-code">@&lt;br&gt;{}</code>」を使います。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">土に根をおろし、風と共に生きよう。<b>@&lt;br&gt;{}</b>
+種と共に冬を越え、鳥と共に春をうたおう。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>土に根をおろし、風と共に生きよう。<br />種と共に冬を越え、鳥と共に春をうたおう。</p>
+</div></div>
+<p>なおこの例だと、「<code class="inline-code">//noindent</code>」をつけて段落の字下げをしないほうがいいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//noindent</b>
+土に根をおろし、風と共に生きよう。@&lt;br&gt;{}
+種と共に冬を越え、鳥と共に春をうたおう。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p class="noindent">土に根をおろし、風と共に生きよう。<br />種と共に冬を越え、鳥と共に春をうたおう。</p>
+</div></div>
+
+<h3 class="none"><a id="h5-2-4"></a><span class="secno">5.2.4</span> 強制空行</h3>
+<p>強制的に空行を入れるには、「<code class="inline-code">@&lt;br&gt;{}</code>」を連続してもいいですが、専用の命令「<code class="inline-code">//blankline</code>」を使うほうがいいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//noindent
+土に根をおろし、風と共に生きよう。
+
+<b>//blankline</b>
+//noindent
+種と共に冬を越え、鳥と共に春をうたおう。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p class="noindent">土に根をおろし、風と共に生きよう。</p>
+<p><br /></p>
+<p class="noindent">種と共に冬を越え、鳥と共に春をうたおう。</p>
+</div></div>
+
+<h3 class="none"><a id="h5-2-5"></a><span class="secno">5.2.5</span> 改段落</h3>
+<p>インライン命令「<code class="inline-code">@&lt;par&gt;{}</code>」を使うと、好きな箇所で改段落できます。</p>
+<p>改段落は、通常は空行で行います。しかしたとえば箇条書きの中で改段落したい場合、安易に空行を入れるとそこで箇条書きが終了してしまいます。つまり「空行なら改段落する」という仕様は、箇条書きの文法とは相性が悪いのです。</p>
+<p>このような場合は、「<code class="inline-code">@&lt;par&gt;{}</code>」を使えば箇条書きの中でも改段落できます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> * 『貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+   他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。』
+   <b>@&lt;par&gt;{}</b>
+   富田耕生さん、今までありがとうございました。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ul>
+<li>『貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+   他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。』
+   <p>
+   富田耕生さん、今までありがとうございました。
+</li>
+</ul>
+</div></div>
+<p>なお箇条書きの中で改段落しても、インデントはされません<sup><a id="fnb-hysqy" href="#fn-hysqy" class="noteref" epub:type="noteref">*2</a></sup>。インデントしたい場合は、「<code class="inline-code">@&lt;par&gt;{<b>i</b>}</code>」としてください。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-hysqy" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*2] </span>これはLaTeXの仕様です。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> * 『貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+   他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。』
+   @&lt;par&gt;{<b>i</b>}
+   富田耕生さん、今までありがとうございました。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ul>
+<li>『貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+   他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。』
+   <p class="indent">
+   富田耕生さん、今までありがとうございました。
+</li>
+</ul>
+</div></div>
+
+<h3 class="none"><a id="h5-2-6"></a><span class="secno">5.2.6</span> 改ページ</h3>
+<p>「<code class="inline-code">//clearpage</code>」で強制的に改ページできます。</p>
+<p>なおRe:VIEWでは「<code class="inline-code">//pagebreak</code>」で強制的に改ページできますが、これはLaTeXの「<code class="inline-code">\pagebreak</code>」命令を使うため、図や表のことが考慮されません。Starterでは「<code class="inline-code">//clearpage</code>」を使ってください。</p>
+
+<h2 id="sec-heading" class="leftline"><a id="h5-3"></a><span class="secno">5.3</span> 見出し</h2>
+
+<h3 class="none"><a id="h5-3-1"></a><span class="secno">5.3.1</span> 見出しレベル</h3>
+<p>章(Chapter)や節(Section)といった見出しは、「<code class="inline-code">= </code>」や「<code class="inline-code">== </code>」で始めます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>=</b> 章(Chapter)見出し
+
+<b>==</b> 節(Section)見出し
+
+<b>===</b> 項(Subsection)見出し
+
+<b>====</b> 目(Subsubsection)見出し
+
+<b>=====</b> 段(Paragraph)見出し
+
+<b>======</b> 小段(Subparagraph)見出し
+</pre>
+</div>
+<p>このうち、章・節・項・目はこの順番で（入れ子にして）使うことが想定されています。たとえば、章(Chapter)の次に節ではなく項(Subsection)が登場するのはよくありません。</p>
+<p>ただし段と小段にはこのような制約はなく、たとえば目(Subsubsection)を飛ばして節や項の中で使って構いません。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">= 章(Chapter)
+
+== 節(Section)
+
+<b>===== 段(Paragraph)</b>   <span class="balloon">← 節の中に段が登場しても構わない</span>
+</pre>
+</div>
+<p>Starterでは、章は1ファイルにつき1つだけにしてください。1つのファイルに複数の章を入れないでください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">= 章1
+
+== 節
+
+<b>= 章2</b>         <span class="balloon">← （エラーにならないけど）これはダメ</span>
+</pre>
+</div>
+
+<h3 class="none"><a id="h5-3-2"></a><span class="secno">5.3.2</span> 見出し用オプション</h3>
+<p>見出しには次のようなオプションが指定できます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">==<b>[nonum]</b> 章番号や節番号をつけない（目次には表示する）
+==<b>[nodisp]</b> 見出しを表示しない（目次には表示する）
+==<b>[notoc]</b> 章番号や節番号をつけず、目次にも表示しない
+</pre>
+</div>
+<p>一般的には、「まえがき」や「あとがき」には章番号をつけません。そのため、これらのオプションは「まえがき」や「あとがき」で使うとよさそうに見えます。</p>
+<p>しかしこのようなオプションをつけなくても、「まえがき」や「あとがき」の章や節には番号がつきません。そのため、これらのオプションを使う機会は、実はほとんどありません。</p>
+
+<h3 class="none"><a id="h5-3-3"></a><span class="secno">5.3.3</span> 章の概要と著者名</h3>
+<p>章タイトルの直後に、章の概要を書くことをお勧めします。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">= チュートリアル
+
+<b>//abstract{</b>
+この章では、インストールから簡単な使い方までを説明します。
+詳しい機能の説明は次の章で行います。
+<b>//}</b>
+</pre>
+</div>
+<p>章の概要は、たとえば次のように表示されます。本文と比べて小さめのゴシック体で、左右に余白が追加され、下に2行分空きます。</p>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="abstract">
+<p>この章では、インストールから簡単な使い方までを説明します。詳しい機能の説明は次の章で行います。</p>
+</div>
+</div></div>
+<p>また、章の著者名を表記できます。複数の著者が集まって合同誌を書く場合に使うといいでしょう。著者名は章タイトルの直後、章の概要より前に書いてください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//chapterauthor[</b>ムスカ大佐<b>]</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="chapterauthor">ムスカ大佐</div>
+</div></div>
+
+<h3 id="subsec-chapterid" class="none"><a id="h5-3-4"></a><span class="secno">5.3.4</span> 章ID</h3>
+<p>章(Chapter)のファイル名から拡張子の「<span class="file">.re</span>」を取り除いた文字列を、「章ID」と呼んでいます。たとえば、ファイル名が「<span class="file">02-tutorial.re</span>」なら章IDは「<span class="file">02-tutorial</span>」、ファイル名が「<span class="file">preface.re</span>」なら章IDは「<span class="file">preface</span>」です。</p>
+<p>章IDは、章そのものを参照する場合だけでなく、ある章から別の章の節(Section)や図やテーブルを参照するときに使います。詳しくは後述します。</p>
+<div class="note">
+<h5>章にラベルはつけられない</h5>
+<p>このあとで説明しますが、たとえば「<code class="inline-code">=={ラベル</code> タイトル}」のように書くと節(Section)や項(Subsection)にラベルがつけられます。</p>
+<p>しかし「<code class="inline-code">={ラベル</code> タイトル}」のように書いても章にはラベルがつけられません。かわりに章IDを使ってください。</p>
+</div>
+
+<h3 class="none"><a id="h5-3-5"></a><span class="secno">5.3.5</span> 章を参照する</h3>
+<p>章(Chapter)を参照するには、3つの方法があります。</p>
+<ul>
+<li>「<code class="inline-code">@&lt;chapref&gt;{章ID}</code>」で章番号と章タイトルを参照できます（例：「第2章 チュートリアル」）。
+</li>
+<li>「<code class="inline-code">@&lt;chap&gt;{章ID}</code>」で章番号を参照できます（例：「第2章」）。
+</li>
+<li>「<code class="inline-code">@&lt;title&gt;{章ID}</code>」で章タイトルを参照できます（例：「チュートリアル」）。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;chapref&gt;{</b>02-tutorial<b>}</b>   ← 章番号と章タイトル
+
+<b>@&lt;chap&gt;{</b>02-tutorial<b>}</b>      ← 章番号だけ
+
+<b>@&lt;title&gt;{</b>02-tutorial<b>}</b>     ← 章タイトルだけ
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><a href="./02-tutorial.html">第4章「チュート」</a>   ← 章番号と章タイトル</p>
+<p><a href="./02-tutorial.html">第4章</a>      ← 章番号だけ</p>
+<p><a href="./02-tutorial.html">チュート</a>     ← 章タイトルだけ</p>
+</div></div>
+
+<h3 id="subsec-headingref" class="none"><a id="h5-3-6"></a><span class="secno">5.3.6</span> 節や項を参照する</h3>
+<p>節(Section)や項(Subsection)を参照するには、まず節や項にラベルをつけます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">==<b>{sec-heading}</b> 見出し
+===<b>{subsec-headingref}</b> 節や項を参照する
+</pre>
+</div>
+<p>そして「<code class="inline-code">@&lt;hd&gt;{ラベル}</code>」を使ってそれらを参照します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;hd&gt;{</b>sec-heading<b>}</b>
+
+<b>@&lt;hd&gt;{</b>subsec-headingref<b>}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><a href="03-syntax.html#h5-3">「5.3 見出し」</a></p>
+<p><a href="03-syntax.html#h5-3-6">「5.3.6 節や項を参照する」</a></p>
+</div></div>
+<p>またStarter拡張である「<code class="inline-code">@&lt;secref&gt;{ラベル}</code>」を使うと、ページ番号も表示されます。コマンド名は「<code class="inline-code">@&lt;secref&gt;</code>」ですが、節(Section)だけでなく項(Subsection)や目(Subsubsection)にも使えます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;secref&gt;{</b>sec-heading<b>}</b>
+
+<b>@&lt;secref&gt;{</b>subsec-headingref<b>}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>「<a href="03-syntax.html#h5-3">5.3 見出し</a>」</p>
+<p>「<a href="03-syntax.html#h5-3-6">5.3.6 節や項を参照する</a>」</p>
+</div></div>
+<p>他の章の節や項（つまり他の原稿ファイルの節や項）を参照するには、ラベルの前に章IDをつけます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">@&lt;secref&gt;{<b>03-syntax|</b>sec-heading}
+
+@&lt;secref&gt;{<b>03-syntax|</b>subsec-headingref}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>「<a href="03-syntax.html#h5-3">5.3 見出し</a>」</p>
+<p>「<a href="03-syntax.html#h5-3-6">5.3.6 節や項を参照する</a>」</p>
+</div></div>
+<p>なおラベルのかわりに節タイトルや項タイトルが使えますが、タイトルを変更したときにそれらを参照している箇所も書き換えなければならなくなるので、お勧めしません。一見面倒でも、参照先の節や項にラベルをつけることを強くお勧めします。</p>
+<div class="note">
+<h5>項を参照するなら項番号をつけよう</h5>
+<p>デフォルトでは、章(Chapter)と節(Section)には番号がつきますが、項(Subsection)には番号がつきません。そのため、「@&lt;hd&gt;{}」で項を参照するとたとえば『「見出し用オプション」』となってしまい、項番号がないのでとても探しにくくなります。「@&lt;secref&gt;{}」を使うと『3.1「見出し」の「見出し用オプション」』となるので多少ましですが、探しやすいとは言えません。</p>
+<p>そのため、項(Subsection)を参照したいなら項にも番号をつけましょう。<span class="file">config.yml</span>の設定項目「<code class="inline-code">secnolevel:</code>」を「<code class="inline-code">3</code>」にすると、項にも番号がつくようになります。</p>
+</div>
+
+<h3 class="none"><a id="h5-3-7"></a><span class="secno">5.3.7</span> まえがき、あとがき、付録</h3>
+<p>「まえがき」や「あとがき」や「付録」の章は、<span class="file">catalog.yml</span>で指定します<sup><a id="fnb-fn-n8bjp" href="#fn-fn-n8bjp" class="noteref" epub:type="noteref">*3</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-n8bjp" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*3] </span>「<span class="file">catalog.yml</span>」の中身は「YAML」という形式で書かれています。「YAML」を知らない人はGoogle検索して調べてみてください。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">catalog.yml</span>
+<pre class="list"><b>PREDEF:</b>
+  <b>- 00-preface.re</b>     <span class="balloon">← まえがき</span>
+
+CHAPS:
+  - 01-install.re
+  - 02-tutorial.re
+  - 03-syntax.re
+
+<b>APPENDIX:</b>
+  <b>- 92-filelist.re</b>    <span class="balloon">← 付録</span>
+
+<b>POSTDEF:</b>
+  <b>- 99-postface.re</b>    <span class="balloon">← あとがき</span>
+</pre>
+</div>
+<p>「<code class="inline-code">-</code>」のあとに半角空白が必要なことに注意してください。またインデントにタブ文字は使わないでください。</p>
+
+<h3 class="none"><a id="h5-3-8"></a><span class="secno">5.3.8</span> 部</h3>
+<p>「第I部」「第II部」のような部(Part)を指定するには、<span class="file">catalog.yml</span>で次のように指定します。</p>
+<div class="caption-code">
+<span class="caption">catalog.yml</span>
+<pre class="list">PREDEF:
+
+CHAPS:
+  - <b>初級編:</b>
+    - chap1.re
+    - chap2.re
+  - <b>中級編:</b>
+    - chap3.re
+    - chap4.re
+  - <b>上級編:</b>
+    - chap5.re
+    - chap6.re
+
+APPENDIX:
+
+POSTDEF:
+</pre>
+</div>
+<p>この例では「第I部 初級編」「第II部 中級編」「第III部 上級編」の3つに分かれています。</p>
+<p>部タイトルのあとには「<code class="inline-code">:</code>」をつけて「<code class="inline-code">初級編:</code>」のようにしてください。これを忘れると意味不明なエラーが出ます。</p>
+
+<h3 class="none"><a id="h5-3-9"></a><span class="secno">5.3.9</span> 段見出しと小段見出し</h3>
+<p>Starterでは、段(Paragraph)見出しは次のように表示されます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+<b>===== 段見出し1</b>
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+<b>===== 段見出し2</b>
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+
+<h5><a id="h5-3-9-0-1"></a>段見出し1</h5>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+
+<h5><a id="h5-3-9-0-2"></a>段見出し2</h5>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+</div></div>
+<p>これを見ると分かるように、段見出しの前に少しスペースが入ります。しかし終わりにはそのようなスペースが入りません。終わりにもスペースを入れるには、次のように「<code class="inline-code">//paragraphend</code>」を使ってください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+===== 段見出し
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+<b>//paragraphend</b>
+
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+
+<h5><a id="h5-3-9-0-3"></a>段見出し</h5>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+</div></div>
+<p>また、小段(Subparagraph)見出しは次のように表示されます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+<b>====== 小段見出し1</b>
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+<b>====== 小段見出し2</b>
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+
+テキストテキストテキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキストテキストテキスト。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+
+<h6><a id="h5-3-9-0-3-1"></a>小段見出し1</h6>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+
+<h6><a id="h5-3-9-0-3-2"></a>小段見出し2</h6>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+<p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト。</p>
+</div></div>
+<p>これを見ると分かるように、小段見出しではスペースは入りません。「<code class="inline-code">//subparagraph</code>」は用意されていますが、スペースは入りません。</p>
+
+<h2 id="sec-list" class="leftline"><a id="h5-4"></a><span class="secno">5.4</span> 箇条書きと定義リスト</h2>
+
+<h3 class="none"><a id="h5-4-1"></a><span class="secno">5.4.1</span> 番号なし箇条書き</h3>
+<p>番号なし箇条書きは「<code class="inline-code"> * </code>」で始めます。先頭に半角空白が入っていることに注意してください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> <b>*</b> 箇条書き1
+ <b>*</b> 箇条書き2
+ <b>*</b> 箇条書き3
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ul>
+<li>箇条書き1
+</li>
+<li>箇条書き2
+</li>
+<li>箇条書き3
+</li>
+</ul>
+</div></div>
+<p>「<code class="inline-code">*</code>」を連続させると、箇条書きを入れ子にできます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> <b>*</b> 箇条書き
+ <b>**</b> 入れ子の箇条書き
+ <b>***</b> 入れ子の入れ子
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ul>
+<li>箇条書き
+<ul>
+<li>入れ子の箇条書き
+<ul>
+<li>入れ子の入れ子
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div></div>
+
+<h3 class="none"><a id="h5-4-2"></a><span class="secno">5.4.2</span> 番号つき箇条書き</h3>
+<p>番号つき箇条書きは2つの書き方があります。</p>
+<p>1つ目は「<code class="inline-code"> 1. </code>」のように始める書き方です。この方法は数字しか指定できず、また入れ子にできません。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> <b>1.</b> 番号つき箇条書き（数字しか指定できない）
+ <b>2.</b> 番号つき箇条書き（入れ子にできない）
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ol start="1" type="1">
+<li>番号つき箇条書き（数字しか指定できない）</li>
+<li>番号つき箇条書き（入れ子にできない）</li>
+</ol>
+</div></div>
+<p>2つ目はStarterによる拡張で、「<code class="inline-code"> - 1. </code>」のように始める書き方です。この書き方は「<code class="inline-code"> - A. </code>」や「<code class="inline-code"> - (1) </code>」など任意の文字列が使え、また「<code class="inline-code">-</code>」を連続することで入れ子にもできます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> <b>- (A)</b> 番号つき箇条書き（英数字が使える）
+ <b>- (B)</b> 番号つき箇条書き（任意の文字列が使える）
+ <b>-- (B-1)</b> 番号つき箇条書き（入れ子にできる）
+ <b>***</b> 番号なし箇条書きを含めることもできる
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ol class="ol-none">
+<li data-mark="(A)"><span class="li-mark">(A) </span>番号つき箇条書き（英数字が使える）
+</li>
+<li data-mark="(B)"><span class="li-mark">(B) </span>番号つき箇条書き（任意の文字列が使える）
+<ol class="ol-none">
+<li data-mark="(B-1)"><span class="li-mark">(B-1) </span>番号つき箇条書き（入れ子にできる）
+<ul>
+<li>番号なし箇条書きを含めることもできる
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+</div></div>
+<p>どちらの記法も、先頭に半角空白が必要なことに注意してください。</p>
+<div class="note">
+<h5>数字を使うべきか、文字を使うべきか</h5>
+<p>番号つき箇条書きでは、順番に強い意味がある場合は「1.」のように数字を使い、順番にさほど意味はなく単にラベルとして使いたい場合は「A.」のように文字を使います。詳しくは「<a href="06-bestpractice.html#h8-3-1">8.3.1 箇条書きを正しく使い分ける</a>」を参照してください。</p>
+</div>
+
+<h3 id="sec-termlist" class="none"><a id="h5-4-3"></a><span class="secno">5.4.3</span> 定義リスト</h3>
+<p>HTMLでいうところの「<code class="inline-code">&lt;dl&gt;&lt;dt&gt;&lt;dd&gt;</code>」は、「定義リスト」と「説明リスト」の2つがあります。前者はRe:VIEWでも使え、後者はStarterによる拡張です。この節では前者の「定義リスト」を説明し、次の節で後者の「説明リスト」を説明します。なお会話形式の文章を作成するには、この節ではなく「<a href="03-syntax.html#h5-16">5.16 会話形式</a>」を参照してください。</p>
+<p>定義リストは、「<code class="inline-code"> : </code>」で始めて、次の行からインデントします。</p>
+<ul>
+<li>説明文のインデントは、半角空白でもタブ文字でもいいです。
+  しかし混在させるとトラブルの元なので、どちらかに統一しましょう。
+</li>
+<li>先頭の半角空白は入れるようにしましょう。
+   過去との互換性のため、先頭の半角空白がなくても動作しますが、箇条書きとの整合性のために半角空白を入れましょう。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> <b>:</b> 用語1
+    説明文。
+    説明文。
+ <b>:</b> 用語2
+    説明文。
+    説明文。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<dl>
+<dt>用語1</dt>
+<dd>
+    説明文。
+    説明文。
+</dd>
+<dt>用語2</dt>
+<dd>
+    説明文。
+    説明文。
+</dd>
+</dl>
+</div></div>
+<p>説明文の中には、箇条書きが入れられます（Starter拡張）。ただし、注意点が2つあります。</p>
+<ul>
+<li>説明文の1行目を箇条書きで始めることはできません<sup><a id="fnb-id_59sv1" href="#fn-id_59sv1" class="noteref" epub:type="noteref">*4</a></sup>。
+   1行目は必ず通常の文章にしてください。
+</li>
+<li>箇条書きを使うときは、インデントにはタブ文字を使わず半角空白を使ってください。
+   半角空白4文字でインデントするといいでしょう。
+</li>
+</ul>
+<div class="footnote-list">
+<div class="footnote" id="fn-id_59sv1" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*4] </span>この制約は、Re:VIEWの文法に起因します。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> <b>:</b> 用語
+    説明文。
+     * 項目1
+     * 項目1
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<dl>
+<dt>用語</dt>
+<dd>
+    説明文。
+<ul>
+<li>項目1
+</li>
+<li>項目1
+</li>
+</ul>
+</dd>
+</dl>
+</div></div>
+<p class="noindent">説明文には、プログラムコードなどは入れられません。入れたい場合は、次で紹介する「説明リスト」を使います。</p>
+
+<h3 id="sec-desclist" class="none"><a id="h5-4-4"></a><span class="secno">5.4.4</span> 説明リスト</h3>
+<p>「説明リスト」(Description List)とは、先ほど説明した「定義リスト」(Definition List)の機能を拡張したものです。定義リストと比べて、説明リストには次のような特徴があります。</p>
+<ul>
+<li>キーや用語を太字にする/しないが選べる。
+</li>
+<li>キーや用語の直後で改行する/しないが選べる。
+</li>
+<li>説明文の中に、箇条書きだけでなくプログラムコードなどを入れられる。
+</li>
+<li>説明文の1行目から箇条書きを書ける。
+</li>
+<li>専用の構文を使わないので、「<code class="inline-code"> : </code>」だけで書ける定義リストと比べて記述が煩雑。
+</li>
+<li>文章における役割は定義リストと同じ。
+</li>
+</ul>
+<p>説明リストは次のように書きます。途中にある「<code class="inline-code">@&lt;br&gt;{}</code>」は改行を表します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//desclist{</b>
+<b>//desc[開催日時]{</b>
+20XX年XX月XX日 10:00〜12:00
+//}
+<b>//desc[開催場所]{</b>
+XXXXXXXXビルXXXXXXXX会議室@&lt;br&gt;{}
+（XXXXXX市XXXXXX町XX-XX-XX）
+//}
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<dl class="desc-list">
+  <dt class="desc">開催日時</dt>
+  <dd class="desc">
+<p>20XX年XX月XX日 10:00〜12:00</p>
+  </dd>
+  <dt class="desc">開催場所</dt>
+  <dd class="desc">
+<p>XXXXXXXXビルXXXXXXXX会議室<br />（XXXXXX市XXXXXX町XX-XX-XX）</p>
+  </dd>
+</dl>
+</div></div>
+<p>「<code class="inline-code"> : </code>」だけで済む定義リストと比べて説明リストの書き方は煩雑ですが、<span class="tableref"><a href="./03-syntax.html#7mfnj">表5.1</a></span>のようなオプションを指定できるという利点があります。これらのオプションのデフォルト値は、「<span class="file">config-starter.yml</span>」で設定されています。</p>
+<div id="id_7mfnj" class="table">
+<p class="caption">表5.1: 「<code class="inline-code">//desclist</code>」のオプション</p>
+<table>
+<tr class="hline"><th>オプション</th><th>説明</th><th>デフォルト値</th></tr>
+<tr><td><code class="inline-code">bold=on</code></td><td>キーや用語を太字にする</td><td><code class="inline-code">off</code></td></tr>
+<tr><td><code class="inline-code">compact=on</code></td><td>キーや用語の直後で改行しない</td><td><code class="inline-code">off</code></td></tr>
+<tr><td><code class="inline-code">indent=<i>幅</i></code></td><td>説明文のインデント幅</td><td><code class="inline-code">3zw</code></td></tr>
+<tr><td><code class="inline-code">listmargin=<i>高さ</i></code></td><td>説明リスト上下の空きの高さ</td><td><code class="inline-code">0.5zw</code></td></tr>
+<tr><td><code class="inline-code">itemmargin=<i>高さ</i></code></td><td>説明項目間の空きの高さ</td><td><code class="inline-code">0mm</code></td></tr>
+<tr><td><code class="inline-code">classname=<i>名前</i></code></td><td>HTMLタグに追加するクラス名</td><td></td></tr>
+</table>
+</div>
+<p>オプションは、「<code class="inline-code">//desclist</code>」の第1引数に指定します。先ほどの例をオプションつきで表示してみましょう。ここで「<code class="inline-code">7zw</code>」は全角7文字分という意味です。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//desclist<b>[bold=on,compact=on,indent=7zw]</b>{
+//desc[開催日時]{
+20XX年XX月XX日 10:00〜12:00
+//}
+//desc[開催場所]{
+XXXXXXXXビルXXXXXXXX会議室@&lt;br&gt;{}
+（XXXXXX市XXXXXX町XX-XX-XX）
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<dl class="desc-list compact item-bold">
+  <dt class="desc"><b>開催日時</b></dt>
+  <dd class="desc">
+<p>20XX年XX月XX日 10:00〜12:00</p>
+  </dd>
+  <dt class="desc"><b>開催場所</b></dt>
+  <dd class="desc">
+<p>XXXXXXXXビルXXXXXXXX会議室<br />（XXXXXX市XXXXXX町XX-XX-XX）</p>
+  </dd>
+</dl>
+</div></div>
+<p>説明リストでは、説明文の1行目から箇条書きが書けます。ただし次のサンプルを見れば分かるように、1行目が箇条書きだとスペースが空きすぎます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//desclist{
+//desc[参加申込者]{
+<b> * アリス</b>
+<b> * ボブ</b>
+<b> * チャーリー</b>
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<dl class="desc-list">
+  <dt class="desc">参加申込者</dt>
+  <dd class="desc">
+<ul>
+<li>アリス
+</li>
+<li>ボブ
+</li>
+<li>チャーリー
+</li>
+</ul>
+  </dd>
+</dl>
+</div></div>
+<p>この問題については将来対応する予定です。当面は、「<code class="inline-code">//vspace</code>」を使ってスペースを削除してください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//desclist{
+//desc[参加申込者]{
+<b>//vspace[latex][-5mm]</b>
+ * アリス
+ * ボブ
+ * チャーリー
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<dl class="desc-list">
+  <dt class="desc">参加申込者</dt>
+  <dd class="desc">
+<ul>
+<li>アリス
+</li>
+<li>ボブ
+</li>
+<li>チャーリー
+</li>
+</ul>
+  </dd>
+</dl>
+</div></div>
+<p>また説明文の中に、プログラムコードなども入れられます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//desclist{
+//desc[print文]{
+「@&lt;code&gt;|print()|」を使うと、文字列を表示できます。
+//list{
+def hello(name):
+    print(f&quot;Hello, {name}!&quot;)
+//}
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<dl class="desc-list">
+  <dt class="desc">print文</dt>
+  <dd class="desc">
+<p>「<code class="inline-code">print()</code>」を使うと、文字列を表示できます。</p>
+<div class="caption-code">
+<pre class="emlist">def hello(name):
+    print(f&quot;Hello, {name}!&quot;)
+</pre>
+</div>
+  </dd>
+</dl>
+</div></div>
+
+<h2 id="sec-command" class="leftline"><a id="h5-5"></a><span class="secno">5.5</span> インライン命令とブロック命令</h2>
+<p>ここで少し話を変えて、命令の形式について説明します。</p>
+<p>Re:VIEWおよびStarterでのコマンドは、大きく3つの形式に分けられます。</p>
+<ul>
+<li>インライン命令（例：「<code class="inline-code">@&lt;B&gt;{...}</code>」）
+</li>
+<li>ブロック命令（例：「<code class="inline-code">//list{...//}</code>」）
+</li>
+<li>特殊な形式の命令（例：箇条書きの「<code class="inline-code">*</code>」や見出しの「<code class="inline-code">=</code>」など）
+</li>
+</ul>
+<p>ここではインライン命令とブロック命令について、それぞれ説明します。</p>
+
+<h3 id="subsec-inlinecmd" class="none"><a id="h5-5-1"></a><span class="secno">5.5.1</span> インライン命令</h3>
+<p>「インライン命令」とは、「<code class="inline-code">@&lt;B&gt;{...}</code>」のような形式の命令のことです。主に、文の途中に埋め込んで使います。</p>
+<p>Re:VIEWのインライン命令は入れ子にできませんが、Starterでは入れ子にできるよう拡張しています。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;code&gt;{</b>func(<b>@&lt;b&gt;{</b><b>@&lt;i&gt;{</b>arg<b>}}</b>)<b>}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><code class="inline-code">func(<b><i>arg</i></b>)</code></p>
+</div></div>
+<p>インライン命令は、複数行を対象にできません。たとえば次のような書き方はできません。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;B&gt;{</b>テキスト
+テキスト<b>}</b>。
+</pre>
+</div>
+<p>インライン命令の中に「<code class="inline-code">}</code>」を書きたい場合は、次のうちどちらかを使います。</p>
+<ul>
+<li>「<code class="inline-code">@&lt;B&gt;{var x = {a: 1\};}</code>」のように「<code class="inline-code">\}</code>」とエスケープする。
+</li>
+<li>「<code class="inline-code">@&lt;B&gt;{...}</code>」のかわりに「<code class="inline-code">@&lt;B&gt;|...|</code>」または「<code class="inline-code">@&lt;B&gt;$...$</code>」を使う。
+</li>
+</ul>
+<p>2番目の書き方は、Re:VIEWでは「フェンス記法」と呼ばれています。この記法では、バックスラッシュによるエスケープができないので注意してください。たとえば「<code class="inline-code">@&lt;B&gt;|\||</code>」や「<code class="inline-code">@&lt;B&gt;$\$$</code>」のようなエスケープをしても効果はありません。</p>
+<div class="note">
+<h5>インライン命令の入れ子対応と複数の引数</h5>
+<p>インライン命令には、「<code class="inline-code">@&lt;href&gt;{<i>url</i>, <i>text</i>}</code>」や「<code class="inline-code">@&lt;yomi&gt;{<i>text</i>, <i>yomi</i>}</code>」のように複数の引数を受け取るものがあります。</p>
+<p>しかしこの書き方は、実は入れ子のインライン命令と相性がよくありません。望ましいのは「<code class="inline-code">@&lt;href url=&quot;<i>url</i>&quot;&gt;{<i>text</i>}</code>」や「<code class="inline-code">@&lt;ruby yomi=&quot;<i>yomi</i>&quot;&gt;{<i>text</i>}</code>」のような形式であり、採用を現在検討中です。</p>
+</div>
+
+<h3 id="subsec-blockcmd" class="none"><a id="h5-5-2"></a><span class="secno">5.5.2</span> ブロック命令</h3>
+<p>「ブロック命令」とは、「<code class="inline-code">//list{...//}</code>」のような形式の命令のことです。</p>
+<p>ブロック命令は、必ず行の先頭から始まる必要があります。たとえば「<code class="inline-code">//list{</code>」や「<code class="inline-code">//}</code>」の前に空白があると、ブロック命令として認識されません。</p>
+<p>ブロック命令は入れ子にできます（Starterによる拡張）。たとえば次の例では、「<code class="inline-code">//note{...//}</code>」の中に「<code class="inline-code">//list{...//}</code>」が入っています。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//note</b>[ノートサンプル]<b>{</b>
+<b>//list</b>[][フィボナッチ]<b>{</b>
+def fib(n):
+    return n if n &lt;= 1 else fib(n-1)+fib(n-2)
+<b>//}</b>
+<b>//}</b>
+</pre>
+</div>
+<p>ただし次のブロック命令はその性質上、中に他のブロック命令を入れられません（インライン命令は入れられます）。</p>
+<ul>
+<li>プログラムコードを表す「<code class="inline-code">//list</code>」
+</li>
+<li>ターミナルを表す「<code class="inline-code">//terminal</code>」と「<code class="inline-code">//cmd</code>」
+</li>
+<li>LaTeXやHTMLの生テキストを埋め込む「<code class="inline-code">//embed</code>」
+</li>
+</ul>
+<p>ブロック命令の引数は、たとえば「<code class="inline-code">//list[ラベル][説明文]{...//}</code>」のように書きます。この場合だと、第1引数が「<code class="inline-code">ラベル</code>」で第2引数が「<code class="inline-code">説明文</code>」です。引数の中に「<code class="inline-code">]</code>」を入れたい場合は、「<code class="inline-code">\]</code>」のようにエスケープしてください。</p>
+
+<h2 id="sec-decoration" class="leftline"><a id="h5-6"></a><span class="secno">5.6</span> 強調と装飾</h2>
+
+<h3 class="none"><a id="h5-6-1"></a><span class="secno">5.6.1</span> 強調</h3>
+<p>文章の一部を強調するには「<code class="inline-code">@&lt;B&gt;{...}</code>」または「<code class="inline-code">@&lt;strong&gt;{...}</code>」で囲みます。囲んだ部分は太字のゴシック体になります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">テキスト<b>@&lt;B&gt;{</b>テキスト<b>}</b>テキスト。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>テキスト<strong>テキスト</strong>テキスト。</p>
+</div></div>
+<p>日本語の文章では、強調箇所は太字にするだけでなくゴシック体にするのが一般的です。そのため、強調したい場合は「<code class="inline-code">@&lt;B&gt;{...}</code>」または「<code class="inline-code">@&lt;strong&gt;{...}</code>」を使ってください。</p>
+<div class="note">
+<h5>インライン命令</h5>
+<p>「<code class="inline-code">@&lt;B&gt;{...}</code>」のような記法は<em>インライン命令</em>と呼ばれています。インライン命令は必ず1行に記述します。複数行を含めることはできません。</p>
+<div class="caption-code">
+<span class="caption">このような書き方はできない</span>
+<pre class="list"><strong>@&lt;B&gt;{</strong>テキスト
+テキスト
+テキスト。<strong>}</strong>
+</pre>
+</div>
+</div>
+
+<h3 class="none"><a id="h5-6-2"></a><span class="secno">5.6.2</span> 太字</h3>
+<p>太字にするだけなら「<code class="inline-code">@&lt;b&gt;{...}</code>」で囲みます。強調と違い、ゴシック体になりません。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">テキスト<b>@&lt;b&gt;{</b>テキスト<b>}</b>テキスト。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>テキスト<b>テキスト</b>テキスト。</p>
+</div></div>
+<p>前述したように、日本語の文章では強調するときは太字のゴシック体にするのが一般的です。そのため強調したいときは、ゴシック体にならない「<code class="inline-code">@&lt;b&gt;{...}</code>」は使わないほうがいいでしょう。</p>
+<p>ただし、プログラムコードの中では「<code class="inline-code">@&lt;B&gt;{...}</code>」ではなく「<code class="inline-code">@&lt;b&gt;{...}</code>」を使ってください。理由は、プログラムコードは等幅フォントで表示しているのに、「<code class="inline-code">@&lt;B&gt;{...}</code>」だとゴシック体のフォントに変更してしまうからです。「<code class="inline-code">@&lt;b&gt;{...}</code>」はフォントを変更しないので、等幅フォントのままで太字になります。</p>
+
+<h3 class="none"><a id="h5-6-3"></a><span class="secno">5.6.3</span> 装飾</h3>
+<p>テキストを装飾するには、<span class="tableref"><a href="./03-syntax.html#tbl-ndpcm">表5.2</a></span>のようなインライン命令を使います。</p>
+<div id="tbl-ndpcm" class="table">
+<p class="caption">表5.2: 装飾用のインライン命令</p>
+<table>
+<tr class="hline"><th>意味</th><th>入力</th><th>出力</th></tr>
+<tr class="hline"><td>太字</td><td><code class="inline-code">@&lt;b&gt;{テキスト}</code></td><td><b>テキスト</b></td></tr>
+<tr class="hline"><td>強調</td><td><code class="inline-code">@&lt;strong&gt;{テキスト}</code></td><td><strong>テキスト</strong></td></tr>
+<tr class="hline"><td>強調</td><td><code class="inline-code">@&lt;B&gt;{テキスト}</code></td><td><strong>テキスト</strong></td></tr>
+<tr class="hline"><td>傍点</td><td><code class="inline-code">@&lt;bou&gt;{テキスト}</code></td><td><span class="bou">テキスト</span></td></tr>
+<tr class="hline"><td>網掛け</td><td><code class="inline-code">@&lt;ami&gt;{テキスト}</code></td><td><span class="ami">テキスト</span></td></tr>
+<tr class="hline"><td>下線</td><td><code class="inline-code">@&lt;u&gt;{テキスト}</code></td><td><u>テキスト</u></td></tr>
+<tr class="hline"><td>取り消し線</td><td><code class="inline-code">@&lt;del&gt;{テキスト}</code></td><td><del>テキスト</del></td></tr>
+<tr class="hline"><td>目立たせない</td><td><code class="inline-code">@&lt;weak&gt;{テキスト}</code></td><td><span class="weak">テキスト</span></td></tr>
+<tr class="hline"><td>ゴシック体</td><td><code class="inline-code">@&lt;em&gt;{テキスト}</code></td><td><em>テキスト</em></td></tr>
+<tr class="hline"><td>イタリック体</td><td><code class="inline-code">@&lt;i&gt;{Text}</code></td><td><i>Text</i></td></tr>
+<tr class="hline"><td>等幅</td><td><code class="inline-code">@&lt;tt&gt;{Text}</code></td><td><tt>Text</tt></td></tr>
+<tr class="hline"><td>コード</td><td><code class="inline-code">@&lt;code&gt;{Text}</code></td><td><code class="inline-code">Text</code></td></tr>
+</table>
+</div>
+
+<h3 class="none"><a id="h5-6-4"></a><span class="secno">5.6.4</span> 文字サイズ</h3>
+<p>文字の大きさを変更するインライン命令もあります（<span class="tableref"><a href="./03-syntax.html#tbl-2cv8w">表5.3</a></span>）。</p>
+<div id="tbl-2cv8w" class="table">
+<p class="caption">表5.3: 文字の大きさを変更するインライン命令</p>
+<table>
+<tr class="hline"><th>意味</th><th>入力</th><th>出力</th></tr>
+<tr class="hline"><td>小さく</td><td><code class="inline-code">@&lt;small&gt;{テキスト}</code></td><td><small style="font-size:small">テキスト</small></td></tr>
+<tr class="hline"><td>もっと小さく</td><td><code class="inline-code">@&lt;xsmall&gt;{テキスト}</code></td><td><small style="font-size:x-small">テキスト</small></td></tr>
+<tr class="hline"><td>もっともっと小さく</td><td><code class="inline-code">@&lt;xxsmall&gt;{テキスト}</code></td><td><small style="font-size:xx-small">テキスト</small></td></tr>
+<tr class="hline"><td>大きく</td><td><code class="inline-code">@&lt;large&gt;{テキスト}</code></td><td><span style="font-size:large">テキスト</span></td></tr>
+<tr class="hline"><td>もっと大きく</td><td><code class="inline-code">@&lt;xlarge&gt;{テキスト}</code></td><td><span style="font-size:x-large">テキスト</span></td></tr>
+<tr class="hline"><td>もっともっと大きく</td><td><code class="inline-code">@&lt;xxlarge&gt;{テキスト}</code></td><td><span style="font-size:xx-large">テキスト</span></td></tr>
+</table>
+</div>
+
+<h3 class="none"><a id="h5-6-5"></a><span class="secno">5.6.5</span> マーキング用</h3>
+<p>装飾ではなく、論理的な意味を与えるマーキング用のインライン命令もあります（<span class="tableref"><a href="./03-syntax.html#tbl-t533z">表5.4</a></span>）。</p>
+<div id="tbl-t533z" class="table">
+<p class="caption">表5.4: マーキング用のインライン命令</p>
+<table>
+<tr class="hline"><th>意味</th><th>入力</th><th>出力</th></tr>
+<tr class="hline"><td>追加されたテキスト</td><td><code class="inline-code">@&lt;ins&gt;{xxx}</code></td><td><ins>xxx</ins></td></tr>
+<tr class="hline"><td>プログラムコード</td><td><code class="inline-code">@&lt;code&gt;{xxx}</code></td><td><code class="inline-code">xxx</code></td></tr>
+<tr class="hline"><td>ファイル名</td><td><code class="inline-code">@&lt;file&gt;{xxx}</code></td><td><span class="file">xxx</span></td></tr>
+<tr class="hline"><td>ユーザ入力文字列</td><td><code class="inline-code">@&lt;userinput&gt;{xxx}</code></td><td><span class="userinput">xxx</span></td></tr>
+</table>
+</div>
+<p>追加されたテキストを表す「<code class="inline-code">@&lt;ins&gt;{}</code>」は、通常の本文では下線になりますが、プログラムコード（<code class="inline-code">//list{ ... //}</code>）やターミナル（<code class="inline-code">//terminal{ ... //}</code>）の中では太字になります。</p>
+<div class="note">
+<h5>「@&lt;tt&gt;{}」ではなく「@&lt;code&gt;{}」や「@&lt;file&gt;{}」を使う</h5>
+<p>プロブラムコードやコマンド文字列を等幅フォントで表すには、「<code class="inline-code">@&lt;tt&gt;{}</code>」ではなく「<code class="inline-code">@&lt;code&gt;{}</code>」を使ってください。理由は、プログラムコードであることを表すにはフォントを変更するコマンドではなく、「プログラムコードである」ことを表すコマンドを使うべきだからです。加えて両者ではシングルクォートとバッククォートの表示が異なり、たとえば「<code class="inline-code">@&lt;tt&gt;{'`}</code>」は「<tt>'`</tt>」と表示され、「<code class="inline-code">@&lt;code&gt;{'`}</code>」は「<code class="inline-code">'`</code>」と表示されます（Starter拡張）<sup><a id="fnb-fn-2byje" href="#fn-fn-2byje" class="noteref" epub:type="noteref">*5</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-2byje" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*5] </span>使用する等幅フォントによっては同じように表示されます。</p></div>
+</div><!--/.footnote-list-->
+<p>同じような理由で、ファイル名を表すには「<code class="inline-code">@&lt;file&gt;{}</code>」を使ってください。「<code class="inline-code">@&lt;tt&gt;{}</code>」や「<code class="inline-code">@&lt;code&gt;{}</code>」を使うべきではありません。</p>
+</div>
+
+<h3 class="none"><a id="h5-6-6"></a><span class="secno">5.6.6</span> その他のインライン命令</h3>
+
+<h4><a id="h5-6-6-1"></a>ダブルクォーテーション</h4>
+<p>「<code class="inline-code">@&lt;qq&gt;{...}</code>」を使うと、引数の文字列を適切なダブルクォーテーションで囲みます。</p>
+<ul>
+<li>PDFでは「<code class="inline-code">``...''</code>」のように囲みます。
+   これはLaTeXでの標準的な方法であり、表示がきれいです。
+</li>
+<li>HTMLでは「<code class="inline-code">“...”</code>」のように全角記号で囲みます。
+</li>
+</ul>
+<p>表示を比べてみましょう。</p>
+<ul>
+<li>「<code class="inline-code">@&lt;qq&gt;{Apple}</code>」は、「“Apple”」と表示されます。
+</li>
+<li>「<code class="inline-code">&quot;Apple&quot;</code>」（半角記号）は、「&quot;Apple&quot;」と表示されます。
+</li>
+<li>「<code class="inline-code">“Apple”</code>」（全角記号）は、「“Apple”」と表示されます。
+</li>
+</ul>
+
+<h2 id="sec-program" class="leftline"><a id="h5-7"></a><span class="secno">5.7</span> プログラムリスト</h2>
+
+<h3 class="none"><a id="h5-7-1"></a><span class="secno">5.7.1</span> 基本的な書き方</h3>
+<p>プログラムリストは「<code class="inline-code">//list{ ... //}</code>」で囲み、第2引数に説明書きを指定します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//list[][フィボナッチ数列]{</b>
+def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<span class="caption">フィボナッチ数列</span>
+<pre class="list">def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+</pre>
+</div>
+</div></div>
+<p>もし説明文字列の中に「<code class="inline-code">]</code>」を含める場合は、「<code class="inline-code">\]</code>」のようにエスケープしてください。また説明書きをつけない場合は、引数を省略して「<code class="inline-code">//list{ ... //}</code>」のように書けます。</p>
+
+<h3 class="none"><a id="h5-7-2"></a><span class="secno">5.7.2</span> リスト番号</h3>
+<p>第1引数にラベル名を指定すると、リスト番号がつきます。また「<code class="inline-code">@&lt;list&gt;{ラベル名}</code>」とすると、ラベル名を使ってプログラムリストを参照できます。そのため、ラベル名は他と重複しない文字列にしてください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">サンプルコードはこちら（<b>@&lt;list&gt;{fib2}</b>）。
+
+//list<b>[fib2]</b>[フィボナッチ数列]{
+def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>サンプルコードはこちら（<span class="listref"><a href="./03-syntax.html#fib2">リスト5.1</a></span>）。</p>
+<div id="fib2" class="caption-code">
+<span class="caption">リスト5.1: リスト5.1: フィボナッチ数列</span>
+<pre class="list">def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+</pre>
+</div>
+</div></div>
+<p>第1引数だけ指定して「<code class="inline-code">//list[ラベル名]{ ... //}</code>」のようにすると、リスト番号はつくけど説明はつきません。</p>
+
+<h3 class="none"><a id="h5-7-3"></a><span class="secno">5.7.3</span> ラベルの自動指定</h3>
+<p>リスト番号はつけたいけど、重複しないラベル名をいちいちつけるのが面倒なら、ラベル名のかわりに「<code class="inline-code">?</code>」を指定します。ただし「<code class="inline-code">@&lt;list&gt;{ラベル名}</code>」での参照はできなくなります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list<b>[?]</b>{
+def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="id__879418538" class="caption-code">
+<span class="caption">リスト5.2: リスト5.2: </span>
+<pre class="list">def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+</pre>
+</div>
+</div></div>
+<p>この機能は、すべてのプログラムリストに手っ取り早くリスト番号をつけたいときに便利です。</p>
+
+<h3 class="none"><a id="h5-7-4"></a><span class="secno">5.7.4</span> 長い行の折り返し</h3>
+<p>Starterでは、プログラムコードの長い行は自動的に折り返されます。行が折り返されると行末と次の行の先頭に折り返し記号がつくので、どの行が折り返されか簡単に見分けがつきます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list{
+sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist">sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)
+</pre>
+</div>
+</div></div>
+<p>「<code class="inline-code">@&lt;b&gt;{}</code>」で太字にしたり、「<code class="inline-code">@&lt;del&gt;{}</code>」で取り消し線を引いても、きちんと折り返しされます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//list{</b>
+<b>@&lt;b&gt;{</b>sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)<b>}</b>
+<b>@&lt;del&gt;{</b>sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)<b>}</b>
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist"><b>sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)</b>
+<del>sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)</del>
+</pre>
+</div>
+</div></div>
+<p><del>ただし折り返し箇所が日本語だと、折り返しされても折り返し記号がつきません。</del>折り返し箇所が日本語でも、折り返し記号がつくようになりました。以前のバージョンを使っている場合はStarterのプロジェクトを作り直してみてください。</p>
+<p>折り返しをしたくないときは、「<code class="inline-code">//list[][][<b>fold=off</b>]</code>」と指定します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][<b>fold=off</b>]{
+sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist">sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)
+</pre>
+</div>
+</div></div>
+<p>折り返しはするけど折り返し記号をつけたくない場合は、「<code class="inline-code">//list[][][<b>foldmark=off</b>]</code>」と指定します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][<b>foldmark=off</b>]{
+sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist">sys.stderr.write(&quot;Something error raised. Please contact to system administrator.&quot;)
+</pre>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-7-5"></a><span class="secno">5.7.5</span> 改行文字を表示</h3>
+<p>第3引数に「<code class="inline-code">[eolmark=on]</code>」と指定をすると、改行文字がうっすらと表示されます。この機能は折り返し記号をオフにしてから使うといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][<b>eolmark=on</b>,foldmark=off]{
+function fib(n) {
+    if (n &lt;= 1) { return n; }
+    return fib(n-1) + fib(n-2);
+}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist">function fib(n) {
+    if (n &lt;= 1) { return n; }
+    return fib(n-1) + fib(n-2);
+}
+</pre>
+</div>
+</div></div>
+<div class="note">
+<h5>折り返し記号や改行文字をマウス選択の対象外にする</h5>
+<p>PDF中のプログラムコードをマウスでコピーしたとき、折り返し記号や改行文字がコピーした文字列に含まれると、それらをいちいち除去しないといけないので不便です。</p>
+<p>Starterでは、これらの記号をマウス選択の対象から外すことができます。詳しくは「<a href="04-customize.html#h6-4-5">6.4.5 [PDF] 折り返し記号や行番号をマウス選択の対象から外す</a>」を参照してください。</p>
+</div>
+
+<h3 class="none"><a id="h5-7-6"></a><span class="secno">5.7.6</span> インデント</h3>
+<p>第3引数にたとえば「<code class="inline-code">[indent=4]</code>」<sup><a id="fnb-dw1jh" href="#fn-dw1jh" class="noteref" epub:type="noteref">*6</a></sup>のような指定をすると、4文字幅でのインデントを表す縦線がうっすらとつきます。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-dw1jh" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*6] </span>後方互換性のために、「<code class="inline-code">[indentwidth=4]</code>」という名前でも指定できます。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][]<b>[indent=4]</b>{
+class Fib:
+
+    def __call__(n):
+        if n &lt;= 1:
+            return n
+        else:
+            return fib(n-1) + fib(n-2)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist">class Fib:
+
+    def __call__(n):
+    <span class="indentbar"> </span>   if n &lt;= 1:
+    <span class="indentbar"> </span>   <span class="indentbar"> </span>   return n
+    <span class="indentbar"> </span>   else:
+    <span class="indentbar"> </span>   <span class="indentbar"> </span>   return fib(n-1) + fib(n-2)
+</pre>
+</div>
+</div></div>
+<p>Pythonのようにインデントの深さでブロックを表すプログラミング言語では、ブロックの終わりが明示されません。そのためプログラムの途中で改ページされると、その前後のブロックの関係が読者には分からなくなります。</p>
+<p>そのような場合は、この機能を使ってインデントを表示してあげるとよいでしょう。</p>
+<div class="note">
+<h5>インデント記号をコピペ対象にしない</h5>
+<p>以前のStarterでは、インデントを表す記号としてパイプ記号「<code class="inline-code">|</code>」を使っていました。そのせいで、プログラムコードをマウスでコピペするとパイプ記号も一緒にコピペされてしまっていました。これは読者にとってうれしくない仕様です。</p>
+<p>現在のStarterでは、インデントを表す記号のかわりに図形として縦線を引いています。そのおかげで、コピペしてもパイプ記号が入りません<sup><a id="fnb-fn-ibzh1" href="#fn-fn-ibzh1" class="noteref" epub:type="noteref">*7</a></sup>。Starterによる気配りの一例です。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-ibzh1" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*7] </span>ただし、Starterのデフォルトでは折り返し記号や行番号がコピペ対象に含まれてしまいます。これについては「<a href="04-customize.html#h6-4-5">6.4.5 [PDF] 折り返し記号や行番号をマウス選択の対象から外す</a>」を参照してください。</p></div>
+</div><!--/.footnote-list-->
+</div>
+
+<h3 class="none"><a id="h5-7-7"></a><span class="secno">5.7.7</span> 外部ファイルの読み込み</h3>
+<p>プログラムコードを外部ファイルから読み込むには、2つ方法があります。</p>
+<p>ひとつは、「<code class="inline-code">//list[][][file=...]</code>」のように「<code class="inline-code">//list</code>」の第3引数にファイル名を指定することです。この場合、ブロックの中身は無視されます（ブロックそのものは省略できません）。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][]<b>[file=source/fib3.rb]</b>{
+//}
+</pre>
+</div>
+<p>もうひとつは、「<code class="inline-code">@&lt;include&gt;{}</code>」というインライン命令を使うことです<sup><a id="fnb-fn-yph1o" href="#fn-fn-yph1o" class="noteref" epub:type="noteref">*8</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-yph1o" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*8] </span>参考：<a href="https://github.com/kmuto/review/issues/887" class="link">https://github.com/kmuto/review/issues/887</a></p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[fib3][フィボナッチ数列]{
+<b>@&lt;include&gt;{source/fib3.rb}</b>
+//}
+</pre>
+</div>
+<p>脚注のリンク先にあるように、この方法はRe:VIEWでは undocumented です。Starterでは正式な機能としてサポートします。</p>
+
+<h3 class="none"><a id="h5-7-8"></a><span class="secno">5.7.8</span> タブ文字</h3>
+<p>プログラムコードの中にタブ文字があると、8文字幅のカラムに合うよう自動的に半角空白に展開されます。</p>
+<p>しかし「<code class="inline-code">@&lt;b&gt;{...}</code>」のようなインライン命令があると、カラム幅の計算が狂うため、意図したようには表示されないことがあります。</p>
+<p>そのため、プログラムコードにはなるべくタブ文字を含めないほうがいいでしょう。</p>
+
+<h3 class="none"><a id="h5-7-9"></a><span class="secno">5.7.9</span> 全角文字の幅を半角2文字分にする</h3>
+<p>プログラムコードのデフォルトでは、全角文字の幅は半角文字2文字分より少し狭くなっています。「<code class="inline-code">//list</code>」の第3引数に「<code class="inline-code">widecharfit=on</code>」というオプションを指定すると、全角文字の幅が半角文字2文字分に揃います。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][<b>widecharfit=on</b>]{
+123456789_123456789_123456789_123456789_123456789_
+あいうえおかきくけこさしすせそたちつてとなにぬねの
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist">123456789_123456789_123456789_123456789_123456789_
+あいうえおかきくけこさしすせそたちつてとなにぬねの
+</pre>
+</div>
+</div></div>
+<p>プログラムやターミナル画面において、全角と半角が混在しているせいで表示が崩れる場合は、このオプションを指定すると表示が崩れなくなります。</p>
+<div class="caption-code">
+<span class="caption">「&lt;code class=&quot;inline-code&quot;&gt;widecharfit=on&lt;/code&gt;」がない場合：表示が崩れる</span>
+<pre class="list">testdb1=&gt; select * from members order by id;
+ id  |   name   | height | gender
+-----+----------+--------+--------
+ 101 | エレン   |    170 | M
+ 102 | ミカサ   |    170 | F
+ 103 | アルミン |    163 | M
+ 104 | ジャン   |    175 | M
+ 105 | サシャ   |    168 | F
+ 106 | コニー   |    158 | M
+(6 rows)
+</pre>
+</div>
+<div class="caption-code">
+<span class="caption">「&lt;code class=&quot;inline-code&quot;&gt;widecharfit=on&lt;/code&gt;」がある場合：表示が崩れない</span>
+<pre class="list">testdb1=&gt; select * from members order by id;
+ id  |   name   | height | gender
+-----+----------+--------+--------
+ 101 | エレン   |    170 | M
+ 102 | ミカサ   |    170 | F
+ 103 | アルミン |    163 | M
+ 104 | ジャン   |    175 | M
+ 105 | サシャ   |    168 | F
+ 106 | コニー   |    158 | M
+(6 rows)
+</pre>
+</div>
+<p>このオプションをデフォルトで有効にしたい場合は、「<a href="04-customize.html#h6-4-4">6.4.4 オプションのデフォルト値</a>」を参考にしてください。</p>
+<div class="note">
+<h5>全角文字の判定</h5>
+<p>全角文字の判定は、現在は次のようなコードで行っており、かなりいい加減です。改善については相談してください。</p>
+<div class="caption-code">
+<span class="caption">全角文字の判定方法(Ruby)</span>
+<pre class="list language-ruby">string.each_char do |char|   # charは長さ1の文字列
+  if char =~ /[\000-\177]/
+    # 半角文字
+  else
+    # 全角文字
+  end
+end
+</pre>
+</div>
+</div>
+
+<h3 id="subsec-output" class="none"><a id="h5-7-10"></a><span class="secno">5.7.10</span> 出力結果</h3>
+<p>出力結果や変換結果を表すための「<code class="inline-code">//output</code>」というブロック命令も用意されています。使い方は「<code class="inline-code">//list</code>」と同じで、見た目が少し違うだけです。たとえば自動生成されたHTMLやCSSを表示したり、SQLとその実行結果を分けて表示したいときに使うといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][一覧を取得するSQL]{
+select gender, count(*)
+from members
+group by gender
+order by gender;
+//}
+
+<b>//output</b>[][実行結果]{
+ gender | count
+--------+-------
+ F      |     2
+ M      |     4
+(2 rows)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<span class="caption">一覧を取得するSQL</span>
+<pre class="list">select gender, count(*)
+from members
+group by gender
+order by gender;
+</pre>
+</div>
+<div class="output">
+<span class="caption">実行結果</span>
+<pre class="output"> gender | count
+--------+-------
+ F      |     2
+ M      |     4
+(2 rows)
+</pre>
+</div>
+</div></div>
+<p>「<code class="inline-code">//output</code>」では全角文字の幅が半角文字のちょうど2個分になるよう設定されているので、半角と全角が混在していても表示が崩れません<sup><a id="fnb-fn-zt0xc" href="#fn-fn-zt0xc" class="noteref" epub:type="noteref">*9</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-zt0xc" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*9] </span>ただし、「<code class="inline-code">//output</code>」で使われる等幅フォントによっては表示が崩れることがあります。その場合は<span class="file">config-starter.yml</span>で「<code class="inline-code">output_ttfont: beramono</code>」を指定してみてください。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">「&lt;code class=&quot;inline-code&quot;&gt;//list&lt;/code&gt;」での表示結果（少し崩れる）</span>
+<pre class="list"> id  |   name   | height | gender
+-----+----------+--------+--------
+ 101 | エレン   |    170 | M
+ 102 | ミカサ   |    170 | F
+ 103 | アルミン |    163 | M
+(3 rows)
+</pre>
+</div>
+<div class="output">
+<span class="caption">「&lt;code class=&quot;inline-code&quot;&gt;//output&lt;/code&gt;」での表示結果（崩れない）</span>
+<pre class="output"> id  |   name   | height | gender
+-----+----------+--------+--------
+ 101 | エレン   |    170 | M
+ 102 | ミカサ   |    170 | F
+ 103 | アルミン |    163 | M
+(3 rows)
+</pre>
+</div>
+
+<h3 class="none"><a id="h5-7-11"></a><span class="secno">5.7.11</span> その他のオプション</h3>
+<p>「<code class="inline-code">//list</code>」の第3引数には、次のようなオプションも指定できます。</p>
+<dl class="desc-list">
+  <dt class="desc"><code class="inline-code">fontsize={small|x-small|xx-small|large|x-large|xx-large}</code></dt>
+  <dd class="desc">
+<p>	文字の大きさを小さく（または大きく）します。	どうしてもプログラムコードを折返ししたくないときに使うといいでしょう。</p>
+  </dd>
+  <dt class="desc"><code class="inline-code">lineno={on|off|<i>integer</i>}</code></dt>
+  <dd class="desc">
+<p>	行番号をつけます。詳細は次の節で説明します。</p>
+  </dd>
+  <dt class="desc"><code class="inline-code">linenowidth={0|<i>integer</i>}</code></dt>
+  <dd class="desc">
+<p>	行番号の幅を指定します。詳細は次の節で説明します。</p>
+  </dd>
+  <dt class="desc"><code class="inline-code">classname=<i>classname</i></code></dt>
+  <dd class="desc">
+<p>	HTMLタグのクラス名を指定します。	HTMLまたはePubのときだけ機能します。</p>
+  </dd>
+  <dt class="desc"><code class="inline-code">lang=<i>langname</i></code></dt>
+  <dd class="desc">
+<p>	プログラム言語の名前を指定します。	コードハイライトのために使いますが、Starterではまだ対応していません。</p>
+  </dd>
+</dl>
+<p>なおオプションのデフォルト値は、「<span class="file">congif-starter.yml</span>」で設定できます。詳しくは「<a href="04-customize.html#h6-4-4">6.4.4 オプションのデフォルト値</a>」を参照してください。</p>
+
+<h2 id="sec-lineno" class="leftline"><a id="h5-8"></a><span class="secno">5.8</span> 行番号</h2>
+
+<h3 class="none"><a id="h5-8-1"></a><span class="secno">5.8.1</span> プログラムリストに行番号をつける</h3>
+<p>プログラムリストに行番号をつけるには、「<code class="inline-code">//list</code>」ブロック命令の第3引数を次のように指定します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][<b>lineno=on</b>]{
+function fib(n) {
+  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist"><em class="lineno">1: </em>function fib(n) {
+<em class="lineno">2: </em>  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+<em class="lineno">3: </em>}
+</pre>
+</div>
+</div></div>
+<p>「<code class="inline-code">on</code>」のかわりに開始行番号を指定できます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][<b>lineno=99</b>]{
+function fib(n) {
+  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist"><em class="lineno">99: </em>function fib(n) {
+<em class="lineno">100: </em>  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+<em class="lineno">101: </em>}
+</pre>
+</div>
+</div></div>
+<p>「<code class="inline-code">lineno=1</code>」のかわりに「<code class="inline-code">1</code>」とだけ書いても、行番号がつきます。行番号をつける方法としてはいちばん短い書き方です。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][<b>1</b>]{
+function fib(n) {
+  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist"><em class="lineno">1: </em>function fib(n) {
+<em class="lineno">2: </em>  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+<em class="lineno">3: </em>}
+</pre>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-8-2"></a><span class="secno">5.8.2</span> 行番号の幅を指定する</h3>
+<p>前の例では行番号が外側に表示されました。行番号の幅を指定すると、行番号が内側に表示されます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][lineno=on,<b>linenowidth=3</b>]{
+function fib(n) {
+  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist"><em class="linenowidth">  1: </em>function fib(n) {
+<em class="linenowidth">  2: </em>  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+<em class="linenowidth">  3: </em>}
+</pre>
+</div>
+</div></div>
+<p>また幅を「<code class="inline-code">0</code>」に指定すると、行番号の幅を自動的に計算します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][lineno=99,<b>linenowidth=0</b>]{
+function fib(n) {
+  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist"><em class="linenowidth"> 99: </em>function fib(n) {
+<em class="linenowidth">100: </em>  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+<em class="linenowidth">101: </em>}
+</pre>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-8-3"></a><span class="secno">5.8.3</span> 複雑な行番号指定</h3>
+<p>行番号は「<code class="inline-code">lineno=80-83&amp;97-100&amp;105-</code>」のような複雑な指定もできます。</p>
+<ul>
+<li>「<code class="inline-code">80-83</code>」は80行目から83行目を表します。
+</li>
+<li>「<code class="inline-code">105-</code>」は105行目以降を表します。
+</li>
+<li>「<code class="inline-code">&amp;</code>」は行番号をつけないことを表します。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//list[][][<b>lineno=80-83&amp;97-100&amp;105-</b>,linenowidth=0]{
+// JavaScript
+function fib(n) {
+  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+}
+...（省略）...
+## Ruby
+def fib(n)
+  n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+end
+...（省略）...
+## Python
+def fib(n):
+  return n if n &lt;=1 else fib(n-1) + fib(n-2)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="caption-code">
+<pre class="emlist"><em class="linenowidth"> 80: </em>// JavaScript
+<em class="linenowidth"> 81: </em>function fib(n) {
+<em class="linenowidth"> 82: </em>  return n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+<em class="linenowidth"> 83: </em>}
+<em class="linenowidth">   : </em>...（省略）...
+<em class="linenowidth"> 97: </em>## Ruby
+<em class="linenowidth"> 98: </em>def fib(n)
+<em class="linenowidth"> 99: </em>  n &lt;= 1 ? n : fib(n-1) + fib(n-2);
+<em class="linenowidth">100: </em>end
+<em class="linenowidth">   : </em>...（省略）...
+<em class="linenowidth">105: </em>## Python
+<em class="linenowidth">106: </em>def fib(n):
+<em class="linenowidth">107: </em>  return n if n &lt;=1 else fib(n-1) + fib(n-2)
+</pre>
+</div>
+</div></div>
+
+<h2 id="sec-terminal" class="leftline"><a id="h5-9"></a><span class="secno">5.9</span> ターミナル</h2>
+
+<h3 class="none"><a id="h5-9-1"></a><span class="secno">5.9.1</span> 基本的な書き方</h3>
+<p>ターミナル（端末）の画面を表すには、「<code class="inline-code">//terminal{ ... //}</code>」というブロック命令を使います。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//terminal[?][PDFを生成]{</b>
+$ rake pdf          @&lt;balloon&gt;{Dockerを使わない場合}
+$ rake docker:pdf   @&lt;balloon&gt;{Dockerを使っている場合}
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="id__284605258" class="cmd-code">
+<span class="caption">リスト5.3: リスト5.3: PDFを生成</span>
+<pre class="list">$ rake pdf          <span class="balloon">← Dockerを使わない場合</span>
+$ rake docker:pdf   <span class="balloon">← Dockerを使っている場合</span>
+</pre>
+</div>
+</div></div>
+<p>引数はプログラムリスト「<code class="inline-code">//list{ ... //}</code>」と同じなので、引数の説明は省略します。</p>
+<p>過去との互換性のために、「<code class="inline-code">//cmd{ ... //}</code>」というブロック命令もあります。しかしこの命令はリスト番号や行番号がつけられないし、「<code class="inline-code">//list</code>」命令と使い方が違うので、もはや使う必要はありません。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//cmd</b>[PDFを生成]{
+$ rake pdf          @&lt;balloon&gt;{Dockerを使わない場合}
+$ rake docker:pdf   @&lt;balloon&gt;{Dockerを使っている場合}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="cmd-code">
+<span class="caption">PDFを生成</span>
+<pre class="list language-shell-session">$ rake pdf          <span class="balloon">← Dockerを使わない場合</span>
+$ rake docker:pdf   <span class="balloon">← Dockerを使っている場合</span>
+</pre>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-9-2"></a><span class="secno">5.9.2</span> ユーザ入力</h3>
+<p>「<code class="inline-code">@&lt;userinput&gt;{}</code>」を使うと、ユーザによる入力箇所を示せます<sup><a id="fnb-fn-pl9ll" href="#fn-fn-pl9ll" class="noteref" epub:type="noteref">*10</a></sup>。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//terminal[?][PDFを生成]{
+$ <b>@&lt;userinput&gt;{</b>rake pdf<b>}</b>          @&lt;balloon&gt;{Dockerを使わない場合}
+$ <b>@&lt;userinput&gt;{</b>rake docker:pdf<b>}</b>   @&lt;balloon&gt;{Dockerを使っている場合}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="id__261486856" class="cmd-code">
+<span class="caption">リスト5.4: リスト5.4: PDFを生成</span>
+<pre class="list">$ <span class="userinput">rake pdf</span>          <span class="balloon">← Dockerを使わない場合</span>
+$ <span class="userinput">rake docker:pdf</span>   <span class="balloon">← Dockerを使っている場合</span>
+</pre>
+</div>
+</div></div>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-pl9ll" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*10] </span>ただし、「<code class="inline-code">@&lt;userinput&gt;{}</code>」では長い行を自動的に折り返せません。これは今後の課題です。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h5-9-3"></a><span class="secno">5.9.3</span> ターミナルのカーソル</h3>
+<p>「<code class="inline-code">@&lt;cursor&gt;{...}</code>」を使うと、ターミナルでのカーソルを表せます。</p>
+<p>次の例では、2行目の真ん中の「f」にカーソルがあることを表しています。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//terminal{
+function fib(n) {
+  return n &lt;= 1 ? n : <b>@&lt;cursor&gt;{f}</b>ib(n-1) : fib(n-2);
+}
+~
+~
+&quot;fib.js&quot; 3L, 74C written
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="cmd-code">
+<pre class="emlist">function fib(n) {
+  return n &lt;= 1 ? n : <span class="cursor">f</span>ib(n-1) : fib(n-2);
+}
+~
+~
+&quot;fib.js&quot; 3L, 74C written
+</pre>
+</div>
+</div></div>
+
+<h2 id="sec-footnote" class="leftline"><a id="h5-10"></a><span class="secno">5.10</span> 脚注</h2>
+
+<h3 class="none"><a id="h5-10-1"></a><span class="secno">5.10.1</span> 脚注の書き方</h3>
+<p>脚注は、脚注をつけたい箇所に「<code class="inline-code">@&lt;fn&gt;{ラベル}</code>」を埋め込み、脚注の文は「<code class="inline-code">//footnote[ラベル][脚注文]</code>」のように書きます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">本文。本文<b>@&lt;fn&gt;{fn-101}</b>。本文。
+
+<b>//footnote[fn-101][脚注文。脚注文。]</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>本文。本文<sup><a id="fnb-fn-101" href="#fn-fn-101" class="noteref" epub:type="noteref">*11</a></sup>。本文。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-101" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*11] </span>脚注文。脚注文。</p></div>
+</div><!--/.footnote-list-->
+</div></div>
+<p>このページの最下部に脚注が表示されていることを確認してください。</p>
+<p>また脚注文に「<code class="inline-code">]</code>」を埋め込む場合は、「<code class="inline-code">\]</code>」のようにエスケープしてください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">本文@&lt;fn&gt;{fn-102}。
+
+//footnote[fn-102][脚注に「<b>\]</b>」を入れる。]
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>本文<sup><a id="fnb-fn-102" href="#fn-fn-102" class="noteref" epub:type="noteref">*12</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-102" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*12] </span>脚注に「]」を入れる。</p></div>
+</div><!--/.footnote-list-->
+</div></div>
+
+<h3 class="none"><a id="h5-10-2"></a><span class="secno">5.10.2</span> 脚注の注意点</h3>
+<p>LaTeXの制限により、脚注が表示されなかったりエラーになることがあります。</p>
+<ul>
+<li>コラムの中で脚注を使うと、脚注が表示されないことがあります。
+   この場合、コラムを明示的に閉じてください。
+   詳しくは「<a href="03-syntax.html#h5-12-3">5.12.3 コラム内の脚注</a>」を参照してください。
+</li>
+<li>ミニブロックの中で脚注を使うと、脚注が表示されないことがあります。
+   ミニブロックについての詳細は「<a href="03-syntax.html#h5-11-3">5.11.3 ノート以外のミニブロック</a>」を参照してください。
+</li>
+</ul>
+<div class="note">
+<h5>脚注がうまく表示されない理由</h5>
+<p>コラムやミニブロックでは、囲み枠が使われています。LaTeXで囲み枠を実現するには、「minipage環境」という機能を使うのが一般的です。LaTeXのminipage環境はページ内で別のページを実現する機能であり、HTMLでいうならiframeのようなものです。</p>
+<p>そしてminipage環境はそれ自体が独立したページなので、minipage環境内で脚注を使うとそれが外側のページにうまく伝わりません。これがコラムやミニブロックで脚注がうまく使えない理由です。</p>
+<p>対策としては、コラムやミニブロックのデザイを枠線を使わないように変更することです。または、コラムやミニブロックでは脚注を使わないように文章を工夫することです。</p>
+<p>なおStarterでは、ミニブロックのうちノート（<code class="inline-code">//note</code>）に関してはminipage環境を使わないデザインにしています。ノートについては次の節で紹介します。</p>
+</div>
+
+<h2 id="sec-note" class="leftline"><a id="h5-11"></a><span class="secno">5.11</span> ノート</h2>
+<p>補足情報や注意事項などを表示する枠を、Starterでは「ノート」と呼びます。</p>
+
+<h3 class="none"><a id="h5-11-1"></a><span class="secno">5.11.1</span> ノートの書き方</h3>
+<p>ノートは、「<code class="inline-code">//note{ ... //}</code>」というブロック命令で表します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//note[</b>締め切りを守るたったひとつの冴えたやり方<b>]{</b>
+原稿の締め切りを守るための、素晴らしい方法を教えましょう。
+それは、早い時期に執筆を開始することです。
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="note">
+<h5>締め切りを守るたったひとつの冴えたやり方</h5>
+<p>原稿の締め切りを守るための、素晴らしい方法を教えましょう。それは、早い時期に執筆を開始することです。</p>
+</div>
+</div></div>
+<p>ノートには、箇条書きやプログラムコードを入れられます（Starter独自拡張）。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//note[ノートタイトル]{
+ * 箇条書き
+ * 箇条書き
+
+//list[][プログラムコード]{
+def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="note">
+<h5>ノートタイトル</h5>
+<ul>
+<li>箇条書き
+</li>
+<li>箇条書き
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">プログラムコード</span>
+<pre class="list">def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+</pre>
+</div>
+</div>
+</div></div>
+<p>なお現在、ノートのタイトルに「<code class="inline-code">@&lt;code&gt;{...}</code>」を入れると「<code class="inline-code">TeX capacity exceeded, sorry [input stack size=5000].</code>」というLaTeXのエラーが発生します。原因は不明なので、もしこのようなエラーが発生したらノートのタイトルから「<code class="inline-code">@&lt;code&gt;{...}</code>」を外してみてください。</p>
+
+<h3 class="none"><a id="h5-11-2"></a><span class="secno">5.11.2</span> ラベルをつけて参照する</h3>
+<p>ノートにラベルをつけて、「<code class="inline-code">@&lt;noteref&gt;{ラベル名}</code>」で参照できます（Starter独自拡張）。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//note<b>[note-123]</b>[詳細情報]{
+詳細な説明は次のようになります。……
+//}
+
+詳しくは<b>@&lt;noteref&gt;{note-123}</b>を参照してください。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="note" id="note-123">
+<h5>詳細情報</h5>
+<p>詳細な説明は次のようになります。……</p>
+</div>
+<p>詳しくはノート「<a href="#note-123">詳細情報</a>」を参照してください。</p>
+</div></div>
+<p>上の例で、第1引数がノートタイトルではなくラベル名になっていることに注意してください。通常は次のどちらかを使うといいでしょう。</p>
+<ul>
+<li>タイトルだけを指定するなら「<code class="inline-code">//note[タイトル]{...//}</code>」
+</li>
+<li>ラベルとタイトルを指定するなら「<code class="inline-code">//note[ラベル][タイトル]{...//}</code>」
+</li>
+</ul>
+<div class="note">
+<h5>ノートブロック命令における引数の詳しい仕様</h5>
+<p>「<code class="inline-code">//note</code>」ブロック命令は、過去との互換性を保ったままラベル機能を導入したので、引数の仕様が少し複雑になっています。</p>
+<p>引数の詳しい仕様を<span class="tableref"><a href="./03-syntax.html#tbl-xthfx">表5.5</a></span>にまとめました。これを見ると分かるように、<strong>第1引数だけを指定した場合はラベルではなくタイトルとみなされます</strong>。注意してください。</p>
+<div id="tbl-xthfx" class="table">
+<p class="caption">表5.5: 「<code class="inline-code">//note</code>」の引数の仕様</p>
+<table>
+<tr class="hline"><th>記述</th><th>ラベル</th><th>タイトル</th></tr>
+<tr class="hline"><td><code class="inline-code">//note[ラベル][タイトル]</code></td><td>あり</td><td>あり</td></tr>
+<tr class="hline"><td><code class="inline-code">//note[][タイトル]</code></td><td>なし</td><td>あり</td></tr>
+<tr class="hline"><td><code class="inline-code">//note[ラベル][]</code></td><td>あり</td><td>なし</td></tr>
+<tr class="hline"><td><b><code class="inline-code">//note[タイトル]</code></b></td><td><strong>なし</strong></td><td><strong>あり</strong></td></tr>
+<tr class="hline"><td><code class="inline-code">//note[][]</code></td><td>なし</td><td>なし</td></tr>
+<tr class="hline"><td><code class="inline-code">//note[]</code></td><td>なし</td><td>なし</td></tr>
+<tr class="hline"><td><code class="inline-code">//note</code></td><td>なし</td><td>なし</td></tr>
+</table>
+</div>
+</div>
+
+<h3 id="subsec-miniblock" class="none"><a id="h5-11-3"></a><span class="secno">5.11.3</span> ノート以外のミニブロック</h3>
+<p>ノート以外にも、Re:VIEWでは次のようなブロックが用意されています。</p>
+<ul>
+<li>「<code class="inline-code">//memo</code>」（メモ）
+</li>
+<li>「<code class="inline-code">//tip</code>」（Tips）
+</li>
+<li>「<code class="inline-code">//info</code>」（情報）
+</li>
+<li>「<code class="inline-code">//warning</code>」（警告）
+</li>
+<li>「<code class="inline-code">//important</code>」（重要事項）
+</li>
+<li>「<code class="inline-code">//caution</code>」（注意喚起）
+</li>
+<li>「<code class="inline-code">//notice</code>」（お知らせ）
+</li>
+</ul>
+<p>これらをRe:VIEWで使うとひどいデザインで表示されますが、Starterでは簡素なデザインで表示するよう修正しています。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//notice</b>[ご来場のみなさまへ]{
+本建物の内部には、王族しか入ることができません。
+それ以外の方は入れないので、あらかじめご了承ください。
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="miniblock miniblock-notice">
+<p class="miniblock-caption">ご来場のみなさまへ</p>
+<p>本建物の内部には、王族しか入ることができません。それ以外の方は入れないので、あらかじめご了承ください。</p>
+</div>
+</div></div>
+<p>第1引数のタイトルは省略できます。</p>
+<p>またStarterでは、「<code class="inline-code">//info</code>」と「<code class="inline-code">//caution</code>」と「<code class="inline-code">//warning</code>」に専用のアイコン画像<sup><a id="fnb-fn-1sqbn" href="#fn-fn-1sqbn" class="noteref" epub:type="noteref">*13</a></sup>を用意しています。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-1sqbn" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*13] </span>これらのアイコン画像はパブリックドメインにするので、商用・非商用を問わず自由にお使いください。再配布も自由に行って構いません。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//info</b>[解決のヒント]{
+本製品を手に取り、古くから伝わるおまじないを唱えてみましょう。
+すると天空の城への門が開きます。
+//}
+
+<b>//caution</b>[使用上の注意]{
+本製品を石版にかざすと、天空の城から雷が発射されます。
+周りに人がいないことを確かめてから使用してください。
+//}
+
+<b>//warning</b>[重大な警告]{
+本製品を持ったまま滅びの呪文を唱えると、天空の城は自動的に崩壊します。
+大変危険ですので、決して唱えないでください。
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="miniblock miniblock-info">
+<p class="miniblock-caption">解決のヒント</p>
+<p>本製品を手に取り、古くから伝わるおまじないを唱えてみましょう。すると天空の城への門が開きます。</p>
+</div>
+<div class="miniblock miniblock-caution">
+<p class="miniblock-caption">使用上の注意</p>
+<p>本製品を石版にかざすと、天空の城から雷が発射されます。周りに人がいないことを確かめてから使用してください。</p>
+</div>
+<div class="miniblock miniblock-warning">
+<p class="miniblock-caption">重大な警告</p>
+<p>本製品を持ったまま滅びの呪文を唱えると、天空の城は自動的に崩壊します。大変危険ですので、決して唱えないでください。</p>
+</div>
+</div></div>
+<p>これらのアイコン画像はKeynoteでささっと作ったものなので、もっといいデザインのアイコン画像に変更するといいでしょう。デザインの変更方法は「<a href="04-customize.html#h6-2-7">6.2.7 [PDF] 「//info」や「//warning」のデザインを変更する</a>」を参照してください。</p>
+<p>なお「<code class="inline-code">//note</code>」と違い、いくつか制限事項があります。</p>
+<ul>
+<li>参照用のラベルはつけられません。
+</li>
+<li>LaTeXの制限により、脚注がうまく表示されません。
+</li>
+<li>LaTeXの制限により、プログラムリストやターミナル画面がページをまたげません。
+</li>
+<li>LaTeXの制限により、画像と表の位置指定（「<code class="inline-code">[pos=h]</code>」のような指定）ができません。また強制的に「<code class="inline-code">pos=H</code>」が指定されたものとして扱われます。
+</li>
+</ul>
+<div class="note">
+<h5>「warning」と「caution」の違い</h5>
+<p>「warning」と「caution」は、どちらも警告や注意を表す言葉ですが、次のような違いがあるそうです<sup><a id="fnb-fn-2xk1v" href="#fn-fn-2xk1v" class="noteref" epub:type="noteref">*14</a></sup>。</p>
+<ul>
+<li>「warning」は致命的な結果になる可能性がある場合に使う。
+</li>
+<li>「caution」は望ましくない結果になる可能性がある場合に使う。
+</li>
+</ul>
+<p>つまり「warning」は強い警告、「caution」は弱い警告だと思えばいいでしょう。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-2xk1v" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*14] </span>参考：<a href="http://www.stevensstrategic.com/technical-writing-the-difference-between-warnings-and-cautions/" class="link">『Technical Writing: The Difference Between Warnings and Cautions』</a></p></div>
+</div><!--/.footnote-list-->
+</div>
+
+<h2 id="sec-column" class="leftline"><a id="h5-12"></a><span class="secno">5.12</span> コラム</h2>
+
+<h3 class="none"><a id="h5-12-1"></a><span class="secno">5.12.1</span> コラムとは</h3>
+<p>コラムは、補足情報や関連情報を記述する囲みです。ノートとよく似ていますが、次のような違いがあります。</p>
+<ul>
+<li>ノートは主に数行〜十数行程度の内容です。
+   コラムはもっと長い内容に使うことが多いです。
+</li>
+<li>ノートは目次に出ません。
+   コラムは目次に出ます<sup><a id="fnb-fn-ouf7u" href="#fn-fn-ouf7u" class="noteref" epub:type="noteref">*15</a></sup>。
+</li>
+<li>ノートは文章のどこに書いても構いません。
+   コラムは主に章(Chapter)の最後に書くことが多いです。
+</li>
+</ul>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-ouf7u" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*15] </span>ただし「<code class="inline-code">[notoc]</code>」オプションをつけた場合を除く。</p></div>
+</div><!--/.footnote-list-->
+<p>ときどき、ノートで書くべき内容をすべてコラムとして書いている同人誌を見かけます。間違いだとは言い切れないのですが、できれば両者の使い分けを意識しましょう。</p>
+
+<h3 class="none"><a id="h5-12-2"></a><span class="secno">5.12.2</span> コラムの書き方</h3>
+<p>コラムは「<code class="inline-code">==[column]</code>」と「<code class="inline-code">==[/column]</code>」か、または「<code class="inline-code">===[column]</code>」と「<code class="inline-code">===[/column]</code>」で囲みます（イコール記号の数が違うことに注意）。また実装上の都合により、コラムを閉じる直前に空行を入れてください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>===[column] サンプルコラム1</b>
+コラム本文。
+
+ - a. 箇条書き
+ - b. 箇条書き
+
+//list[][プログラムリスト]{
+def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+//}
+                    <span class="balloon">← 空行を入れてから、</span>
+<b>===[/column]</b>        <span class="balloon">← コラムを閉じる</span>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="column">
+
+<h3><a id="column-1"></a>サンプルコラム1</h3>
+<p>コラム本文。</p>
+<ol start="1" type="a">
+<li>箇条書き
+</li>
+<li>箇条書き
+</li>
+</ol>
+<div class="caption-code">
+<span class="caption">プログラムリスト</span>
+<pre class="list">def fib(n):
+    return n if n &lt;= 1 else fib(n-1) + fib(n-2)
+</pre>
+</div>
+</div>
+</div></div>
+
+<h3 id="subsec-columnfootnote" class="none"><a id="h5-12-3"></a><span class="secno">5.12.3</span> コラム内の脚注</h3>
+<p>前の例を見れば分かるように、コラムの中には箇条書きやプログラムリストなどを含めることができます。ただし、脚注だけはコラムを閉じたあとに書く必要があります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">===[column] サンプルコラム2
+コラム本文<b>@&lt;fn&gt;{fn-222}</b>。
+
+===[/column]                      <span class="balloon">← コラムを閉じて、</span>
+
+<b>//footnote[fn-222][脚注の文章。]</b>  <span class="balloon">← そのあとに書くこと！</span>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="column">
+
+<h3><a id="column-2"></a>サンプルコラム2</h3>
+<p>コラム本文<sup><a id="fnb-fn-222" href="#fn-fn-222" class="noteref" epub:type="noteref">*16</a></sup>。</p>
+</div>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-222" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*16] </span>脚注の文章。</p></div>
+</div><!--/.footnote-list-->
+</div></div>
+
+<h3 class="none"><a id="h5-12-4"></a><span class="secno">5.12.4</span> コラムを参照</h3>
+<p>コラムを参照するには、コラムにラベルをつけて、それを「<code class="inline-code">@&lt;column&gt;{ラベル}</code>」で参照します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">===[column]<b>{column3}</b> サンプルコラム3
+サンプルコラム本文。
+
+===[/column]                      <span class="balloon">← コラムを閉じて、</span>
+
+<b>@&lt;column&gt;{column3}</b>を参照。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="column">
+
+<h3 id="column3"><a id="column-3"></a>サンプルコラム3</h3>
+<p>サンプルコラム本文。</p>
+</div>
+<p><a href="#column-3" class="columnref">コラム「サンプルコラム3」</a>を参照。</p>
+</div></div>
+
+<h3 class="none"><a id="h5-12-5"></a><span class="secno">5.12.5</span> コラムの制限</h3>
+<p>現在、コラムには次のような制限があります。</p>
+<ul>
+<li>コラム内で「<code class="inline-code">//list</code>」や「<code class="inline-code">//terminal</code>」を使うと、それらはページをまたいでくれません<sup><a id="fnb-fn-giruq" href="#fn-fn-giruq" class="noteref" epub:type="noteref">*17</a></sup>。
+</li>
+<li>画像と表の位置指定ができません。「<code class="inline-code">//image[][][<b>pos=h</b>]</code>」や「<code class="inline-code">//table[][][<b>pos=h</b>]</code>」を指定するとエラーになるので<sup><a id="fnb-fn-k247m" href="#fn-fn-k247m" class="noteref" epub:type="noteref">*18</a></sup>、指定しないでください。
+</li>
+</ul>
+<p>これらの制限は仕様です。あきらめてください。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-giruq" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*17] </span>これはLaTeXのframed環境による制限です。解決するにはframed環境を使わないよう変更する必要があります。</p></div>
+<div class="footnote" id="fn-fn-k247m" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*18] </span>oframe環境の中ではtable環境やfigure環境のようなフローティング要素が使えないというLaTeXの制約が原因です。</p></div>
+</div><!--/.footnote-list-->
+<div class="note">
+<h5>コラムは見出しの一種</h5>
+<p>Re:VIEWおよびStarterでは、コラムは節(Section)や項(Subsection)といった見出しの一種として実装されています。そのため、「<code class="inline-code">==[column]</code>」なら節(Section)と同じような扱いになり、「<code class="inline-code">===[column]</code>」なら項(Subsection)と同じような扱いになります（目次レベルを見るとよく分かります）。</p>
+<p>また節や項は閉じる必要がない（勝手に閉じてくれる）のと同じように、コラムも「<code class="inline-code">===[/column]</code>」がなければ勝手に閉じてくれます。しかし明示的に閉じないと脚注が出力されないことがあるので、横着をせずに明示的にコラムを閉じましょう。</p>
+</div>
+
+<h2 id="sec-image" class="leftline"><a id="h5-13"></a><span class="secno">5.13</span> 画像</h2>
+
+<h3 class="none"><a id="h5-13-1"></a><span class="secno">5.13.1</span> 画像ファイルの読み込み方</h3>
+<p>画像を読み込むには、「<code class="inline-code">//image[画像ファイル名][説明文字列][オプション]</code>」を使います。</p>
+<ul>
+<li>画像ファイルは「<span class="file">images/</span>」フォルダに置きます<sup><a id="fnb-fn-6s711" href="#fn-fn-6s711" class="noteref" epub:type="noteref">*19</a></sup>。
+</li>
+<li>画像ファイル名には拡張子を指定しません（自動的に検出されます）。
+</li>
+<li>画像ファイル名がラベルを兼ねており、「<code class="inline-code">@&lt;img&gt;{画像ファイル名}</code>」で参照できます。
+</li>
+<li>画像の表示幅は第3引数のオプションとして指定します。詳しくは後述します。
+</li>
+<li>第3引数のオプションは省略できます。どんなオプションが指定できるかは後述します。
+</li>
+</ul>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-6s711" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*19] </span>画像ファイルを置くフォルダは、設定ファイル「<span class="file">config.yml</span>」の設定項目「<span class="file">imagedir</span>」で変更できますが、通常は変更する必要はないでしょう。</p></div>
+</div><!--/.footnote-list-->
+<p>次の例では、画像ファイル「<span class="file">images/tw-icon1.jpg</span>」を読み込んでいます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//image[tw-icon1][Twitterアイコン][width=30mm]
+</pre>
+</div>
+<p>表示例は<span class="imgref"><a href="./03-syntax.html#tw-icon1">図5.1</a></span>を見てください。</p>
+<div id="tw-icon1" class="image">
+<img src="images/03-syntax/tw-icon1.jpg" alt="Twitterアイコン" class="img" style="width:30mm" />
+<p class="caption">
+図5.1: Twitterアイコン
+</p>
+</div>
+<div class="note">
+<h5>1つの画像ファイルを複数の箇所から読み込まない</h5>
+<p>「<code class="inline-code">//image</code>」コマンドでは、画像ファイル名がラベルを兼ねます。そのせいで、1つの画像ファイルを複数の箇所で読み込むとラベルが重複してしまい、コンパイル時に警告が出ます。また「<code class="inline-code">@&lt;img&gt;{}</code>」で参照しても、画像番号がずれてしまい正しく参照できません。</p>
+<p>Re:VIEWおよびStarterでは1つの画像ファイルを複数の箇所から読み込むのは止めておきましょう。かわりにファイルをコピーしてファイル名を変えましょう<sup><a id="fnb-fn-9d4pq" href="#fn-fn-9d4pq" class="noteref" epub:type="noteref">*20</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-9d4pq" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*20] </span>（分かる人向け）もちろんシンボリックリンクやハードリンクでもいいです。</p></div>
+</div><!--/.footnote-list-->
+</div>
+
+<h3 class="none"><a id="h5-13-2"></a><span class="secno">5.13.2</span> 画像の表示幅を指定する</h3>
+<p>「<code class="inline-code">//image</code>」の第3引数に、画像を表示する幅を指定できます。指定方法は2つあります。</p>
+<dl class="desc-list">
+  <dt class="desc"><code class="inline-code">//image[][][<b>scale=0.5</b>]</code></dt>
+  <dd class="desc">
+<p>画像の幅が本文幅より大きいか小さいかで挙動が変わります。</p>
+<ul>
+<li>画像の幅が本文幅より大きい場合は、本文幅を基準とします。この例なら、本文幅の半分の幅で表示されます。
+</li>
+<li>画像の幅が本文幅より小さい場合は、画像の幅を基準とします。この例なら、画像幅の半分の幅で表示されます。
+</li>
+</ul>
+  </dd>
+  <dt class="desc"><code class="inline-code">//image[][][<b>width=50%</b>]</code></dt>
+  <dd class="desc">
+<p>常に本文幅の半分の幅で画像を表示します。また「<code class="inline-code">50%</code>」のような比率だけでなく、「<code class="inline-code">150px</code>」や「<code class="inline-code">50mm</code>」のように本文幅と関係ない長さの指定ができます。値には必ず単位が必要であり、「<code class="inline-code">width=0.5</code>」のような指定はできません。</p>
+  </dd>
+</dl>
+<p>「<code class="inline-code">scale</code>」も「<code class="inline-code">width</code>」も指定しなかった場合は、次のように表示されます。</p>
+<ul>
+<li>画像の幅が本文幅より大きい場合は、本文幅に縮小されて表示されます。
+</li>
+<li>画像の幅が本文幅より小さい場合は、画像幅のままで表示されます<sup><a id="fnb-id_3gyr7" href="#fn-id_3gyr7" class="noteref" epub:type="noteref">*21</a></sup>。
+</li>
+</ul>
+<div class="footnote-list">
+<div class="footnote" id="fn-id_3gyr7" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*21] </span>Re:VIEWでHTMLを生成すると、画像の幅が本文幅より小さい場合、本文幅いっぱいで表示されてしまいます。この挙動は困るので、Starterでは画像幅のままで表示するよう修正しています。</p></div>
+</div><!--/.footnote-list-->
+<p>なお「<code class="inline-code">scale=0.5</code>」はRe:VIEWでもStarterでも使えるオプションですが、「<code class="inline-code">width=50%</code>」はStarterでのみ使えるオプションです。「<code class="inline-code">width=50%</code>」はRe:VIEWでは使えないので注意してください。</p>
+<p>PDFとHTMLの場合で表示幅を変えるような指定もできます。「<code class="inline-code">latex::width=100%, html::width=50%</code>」<sup><a id="fnb-uzys8" href="#fn-uzys8" class="noteref" epub:type="noteref">*22</a></sup>のように指定すると、PDFのときは本文幅いっぱいに画像を表示し、HTMLのときは本文幅の半分の幅で画像を表示します。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-uzys8" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*22] </span>この指定方法は、他のオプションや他のブロックコマンドでも使用できます。</p></div>
+</div><!--/.footnote-list-->
+<div class="note">
+<h5>「scale=0.5」の挙動について</h5>
+<p><a href="https://github.com/kmuto/review/blob/master/doc/format.ja.md#図" class="link">Re:VIEWのドキュメント</a>には、「<code class="inline-code">scale=0.5</code>」について次のように説明されています。</p>
+<blockquote class="blockquote">
+<p>3番目の引数として、画像の倍率・大きさを指定できます。今のところ「scale=X」で倍率（X 倍）を指定でき、HTML、TeX ともに紙面（画面）幅に対しての倍率となります（0.5 なら半分の幅になります）。</p>
+</blockquote>
+<p>しかし、これは画像の幅が本文幅より大きい場合の説明です。画像の幅が本文より小さい場合は、「<code class="inline-code">scale=0.5</code>」は本文幅の半分ではなく画像幅の半分になります。つまり、こういうことです：</p>
+<ul>
+<li>画像の幅が本文幅より<span class="bou">大きい</span>場合は、<span class="bou">本文幅</span>を基準とする。
+</li>
+<li>画像の幅が本文幅より<span class="bou">小さい</span>場合は、<span class="bou">画像幅</span>を基準とする。
+</li>
+</ul>
+<p>ややこしいことに、Re:VIEWがHTMLを生成するときは必ず本文幅を基準としてしまいます。なぜなら、Re:VIEWでは画像の表示幅を指定するのに「<code class="inline-code">width:50%</code>」のようなCSSを使うためです。</p>
+<p>これはPDFのときと挙動が大きく違うので、Starterではかわりに「<code class="inline-code">max-width:50%</code>」のようなCSSを使い、PDFの挙動に似せています。ただし完全に同じ動作にはならないので、どうしてもRe:VIEWと互換性を持たせる必要がある場合を除き、「<code class="inline-code">scale=0.5</code>」ではなく「<code class="inline-code">width=50%</code>」を使うことを勧めます。</p>
+</div>
+
+<h3 class="none"><a id="h5-13-3"></a><span class="secno">5.13.3</span> 章ごとの画像フォルダ</h3>
+<p>画像ファイルは、章(Chapter)ごとのフォルダに置けます。たとえば原稿ファイル名が「<span class="file">02-tutorial.re</span>」であれば、章IDは「<span class="file">02-tutorial</span>」なので、画像ファイルを「<span class="file">images/02-tutorial/</span>」に置けます<sup><a id="fnb-fn-31qgg" href="#fn-fn-31qgg" class="noteref" epub:type="noteref">*23</a></sup>（特別な設定は不要です）。これは複数の著者で一冊の本を執筆するときに便利です。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-31qgg" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*23] </span>もちろん「<span class="file">images/</span>」にも置けます。</p></div>
+</div><!--/.footnote-list-->
+<p>詳しくは<a href="https://github.com/kmuto/review/blob/master/doc/format.ja.md#%E7%94%BB%E5%83%8F%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E6%8E%A2%E7%B4%A2" class="link">Re:VIEWのマニュアル</a>を参照してください。</p>
+
+<h3 class="none"><a id="h5-13-4"></a><span class="secno">5.13.4</span> 画像のまわりに線をつける</h3>
+<p>第3引数に「<code class="inline-code">[border=on]</code>」をつけると、画像のまわりに灰色の線がつきます（Starter拡張）。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//image[tw-icon2][Twitterアイコン][scale=0.3<b>,border=on</b>]
+</pre>
+</div>
+<p>表示結果は<span class="imgref"><a href="./03-syntax.html#tw-icon2">図5.2</a></span>を見てください。</p>
+<div id="tw-icon2" class="image">
+<img src="images/03-syntax/tw-icon2.jpg" alt="Twitterアイコン" class="img width-030per border" />
+<p class="caption">
+図5.2: Twitterアイコン
+</p>
+</div>
+
+<h3 class="none"><a id="h5-13-5"></a><span class="secno">5.13.5</span> 画像の配置位置を指定する</h3>
+<p>第3引数に「<code class="inline-code">[pos=...]</code>」をつけると、読み込んだ画像をページのどこに配置するか、指定できます（Starter拡張）。</p>
+<dl>
+<dt><code class="inline-code">pos=H</code></dt>
+<dd>
+	なるべく現在位置に配置します。
+	現在位置に読み込めるスペースがなければ次のページの先頭に配置し、現在位置にはスペースが空いたままになります。
+	Re:VIEWのデフォルトですが、ページ数が無駄に増えるのでお勧めしません。
+</dd>
+<dt><code class="inline-code">pos=h</code></dt>
+<dd>
+	上と似ていますが、画像が次のページの先頭に配置されたときは、現在位置に後続の文章が入るため、スペースが空きません。
+	Starterのデフォルトです<sup><a id="fnb-fn-4hoaz" href="#fn-fn-4hoaz" class="noteref" epub:type="noteref">*24</a></sup>。
+</dd>
+<dt><code class="inline-code">pos=t</code></dt>
+<dd>
+	ページ先頭に配置します。
+</dd>
+<dt><code class="inline-code">pos=b</code></dt>
+<dd>
+	ページ最下部に配置します。
+</dd>
+<dt><code class="inline-code">pos=p</code></dt>
+<dd>
+	独立したページに画像だけを配置します（後続の文章が入りません）。
+	大きな画像はこれで表示するといいでしょう。
+</dd>
+</dl>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-4hoaz" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*24] </span>設定ファイル「<span class="file">config-starter.yml</span>」の設定項目「<span class="file">image_position:</span>」でデフォルト値を変更できます。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">現在位置に配置
+//image[tw-icon][Twitterアイコン][scale=0.3<b>,pos=h</b>]
+
+ページ先頭に配置
+//image[tw-icon][Twitterアイコン][scale=0.3<b>,pos=t</b>]
+
+ページ最下部に配置
+//image[tw-icon][Twitterアイコン][scale=0.3<b>,pos=b</b>]
+</pre>
+</div>
+<p>「<code class="inline-code">pos=H</code>」と「<code class="inline-code">pos=h</code>」の違いは、<span class="imgref"><a href="./03-syntax.html#figure_heretop">図5.3</a></span>を見ればよく分かるでしょう。</p>
+<div id="figure_heretop" class="image">
+<img src="images/03-syntax/figure_heretop.png" alt="「&lt;code class=&quot;inline-code&quot;&gt;pos=H&lt;/code&gt;」（上）と「&lt;code class=&quot;inline-code&quot;&gt;pos=h&lt;/code&gt;」（下）の違い" class="img width-080per" />
+<p class="caption">
+図5.3: 「<code class="inline-code">pos=H</code>」（上）と「<code class="inline-code">pos=h</code>」（下）の違い
+</p>
+</div>
+<p>ただし位置指定は、コラムの中では使えず、ノート以外のミニブロック（「<code class="inline-code">//info</code>」や「<code class="inline-code">//warning</code>」など）の中でも使えません。どちらの場合も、位置指定は強制的に「<code class="inline-code">pos=H</code>」と同じ動作になります。これはLaTeXの制約からくる仕様です。</p>
+
+<h3 class="none"><a id="h5-13-6"></a><span class="secno">5.13.6</span> 画像に番号も説明もつけない</h3>
+<p>今まで説明したやり方では、画像に番号と説明文字列がつきました。これらをつけず、単に画像ファイルを読み込みたいだけの場合は、「<code class="inline-code">//indepimage[ファイル名][][scale=1.0]</code>」を使ってください。第2引数に説明文字列を指定できますが、通常は不要でしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//indepimage</b>[tw-icon3][][scale=0.3]
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tw-icon3" class="image">
+<img src="images/03-syntax/tw-icon3.jpg" alt="" class="width-030per" />
+</div>
+</div></div>
+<p>第2引数に説明文字列を指定した場合、Re:VIEWでは「図：」という接頭辞がつきます。しかし<code class="inline-code">//indepimage</code>の用途を考えると、この接頭辞は邪魔でしょう。そこでStarterでは、このような接頭辞をつけないようにしました。もし「図：」が必要なら自分で説明文字列につけてください。</p>
+
+<h3 class="none"><a id="h5-13-7"></a><span class="secno">5.13.7</span> 文章の途中に画像を読み込む</h3>
+<p>文章の途中に画像を読み込むには、「<code class="inline-code">@&lt;icon&gt;{画像ファイル名}</code>」を使います。画像の表示幅は指定できないようです。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">文章の途中でファビコン画像「<b>@&lt;icon&gt;{</b>favicon-16x16<b>}</b>」を読み込む。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>文章の途中でファビコン画像「<img src="images/03-syntax/favicon-16x16.png" alt="[favicon-16x16]" />」を読み込む。</p>
+</div></div>
+
+<h3 class="none"><a id="h5-13-8"></a><span class="secno">5.13.8</span> 画像とテキストを並べて表示する</h3>
+<p>Starterでは、画像とテキストを並べて表示するためのコマンド「<code class="inline-code">//sideimage</code>」を用意しました。著者紹介においてTwitterアイコンとともに使うといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//sideimage[tw-icon4][20mm][side=L,sep=7mm,border=on]</b>{
+//noindent
+@&lt;B&gt;{カウプラン機関極東支部}
+
+ * @_kauplan (@&lt;href&gt;{https://twitter.com/_kauplan/})
+ * @&lt;href&gt;{https://kauplan.org/}
+ * 技術書典8新刊「Pythonの黒魔術」出ました。
+
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="sideimage">
+  <div class="sideimage-image" style="float:left;text-align:center;width:20mm">
+    <img src="./images/03-syntax/tw-icon4.jpg" class="image-bordered" style="width:20mm"/>
+  </div>
+  <div class="sideimage-text" style="margin-left:20mm">
+    <div style="padding-left:7mm">
+<p class="noindent"><strong>カウプラン機関極東支部</strong></p>
+<ul>
+<li>@_kauplan (<a href="https://twitter.com/_kauplan/" class="link">https://twitter.com/_kauplan/</a>)
+</li>
+<li><a href="https://kauplan.org/" class="link">https://kauplan.org/</a>
+</li>
+<li>技術書典8新刊「Pythonの黒魔術」出ました。
+</li>
+</ul>
+    </div>
+  </div>
+</div>
+</div></div>
+<p>使い方は「<code class="inline-code">//sideimage[<i>画像ファイル</i>][<i>画像表示幅</i>][<i>オプション</i>]{</code> ... <code class="inline-code">//}</code>」です。</p>
+<ul>
+<li>画像ファイルは「<code class="inline-code">//image</code>」と同じように指定します。
+</li>
+<li>画像表示幅は「<code class="inline-code">30mm</code>」「<code class="inline-code">3.0cm</code>」「<code class="inline-code">1zw</code>」「<code class="inline-code">10%</code>」などのように指定します。
+   使用できる単位はこの4つであり、「<code class="inline-code">1zw</code>」は全角文字1文字分の幅、「<code class="inline-code">10%</code>」は本文幅の10%になります。
+   なお「<code class="inline-code">//image</code>」と違い、単位がない「<code class="inline-code">0.1</code>」が10%を表すという仕様ではなく、エラーになります。
+</li>
+<li>オプションはたとえば「<code class="inline-code">side=L,sep=7mm,boxwidth=40mm,border=on</code>」のように指定します。
+<ul>
+<li>「<code class="inline-code">side=L</code>」で画像が左側、「<code class="inline-code">side=R</code>」で画像が右側にきます。
+    デフォルトは「<code class="inline-code">side=L</code>」。
+</li>
+<li>「<code class="inline-code">sep=7mm</code>」は、画像と本文の間のセパレータとなる余白幅です。
+    デフォルトはなし。
+</li>
+<li>「<code class="inline-code">boxwidth=40mm</code>」は、画像を表示する領域の幅です。
+    画像表示幅より広い長さを指定してください。
+    デフォルトは画像表示幅と同じです。
+</li>
+<li>「<code class="inline-code">border=on</code>」は、画像を灰色の線で囲みます。
+    デフォルトはoff。
+</li>
+</ul>
+</li>
+</ul>
+<p>なお「<code class="inline-code">//sideimage</code>」は内部でLaTeXのminipage環境を使っているため、次のような制限があります。</p>
+<ul>
+<li>途中で改ページされません。
+</li>
+<li>画像下へのテキストの回り込みはできません。
+</li>
+<li>脚注が使えません。
+</li>
+</ul>
+<p>こういった制限があることを分かったうえで使ってください。</p>
+
+<h2 id="sec-table" class="leftline"><a id="h5-14"></a><span class="secno">5.14</span> 表</h2>
+
+<h3 class="none"><a id="h5-14-1"></a><span class="secno">5.14.1</span> 表の書き方</h3>
+<p>表（テーブル）は「<code class="inline-code">//table[ラベル][説明文字列]{ ... //}</code>」のように書きます。</p>
+<ul>
+<li>ラベルを使って「<code class="inline-code">@table{ラベル}</code>」のように参照できます。
+</li>
+<li>セルは1文字以上のタブ文字で区切ります。
+</li>
+<li>ヘッダは12文字以上の「<code class="inline-code">-</code>」か「<code class="inline-code">=</code>」で区切ります。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;table&gt;{tbl-sample1}</b>を参照。
+
+<b>//table[tbl-sample1][テーブルサンプル]{</b>
+Name    Val     Val     Val
+<b>--------------------------------</b>
+AAA     10      10      10
+BBB     100     100     100
+CCC     1000    1000    1000
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><span class="tableref"><a href="./03-syntax.html#tbl-sample1">表5.6</a></span>を参照。</p>
+<div id="tbl-sample1" class="table">
+<p class="caption">表5.6: テーブルサンプル</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+<tr class="hline"><td>CCC</td><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-14-2"></a><span class="secno">5.14.2</span> ラベルの自動採番</h3>
+<p>「<code class="inline-code">//table[][]</code>」の第1引数はラベルです。これがないと、「表1.1」のような表示がされません。しかし、重複しない文字列を用意して第1引数に設定するのは、結構面倒くさいです。</p>
+<p>そこでStarterでは、ラベルのかわりに「<code class="inline-code">?</code>」を指定する機能を用意しました。これを使うと、ランダム文字列が自動的に割り当てられるため、いつも「表1.1」のような表示がされます（これは「<code class="inline-code">//list[?]</code>」と同じ機能です）。</p>
+<p>次の例では、「<code class="inline-code">//table</code>」の第1引数がラベルではなく「<code class="inline-code">?</code>」になっています。これで重複しないランダム文字列が自動的に割り当てられるので、この表は番号つきで表示されます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table<b>[?]</b>[キャプション]{
+Name    Val     Val     Val
+--------------------------------
+AAA     10      10      10
+BBB     100     100     100
+CCC     1000    1000    1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="id__416969399" class="table">
+<p class="caption">表5.7: キャプション</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+<tr class="hline"><td>CCC</td><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-14-3"></a><span class="secno">5.14.3</span> 右寄せ、左寄せ、中央揃え</h3>
+<p>セルの右寄せ(r)・左寄せ(l)・中央揃え(c)を指定するには、「<code class="inline-code">//tsize[latex][...]</code>」<sup><a id="fnb-fn-8rpih" href="#fn-fn-8rpih" class="noteref" epub:type="noteref">*25</a></sup>を使います。ただし現在のところ、この機能はPDF用でありePubでは使えません。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-8rpih" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*25] </span>「<code class="inline-code">//tsize[pdf][...]</code>」ではなく「<code class="inline-code">//tsize[latex][...]</code>」なのは、内部でLaTeXという組版用ソフトウェアを使っているからです。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//tsize[latex][|l|r|l|c|]</b>
+//table[tbl-sample2][右寄せ(r)、左寄せ(l)、中央揃え(c)]{
+Name    Val     Val     Val
+--------------------------------
+AAA     10      10      10
+BBB     100     100     100
+CCC     1000    1000    1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-sample2" class="table">
+<p class="caption">表5.8: 右寄せ(r)、左寄せ(l)、中央揃え(c)</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+<tr class="hline"><td>CCC</td><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+<p>「<code class="inline-code">//tsize</code>」の使い方は2種類あります。</p>
+<ol class="ol-none">
+<li data-mark="(A)"><span class="li-mark">(A) </span>「<code class="inline-code">//tsize[|latex||r|l|c|]</code>」 … Re:VIEWでの書き方（Starterでも使える）
+</li>
+<li data-mark="(B)"><span class="li-mark">(B) </span>「<code class="inline-code">//tsize[latex][|r|l|c|]</code>」 … Starterで追加した書き方（Re:VIEWでは使えない）
+</li>
+</ol>
+<p>(A)の書き方では、「<code class="inline-code">latex</code>」や「<code class="inline-code">html</code>」を表す縦線と、罫線を指定する縦線とが混在しており、とても分かりにくいです。これに対し、Starterで追加された(B)の書き方であれば、ずっと見やすく書けます。どうしてもRe:VIEWとの互換性が必要な場合を除き、(B)の書き方をお勧めします。</p>
+<p>なお「<code class="inline-code">latex</code>」を指定しない場合は次のように書きます。</p>
+<ul>
+<li>「<code class="inline-code">//tsize[|||r|l|c|]</code>」 … Re:VIEWでの書き方
+</li>
+<li>「<code class="inline-code">//tsize[][|r|l|c|]</code>」 … Starterで追加した書き方
+</li>
+<li>「<code class="inline-code">//tsize[*][|r|l|c|]</code>」 … これでもよい
+</li>
+</ul>
+<p>また「<code class="inline-code">//tsize[html,epub][...]</code>」のような指定もできます。将来的に「<code class="inline-code">//tsize</code>」がHTMLやePubをサポートすれば、このような指定が役に立つでしょう。</p>
+
+<h3 class="none"><a id="h5-14-4"></a><span class="secno">5.14.4</span> 縦の罫線</h3>
+<p>「<code class="inline-code">//tsize[][|l|r|l|c|]</code>」の指定において、「<code class="inline-code">|</code>」は縦方向の罫線を表します。これをなくすと罫線がつきません。また「<code class="inline-code">||</code>」のように二重にすると、罫線も二重になります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//tsize[][<b>l||rlc</b>]
+//table[tbl-sample3][罫線をなくしたり、二重にしてみたり]{
+Name    Val     Val     Val
+--------------------------------
+AAA     10      10      10
+BBB     100     100     100
+CCC     1000    1000    1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-sample3" class="table">
+<p class="caption">表5.9: 罫線をなくしたり、二重にしてみたり</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+<tr class="hline"><td>CCC</td><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-14-5"></a><span class="secno">5.14.5</span> 横の罫線</h3>
+<p>Re:VIEWでは、表のどの行にも横の罫線が引かれます。Starterでは、横の罫線を引かないように指定できます。そのためには、第3引数に「<code class="inline-code">hline=off</code>」を指定します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//tsize[][lrlc]
+//table[tbl-sample4][横の罫線を引かない][<b>hline=off</b>]{
+Name    Val     Val     Val
+================================
+AAA     10      10      10
+BBB     100     100     100
+CCC     1000    1000    1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-sample4" class="table">
+<p class="caption">表5.10: 横の罫線を引かない</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+<tr><td>CCC</td><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+<p>「<code class="inline-code">hline=off</code>」を指定したとき、空行があるとそこに罫線が引かれます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//tsize[][lrlc]
+//table[tbl-sample5][空行が横の罫線になる][<b>hline=off</b>]{
+Name    Val     Val     Val
+================================
+AAA     10      10      10
+BBB     100     100     100
+
+CCC     1000    1000    1000
+DDD     1000    1000    1000
+
+EEE     1000    1000    1000
+FFF     1000    1000    1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-sample5" class="table">
+<p class="caption">表5.11: 空行が横の罫線になる</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+<tr><td>CCC</td><td>1000</td><td>1000</td><td>1000</td></tr>
+<tr class="hline"><td>DDD</td><td>1000</td><td>1000</td><td>1000</td></tr>
+<tr><td>EEE</td><td>1000</td><td>1000</td><td>1000</td></tr>
+<tr><td>FFF</td><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+<p>必要な箇所だけに罫線を引くと、表が見やすくなります。次の例を参考にしてください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//tsize[][llr]
+//table[tbl-sample6][出版社別コミックス発行部数][<b>hline=off</b>]{
+出版社  タイトル        発行部数
+====================
+集英社  鬼滅の刃        XXXX万部
+.       ワンピース      XXX万部
+.       ハイキュー!!    XXX万部
+.       呪術廻戦        XXX万部
+
+講談社  進撃の巨人      XXX万部
+.       FAIRY TAIL      XXX万部
+
+小学館  名探偵コナン    XXX万部
+.       銀の匙          XXX万部
+//}
+</pre>
+</div>
+<p>表示結果は<span class="tableref"><a href="./03-syntax.html#tbl-sample6">表5.12</a></span>を見てください。</p>
+<div id="tbl-sample6" class="table">
+<p class="caption">表5.12: 出版社別コミックス発行部数</p>
+<table>
+<tr class="hline"><th>出版社</th><th>タイトル</th><th>発行部数</th></tr>
+<tr><td>集英社</td><td>鬼滅の刃</td><td>XXXX万部</td></tr>
+<tr><td></td><td>ワンピース</td><td>XXX万部</td></tr>
+<tr><td></td><td>ハイキュー!!</td><td>XXX万部</td></tr>
+<tr class="hline"><td></td><td>呪術廻戦</td><td>XXX万部</td></tr>
+<tr><td>講談社</td><td>進撃の巨人</td><td>XXX万部</td></tr>
+<tr class="hline"><td></td><td>FAIRY TAIL</td><td>XXX万部</td></tr>
+<tr><td>小学館</td><td>名探偵コナン</td><td>XXX万部</td></tr>
+<tr><td></td><td>銀の匙</td><td>XXX万部</td></tr>
+</table>
+</div>
+
+<h3 class="none"><a id="h5-14-6"></a><span class="secno">5.14.6</span> セル幅</h3>
+<p>セルの幅を指定するには、「<code class="inline-code">//tsize[][...]</code>」の中でたとえば「<code class="inline-code">p{20mm</code>}」のように指定します。</p>
+<ul>
+<li>この場合、自動的に左寄せになります。右寄せや中央揃えにはできません。
+</li>
+<li>セル内の長いテキストは自動的に折り返されます。
+   表が横にはみ出てしまう場合はセル幅を指定するといいでしょう。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//tsize[latex][|l|<b>p{70mm}</b>|]
+//table[tbl-sample7][セルの幅を指定すると、長いテキストが折り返される]{
+Name    Description
+--------------------------------
+AAA     text text text text text text text text text text text text text text text
+BBB     text text text text text text text text text text text text text text text
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-sample7" class="table">
+<p class="caption">表5.13: セルの幅を指定すると、長いテキストが折り返される</p>
+<table>
+<tr class="hline"><th>Name</th><th>Description</th></tr>
+<tr class="hline"><td>AAA</td><td>text text text text text text text text text text text text text text text</td></tr>
+<tr class="hline"><td>BBB</td><td>text text text text text text text text text text text text text text text</td></tr>
+</table>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-14-7"></a><span class="secno">5.14.7</span> 空欄</h3>
+<p>セルを空欄にするには、セルに「<code class="inline-code">.</code>」だけを書いてください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//tsize[latex][|l|ccc|]
+//table[tbl-sample8][セルを空欄にするサンプル]{
+評価項目                製品A   製品B   製品C
+----------------------------------------
+機能が充分か            ✓       ✓       .
+価格が適切か            .       .       ✓
+サポートがあるか        ✓       .       ✓
+//}
+</pre>
+</div>
+<p>表示結果は<span class="tableref"><a href="./03-syntax.html#tbl-sample8">表5.14</a></span>を見てください。</p>
+<div id="tbl-sample8" class="table">
+<p class="caption">表5.14: セルを空欄にするサンプル</p>
+<table>
+<tr class="hline"><th>評価項目</th><th>製品A</th><th>製品B</th><th>製品C</th></tr>
+<tr class="hline"><td>機能が充分か</td><td>✓</td><td>✓</td><td></td></tr>
+<tr class="hline"><td>価格が適切か</td><td></td><td></td><td>✓</td></tr>
+<tr class="hline"><td>サポートがあるか</td><td>✓</td><td></td><td>✓</td></tr>
+</table>
+</div>
+<p>またセルの先頭が「<code class="inline-code">.</code>」で始まる場合は、「<code class="inline-code">..</code>」のように2つ書いてください。そうしないと先頭の「<code class="inline-code">.</code>」が消えてしまいます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-sample9][セルの先頭が「@&lt;code&gt;{.}」で始まる場合][headerrows=0]{
+先頭に「.」が1つだけの場合      <b>.bashrc</b>
+先頭に「.」が2つある場合        <b>..bashrc</b>
+//}
+</pre>
+</div>
+<p>表示結果は<span class="tableref"><a href="./03-syntax.html#tbl-sample9">表5.15</a></span>を見てください。</p>
+<div id="tbl-sample9" class="table">
+<p class="caption">表5.15: セルの先頭が「<code class="inline-code">.</code>」で始まる場合</p>
+<table>
+<tr class="hline"><td>先頭に「.」が1つだけの場合</td><td>bashrc</td></tr>
+<tr class="hline"><td>先頭に「.」が2つある場合</td><td>.bashrc</td></tr>
+</table>
+</div>
+
+<h3 class="none"><a id="h5-14-8"></a><span class="secno">5.14.8</span> 表示位置の指定</h3>
+<p>表を表示する位置を、「<code class="inline-code">//table</code>」の第3引数で指定できます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-sample10][表示位置を指定][<b>pos=ht</b>]{
+....
+//}
+</pre>
+</div>
+<p>指定できる文字は次の通りです。また複数の文字を指定できます。</p>
+<dl class="desc-list compact">
+  <dt class="desc">pos=h</dt>
+  <dd class="desc">
+here（現在の場所）
+  </dd>
+  <dt class="desc">pos=H</dt>
+  <dd class="desc">
+here forcedly（現在の場所に強制）
+  </dd>
+  <dt class="desc">pos=t</dt>
+  <dd class="desc">
+top （ページ上部）
+  </dd>
+  <dt class="desc">pos=b</dt>
+  <dd class="desc">
+bottom （ページ下部）
+  </dd>
+  <dt class="desc">pos=p</dt>
+  <dd class="desc">
+page （その表だけのページ）
+  </dd>
+</dl>
+<p>ただし位置指定は、コラムの中では使えず、ノート以外のミニブロック（「<code class="inline-code">//info</code>」や「<code class="inline-code">//warning</code>」など）の中でも使えません。どちらの場合も、強制的に「<code class="inline-code">pos=H</code>」と同じ動作になります。これはLaTeXの制約からくる仕様です。</p>
+
+<h3 class="none"><a id="h5-14-9"></a><span class="secno">5.14.9</span> 表のフォントサイズ</h3>
+<p>表のフォントサイズを、「<code class="inline-code">//table</code>」の第3引数で指定できます。表が大きくて1ページに収まらないとき使うといいでしょう<sup><a id="fnb-dwrsy" href="#fn-dwrsy" class="noteref" epub:type="noteref">*26</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-dwrsy" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*26] </span>PDFでは表のフォントサイズがデフォルトでsmallになっています。そのため、「<code class="inline-code">//table[][][fontsize=small]</code>」を指定しても小さくなりません。かわりに「<code class="inline-code">x-small</code>」を指定してください。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-sample11][フォントを小さく][<b>fontsize=small</b>]{
+Name    Val     Val     Val
+================================
+AAA     10      10      10
+BBB     100     100     100
+//}
+
+//table[tbl-sample12][フォントをもっと小さく][<b>fontsize=x-small</b>]{
+Name    Val     Val     Val
+================================
+AAA     10      10      10
+BBB     100     100     100
+//}
+
+//table[tbl-sample13][フォントをもーっと小さく][<b>fontsize=xx-small</b>]{
+Name    Val     Val     Val
+================================
+AAA     10      10      10
+BBB     100     100     100
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-sample11" class="table">
+<p class="caption">表5.16: フォントを小さく</p>
+<table style="font-size:small">
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+</table>
+</div>
+<div id="tbl-sample12" class="table">
+<p class="caption">表5.17: フォントをもっと小さく</p>
+<table style="font-size:x-small">
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+</table>
+</div>
+<div id="tbl-sample13" class="table">
+<p class="caption">表5.18: フォントをもーっと小さく</p>
+<table style="font-size:xx-small">
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+</table>
+</div>
+</div></div>
+<p>指定できるフォントサイズは次の通りです。</p>
+<div id="on1lz" class="table">
+<p class="caption">表5.19: 表のフォントサイズ</p>
+<table>
+<tr class="hline"><th>フォントサイズ</th><th>説明</th></tr>
+<tr class="hline"><td>medium</td><td>本文と同じサイズ</td></tr>
+<tr class="hline"><td>small</td><td>少し小さく</td></tr>
+<tr class="hline"><td>x-small</td><td>小さく</td></tr>
+<tr class="hline"><td>xx-small</td><td>かなり小さく</td></tr>
+<tr class="hline"><td>large</td><td>少し大きく</td></tr>
+<tr class="hline"><td>x-large</td><td>大きく</td></tr>
+<tr class="hline"><td>xx-large</td><td>かなり大きく</td></tr>
+</table>
+</div>
+
+<h3 class="none"><a id="h5-14-10"></a><span class="secno">5.14.10</span> CSV形式の表</h3>
+<p>「<code class="inline-code">//table</code>」の第3引数に「<code class="inline-code">csv=on</code>」を指定すると、表をCSV形式で書けます（Starter拡張）。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv1][CSVテーブル][<b>csv=on</b>]{
+Name,Val,Val,Val
+================
+AAA,10,10,10
+BBB,100,100,100
+CCC,1000,1000,1000
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-csv1" class="table table-nohline">
+<p class="caption">表5.20: CSVテーブル</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+<tr class="hline"><td>CCC</td><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+<p>タブ区切りのときと同じように、12個以上の「<code class="inline-code">=</code>」でヘッダを区切ります。</p>
+<p>CSV形式では、空欄はそのまま空欄として表示されます。「<code class="inline-code">.</code>」を入力する必要はありません。また「<code class="inline-code">&quot;...&quot;</code>」のようにすると、1つのセルに複数行の文字列を書けます。ただし複数行で書いても表示は1行になります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv2][CSVテーブル][csv=on]{
+ぼくはか,<b>&quot;</b>ぼくのとなりに
+暗黒破壊神がいます<b>&quot;</b>
+はめふら,<b>&quot;</b>乙女ゲームの破滅フラグしかない
+悪役令嬢に転生してしまった…<b>&quot;</b>
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-csv2" class="table table-nohline">
+<p class="caption">表5.21: CSVテーブル</p>
+<table>
+<tr class="hline"><th>ぼくはか</th><td>ぼくのとなりに
+暗黒破壊神がいます</td></tr>
+<tr class="hline"><th>はめふら</th><td>乙女ゲームの破滅フラグしかない
+悪役令嬢に転生してしまった…</td></tr>
+</table>
+</div>
+</div></div>
+<p>表示も複数行にしたい場合は、明示的に改行します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv3][CSVテーブル][csv=on]{
+ぼくはか,&quot;ぼくのとなりに<b>@&lt;br&gt;{}</b>
+暗黒破壊神がいます&quot;
+はめふら,&quot;乙女ゲームの破滅フラグしかない<b>@&lt;br&gt;{}</b>
+悪役令嬢に転生してしまった…&quot;
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-csv3" class="table table-nohline">
+<p class="caption">表5.22: CSVテーブル</p>
+<table>
+<tr class="hline"><th>ぼくはか</th><td>ぼくのとなりに<br />
+暗黒破壊神がいます</td></tr>
+<tr class="hline"><th>はめふら</th><td>乙女ゲームの破滅フラグしかない<br />
+悪役令嬢に転生してしまった…</td></tr>
+</table>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-14-11"></a><span class="secno">5.14.11</span> 外部ファイルを読み込む</h3>
+<p>「<code class="inline-code">//table</code>」の第3引数に「<code class="inline-code">file=<i>filename</i></code>」を指定すると、外部ファイルを読み込んでそれを表（テーブル）にできます（Starter拡張）。</p>
+<ul>
+<li>ファイル名の拡張子が「<code class="inline-code">.csv</code>」なら、CSV形式で読み込まれます。
+</li>
+<li>第3引数に「<code class="inline-code">csv=on</code>」が指定された場合も、CSV形式で読み込まれます。
+</li>
+<li>それ以外の場合は、タブ区切り形式で読み込まれます。
+</li>
+</ul>
+<p>次の例では、「<code class="inline-code">data/data1.csv</code>」というファイルを読み込んで表にしています。ブロック（「<code class="inline-code">{</code>」から「<code class="inline-code">//}</code>」まで）は省略できないので注意してください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv4][サンプルデータ][<b>file=data/data1.csv</b>]{
+//}
+</pre>
+</div>
+<p>文字コードを指定して読み込むこともできます。指定できる文字コードは、「utf-8」「sjs」「shift_jis」「cp932」などです。デフォルトはUTF-8です。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv5][サンプルデータ][file=data/data1.csv, <b>encoding=sjis</b>]{
+//}
+</pre>
+</div>
+
+<h3 class="none"><a id="h5-14-12"></a><span class="secno">5.14.12</span> ヘッダの行数を指定する</h3>
+<p>今までは、ヘッダを指定するには12個以上の「<code class="inline-code">=</code>」や「<code class="inline-code">-</code>」からなる区切り行を挿入する必要がありました。しかし一般的なCSVファイルでは、このような区切り行は入れず、かわりに最初の行をヘッダ行と見なすことがほとんとではないでしょうか。</p>
+<p>「<code class="inline-code">//table</code>」では第3引数に「<code class="inline-code">headerrows=1</code>」を指定すると、区切り行がなくても最初の行をヘッダとして扱ってくれます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv6][先頭行をヘッダとみなす][csv=on,<b>headerrows=1</b>]{
+Name,Val,Val,Val
+AAA,10,10,10
+BBB,100,100,100
+CCC,1000,1000,1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-csv6" class="table table-nohline">
+<p class="caption">表5.23: 先頭行をヘッダとみなす</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><td>AAA</td><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><td>BBB</td><td>100</td><td>100</td><td>100</td></tr>
+<tr class="hline"><td>CCC</td><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+<p>また「<code class="inline-code">headerrows=<b>0</b></code>」を指定すると、ヘッダ行のない表として表示されます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv7][3×3の魔方陣][csv=on,<b>headerrows=0</b>]{
+6,1,8
+7,5,3
+2,9,4
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-csv7" class="table table-nohline">
+<p class="caption">表5.24: 3×3の魔方陣</p>
+<table>
+<tr class="hline"><td>6</td><td>1</td><td>8</td></tr>
+<tr class="hline"><td>7</td><td>5</td><td>3</td></tr>
+<tr class="hline"><td>2</td><td>9</td><td>4</td></tr>
+</table>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-14-13"></a><span class="secno">5.14.13</span> ヘッダのカラム数を指定する</h3>
+<p>「<code class="inline-code">//table[][][headercols=2]</code>」とすると、左から2つのカラムをヘッダとして表示します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv8][左2つのカラムをヘッダとみなす][csv=on,<b>headercols=2</b>]{
+Name,Val,Val,Val
+AAA,10,10,10
+BBB,100,100,100
+CCC,1000,1000,1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-csv8" class="table table-nohline">
+<p class="caption">表5.25: 左2つのカラムをヘッダとみなす</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><td>Val</td><td>Val</td></tr>
+<tr class="hline"><th>AAA</th><th>10</th><td>10</td><td>10</td></tr>
+<tr class="hline"><th>BBB</th><th>100</th><td>100</td><td>100</td></tr>
+<tr class="hline"><th>CCC</th><th>1000</th><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+<p>このオプションは、ヘッダの行数を指定する「<code class="inline-code">headercols=1</code>」と共存できます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//table[tbl-csv9][上と左をヘッダにする][csv=on,<b>headerrows=1,headercols=1</b>]{
+Name,Val,Val,Val
+AAA,10,10,10
+BBB,100,100,100
+CCC,1000,1000,1000
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="tbl-csv9" class="table table-nohline">
+<p class="caption">表5.26: 上と左をヘッダにする</p>
+<table>
+<tr class="hline"><th>Name</th><th>Val</th><th>Val</th><th>Val</th></tr>
+<tr class="hline"><th>AAA</th><td>10</td><td>10</td><td>10</td></tr>
+<tr class="hline"><th>BBB</th><td>100</td><td>100</td><td>100</td></tr>
+<tr class="hline"><th>CCC</th><td>1000</td><td>1000</td><td>1000</td></tr>
+</table>
+</div>
+</div></div>
+
+<h3 class="none"><a id="h5-14-14"></a><span class="secno">5.14.14</span> 表を画像で用意する</h3>
+<p>Re:VIEWやStarterでは、あまり複雑な表は作成できません。複雑な表は画像として用意し、それを読み込むのがいいでしょう。</p>
+<p>「<code class="inline-code">//imgtable</code>」コマンドを使うと、画像を表として読み込みます。使い方は「<code class="inline-code">//image</code>」と同じです。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//imgtable[order-detail][複雑な表の例：注文詳細][scale=0.5]{</b>
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="order-detail" class="imgtable image">
+<p class="caption">表5.27: 複雑な表の例：注文詳細</p>
+  <div>
+<img src="images/03-syntax/order-detail.png" alt="複雑な表の例：注文詳細" class="width-050per" />
+  </div>
+</div>
+</div></div>
+
+<h2 id="sec-mathexpr" class="leftline"><a id="h5-15"></a><span class="secno">5.15</span> 数式</h2>
+
+<h3 class="none"><a id="h5-15-1"></a><span class="secno">5.15.1</span> 数式の書き方</h3>
+<p>数式は「<code class="inline-code">//texequation[ラベル][説明文]{ ... //}</code>」のように書きます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//texequation[euler1][オイラーの公式]{</b>
+e^{i\theta} = \sin{\theta} + i\cos{\theta}
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<span class="caption">式5.1: オイラーの公式</span>
+<div class="equation">
+<pre>e^{i\theta} = \sin{\theta} + i\cos{\theta}
+</pre>
+</div>
+</div></div>
+<p>数式の書き方が独特に見えますが、これはLaTeXでの書き方です。LaTeXにおける数式の書き方は、<a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics" class="link">Wikibooks</a>など他の資料をあたってください。</p>
+<p>数式は、ラベルを使って「<code class="inline-code">@&lt;eq&gt;{ラベル}</code>」のように参照できます。たとえば「<code class="inline-code">@&lt;eq&gt;{euler1}</code>」とすると「<a>式5.1</a>」となります。</p>
+<p>ラベルや説明文がいらなければ、「<code class="inline-code">//texequation{ ... //}</code>」のように省略できます。</p>
+
+<h3 class="none"><a id="h5-15-2"></a><span class="secno">5.15.2</span> 数式を文中に埋め込む</h3>
+<p>数式を文中に埋め込むには「<code class="inline-code">@&lt;m&gt;$...$</code>」を使います。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">オイラーの公式は<b>@&lt;m&gt;$e^{i\theta} = \sin{\theta} + i\cos{\theta}$</b>です。
+特に、<b>@&lt;m&gt;$\theta = \pi$</b>のときは<b>@&lt;m&gt;$e^{i\pi} = -1$</b>となり、これはオイラーの等式と呼ばれます。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>オイラーの公式は<span class="equation">e^{i\theta} = \sin{\theta} + i\cos{\theta}</span>です。特に、<span class="equation">\theta = \pi</span>のときは<span class="equation">e^{i\pi} = -1</span>となり、これはオイラーの等式と呼ばれます。</p>
+</div></div>
+
+<h3 class="none"><a id="h5-15-3"></a><span class="secno">5.15.3</span> 数式のフォント</h3>
+<p>数式中では、アルファベットはイタリック体になります。これは数式の伝統です。次の例で、「<code class="inline-code">@&lt;m&gt;$...$</code>」を使った場合と使わない場合を比べてください。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> * <b>@&lt;m&gt;$y = f(x) + k$</b>  ← 使った場合
+ * <b>y = f(x) + k</b>        ← 使わなかった場合
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ul>
+<li><span class="equation">y = f(x) + k</span>  ← 使った場合
+</li>
+<li>y = f(x) + k        ← 使わなかった場合
+</li>
+</ul>
+</div></div>
+<p>その他、Re:VIEWにおける数式の詳細は、Re:VIEWの<a href="https://github.com/kmuto/review/blob/master/doc/format.ja.md#tex-%E5%BC%8F" class="link">Wiki</a>を参照してください。</p>
+
+<h2 id="sec-talk" class="leftline"><a id="h5-16"></a><span class="secno">5.16</span> 会話形式</h2>
+<p>Starterでは、会話形式の文章を書けます<sup><a id="fnb-id_8a7k9" href="#fn-id_8a7k9" class="noteref" epub:type="noteref">*27</a></sup>（Starter拡張）。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-id_8a7k9" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*27] </span>LINEのようなチャット形式はサポートしていません。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h5-16-1"></a><span class="secno">5.16.1</span> アイコン画像を使う場合</h3>
+<p>会話形式は次のようにして書きます。</p>
+<ul>
+<li>全体を「<code class="inline-code">//talklist{ ... //}</code>」で囲う。
+</li>
+<li>発言を「<code class="inline-code">//talk[]{ ... //}</code>」で囲う。
+</li>
+<li>「<code class="inline-code">//talk</code>」の第1引数にアイコン画像ファイルを指定する（「<code class="inline-code">//image</code>」の第1引数と同じ）。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//talklist</b>{
+<b>//talk[avatar-b]</b>{
+できもしないことをおっしゃらないでください。
+//}
+<b>//talk[avatar-g]</b>{
+不可能なことを言い立てるのは貴官の方だ。
+それも安全な場所から動かずにな。
+//}
+<b>//talk[avatar-b]</b>{
+……小官を侮辱なさるのですか。
+//}
+<b>//talk[avatar-g]</b>{
+貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="talk-outer">
+  <ul class="talk-list">
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-b.png"/></span>
+  <div class="talk-text"><p>できもしないことをおっしゃらないでください。</p></div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-g.png"/></span>
+  <div class="talk-text"><p>不可能なことを言い立てるのは貴官の方だ。それも安全な場所から動かずにな。</p></div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-b.png"/></span>
+  <div class="talk-text"><p>……小官を侮辱なさるのですか。</p></div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-g.png"/></span>
+  <div class="talk-text"><p>貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。</p></div>
+</li>
+  </ul>
+</div>
+</div></div>
+<p>発言部分は自動的にカギ括弧でくくられます。これを止めるには、設定ファイル「<span class="file">config-starter.yml</span>」を変更します。またアイコン画像の大きさも変更できます。詳しくは後述します。</p>
+<div class="note">
+<h5>白黒印刷でも判別できる画像を使う</h5>
+<p>このサンプルでは、色が違うだけのアイコン画像を使っています。そのせいで、白黒印刷すると誰が誰だか判別できなくなります。もし白黒印刷するなら、色に頼らず判別できるようなアイコン画像を使いましょう。</p>
+</div>
+
+<h3 class="none"><a id="h5-16-2"></a><span class="secno">5.16.2</span> アイコン画像を使わない場合</h3>
+<p>「<code class="inline-code">//talk</code>」の第1引数にアイコン画像を指定しない場合は、第2引数に名前を指定します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//talklist{
+<b>//talk[][A准将]</b>{
+できもしないことをおっしゃらないでください。
+//}
+<b>//talk[][B提督]</b>{
+不可能なことを言い立てるのは貴官の方だ。
+それも安全な場所から動かずにな。
+//}
+<b>//talk[][A准将]</b>{
+……小官を侮辱なさるのですか。
+//}
+<b>//talk[][B提督]</b>{
+貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="talk-outer">
+  <ul class="talk-list">
+<li class="talk-item">
+  <span class="talk-chara"><b class="talk-name">A准将</b></span>
+  <div class="talk-text"><p>できもしないことをおっしゃらないでください。</p></div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><b class="talk-name">B提督</b></span>
+  <div class="talk-text"><p>不可能なことを言い立てるのは貴官の方だ。それも安全な場所から動かずにな。</p></div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><b class="talk-name">A准将</b></span>
+  <div class="talk-text"><p>……小官を侮辱なさるのですか。</p></div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><b class="talk-name">B提督</b></span>
+  <div class="talk-text"><p>貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。</p></div>
+</li>
+  </ul>
+</div>
+</div></div>
+<p>名前が長い場合は、会話の1行目だけ自動的に開始位置がずれます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//talklist{
+//talk[][<b>ビュコック提督</b>]{
+貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="talk-outer">
+  <ul class="talk-list">
+<li class="talk-item">
+  <span class="talk-chara"><b class="talk-name">ビュコック提督</b></span>
+  <div class="talk-text"><p>貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。</p></div>
+</li>
+  </ul>
+</div>
+</div></div>
+<p>アイコン画像と名前の両方を指定することは、現在はできません。できるようにして欲しい人は、相談してください。</p>
+
+<h3 class="none"><a id="h5-16-3"></a><span class="secno">5.16.3</span> コンパクトな書き方</h3>
+<p>ブロック本体のかわりに、「<code class="inline-code">//talk</code>」の第3引数に会話文を書けます。こうするとブロック本体を省略できるので、コンパクトな書き方になります。</p>
+<p>また第3引数を使わない書き方と混在できます。文章が短い場合だけ第3引数を使い、ある程度の長さがある場合はブロック本体に書くのがいいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//talklist{
+//talk[avatar-b][]<b>[</b>できもしないことをおっしゃらないでください。<b>]</b>
+//talk[avatar-g][]<b>[</b>不可能なことを言い立てるのは貴官の方だ。それも安全な場所から動かずにな。<b>]</b>
+//talk[avatar-b][]<b>[</b>……小官を侮辱なさるのですか。<b>]</b>
+//talk[avatar-g]{
+貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="talk-outer">
+  <ul class="talk-list">
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-b.png"/></span>
+  <div class="talk-text">
+できもしないことをおっしゃらないでください。</div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-g.png"/></span>
+  <div class="talk-text">
+不可能なことを言い立てるのは貴官の方だ。それも安全な場所から動かずにな。</div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-b.png"/></span>
+  <div class="talk-text">
+……小官を侮辱なさるのですか。</div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-g.png"/></span>
+  <div class="talk-text"><p>貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。</p></div>
+</li>
+  </ul>
+</div>
+</div></div>
+<p>会話文を第3引数に書く場合は、「<code class="inline-code">]</code>」を「<code class="inline-code">\]</code>」のように書いてください<sup><a id="fnb-mk3fo" href="#fn-mk3fo" class="noteref" epub:type="noteref">*28</a></sup>。そうしないとコンパイルエラーになるでしょう。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-mk3fo" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*28] </span>これは脚注を書くときと同じ制約です。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h5-16-4"></a><span class="secno">5.16.4</span> 短縮名</h3>
+<p>大量の会話を入力する場合、いちいちアイコン画像や名前を入力するのは面倒です。そこでStarterでは、会話に使うアイコン画像や名前を短縮名で登録できる機能を用意しました。</p>
+<p>まず、「<span class="file">config-starter.yml</span>」に短縮名を登録します。すでに以下のような設定がされているので、それを上書きするといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">「&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;」に短縮名を登録</span>
+<pre class="list">  talk_shortcuts:
+    &quot;b1&quot;:    {image: &quot;avatar-b&quot;}  # アイコン画像を使う場合
+    &quot;g1&quot;:    {image: &quot;avatar-g&quot;}  # アイコン画像を使う場合
+    #&quot;b1&quot;:   {name: &quot;アリス&quot;}     # アイコン画像を使わない場合
+    #&quot;g1&quot;:   {name: &quot;ボブ&quot;}       # アイコン画像を使わない場合
+</pre>
+</div>
+<p>そして、原稿では「<code class="inline-code">//t[短縮名]</code>」のように書きます。たとえば「<code class="inline-code">//t[b1]</code>」は「<code class="inline-code">//talk[avatar-b]</code>」の短縮形となります。</p>
+<p>前の項のサンプルを、短縮名を使って書いてみましょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//talklist{
+<b>//t[b1]</b>[できもしないことをおっしゃらないでください。]
+<b>//t[g1]</b>[不可能なことを言い立てるのは貴官の方だ。それも安全な場所から動かずにな。]
+<b>//t[b1]</b>[……小官を侮辱なさるのですか。]
+<b>//t[g1]</b>{
+貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="talk-outer">
+  <ul class="talk-list">
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-b.png"/></span>
+  <div class="talk-text">
+できもしないことをおっしゃらないでください。</div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-g.png"/></span>
+  <div class="talk-text">
+不可能なことを言い立てるのは貴官の方だ。それも安全な場所から動かずにな。</div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-b.png"/></span>
+  <div class="talk-text">
+……小官を侮辱なさるのですか。</div>
+</li>
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-g.png"/></span>
+  <div class="talk-text"><p>貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。</p></div>
+</li>
+  </ul>
+</div>
+</div></div>
+<p>短縮名を使うと、アイコン画像や登場人物名を変更するのも簡単になります。変更の発生が予想される場合も、短縮機能を使うといいでしょう。</p>
+
+<h3 class="none"><a id="h5-16-5"></a><span class="secno">5.16.5</span> カスタマイズ</h3>
+<p>「<code class="inline-code">//talklist</code>」の第1引数にオプションを指定すると、会話形式の表示をカスタマイズできます。たとえば次の例では、アイコン画像の幅を全角2文字分にし、会話文のインデント幅を全角4文字分にしています。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//talklist[<b>imagewidth=2zw,indent=4zw</b>]{
+//talk[avatar-g]{
+貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。
+他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。
+//}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="talk-outer">
+  <ul class="talk-list">
+<li class="talk-item">
+  <span class="talk-chara"><img class="talk-image" src="./images/avatar-g.png"/></span>
+  <div class="talk-text"><p>貴官は自己の才能を示すのに、弁舌ではなく実績をもってすべきだろう。他人に命令するようなことが自分にもできるかどうか、やってみたらどうだ。</p></div>
+</li>
+  </ul>
+</div>
+</div></div>
+<p>指定できるオプションは<span class="tableref"><a href="./03-syntax.html#wkajz">表5.28</a></span>の通りです。これらは「<code class="inline-code">classname</code>」を除いてLaTeX用であり、HTMLには「<code class="inline-code">classname</code>」しか適用されません。またオプションを指定できるのは「<code class="inline-code">//talklist</code>」だけであり、「<code class="inline-code">//talk</code>」には指定できません。</p>
+<div id="wkajz" class="table">
+<p class="caption">表5.28: 「<code class="inline-code">//talklist</code>」のオプション</p>
+<table>
+<tr class="hline"><th>オプション名</th><th>デフォルト値</th><th>説明</th></tr>
+<tr><td><code class="inline-code">indent</code></td><td><code class="inline-code">6zw</code></td><td>本文左端から会話部分までの幅</td></tr>
+<tr><td><code class="inline-code">separator</code></td><td><code class="inline-code">：</code></td><td>名前と会話文との区切り文字列</td></tr>
+<tr><td><code class="inline-code">imagewidth</code></td><td><code class="inline-code">4zw</code></td><td>アイコン画像の幅</td></tr>
+<tr><td><code class="inline-code">imageheight</code></td><td></td><td>画像高さ（通常は無指定でよい）</td></tr>
+<tr><td><code class="inline-code">imageborder</code></td><td><code class="inline-code">off</code></td><td>「<code class="inline-code">on</code>」なら画像に枠線をつける</td></tr>
+<tr><td><code class="inline-code">needvspace</code></td><td><code class="inline-code">4zw</code></td><td>必要な空きがなければ改ページ</td></tr>
+<tr><td><code class="inline-code">itemmargin</code></td><td><code class="inline-code">1mm</code></td><td>会話項目間の空き</td></tr>
+<tr><td><code class="inline-code">listmargin</code></td><td><code class="inline-code">4mm</code></td><td>会話リストの最初と最後の空き</td></tr>
+<tr><td><code class="inline-code">itemstart</code></td><td><code class="inline-code">「 </code></td><td>会話文の先頭につける文字列</td></tr>
+<tr><td><code class="inline-code">itemend</code></td><td><code class="inline-code">」</code></td><td>会話文の最後につける文字列</td></tr>
+<tr><td><code class="inline-code">classname</code></td><td></td><td>HTMLタグに含めるクラス名</td></tr>
+</table>
+</div>
+<p><span class="tableref"><a href="./03-syntax.html#wkajz">表5.28</a></span>のデフォルト値は、設定ファイル「<span class="file">config-starter.yml</span>」で設定されています。必要に応じて変更してください。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;</span>
+<pre class="list">  ## 会話形式（`//talklist`）のデフォルトオプション
+  ## （注：YAMLでは on は true と同じ、off は false と同じ）
+  talklist_default_options:
+    indent:      6zw       # 本文左端から会話部分までの幅
+    separator:   &quot;：&quot;      # 名前と会話文との区切り文字列
+    imagewidth:  4zw       # アイコン画像の幅
+    imageheight:           # 画像高さ（通常はnullでよい）
+    imageborder: off       # on なら画像に枠線をつける
+    needvspace:  4zw       # 必要な空きがなければ改ページ
+    itemmargin:  1mm       # 会話項目間の空き
+    listmargin:  0.5zw     # 会話リストの最初と最後の空き
+    itemstart:   &quot;「&quot;      # 会話文の先頭につける文字列
+    itemend:     &quot;」&quot;      # 会話文の最後につける文字列
+    classname:             # HTMLタグに含めるクラス名
+</pre>
+</div>
+<p>たとえばアイコン画像の幅を全角3文字分にするには、次のように変更します。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;</span>
+<pre class="list">  talklist_default_options:
+    <span class="weak">#...(省略)...</span>
+    imagewidth:  <b>3zw</b>    # アイコン画像の幅
+    <span class="weak">#...(省略)...</span>
+</pre>
+</div>
+<p>また会話文にカギ括弧をつけないようにするには、次のように変更します。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;</span>
+<pre class="list">  talklist_default_options:
+    <span class="weak">#...(省略)...</span>
+    itemstart:   <b>&quot;&quot;</b>     # 会話文の先頭につける文字列
+    itemend:     <b>&quot;&quot;</b>     # 会話文の最後につける文字列
+    <span class="weak">#...(省略)...</span>
+</pre>
+</div>
+<p>なお会話形式に関するLaTeXマクロは「<span class="file">sty/starter-talk.sty</span>」に定義されています。必要であれば、マクロを「<span class="file">sty/mystyle.sty</span>」にコピーしてから変更してください。</p>
+<p>HTMLの場合は、「<span class="file">css/webstyle.css</span>」をカスタマイズしてください。クラス名が「<code class="inline-code">.talk-xxx</code>」のエントリが会話形式に関するルールです。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;css/webstyle.css&lt;/span&gt;</span>
+<pre class="list">.talk-image {
+        width: 60px;   /* アイコン画像の表示幅 */
+}
+.talk-name {
+        font-family: sans-serif;  /* 名前のフォント */
+        font-weight: normal;
+}
+.talk-text {
+        display: block;
+        margin-left: 100px;   /* 会話文のインデント幅 */
+        padding-top: 5px;
+}
+....（省略）....
+</pre>
+</div>
+
+<h2 id="sec-term" class="leftline"><a id="h5-17"></a><span class="secno">5.17</span> 用語、索引</h2>
+<p>たいていの本では、巻末に索引が用意されています（<span class="imgref"><a href="./03-syntax.html#index-page">図5.4</a></span>）。Starterでは、指定した用語を索引に登録できます。また用語に親子関係を持たせたり、転送先の用語を指定できます。</p>
+<div id="index-page" class="image">
+<img src="images/03-syntax/index-page.png" alt="索引ページ" class="img border" style="width:80%" />
+<p class="caption">
+図5.4: 索引ページ
+</p>
+</div>
+
+<h3 class="none"><a id="h5-17-1"></a><span class="secno">5.17.1</span> 索引機能をオンにする</h3>
+<p>索引を作る機能は、デフォルトではオフになっています。オンにするには、<span class="file">config.yml</span>の370行目ぐらいにある「<code class="inline-code">makeindex: true</code>」を設定してください。</p>
+<p>なお索引に用語が何も登録されていない場合、索引機能をオンにするとPDFのコンパイルがエラーになります。1つでもいいから本文に用語を指定してから、索引機能をオンにしてください。</p>
+<p>ややこしいのですが、索引機能がオフでも用語を索引に登録できます。つまり、こういうことです：</p>
+<ul>
+<li>索引機能がオンのとき、索引に用語が何も登録されていないとエラー。
+</li>
+<li>索引機能がオフのとき、索引に用語を登録してもエラーにならない。
+</li>
+</ul>
+<p>索引はLaTeXの機能を使って生成しているので、索引機能は今のところPDFでのみサポートしています。また索引機能をオンにすると、LaTeXのコンパイル回数が増えてコンパイルに時間がかかるようになります。執筆中は索引機能をオフにし、完成間近になったらオンにするといいでしょう。</p>
+
+<h3 class="none"><a id="h5-17-2"></a><span class="secno">5.17.2</span> 用語の書き方</h3>
+<p>用語の書き方は次の通りです。</p>
+<ul>
+<li>初めて登場した用語は「<code class="inline-code">@&lt;term&gt;{用語名((よみかた))}</code>」のように書きます。
+   すると用語名がゴシック体で表示され、かつ巻末の索引に載ります。
+</li>
+<li>再登場した用語は「<code class="inline-code">@&lt;idx&gt;{用語名((よみかた))}</code>」のように書きます。
+   すると索引には載るけど、ゴシック体にはなりません。
+</li>
+<li>「<code class="inline-code">@&lt;hidx&gt;{用語名((よみかた))}</code>」(hidden index)とすると、索引に載るけど本文には何も表示されません。
+</li>
+<li>用語名が漢字を含まない場合（つまりひらがなやカタカナや英数字だけの場合）は、読み方を省略して「<code class="inline-code">@&lt;term&gt;{用語名}</code>」のように書けます。
+</li>
+<li>索引に登録せずゴシック体で表示したいだけのときは、「<code class="inline-code">@&lt;termnoidx&gt;{用語名}</code>」と書きます。
+   「<code class="inline-code">@&lt;hidx&gt;{}</code>」と組み合わせて使うことを想定しています。
+   索引に登録しないので、よみがなは含めないでください。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;term&gt;</b>{アンジェ<b>(</b><b>(</b>あんじぇ<b>)</b><b>)</b>}。
+<b>@&lt;idx&gt;</b>{侍従長<b>(</b><b>(</b>じじゅうちょう<b>)</b><b>)</b>}。
+<b>@&lt;term&gt;</b>{Cボール}。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><span class="index term" title="あんじぇ">アンジェ</span>。<span class="index" title="じじゅうちょう">侍従長</span>。<span class="index term" title="Cボール">Cボール</span>。</p>
+</div></div>
+<p>この例だと、「アンジェ」と「Cボール」は<code class="inline-code">@&lt;term&gt;{}</code>を使っているのでゴシック体、「内務卿」は<code class="inline-code">@&lt;idx&gt;{}</code>を使っているので本文と同じ明朝体のままです。</p>
+<p>用語には他のインライン命令を含められます。その場合、必ずフェンス記法<sup><a id="fnb-fn-mzjk0" href="#fn-fn-mzjk0" class="noteref" epub:type="noteref">*29</a></sup>を使って「<code class="inline-code">@&lt;term&gt;<b>|</b>@&lt;xxx&gt;{...}<b>|</b></code>」のように書いてください（これは実装上の都合です）。「<code class="inline-code">@&lt;term&gt;<b>{</b>@&lt;xxx&gt;{...}<b>}</b></code>」だとエラーになります。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-mzjk0" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*29] </span>Re:VIEWでは「<code class="inline-code">@&lt;foo&gt;<b>|</b>...<b>|</b></code>」や「<code class="inline-code">@&lt;foo&gt;<b>$</b>...<b>$</b></code>」のような書き方を「フェンス記法」と呼んでいます。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">@&lt;term&gt;|@&lt;ruby&gt;{鹿威, ししおど}し((ししおどし))|。
+@&lt;term&gt;|@&lt;ruby&gt;{黒星, くろぼし}@&lt;ruby&gt;{紅白, こうはく}((くろぼしこうはく))|。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><span class="index term" title="ししおどし"><ruby>鹿威<rp>（</rp><rt>ししおど</rt><rp>）</rp></ruby>し</span>。<span class="index term" title="くろぼしこうはく"><ruby>黒星<rp>（</rp><rt>くろぼし</rt><rp>）</rp></ruby><ruby>紅白<rp>（</rp><rt>こうはく</rt><rp>）</rp></ruby></span>。</p>
+</div></div>
+<p>本文では用語にルビをつけたいけど索引ではつけたくないなら、「<code class="inline-code">@&lt;hidx&gt;{}</code>」を使うといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">@&lt;termnoidx&gt;|@&lt;ruby&gt;{鹿威, ししおど}し|<b>@&lt;hidx&gt;</b>{鹿威し((ししおどし))}。
+@&lt;ruby&gt;{黒星, くろぼし}@&lt;ruby&gt;{紅白, こうはく}<b>@&lt;hidx&gt;</b>{黒星紅白((くろぼしこうはく))}。
+</pre>
+</div>
+
+<h3 class="none"><a id="h5-17-3"></a><span class="secno">5.17.3</span> 親子関係にある用語</h3>
+<p>用語に親子関係がある場合、索引でそのように表示できます。そのためには用語を「<code class="inline-code">&lt;&lt;&gt;&gt;</code>」で区切ります。</p>
+<p>たとえば2つの用語「ケイバーライト」と「ケイバーライト症候群」がある場合は、前者を親項目、後者を子項目にして索引に登録できます。また「アルビオン王国」「アルビオン共和国」「アルビオン王立航空軍」という3つの用語では、共通する「アルビオン」をあたかも存在する用語かのように見立てて索引に登録できます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">@&lt;term&gt;{ケイバーライト((けいばーらいと))}。
+@&lt;term&gt;{ケイバーライト((けいばーらいと))<b>&lt;&lt;&gt;&gt;</b>症候群((しょうこうぐん))}。
+
+@&lt;term&gt;{アルビオン((あるびおん))<b>&lt;&lt;&gt;&gt;</b>王国((おうこく))}。
+@&lt;term&gt;{アルビオン((あるびおん))<b>&lt;&lt;&gt;&gt;</b>共和国((きょうわこく))}。
+@&lt;term&gt;{アルビオン((あるびおん))<b>&lt;&lt;&gt;&gt;</b>王立航空軍((おうりつこうくうぐん))}。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><span class="index term" title="けいばーらいと">ケイバーライト</span>。<span class="index term" title="けいばーらいとしょうこうぐん">ケイバーライト症候群</span>。</p>
+<p><span class="index term" title="あるびおんおうこく">アルビオン王国</span>。<span class="index term" title="あるびおんきょうわこく">アルビオン共和国</span>。<span class="index term" title="あるびおんおうりつこうくうぐん">アルビオン王立航空軍</span>。</p>
+</div></div>
+<p>索引ページの表示結果は<span class="imgref"><a href="./03-syntax.html#index-page">図5.4</a></span>を見てください。これを見ると、「アルビオン」という用語は本文には登場していないので、索引の項目にページ番号がありません。これに対し、同じ親項目でも「ケイバーライト」は本文に登場したので、ページ番号がついています。</p>
+<p>なお、「<code class="inline-code">@&lt;idx&gt;{アルビオン&lt;&lt;&gt;&gt;王国}</code>」と「<code class="inline-code">@&lt;idx&gt;{アルビオン王国}</code>」は別々の用語として扱われるので、索引にも別々に載ります。どちからに統一しましょう。</p>
+<p>また用語に「<code class="inline-code">&lt;&lt;&gt;&gt;</code>」を2つ埋め込むと、親・子・孫の関係を表せます（が推奨しません）。それ以上の深い関係は未対応です。</p>
+
+<h3 class="none"><a id="h5-17-4"></a><span class="secno">5.17.4</span> 親子関係の順番を入れ替える</h3>
+<p>今までのサンプルでは、親項目が前にきて子項目がその後ろについていました（例：「アルビオン」＋「王国」）。そうではなく、親項目のほうが後ろ、子項目のほうが前にくる用語もあります。たとえば「二重スパイ」という用語では、後ろにある「スパイ」が親項目、前にある「二重」が子項目です。</p>
+<ul>
+<li>「<code class="inline-code">@&lt;term&gt;{二重((にじゅう))&lt;&lt;&gt;&gt;スパイ((すぱい))}</code>」だと、「二重」が親で「スパイ」が「子」になってしまいます。
+</li>
+<li>「<code class="inline-code">@&lt;term&gt;{スパイ((すぱい))&lt;&lt;&gt;&gt;二重((にじゅう))}</code>」だと、親子関係は正しいものの、本文には「スパイ二重」と表示されてしまいます。
+</li>
+</ul>
+<p>つまり、どちらの書き方も正しくありません。</p>
+<p>このような場合、子要素の用語名に「<code class="inline-code">---</code>」を含めると、そこに親要素が入るものとして扱います。たとえば「<code class="inline-code">@&lt;term&gt;{スパイ((すぱい))&lt;&lt;&gt;&gt;二重<b>---</b>((にじゅう))}</code>」と書くと、「スパイ」が親で「二重」が子になる構造を指定しつつ、本文には「二重スパイ」と表示されます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">@&lt;term&gt;{スパイ((すぱい))}。
+@&lt;term&gt;{スパイ((すぱい))&lt;&lt;&gt;&gt;二重<b>---</b>((にじゅう))}。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><span class="index term" title="すぱい">スパイ</span>。<span class="index term" title="すぱいにじゅう">二重スパイ</span>。</p>
+</div></div>
+<p>索引ページの表示結果は<span class="imgref"><a href="./03-syntax.html#index-page">図5.4</a></span>を見てください。</p>
+<p>念のために注意しますが、「<code class="inline-code">---</code>」を含めるのは子要素の用語名です。よみがなの中に入れてはいけません。また親要素に入れた場合は何の効果もなくそのまま表示されます。</p>
+
+<h3 class="none"><a id="h5-17-5"></a><span class="secno">5.17.5</span> 転送先の用語を指定する</h3>
+<p>索引では、用語ごとにページ番号がつきます。ただし、ページ番号ではなく「〜を見よ」のように転送先の用語を指定することがあります。このような場合は、「<code class="inline-code">@&lt;term&gt;{用語((よみがな))==&gt;&gt;転送先}</code>」のように書きます。たとえば「空中艦隊」が「アルビオン王立航空軍」の別名なら、次のようにして前者から後者へ転送するといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">@&lt;term&gt;{アルビオン((あるびおん))&lt;&lt;&gt;&gt;王立航空軍((おうりつこうくうぐん))}。
+@&lt;term&gt;{空中艦隊((くうちゅうかんたい))<b>==&gt;&gt;</b>アルビオン王立航空軍}。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><span class="index term" title="あるびおんおうりつこうくうぐん">アルビオン王立航空軍</span>。<span class="index term" title="くうちゅうかんたい → see: アルビオン王立航空軍">空中艦隊</span>。</p>
+</div></div>
+<p>実際に試すと、転送先を表すのに「→」が使われます。また表示結果（<span class="imgref"><a href="./03-syntax.html#index-page">図5.4</a></span>）を見ると「→」に下線が引かれていますが、これは意図したものではありません。原因は調査中です。</p>
+<p>なお、転送先の用語が索引に登録されているかどうかのチェックは行っていません。この場合だと、もし転送先の「アルビオン王立航空軍」が索引に登録されていなくてもエラーになりません。これは仕様です<sup><a id="fnb-fn-bz0je" href="#fn-fn-bz0je" class="noteref" epub:type="noteref">*30</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-bz0je" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*30] </span>索引の機能をLaTeXに任せているため、用語のチェックが難しいのです。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h5-17-6"></a><span class="secno">5.17.6</span> よみがなの再利用</h3>
+<p>一度指定したよみがなは、その用語が再び登場したときに再利用されます。</p>
+<p>たとえば、用語が初めて登場したときに「<code class="inline-code">@&lt;term&gt;{侍従長((じじゅうちょう))}</code>」のようによみがなを指定してます。そして用語が再び登場したときに「<code class="inline-code">@&lt;idx&gt;{侍従長}</code>」のようによみがなを省略すると、さきほどのよみがなが再利用されます。</p>
+<p>親子関係にある用語でも、よみがなは再利用されます。たとえば「<code class="inline-code">@@&lt;nop&gt;&lt;term&gt;{アルビオン((あるびおん))&lt;&lt;&gt;&gt;王国((おうこく))}</code>」と一度書いておけば、その後は「<code class="inline-code">@@&lt;nop&gt;&lt;idx&gt;{アルビオン&lt;&lt;&gt;&gt;王国}</code>」のようによみがなを省略できます。</p>
+<p>再登場した用語のよみがなは、省略してもいいししなくてもいいです。省略すれば前のよみがなが再利用され、省略しなければ再利用されないだけです。</p>
+
+<h3 class="none"><a id="h5-17-7"></a><span class="secno">5.17.7</span> よみがな辞書を使う</h3>
+<p>用語のよみがなは、辞書となるファイルに登録しておくこともできます。そうしておけば、用語のよみがなを省略できます。また複数人で執筆しているときに、索引に載せる用語と載せない用語を統一するのにも辞書ファイルが役立ちます。</p>
+<p>よみがなの辞書ファイルはタブ区切りのテキストファイルであり、<span class="file">config.yml</span>の「<code class="inline-code">makeindex_dic: yomigana.txt</code>」（370行目付近）でファイル名を指定します。デフォルトでは<span class="file">yomigana.txt</span>というファイルが指定されており、その中身は用語とよみがなのリストです<sup><a id="fnb-fn-u2zh8" href="#fn-fn-u2zh8" class="noteref" epub:type="noteref">*31</a></sup>。用語とよみがなは1つ以上のタブ文字で区切ってください。</p>
+<div class="caption-code">
+<span class="caption">よみがな辞書ファイルの中身</span>
+<pre class="list">侍従長             じじゅうちょう
+内務卿             ないむきょう
+ハイランダー連隊        はいらんだーれんたい
+</pre>
+</div>
+<p>こうしておけば、「<code class="inline-code">@&lt;term&gt;{侍従長((じじゅうちょう))}</code>」と書くかわりに「<code class="inline-code">@&lt;term&gt;{じじゅうちょう}</code>」のように読みを省略して書けます。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-u2zh8" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*31] </span>このファイルはLaTeXにおいて索引を生成する「<code class="inline-code">mendex</code>」というコマンドで読み込まれます。<code class="inline-code">mendex</code>コマンドで読み取れるのが、タブ区切りのテキストファイルなのです。CSV形式は使えません。</p></div>
+</div><!--/.footnote-list-->
+<p>このほか、形態素解析エンジン「MeCab」を使うことでよみがなを用語から自動的に取得する機能がありますが、Starterでは推奨していません。説明は省略するので、知りたい人は<a href="https://github.com/kmuto/review/blob/master/doc/makeindex.ja.md" class="link">Re:VIEWのドキュメント</a>を読んでください。</p>
+
+<h3 class="none"><a id="h5-17-8"></a><span class="secno">5.17.8</span> 用語と索引の補足事項</h3>
+
+<h4><a id="h5-17-8-1"></a>1つの用語に複数の読み方がある場合</h4>
+<p>たとえば「一也」という用語の読み方が「かずや」と「いちや」の2つある場合は、面倒でも「<code class="inline-code">@&lt;idx&gt;{一也((かずや))}</code>」と「<code class="inline-code">@&lt;idx&gt;{一也((いちや))}</code>」を使い分けてください。</p>
+<p>またこのようなケースがあるため、同じ用語に対して違うよみがなが指定されてもエラーにはなりません。</p>
+
+<h4><a id="h5-17-8-2"></a>用語のよみがなが見つからなかった場合</h4>
+<p>よみがなが指定されず、よみがなの辞書ファイルにも登録されておらず、かつ漢字を含んだ用語（ひらがな・カタカナ・英数字以外の文字を含む用語）は、索引の最後に「■漢字」というグループがつくられ、そこに載ります。本に索引をつけた場合は、索引の最後に「■漢字」がないかチェックしましょう。もしあれば、よみがなを指定し忘れています<sup><a id="fnb-fn-1ix79" href="#fn-fn-1ix79" class="noteref" epub:type="noteref">*32</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-1ix79" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*32] </span>よみがなの指定し忘れを警告にする機能は検討中です。</p></div>
+</div><!--/.footnote-list-->
+
+<h4><a id="h5-17-8-3"></a>索引の表示をカスタマイズする</h4>
+<p>索引の表示は、次のようなカスタマイズができます。</p>
+<ul>
+<li>用語とページ番号の間を、連続したピリオドではなく空白にする。
+</li>
+<li>用語のグループ化を行単位ではなく文字単位で行う。
+</li>
+<li>用語見出しを「■あ」のようなデザインから変更する。
+</li>
+<li>子要素の用語で使う「――」を別の文字列に変更する。
+</li>
+<li>「<code class="inline-code">@&lt;term&gt;{}</code>」の表示をゴシック体から別の書体に変更する。
+</li>
+</ul>
+<p>詳しくは「<a href="04-customize.html#h6-7">6.7 索引</a>」を参照してください。なお索引のカスタマイズには、LaTeXの知識が必要です。</p>
+
+<h3 class="none"><a id="h5-17-9"></a><span class="secno">5.17.9</span> Re:VIEWとの違い</h3>
+<p>Starterの索引機能は、Re:VIEWのそれを拡張しています。違いは次の通りです。</p>
+<ul>
+<li>「<code class="inline-code">@&lt;idx&gt;{}</code>」と「<code class="inline-code">@&lt;hidx&gt;{}</code>」は、Re:VIEWにある機能です。
+   Starterではそれを引き継いでいます。
+</li>
+<li>「<code class="inline-code">@&lt;term&gt;{}</code>」はStarterによる拡張であり、Re:VIEWにはありません。
+</li>
+<li>「<code class="inline-code">@&lt;idx&gt;{用語((よみがな))}</code>」のようによみがなを埋め込む機能は、Starterによる独自拡張です。
+</li>
+<li>「<code class="inline-code">@&lt;idx&gt;{親用語&lt;&lt;&gt;&gt;子用語}</code>」のような親子関係の指定は、Re:VIEWにある機能です。
+   Starterでも使えます。
+</li>
+<li>「<code class="inline-code">@&lt;idx&gt;{親&lt;&lt;&gt;&gt;子---}</code>」のような親の位置を子で指定する機能は、Starterによる独自拡張です。
+</li>
+<li>「<code class="inline-code">@&lt;idx&gt;{用語==&gt;&gt;転送先}</code>」のような親子関係の指定は、Starterによる独自拡張です。
+</li>
+<li>よみがな辞書ファイルの機能は、Re:VIEWにある機能です。
+</li>
+<li>形態素解析エンジン「MeCab」を使ったよみがな自動取得機能は、Re:VIEWにある機能です。
+   Starterでも設定すれば使えますが、トラブルが多いので推奨していません。
+</li>
+</ul>
+<p>Re:VIEWの索引機能については、<a href="https://github.com/kmuto/review/blob/master/doc/makeindex.ja.md" class="link">Re:VIEWのドキュメント</a>を参照してください。</p>
+<div class="note">
+<h5>これを読んでるRe:VIEW関係者の方へ</h5>
+<p>これを読んでるRe:VIEW関係者の方へお願いがあります。Starterの機能を真似していただくのは構わないです（それどころか歓迎します）。しかし、特に理由がないのにわざと違う仕様にするのはユーザに不利益を与えるだけなので、止めていただくようお願いします。</p>
+<p>Starterによる拡張機能に問題があるから仕様を変えて導入した、というなら道理はあるでしょう。しかしStarterを新機能の参考にしておきながら、わざわざ違う仕様にして導入するのは、ユーザの利益になりません。</p>
+<p>競うなら公平・公正に。ユーザの利益を犠牲にする必要はありません。</p>
+</div>
+
+<h2 id="sec-words" class="leftline"><a id="h5-18"></a><span class="secno">5.18</span> 単語展開</h2>
+<p>キーと単語の組を単語辞書ファイルに登録しておけば、キーを単語に展開できます。たとえば、辞書ファイル「<span class="file">data/words.txt</span>」の中にキー「apple」と単語「アップル」を登録しておけば、「<code class="inline-code">@&lt;w&gt;{apple}</code>」が「アップル」に展開されます。</p>
+<p>この機能を使うと、表記が定まっていない単語の表記をあとから簡単に変更できます。たとえば「Apple」と「アップル」のどちらの表記にするかまだ決まってなくても、本文に「<code class="inline-code">@&lt;w&gt;{apple}</code>」と書いておけば、あとから辞書の中身を変えるだけでどちらの表記にも対応できます。</p>
+<p>なお単語にはインライン命令を含められません。</p>
+
+<h3 class="none"><a id="h5-18-1"></a><span class="secno">5.18.1</span> 単語展開用のインライン命令</h3>
+<p>単語展開のためのインライン命令は3つあります。</p>
+<ul>
+<li>「<code class="inline-code">@&lt;w&gt;{}</code>」は、キーに対応した単語へと展開するだけです。
+</li>
+<li>「<code class="inline-code">@&lt;wb&gt;{}</code>」は、展開してから太字にします。
+   実質的に「<code class="inline-code">@&lt;b&gt;{@&lt;w&gt;{}}</code>」と同じです。
+</li>
+<li>「<code class="inline-code">@&lt;W&gt;{}</code>」は、展開してから強調表示します。
+   実質的に「<code class="inline-code">@&lt;B&gt;{@&lt;w&gt;{}}</code>」と同じです。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> * <b>@&lt;w&gt;</b>{apple} …… 展開するだけ
+ * <b>@&lt;wb&gt;</b>{apple} …… 展開して太字に
+ * <b>@&lt;W&gt;</b>{apple} …… 展開して強調表示
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ul>
+<li>アップル …… 展開するだけ
+</li>
+<li><b>アップル</b> …… 展開して太字に
+</li>
+<li><strong>アップル</strong> …… 展開して強調表示
+</li>
+</ul>
+</div></div>
+
+<h3 class="none"><a id="h5-18-2"></a><span class="secno">5.18.2</span> 単語展開用の辞書ファイル</h3>
+<p>単語展開用の辞書ファイルは、<span class="file">config.yml</span>の「<code class="inline-code">words_file</code>」で指定します。デフォルトでは「<code class="inline-code">data/words.txt</code>」が指定されています。</p>
+<p>辞書ファイルは、CSVファイル（<span class="file">*.csv</span>）か、タブ文字区切りのファイル（<span class="file">*.txt</span>または<span class="file">*.tsv</span>）を指定します。どちらの形式かはファイル名の拡張子で判断します。</p>
+<p>辞書ファイルは複数指定できます。たとえば「<code class="inline-code">words_file: [data/f1.txt, data/f2.txt]</code>」とすれば、<span class="file">data/f1.txt</span>と<span class="file">data/f2.txt</span>を読み込みます。キーが重複していてもエラーにはならず、あとから読み込まれたほうが使われます。</p>
+<p>辞書ファイルの文字コードはUTF-8しか使えません。</p>
+
+<h3 class="none"><a id="h5-18-3"></a><span class="secno">5.18.3</span> Re:VIEWとの違い</h3>
+<ul>
+<li>Re:VIEWでは、辞書ファイルとしてCSVファイルしか指定できません。
+   Starterだと、タブ文字区切りのテキストファイルも指定できます。
+   テキストエディタで編集しやすいのは、CSVファイルよりもタブ文字区切りのテキストファイルのほうです。
+</li>
+<li>Re:VIEWには「<code class="inline-code">@&lt;W&gt;</code>」がありません。
+</li>
+<li>Starterではデフォルトで辞書ファイル「<span class="file">data/words.txt</span>」が提供済みです。
+   設定ファイルを編集しなくても最初から<code class="inline-code">@&lt;w&gt;{}</code>が利用可能です。
+</li>
+</ul>
+
+<h2 id="sec-misc" class="leftline"><a id="h5-19"></a><span class="secno">5.19</span> その他</h2>
+
+<h3 class="none"><a id="h5-19-1"></a><span class="secno">5.19.1</span> URL、リンク</h3>
+<p>URLは「<code class="inline-code">@&lt;href&gt;{URL}</code>」と書きます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">Re:VIEW Starter：<b>@&lt;href&gt;{</b>https://kauplan.org/reviewstarter/<b>}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>Re:VIEW Starter：<a href="https://kauplan.org/reviewstarter/" class="link">https://kauplan.org/reviewstarter/</a></p>
+</div></div>
+<p>リンクは「<code class="inline-code">@&lt;href&gt;{URL, テキスト}</code>」と書きます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;href&gt;{</b>https://kauplan.org/reviewstarter/<b>, </b>Re:VIEW Starter<b>}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><a href="https://kauplan.org/reviewstarter/" class="link">Re:VIEW Starter</a></p>
+</div></div>
+<p>PDFの場合、リンクのURLは自動的に脚注に書かれます（Starter拡張）。これは印刷時でもURLが読めるようにするためです。この拡張機能をオフにするには、<span class="file">starter-config.yml</span>で設定項目「<code class="inline-code">linkurl_footnote:</code>」を「<code class="inline-code">false</code>」または「<code class="inline-code">off</code>」にします。</p>
+<p>もし「<code class="inline-code">linkurl_footnote:</code>」の設定に関係なく、必ずリンクを使いたい（URLを脚注に書かない）場合は、「<code class="inline-code">@&lt;hlink&gt;{...}</code>」を使ってください。使い方は「<code class="inline-code">@&lt;href&gt;{...}</code>」と同じです。</p>
+<p>「<code class="inline-code">@&lt;href&gt;{}</code>」と「<code class="inline-code">@&lt;hlink&gt;{}</code>」の違いを比べて見ましょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> * <b>@&lt;href&gt;</b>{https://twitter.com/_kauplan/, @_kauplan}
+ * <b>@&lt;hlink&gt;</b>{https://twitter.com/_kauplan/, @_kauplan}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ul>
+<li><a href="https://twitter.com/_kauplan/" class="link">@_kauplan</a>
+</li>
+<li><a href="https://twitter.com/_kauplan/" class="link">@_kauplan</a>
+</li>
+</ul>
+</div></div>
+
+<h3 class="none"><a id="h5-19-2"></a><span class="secno">5.19.2</span> 引用</h3>
+<p>引用は「<code class="inline-code">//quote{ ... //}</code>」で表します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//quote{</b>
+//noindent
+その者、蒼き衣を纏いて金色の野に降り立つべし。@&lt;br&gt;{}
+失われし大地との絆を結び、ついに人々を青き清浄の地に導かん。
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<blockquote class="blockquote">
+<p class="noindent">その者、蒼き衣を纏いて金色の野に降り立つべし。<br />失われし大地との絆を結び、ついに人々を青き清浄の地に導かん。</p>
+</blockquote>
+</div></div>
+
+<h3 class="none"><a id="h5-19-3"></a><span class="secno">5.19.3</span> 傍点</h3>
+<p>傍点は「<code class="inline-code">@&lt;bou&gt;{...}</code>」でつけられます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;bou&gt;{</b>三分間<b>}</b>、待ってやる。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><span class="bou">三分間</span>、待ってやる。</p>
+</div></div>
+<p>傍点は、太字で強調するほどではないけど読者の注意を向けたいときに使います。ただしアルファベットや記号ではあまりよいデザインにはなりません。</p>
+
+<h3 class="none"><a id="h5-19-4"></a><span class="secno">5.19.4</span> ルビ、読みがな</h3>
+<p>ルビ（あるいは読みがな）は「<code class="inline-code">@&lt;ruby&gt;{テキスト, ルビ}</code>」のように書きます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>@&lt;ruby&gt;{</b>約束された勝利の剣<b>, </b>エクスカリバー<b>}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p><ruby>約束された勝利の剣<rp>（</rp><rt>エクスカリバー</rt><rp>）</rp></ruby></p>
+</div></div>
+<p>途中の「<code class="inline-code">, </code>」は必ず半角文字を使い、全角文字は使わないでください。</p>
+
+<h3 class="none"><a id="h5-19-5"></a><span class="secno">5.19.5</span> 何もしないコマンド</h3>
+<p>「<code class="inline-code">@&lt;nop&gt;{}</code>」<sup><a id="fnb-fn-tflcc" href="#fn-fn-tflcc" class="noteref" epub:type="noteref">*33</a></sup>は、何もしないコマンドです。これは、たとえばインライン命令の「<code class="inline-code">@</code>」と「<code class="inline-code">&lt;</code>」の間に入れることで、インライン命令として解釈されないようごまかすために使います。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-tflcc" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*33] </span>「nop」は「No Operation」の略です。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">強調される： @&lt;B&gt;{テキスト}。
+
+強調されない： @<b>@&lt;nop&gt;{}</b>&lt;B&gt;{テキスト}。
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>強調される： <strong>テキスト</strong>。</p>
+<p>強調されない： @&lt;B&gt;{テキスト}。</p>
+</div></div>
+<p>またブロック命令の行頭に「<code class="inline-code">@&lt;nop&gt;{}</code>」を入れると、ブロック命令として解釈されなくなります。</p>
+
+<h3 class="none"><a id="h5-19-6"></a><span class="secno">5.19.6</span> コード中コメント</h3>
+<p>プログラムコードやターミナルにおいて、コメントを記述するための「<code class="inline-code">@&lt;balloon&gt;{...}</code>」というコマンドが用意されています。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//terminal{
+$ @&lt;userinput&gt;{unzip mybook.zip}       <b>@&lt;balloon&gt;{</b>zipファイルを解凍<b>}</b>
+$ @&lt;userinput&gt;{cd mybook/}             <b>@&lt;balloon&gt;{</b>ディレクトリを移動<b>}</b>
+$ @&lt;userinput&gt;{rake pdf}               <b>@&lt;balloon&gt;{</b>PDFファイルを生成<b>}</b>
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="cmd-code">
+<pre class="emlist">$ <span class="userinput">unzip mybook.zip</span>       <span class="balloon">← zipファイルを解凍</span>
+$ <span class="userinput">cd mybook/</span>             <span class="balloon">← ディレクトリを移動</span>
+$ <span class="userinput">rake pdf</span>               <span class="balloon">← PDFファイルを生成</span>
+</pre>
+</div>
+</div></div>
+<p>Re:VIEWのドキュメントを読むと、本来は吹き出し（バルーン）形式で表示することを意図していたようです。Starterでは、「←」つきのグレーで表示しています。</p>
+<p>なおプログラムコードにおいて改行記号を表示している場合、「<code class="inline-code">@&lt;balloon&gt;{}</code>」があるとそれより後に改行文字が表示されてしまいます。たとえば次の例だと、改行記号は「←再帰呼び出し」の前につくべきですが、実際には後についています。これは期待される挙動ではないでしょう。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//program[][改行記号と「@@&lt;nop&gt;{}&lt;balloon&gt;{}」は相性が悪い][<b>eolmark=on</b>]{
+function fib(n) {
+  if (n &lt;= 1) { return n };
+  return fib(n-1) + fib(n-2);  <b>@&lt;balloon&gt;{</b>再帰呼び出し<b>}</b>
+}
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="code">
+<span class="caption">改行記号と「@&amp;lt;balloon&amp;gt;{}」は相性が悪い</span>
+<pre class="list">function fib(n) {
+  if (n &lt;= 1) { return n };
+  return fib(n-1) + fib(n-2);  <span class="balloon">← 再帰呼び出し</span>
+}
+</pre>
+</div>
+</div></div>
+<p>この問題については将来的に対応予定ですが、現在はまだ対応できていません。</p>
+
+<h3 class="none"><a id="h5-19-7"></a><span class="secno">5.19.7</span> 特殊文字</h3>
+<ul>
+<li>「<code class="inline-code">@&lt;hearts&gt;{}</code>」で「&#9829;」が表示できます。
+</li>
+<li>「<code class="inline-code">@&lt;TeX&gt;{}</code>」で「TeX」が表示できます。
+</li>
+<li>「<code class="inline-code">@&lt;LaTeX&gt;{}</code>」で「LaTeX」が表示できます。
+</li>
+</ul>
+
+<h3 class="none"><a id="h5-19-8"></a><span class="secno">5.19.8</span> 右寄せ、センタリング</h3>
+<p>右寄せとセンタリングのブロック命令があります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//flushright{
+右寄せのサンプル
+//}
+//centering{
+センタリングのサンプル
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p class="flushright">右寄せのサンプル</p>
+<p class="center">センタリングのサンプル</p>
+</div></div>
+
+<h3 class="none"><a id="h5-19-9"></a><span class="secno">5.19.9</span> 縦方向の空き（実験的機能）</h3>
+<p>「<code class="inline-code">//vspace</code>」を使って、縦方向の空きを入れられます。マイナスの値を指定すると、空きを削除できます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">AAAAA
+
+BBBBB
+
+<b>//vspace[latex][-4mm]</b>
+CCCCC
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<p>AAAAA</p>
+<p>BBBBB</p>
+<p>CCCCC</p>
+</div></div>
+
+<h3 class="none"><a id="h5-19-10"></a><span class="secno">5.19.10</span> 生データ</h3>
+<p>LaTeXのコード（PDFのとき）やHTMLのコード（ePubのとき）を埋め込む機能があります。たとえば次の例では、PDFのときは「<code class="inline-code">//embed[latex]{...//}</code>」のコードが使われ、HTMLとePubのときだけ「<code class="inline-code">//embed[html,epub]{...//}</code>」のコードが使われます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//embed[latex]{</b>
+\textcolor{red}{Red}
+\textcolor{green}{Green}
+\textcolor{blue}{Blue}
+\par
+<b>//}</b>
+
+<b>//embed[html,epub]{</b>
+&lt;div&gt;
+  &lt;span style=&quot;color:red&quot;&gt;Red&lt;/span&gt;
+  &lt;span style=&quot;color:green&quot;&gt;Green&lt;/span&gt;
+  &lt;span style=&quot;color:blue&quot;&gt;Blue&lt;/span&gt;
+&lt;/div&gt;
+<b>//}</b>
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div>
+  <span style="color:red">Red</span>
+  <span style="color:green">Green</span>
+  <span style="color:blue">Blue</span>
+</div>
+</div></div>
+<p>またインライン命令の「<code class="inline-code">@&lt;embed&gt;{...}</code>」もあります。</p>
+<ul>
+<li>「<code class="inline-code">@&lt;embed&gt;{|latex|...}</code>」ならLaTeXのときだけ中身が出力されます。
+</li>
+<li>「<code class="inline-code">@&lt;embed&gt;{|htlm,epub|...}</code>」ならHTMLとePubのときだけ中身が出力されます。
+</li>
+</ul>
+
+<h3 class="none"><a id="h5-19-11"></a><span class="secno">5.19.11</span> 参考文献</h3>
+<p>（未執筆。Re:VIEWの<a href="https://github.com/kmuto/review/blob/master/doc/format.ja.md#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%E3%81%AE%E5%AE%9A%E7%BE%A9" class="link">Wiki</a>を参照してください。）</p>
+
+        </main>
+        <nav class="page-navi">
+          <a href="02-tutorial.html" class="page-prev">&#9664;</a>
+          <a href="04-customize.html" class="page-next">&#9654;</a>
+        </nav>
+        <footer>
+        </footer>
+      </div>
+    </div>
+    <script>
+function rebuildAndReloadForcedly() {
+  fetch('/rebuild.js').then((resp)=>{
+    resp.text().then((text)=>{ eval(text); });
+  });
+}
+    </script>
+    <script src="/rebuild.js?file=03-syntax.re"></script>
+  </body>
+</html>
+<!-- layout.html5.erb -->

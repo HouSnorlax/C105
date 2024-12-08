@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>開発の背景 | 【Python】Tkinterで競馬の着順掲示板を作る</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css" />
+    <link rel="next" title="あとがき / おわりに" href="99-postface.html">
+    <link rel="prev" title="ファイルとフォルダ" href="92-filelist.html">
+    <meta name="generator" content="Re:VIEW Starter">
+  </head>
+  <body>
+    <div class="page-outer">
+      <nav class="side-content">
+                <div class="rebuild">
+          <a href="javascript:void(0)" onclick="rebuildAndReloadForcedly()">Rebuild and Reload</a>
+        </div>
+                <a class="nav-title" href="index.html">【Python】Tkinterで競馬の着順掲示板を作る</a>
+<ul class="toc toc-1">
+    <li class="toc-chapter"><a href="./00-preface.html">まえがき / はじめに</a></li>
+    <li class="toc-chapter"><a href="./01-install.html">1 インストール</a></li>
+    <li class="toc-chapter"><a href="./02-tuto.html">2 チュートリアル</a></li>
+    <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a></li>
+    <li class="toc-chapter"><a href="./02-tutorial.html">4 チュート</a></li>
+    <li class="toc-chapter"><a href="./03-syntax.html">5 記法</a></li>
+    <li class="toc-chapter"><a href="./04-customize.html">6 カスタマイズ</a></li>
+    <li class="toc-chapter"><a href="./05-faq.html">7 FAQ</a></li>
+    <li class="toc-chapter"><a href="./06-bestpractice.html">8 よりよい本づくり</a></li>
+    <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a></li>
+    <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
+    <li class="toc-chapter"><a href="./93-background.html">開発の背景</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h3-1">3.1 開発の経緯</a></li>
+        <li class="toc-section"><a href="#h3-2">3.2 開発の転機</a></li>
+        <li class="toc-section"><a href="#h3-3">3.3 開発の障害</a></li>
+        <li class="toc-section"><a href="#h3-4">3.4 開発方針の違い</a></li>
+        <li class="toc-section"><a href="#h3-5">3.5 今後の開発</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./99-postface.html">あとがき / おわりに</a></li>
+</ul>
+      </nav>
+      <div class="page-inner">
+        <header class="page-header">
+        </header>
+        <main class="page-main">
+<h1 class="boldlines center twolines"><a id="hC"></a><span class="secno">付録C</span> <br/>開発の背景</h1>
+<div class="abstract">
+<p>ここでは歴史の記録として、Re:VIEW Starterが開発された背景などを記しておきます。個人的な忘備録として残すものであり、読まなくても本や同人誌の制作にはまったく支障はありません。</p>
+</div>
+
+<h2 id="id_93-background_nonum1" notoc="true">開発の経緯</h2>
+<p>Re:VIEWはver 2.4の頃、「A5サイズのPDFファイルが生成できない」「フォントサイズも10ptから変更できない」という致命的な問題を抱えていました。つまりB5サイズでフォントが10ptの本しか作れなかったのです。</p>
+<p>この頃はまだ、技術同人誌はB5サイズ10ptで作るのが主流だったので、Re:VIEWのこの制限はあまり問題にはなりませんでした。しかし同人誌印刷ではB5サイズよりA5サイズのほうが割安なので、一部の人がA5サイズやより小さいフォントサイズでのPDF生成を模索し、そしてRe:VIEWの制限に苦しみました。</p>
+<p>たとえば、フォントサイズを小さくしようとして格闘し、結果としてあきらめた人の証言を見てみましょう<sup><a id="fnb-g6rdf" href="#fn-g6rdf" class="noteref" epub:type="noteref">*1</a></sup>（<span class="imgref"><a href="./93-background.html#slide2">図C.1</a></span>）。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-g6rdf" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*1] </span><a href="https://www.slideshare.net/KazutoshiKashimoto/nagoya0927-release" class="link">https://www.slideshare.net/KazutoshiKashimoto/nagoya0927-release</a>のp.21とp.22。</p></div>
+</div><!--/.footnote-list-->
+<div id="slide2" class="image">
+<img src="images/93-background/slide2.png" alt="フォントやページサイズを変更できなかった人の証言" class="img width-100per" />
+<p class="caption">
+図C.1: フォントやページサイズを変更できなかった人の証言
+</p>
+</div>
+<p>この問題は、「<em>geometry.sty</em>」というスタイルファイルをオプションなしで読み込んでいることが原因です<sup><a id="fnb-fn-ly58b" href="#fn-fn-ly58b" class="noteref" epub:type="noteref">*2</a></sup>。具体的な修正方法は<a href="https://qiita.com/kauplan/items/01dee0249802711d30a6" class="link">Qiitaの記事</a>に書いています。読めば分かりますが、かなり面倒です。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-ly58b" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*2] </span>簡単に書いてますけど、原因が<em>geometry.sty</em>であることを突き止めるのには多くの時間がかかり、正月休みが潰れました。今でも恨んでます。この苦労を知らずに「Re:VIEWでは昔からA5のPDFが簡単に生成できた」と言い張る歴史修正者にはケツバットの刑を与えてやりたいくらいです。</p></div>
+</div><!--/.footnote-list-->
+<p>この不具合はバグ報告したものの、開発陣の反応は芳しくなく、すぐには修正されなさそうでした<sup><a id="fnb-fn-mxd28" href="#fn-fn-mxd28" class="noteref" epub:type="noteref">*3</a></sup>。当時は「技術書典」という同人イベントの開催が迫っていたので、これは困りました。仕方ないのでRe:VIEW側での修正に期待せず、誰でも簡単にA5サイズの同人誌が作れるための別の方法を考えることにしました。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-mxd28" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*3] </span>実際、Re:VIEW Ver 2の間は修正されず、修正されたのはVer 3になってからでした。当然、技術書典には間に合いませんでした。</p></div>
+</div><!--/.footnote-list-->
+<p>そうした経緯で誕生したのが、Re:VIEW Starterです。Starterでは初期設定がGUIでできる簡単さが売りのひとつですが、もともとはA5サイズ9ptの同人誌を簡単に作れることが開発動機だったのです。</p>
+
+<h2 id="id_93-background_nonum2" notoc="true">開発の転機</h2>
+<p>Starterは、当初はRe:VIEWとの違いが大きくならないよう、GUIで設定した状態のプロジェクトをダウンロードできるだけに留めていました。つまりユーザが手作業で設定するのを、GUIで簡単に設定できるようにしただけでした。</p>
+<p>しかしRe:VIEWは、ドキュメント作成ツールとしての基本機能が足りておらず、そのうえ開発速度が遅くて技術書典といったイベントには新機能追加が間に合いません。またバグ報告をしても「仕様だ」と回答されたり、互換性を理由に却下されたり（けど他の人が報告すると取り入れられたり）といったことが積み重なって、ある日を境にStarterで独自の機能を追加することを決心しました。</p>
+<p>そこからは少しずつRe:VIEWの機能を上書きし、足りない機能を追加していきました。</p>
+<p>現在のStarterでは、Re:VIEWのソースコードを広範囲に上書きしています<sup><a id="fnb-fn-8309s" href="#fn-fn-8309s" class="noteref" epub:type="noteref">*4</a></sup>。特にパーサの大部分はStarter側で上書きしています。このおかげで、インライン命令やブロック命令を入れ子対応にしたり、箇条書きの機能を大きく拡張したりできています。</p>
+<p>Re:VIEWとのかい離はずいぶんと大きくなりました。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-8309s" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*4] </span>実はRe:VIEWのソースコードを広範囲に上書きしているせいで、ベースとなるRe:VIEWのバージョンを2.5から上げられていません。しかしRe:VIEWの開発速度が遅く目ぼしい新機能は追加されてないので、デメリットはありません。</p></div>
+</div><!--/.footnote-list-->
+
+<h2 id="id_93-background_nonum3" notoc="true">開発の障害</h2>
+<p>Starterを開発するうえで大きな障害になったのが、LaTeXと、Re:VIEWのコード品質です。</p>
+<p>「LaTeX」はフリーの組版ソフトウェアであり、Re:VIEWやStarterがPDFファイルを生成するときに内部で使っています。LaTeXは出力結果がとてもきれいですが、使いこなすには相当な知識が必要です。</p>
+<p>特にLaTeXのデバッグは困難を極めます。エラーメッセージがろくに役立たないせいでエラーを見ても原因が分からない、どう修正すればいいかも分からない、直ったとしてもなぜ直ったのか分からない、分からないことだらけです。この文章を読んでいる人にアドバイスできることがあるとすれば、「LaTeXには関わるな！」です。</p>
+<p>またRe:VIEWのコード品質の悪さも、大きな障害となりました。ソースコードを読んでも何を意図しているのか理解しづらい、コードの重複があちこちにある、パーサで行うべきことをBuilderクラスで行っている、…など、基礎レベルでのリファクタリングがされていません。信じたくはないでしょうが、同じような感想を持った人が他にもいたので紹介します。</p>
+<p class="noindent"><a href="https://np-complete.gitbook.io/c86-kancolle-api/atogaki" class="link">https://np-complete.gitbook.io/c86-kancolle-api/atogaki</a>:</p>
+<blockquote class="blockquote">
+<p>っと上の文章を書いてから2時間ほどRe:VIEWのコードと格闘していたんですが、なんですかこのクソコードは・・・これはマジでちょっとビビるレベルのクソコードですよ。夏コミが無事に終わったら冬に向けてRe:VIEWにプルリク送りまくるしかないと思いました。</p>
+</blockquote>
+<p>「クソコード」は言い過ぎですが、そう言いたくなる気持ちはとてもよく分かります。</p>
+<p>また、パースしたあとに構文木を作っていないのは、Re:VIEWの重大な設計ミスといえるでしょう。Re:VIEWやMarkdownのようなドキュメント作成ツールでは、一般的に次のような設計にします。</p>
+<ol start="1" type="1">
+<li>パーサが入力テキストを解析して、構文木を作る。</li>
+<li>構文木をたどって必要な改変をする。</li>
+<li>Visitorパターンを使って、構文木をHTMLやLaTeXのコードに変換する。</li>
+</ol>
+<p>このような設計であれば、機能追加は容易です。特にHTMLやLaTeXのコードを生成するより<span class="bou">前</span>にすべての入力テキストがパース済みなので、たとえ入力テキストの<span class="bou">最後</span>に書かれたコマンドであろうと、それを認識して<span class="bou">先頭</span>のコードを柔軟に変更できます。</p>
+<p>しかしRe:VIEWは構文木を作らず、パースしながらHTMLやLaTeXのコードに変換するため、しなくてもいいはずのハックが必要となることがあります。</p>
+<p>Starterは将来的にRe:VIEWのパーサをすべて上書きして、構文木を生成するタイプのパーサへ置き換えることになるでしょう。</p>
+
+<h2 id="id_93-background_nonum4" notoc="true">開発方針の違い</h2>
+<p>Re:VIEWとStarterでは、開発方針に大きな違いがあります。</p>
+
+<h3 id="id_93-background_nonum5" notoc="true">開発速度</h3>
+<p>Re:VIEWでは、リリースが年3回と決まっています。またリリース時期も（過去を見る限り）2月末、6月末、10月末に固定されています。そのため「次の技術書典までにこの新機能が必要だ」と思っても、固定されたリリース時期にならないと新機能はリリースされません。言い方を変えると、ユーザが必要とする開発速度についてこれていません。</p>
+<p>Starterは主に、技術書典をはじめとした同人イベントに合わせて新機能が開発されます。また2〜3週間ごとにリリースされるので、新機能の追加とバグ修正が急ピッチで進みます。つまり、ユーザが必要とする速度で開発されています。</p>
+
+<h3 id="id_93-background_nonum6" notoc="true">機能選定</h3>
+<p>Re:VIEWは商業誌での利用実績が多いこともあって、「<a href="https://www.w3.org/TR/jlreq/ja/" class="link">日本語組版処理の要件</a>」への対応が重視されます。そのため<a href="https://github.com/abenori/jlreq" class="link">jlreqクラスファイル</a>が標準でサポートされており、少なくない開発リソースがその対応に割かれています。そのせいか、「範囲コメントを実装する」「インライン命令やブロック命令を入れ子に対応させる」「順序つき箇条書きで数字以外を使えるようにする」などの基本機能が、未だに実装されていません。</p>
+<p>しかし「日本語組版処理の要件」は、読んでみると分かりますが、重箱の隅をつつくような内容がほとんどです。プロユースでは必要なのかもしれませんが、同人誌では「禁則処理がきちんとできていれば充分」というユーザがほとんどでしょう。開発リソースをそんな細かいところに割くよりも、もっとユーザが必要とする機能の開発に割くべきです。</p>
+<p>Starterでは日本語組版の細かい要件は気にせず、ユーザが必要とする機能を重点的に開発しています。たとえば、範囲コメントを実装したり、インライン命令やブロック命令を入れ子に対応させたり、順序つき箇条書きでアルファベットも使えるようにしたり、章や節のタイトルを見栄えのいいデザインにしたりといった、ユーザにとって必要な機能を優先して開発しています<sup><a id="fnb-fn-jnik5" href="#fn-fn-jnik5" class="noteref" epub:type="noteref">*5</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-jnik5" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*5] </span>ここに挙げた機能のうち、見た目のデザインを変更するのは（LaTeXの知識さえあれば）ユーザでも変更できますし、実際にTechboosterテンプレートでは見た目のデザインを変更しています。しかしそれ以外の機能はRe:VIEWのソースコードを変更しなければ実現できず、ユーザが簡単に行えることではありません。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 id="id_93-background_nonum7" notoc="true">バグ対応</h3>
+<p>今まで、Re:VIEWには約20個ほどのバグ報告やPull Requestを出しました。取り入れられたものも多いですが、理不尽な理由で拒絶されたものも多いです。</p>
+
+<h5><a id="hC-0-0-0-1"></a>明らかなバグを仕様だと言い張る</h5>
+<p>たとえば、Re:VIEWでは箇条書きの項目が複数行だと勝手に結合されるというバグがあります。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"> * AA AA
+   BB BB
+   CC CC
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<ul>
+<li>AA AABB BBCC CC
+</li>
+</ul>
+</div></div>
+<p>「AABB」や「BBCC」のように英単語が結合されていますよね？どう見てもRe:VIEWのバグなのですが、<a href="https://github.com/kmuto/review/issues/1312" class="link">報告</a>しても「これは仕様だ」と言い張るんです。しかも「なぜそのような書き方をするんだ？一行に書けばいいではないか」と言われる始末。かなり意味不明な対応をされました。</p>
+<p>Starterではこのバグは修正しています（当然です）。</p>
+
+<h5><a id="hC-0-0-0-2"></a>提案を却下しておきながら次のバージョンで釈明なく取り入れる</h5>
+<p>Re:VIEW 2.xでは、LaTeXスタイルファイルが「<span class="file">sty/reviewmacro.sty</span>」しかなく、カスタマイズするにはこのファイルを編集するのが一般的でした。しかしこの方法には問題があります。</p>
+<ul>
+<li>「<span class="file">sty/reviewmacro.sty</span>」を直接編集すると、Re:VIEWのバージョンアップをするときに困る。
+</li>
+<li>自分でスタイルファイルを追加できるが、そのためには設定ファイルの項目を変更する必要があり、初心者には敷居が高い（どの項目をどう変更すればいいか知らないため）。
+</li>
+</ul>
+<p>そこで、あらかじめ空のスタイルファイルを用意し、ユーザのカスタマイズはそのファイルの中で行うことを<a href="https://github.com/kmuto/review/issues/917" class="link">提案</a>しました。Starterでいうと「<span class="file">sty/mystyle.sty</span>」のことですね。実装は簡単だし、問題の解決策としてとても妥当な方法です。</p>
+<p>しかしこの提案は、あーだこーだと理由をつけられて却下されました（これに限らず、初心者への敷居を下げるための提案は却下されることが多い印象です）。仕方ないので、Starterでは初期の頃から独自に空のスタイルファイルを提供していました。</p>
+<p>ところが、なんとRe:VIEW 3.0でこの機能が取り込まれていたのです！「提案が通ったならそれでいいじゃないか」と心ないことを言う人もいるでしょうけど、いろいろ理由をつけて提案を却下しておきながら、何の釈明もなくしれーっと取り込むのは、却下されたほうとしてはたまったものではありません。不満が残るのは当たり前です。</p>
+
+<h5><a id="hC-0-0-0-3"></a>仲のいい人とそうでない人とで露骨に態度を変える</h5>
+<p>昔のRe:VIEWでは、「<code class="inline-code">//list</code>」においてキャプション（説明文）を指定しなくても言語指定をすると、本文とプログラムリストの間が大きく空いてしまうというバグがありました。たとえばこのように書くと：</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list"><b>//list[][][ruby]</b>{
+def fib(n)
+  return n &lt;= 1 ? n : fib(n-1) : fib(n-2)
+end
+//}
+</pre>
+</div>
+<p class="noindent"><span class="imgref"><a href="./93-background.html#bug913">図C.2</a></span>の下のように表示されていました。</p>
+<div id="bug913" class="image">
+<img src="images/93-background/bug913.png" alt="本文とプログラムリストの間が大きく空いてしまう（下）" class="img width-070per border" />
+<p class="caption">
+図C.2: 本文とプログラムリストの間が大きく空いてしまう（下）
+</p>
+</div>
+<p>この現象は、空文字列がキャプションとして使われるため、その分の空行が空いてしまうことが原因です。そこで、キャプションが空文字列のときは表示しないようにする修正を<a href="https://github.com/kmuto/review/pull/913" class="link">報告</a>しました。</p>
+<p>しかしこのバグ報告も、後方互換性のために却下されました。「出力結果が変わってしまうような変更は、たとえバグ修正だとしても、メジャーバージョンアップ以外では受けつけられない」というのが理由でした。こんな明白なバグの互換性なんかいらないはずだと思ったので、粘って交渉したのですが、互換性を理由に頑なに拒まれました。</p>
+<p>ところが、開発者と仲のいい別の人が「やはりバグではないか？」とコメントした途端、メジャーバージョンアップでもないのに修正されました。見事な手のひら返しです。</p>
+<p>「出力結果が変わってしまう変更は、たとえバグ修正でも（メジャーバージョンアップ以外では）受けつけられない。それが組版ソフトだ」という理由でさんざん拒絶しておいて、いざ別の人が言及するとすぐに修正する。出力結果が変わってしまう修正だというのに！</p>
+<p>大事な点なので強調しますが、<strong>出力結果が変わる変更はダメと言って拒絶しておきながら、別の人が「やはりバグでは？」と言うと出力結果が変わる変更でもあっさり行うという、露骨な態度の違い</strong>。よく平気でこんなことできるなと逆に感心しました。</p>
+<p><br /></p>
+<p>こんなことが積み重なったので、もうバグ報告も機能提案もしないことにしました。Re:VIEWのコードは品質が良くないので、ソースコードを読んでいると細かいバグがちょこちょこ見つかりますが、もうシラネ。</p>
+<p>またRe:VIEWのリリースノートを見ると、Starterの機能がRe:VIEWの新機能として取り込まれているのを見かけます。つまり、<strong>Re:VIEWに新機能提案しても通らないけど、Starterに機能を実装するとRe:VIEWに取り込まれる可能性が高い</strong>ということです。こちらはバグ報告や提案が変な理由で却下されてストレスが溜まることから解放されるし、Re:VIEW側はStarterが先行実装した機能を選んで取り込めばいいし、Win-Winで、これでいいのだ。</p>
+
+<h2 id="id_93-background_nonum8" notoc="true">今後の開発</h2>
+<ul>
+<li>Starterは、将来的にRe:VIEWのソースコードをすべて上書きするでしょう。
+   <strong>大事なのはユーザが書いた原稿であって、Re:VIEWでもStarterでもありません</strong>。
+   たとえRe:VIEWのソースコードをすべて捨てたとしても、ユーザの原稿は使えるようになるはずです。
+</li>
+</ul>
+<ul>
+<li>設定は、今は設定ファイルを手作業で変更していますが、これはGUIによる設定に置き換わるでしょう。
+   そのため設定ファイルの互換性はなくなる可能性が高いです。
+</li>
+</ul>
+<ul>
+<li>PDF生成のための組版ツールとして、LaTeX以外にVivliostyleをサポートしたいと考えています。
+   ただしVivliostyleプロジェクトが独自のドキュメント作成ツールを開発中なので、Vivliostyleを必要とする人はそちらを使うだろうから、Starterでの優先順位は高くなくてもいいかなと思っています。
+</li>
+</ul>
+<ul>
+<li>同人イベントがオンラインに移行することから、PDFよりePubの需要が高くなるでしょう。
+   今のStarterはePub対応が弱いので、強化する必要があります。
+</li>
+</ul>
+<ul>
+<li>印刷物での配布が減るので、カラー化がいっそう進むでしょう。
+   Starterはコードハイライトができないので、対応を急ぐ必要があります。
+</li>
+</ul>
+<ul>
+<li>Visual Studio Codeでの執筆を支援するプラグインが必要とされるでしょう。
+   そのための本を買ったけど、積ん読のままです。
+</li>
+</ul>
+<ul>
+<li>Markdownファイルの対応は、パーサを書き換えたあとで検討します。
+</li>
+</ul>
+<ul>
+<li>諸般の事情によりGitリポジトリを公開していないので、公開できるよう準備を進めます。
+</li>
+</ul>
+
+        </main>
+        <nav class="page-navi">
+          <a href="92-filelist.html" class="page-prev">&#9664;</a>
+          <a href="99-postface.html" class="page-next">&#9654;</a>
+        </nav>
+        <footer>
+        </footer>
+      </div>
+    </div>
+    <script>
+function rebuildAndReloadForcedly() {
+  fetch('/rebuild.js').then((resp)=>{
+    resp.text().then((text)=>{ eval(text); });
+  });
+}
+    </script>
+    <script src="/rebuild.js?file=93-background.re"></script>
+  </body>
+</html>
+<!-- layout.html5.erb -->

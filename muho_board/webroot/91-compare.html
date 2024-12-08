@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Re:VIEWとの差分 | 【Python】Tkinterで競馬の着順掲示板を作る</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css" />
+    <link rel="next" title="ファイルとフォルダ" href="92-filelist.html">
+    <link rel="prev" title="よりよい本づくり" href="06-bestpractice.html">
+    <meta name="generator" content="Re:VIEW Starter">
+  </head>
+  <body>
+    <div class="page-outer">
+      <nav class="side-content">
+                <div class="rebuild">
+          <a href="javascript:void(0)" onclick="rebuildAndReloadForcedly()">Rebuild and Reload</a>
+        </div>
+                <a class="nav-title" href="index.html">【Python】Tkinterで競馬の着順掲示板を作る</a>
+<ul class="toc toc-1">
+    <li class="toc-chapter"><a href="./00-preface.html">まえがき / はじめに</a></li>
+    <li class="toc-chapter"><a href="./01-install.html">1 インストール</a></li>
+    <li class="toc-chapter"><a href="./02-tuto.html">2 チュートリアル</a></li>
+    <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a></li>
+    <li class="toc-chapter"><a href="./02-tutorial.html">4 チュート</a></li>
+    <li class="toc-chapter"><a href="./03-syntax.html">5 記法</a></li>
+    <li class="toc-chapter"><a href="./04-customize.html">6 カスタマイズ</a></li>
+    <li class="toc-chapter"><a href="./05-faq.html">7 FAQ</a></li>
+    <li class="toc-chapter"><a href="./06-bestpractice.html">8 よりよい本づくり</a></li>
+    <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h1-1">1.1 まとめ記事</a></li>
+        <li class="toc-section"><a href="#h1-2">1.2 プロジェクト作成</a></li>
+        <li class="toc-section"><a href="#h1-3">1.3 コメント</a></li>
+        <li class="toc-section"><a href="#h1-4">1.4 箇条書き</a></li>
+        <li class="toc-section"><a href="#h1-5">1.5 定義リスト</a></li>
+        <li class="toc-section"><a href="#h1-6">1.6 見出し（章、節、項、目）</a></li>
+        <li class="toc-section"><a href="#h1-7">1.7 インライン命令</a></li>
+        <li class="toc-section"><a href="#h1-8">1.8 ブロック命令</a></li>
+        <li class="toc-section"><a href="#h1-9">1.9 プログラムコード</a></li>
+        <li class="toc-section"><a href="#h1-10">1.10 ターミナル画面</a></li>
+        <li class="toc-section"><a href="#h1-11">1.11 ノート、ミニブロック</a></li>
+        <li class="toc-section"><a href="#h1-12">1.12 図</a></li>
+        <li class="toc-section"><a href="#h1-13">1.13 表</a></li>
+        <li class="toc-section"><a href="#h1-14">1.14 会話形式</a></li>
+        <li class="toc-section"><a href="#h1-15">1.15 用語、索引</a></li>
+        <li class="toc-section"><a href="#h1-16">1.16 表紙、大扉、奥付</a></li>
+        <li class="toc-section"><a href="#h1-17">1.17 PDFファイル</a></li>
+        <li class="toc-section"><a href="#h1-18">1.18 LaTeX関連</a></li>
+        <li class="toc-section"><a href="#h1-19">1.19 エラメッセージ</a></li>
+        <li class="toc-section"><a href="#h1-20">1.20 その他</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
+    <li class="toc-chapter"><a href="./93-background.html">開発の背景</a></li>
+    <li class="toc-chapter"><a href="./99-postface.html">あとがき / おわりに</a></li>
+</ul>
+      </nav>
+      <div class="page-inner">
+        <header class="page-header">
+        </header>
+        <main class="page-main">
+<h1 class="boldlines center twolines"><a id="hA"></a><span class="secno">付録A</span> <br/>Re:VIEWとの差分</h1>
+<div class="abstract">
+<p>Starterにおける機能追加や修正の一覧です。</p>
+</div>
+
+<h2 class="leftline"><a id="hA-1"></a><span class="secno">A.1</span> まとめ記事</h2>
+<p>こちらの記事も参照してください。</p>
+<ul>
+<li>『技術系同人誌を書く人の味方「Re:VIEW Starter」の紹介』(Qitta)<br />
+   <a href="https://qiita.com/kauplan/items/d01e6e39a05be0b908a1" class="link">https://qiita.com/kauplan/items/d01e6e39a05be0b908a1</a>
+</li>
+<li>『Re:VIEW Starterの新機能（2019年夏）』(Qiita)<br />
+   <a href="https://qiita.com/kauplan/items/dd8dd0f4a6e0eb539a98" class="link">https://qiita.com/kauplan/items/dd8dd0f4a6e0eb539a98</a>
+</li>
+<li>『Re:VIEW Starterの新機能（2019年冬）』(Qitta)<br />
+   <a href="https://qiita.com/kauplan/items/e36edd7900498e231aaf" class="link">https://qiita.com/kauplan/items/e36edd7900498e231aaf</a>
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-2"></a><span class="secno">A.2</span> プロジェクト作成</h2>
+<ul>
+<li>Starterでは、WebサイトにおいてGUIでプロジェクトの作成と初期設定ができます。
+   このおかげで、初心者でもつまづかずにプロジェクトを始められます。
+   <p class="indent">
+   Re:VIEWではプロジェクトの作成はコマンドラインでしか行えず、また初期設定を自分で行う必要があるので、初心者にはかなりハードルが高いです。
+</li>
+<li>Starterでは、ダウンロードしたプロジェクトに文章のサンプルが含まれています。
+   そのおかげで、どのように原稿を書けばいいのかが分かります。
+   <p class="indent">
+   Re:VIEWでは、作成したプロジェクトの中身はほとんど空であり、サンプルとしては役に立ちません。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-3"></a><span class="secno">A.3</span> コメント</h2>
+<ul>
+<li>Starterでは、範囲コメントが使えます。
+   <p class="indent">
+   Re:VIEWでは、行コメントしか使えません。
+</li>
+<li>Starterでは、行コメントは単に読み飛ばされます。
+   <p class="indent">
+   Re:VIEWでは、行コメントが空行扱いになるため、行コメントを使うと意図せず段落が区切られます。
+   これは明らかにRe:VIEWの仕様バグですが、Re:VIEW開発チームはこのバグを認めていません。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-4"></a><span class="secno">A.4</span> 箇条書き</h2>
+<ul>
+<li>Starterでは、順序つきリスト（HTMLでいうところの「<code class="inline-code">&lt;ol&gt;</code>」）の項目に、「1.」や「(a)」や「(A-1)」など任意の文字列が使えます。
+   <p class="indent">
+   Re:VIEWでは「1.」しか使えません。
+</li>
+<li>Starterでは、順序つきリストを入れ子にできます。
+   <p class="indent">
+   Re:VIEWではできません。
+</li>
+<li>Starterでは、順序つきリストと順序なしリストを相互に入れ子にできます。
+   <p class="indent">
+   Re:VIEWではできません。
+</li>
+<li>Re:VIEWでは、箇条書きの項目が複数行のテキストだと、自動的に1行に連結されます。
+   そのせいで、本来なら「<code class="inline-code">aaa</code>」と「<code class="inline-code">bbb</code>」と「<code class="inline-code">ccc</code>」の3行に分かれていた単語が、「<code class="inline-code">aaabbbccc</code>」のように勝手に連結されてしまいます。
+   <p class="indent">
+   Starterではこのようなおかしなバグは起こりません。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-5"></a><span class="secno">A.5</span> 定義リスト</h2>
+<ul>
+<li>Re:VIEWでは、定義リストの説明文が複数行だと、自動的に1行に連結されます。
+   そのせいで、本来なら「<code class="inline-code">aaa</code>」と「<code class="inline-code">bbb</code>」と「<code class="inline-code">ccc</code>」の3行に分かれていた単語が、「<code class="inline-code">aaabbbccc</code>」のように勝手に連結されてしまいます。
+   <p class="indent">
+   Starterではこのようなおかしなバグは起こりません。
+</li>
+<li>Starterでは、定義リストの説明文に箇条書きが書けます。
+   <p class="indent">
+   Re:VIEWでは書けません。
+</li>
+<li>Starterでは、定義リストとよく似た「説明リスト」が用意されています。
+   説明リストは入れ子のブロック命令で書くので、説明文の中にたとえばプログラムコードを入れられます。
+   またブロック命令にオプション引数を指定すると、太字にする・しないや、コンパクトモードにする・しないが選べます。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-6"></a><span class="secno">A.6</span> 見出し（章、節、項、目）</h2>
+<ul>
+<li>Starterでは、章や節のタイトルを見栄えのいいデザインにしています。
+   また設定ファイルを変更することで、デザインを選択できます。
+   <p class="indent">
+   Re:VIEWではLaTeXのデフォルトのデザインを使っているだけです。
+</li>
+<li>Starterでは、章(Chapter)ごとにタイトルページを作成できます。
+   これは商業誌では一般的なスタイルです。
+</li>
+<li>Starterでは、節(Section)ごとに改ページできます。
+   これは初心者向け入門書ではよく見かけるレイアウトです。
+</li>
+<li>Starterでは、章や節を参照するとページ番号もつきます。
+   これは特に、項(Subsection)に番号をつけない設定において、項を参照するときに有用です。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-7"></a><span class="secno">A.7</span> インライン命令</h2>
+<ul>
+<li>Starterでは、たとえば「<code class="inline-code">@&lt;code&gt;{foo@&lt;b&gt;{bar}}</code>」のようにインライン命令を入れ子にできます。
+   <p class="indent">
+   Re:VIEWではできません。
+</li>
+<li>Starterでは、「<code class="inline-code">@&lt;strong&gt;{}</code>」が太字かつゴシック体になります。
+   なぜなら日本語の文章では、強調は太字にするだけでなくゴシック体にすることが望ましいからです。
+   <p class="indent">
+   Re:VIEWでは、「<code class="inline-code">@&lt;strong&gt;{}</code>」は太字になるだけです。
+</li>
+<li>Starterでは、「<code class="inline-code">@&lt;strong&gt;{}</code>」の省略形として「<code class="inline-code">@&lt;B&gt;{}</code>」を用意しています。
+   これにより、文章の強調が簡単にできます。
+   <p class="indent">
+   Re:VIEWには、「<code class="inline-code">@&lt;B&gt;{}</code>」はありません。
+</li>
+<li>Starterでは、何もしない命令「<code class="inline-code">@&lt;nop&gt;{}</code>」があります。
+   これを使うと、たとえば「<code class="inline-code">@@&lt;nop&gt;{}&lt;B&gt;{}</code>」とすれば「<code class="inline-code">@&lt;B&gt;{}</code>」と表示されます。
+   これはRe:VIEWを使ってRe:VIEWのマニュアルを作るときに重宝します。
+   <p class="indent">
+   Re:VIEWにはこのようなコマンドはありません。
+</li>
+<li>Re:VIEWでは、たとえば「<code class="inline-code">@&lt;code&gt;{a: b? c! d. e}</code>」と入力すると、「<code class="inline-code">{a:  b?  c!  d.  e}</code>」のように半角空白が2つ分出力されます。このような意図しない出力になるのは、LaTeXにおけるスペーシングの仕様をそのまま引き継いでいるからです。
+   <br />
+   Starterではこの現象を回避しており、等幅フォントでも半角空白が2つ分出力されないように修正しています。
+</li>
+<li>Starterでは、ファイル名を表すインライン命令「<code class="inline-code">@&lt;file&gt;{}</code>」が用意されています。
+</li>
+<li>Starterでは、文字サイズを変更するインライン命令「<code class="inline-code">@&lt;small&gt;{}</code>」「<code class="inline-code">@&lt;xsmall&gt;{}</code>」「<code class="inline-code">@&lt;xxsmall&gt;{}</code>」「<code class="inline-code">@&lt;large&gt;{}</code>」「<code class="inline-code">@&lt;xlargel&gt;{}</code>」「<code class="inline-code">@&lt;xxlarge&gt;{}</code>」が用意されています。
+</li>
+<li>Starterでは、「LaTeX」を表示する「<code class="inline-code">@&lt;LaTeX&gt;{}</code>」、「TeX」を表示する「<code class="inline-code">@&lt;TeX&gt;{}</code>」、「&#9829;」を表示する「<code class="inline-code">@&lt;hearts&gt;{}</code>」が用意されています。
+</li>
+<li>Starterでは、リンクのURLを自動的に脚注に表示する機能があります。
+   これは、紙の本ではリンクのURLが表示されない問題に対する解決策です。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-8"></a><span class="secno">A.8</span> ブロック命令</h2>
+<ul>
+<li>Starterでは、ブロック命令を入れ子にできます。
+   たとえば「<code class="inline-code">//note{ ... //}</code>」の中に「<code class="inline-code">//list{ .. //}</code>」や「<code class="inline-code">//quote{ ... //}</code>」を入れられます。
+</li>
+<li>Starterでは、章の概要を表す「<code class="inline-code">//abstract</code>」が用意されています。
+   <p class="indent">
+   Re:VIEWにはありませんが、かわりにリード文を表す「<code class="inline-code">//lead</code>」が使えます。
+</li>
+<li>Starterでは、縦方向の空きを入れる「<code class="inline-code">//vspace</code>」が用意されています。
+   マイナスの値を指定すれば、余分な空きを削除できます。
+</li>
+<li>Starterでは、縦方向のスペースを確保する「<code class="inline-code">//needvspace</code>」が用意されています。
+   <p class="indent">
+   たとえばプログラムのキャプションだけが現在のページ、プログラムコードは次のページに表示されてしまったとします。
+   このとき「<code class="inline-code">//list</code>」の前に「<code class="inline-code">//needvspace[6zw]</code>」と書くと、全角6文字分の高さのスペースがなければ自動的に改ページされます（つまりプログラムのキャプションの<span class="bou">前</span>で改ページされる）。
+   結果として、プログラムのキャプションとコードが同じページに表示されます。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-9"></a><span class="secno">A.9</span> プログラムコード</h2>
+<ul>
+<li>Starterでは、「1」と「l」、「0」と「O」の見分けがつきやすいフォントを選んでいます。
+   <p class="indent">
+   Re:VIEWではLaTeXのデフォルトを使っているので、これらの見分けがつきにくいです。
+</li>
+<li>プログラムコードを表示するとき、Starterでは1つのブロック命令「<code class="inline-code">//list</code>」だけで済みます。
+   <p class="indent">
+   Re:VIEWでは「<code class="inline-code">//list</code>」「<code class="inline-code">//emlist</code>」「<code class="inline-code">//listnum</code>」「<code class="inline-code">//emlistnum</code>」の4つを使い分ける必要があります。
+</li>
+<li>Starterでは、長すぎる行を自動的に右端で折り返します。
+   また折り返したことが分かるような記号をつけてくれます。
+   <p class="indent">
+   Re:VIEWにはこのような気の利いた機能がありません。
+</li>
+<li>Starterでは、「<code class="inline-code">@&lt;del&gt;{}</code>」で取り消し線を引いた行でも右端で折り返しされます。
+   Starterではこのような細かいところに配慮が行き届いています。
+</li>
+<li>Starterでは、行番号は目立たないようにグレーで表示します。
+   <p class="indent">
+   Re:VIEWにはこのような気の利いた機能がありません。
+</li>
+<li>Starterでは、行番号を欄外に表示できます。
+   これにより、行番号の分だけコードの表示範囲が狭まってしまうのを防げます。
+</li>
+<li>Starterでは、飛び飛びの行番号を指定できます。
+   <p class="indent">
+   Re:VIEWでは連続した行番号しか表示できません。
+</li>
+<li>Starterでは、インデントを可視化できます。
+   この機能は、Pythonのようなインデントで入れ子を表現するプログラミング言語では重要です。
+</li>
+<li>Starterでは、ラベルさえ指定されていればキャプションがなくても番号つきで表示されます。
+   <p class="indent">
+   Re:VIEWでは、「<code class="inline-code">//list[fib1]</code>」のようにラベルを指定していても、キャプションがなければ番号がつきません。
+   ラベルの目的を考えれば、これはRe:VIEWの仕様バグです。
+</li>
+<li>Starterでは、「<code class="inline-code">//list[?]</code>」のようにすると簡単に番号付きで表示されます。
+   <p class="indent">
+   Re:VIEWにはこの機能がないので、番号つきで表示するには重複しないラベルを指定する必要があり、数が多いとかなり面倒です。
+</li>
+<li>Starterでは、プログラムコードのフォントサイズを変更できます。
+   「あるプログラムコードだけフォントサイズを小さくする」といったことが簡単にできます。
+</li>
+<li>Starterでは、コード中の注釈を表す「<code class="inline-code">@&lt;balloon&gt;{}</code>」がグレー表示されます。
+   これは注釈がコードより目立たないようにという配慮です。
+   <p class="indent">
+   Re:VIEWにはこのような配慮はありません。
+</li>
+<li>プログラム中にタブ文字がある場合、Re:VIEWでは空白文字に展開されます。
+   しかしこれが「LaTeXコードに変換してからタブ文字を展開する」という仕様のため、表示が崩れます。
+   <p class="indent">
+   Starterではタブ文字を展開してからLaTeXコードに変換する」ため、表示が崩れません（ただし限界はあります）。
+</li>
+<li>Starterでは、全角文字の幅を半角文字2つ分に揃えて表示する機能があります。
+   全角と半角が混在しているせいで表示が揃わない（崩れてしまう）場合に使うと大変便利です。
+</li>
+<li>Starterでは、プログラムコードとは別に出力結果を表示するための「<code class="inline-code">//output</code>」があります。
+   プログラムコードと出力結果では見た目を変えて表示したい場合に便利です。
+</li>
+<li>Re:VIEWでは、プログラムコードをハイライト表示する機能があります。
+   <p class="indent">
+   Starterではまだ未サポートです。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-10"></a><span class="secno">A.10</span> ターミナル画面</h2>
+<ul>
+<li>Starterでは、ターミナル画面を表すコマンド命令「<code class="inline-code">//terminal</code>」を用意しています。
+   これは使い方が「<code class="inline-code">//list</code>」と同じなので、覚えやすいです。
+   <p class="indent">
+   Re:VIEWで用意しているブロック命令「<code class="inline-code">//cmd</code>」は、「<code class="inline-code">//list</code>」と使い方が違っているので覚えにくいです。
+</li>
+<li>Starterの「<code class="inline-code">//terminal</code>」はほぼ「<code class="inline-code">//list</code>」と同じなので、折返しや行番号など「<code class="inline-code">//list</code>」と同じ機能が「<code class="inline-code">//terminal</code>」でも使えます。
+   <p class="indent">
+   Re:VIEWの「<code class="inline-code">//cmd</code>」はそうではないので、機能が貧弱です。
+</li>
+<li>Starterでは、ユーザ入力を表すインライン命令「<code class="inline-code">@&lt;userinput&gt;{}</code>」があります。
+   これを使うと、ユーザ入力部分に薄い下線が引かれます。
+   ただしLaTeXの制限により、長い行が右端で折り返しされません。
+</li>
+<li>Starterでは、カーソルを表すインライン命令「<code class="inline-code">@&lt;cursor&gt;{}</code>」が用意されています。
+   Vimの操作画面を説明するときに便利です。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-11"></a><span class="secno">A.11</span> ノート、ミニブロック</h2>
+<ul>
+<li>Starterでは、ノートを表すブロック命令「<code class="inline-code">//note</code>」を上書きし、見栄えのいい表示にしています。
+   <p class="indent">
+   Re:VIEWではノートの見栄えは気にされていません。
+</li>
+<li>Starterでは、ノートの中に箇条書きや他のブロック命令を入れられます。
+</li>
+<li>Starterでは、ノートの中で脚注が使えます。
+</li>
+<li>Starterでは、ノートの中に書いたプログラムコードやターミナル画面が、ページまたぎできます。
+</li>
+<li>Starterでは、ノートにラベルをつけてあとから参照できます。
+   これはちょうど、図や表を参照するのと同じような機能です。
+</li>
+<li>Starterでは、補足情報を表す「<code class="inline-code">//info</code>」と注意喚起を表す「<code class="inline-code">//caution</code>」と警告を表す「<code class="inline-code">//warning</code>」にアイコンがつきます。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-12"></a><span class="secno">A.12</span> 図</h2>
+<ul>
+<li>Re:VIEWでは、たとえば「<code class="inline-code">//image[][][scale=0.5]</code>」のようなオプションを指定すると、画像が本文幅の半分の大きさで表示されます。
+   しかしこれは画像の幅が本文幅より大きい場合だけであり、画像の幅が本文幅より小さい場合は画像幅の半分の大きさで表示されます。
+   そのため、画像の幅が本文幅より大きいかどうかを気にする必要があり、面倒です。
+   <p class="indent">
+   Starterでは「<code class="inline-code">//image[][][width=50%]</code>」のように指定すると、画像の幅が本文幅より大きいかどうかに関係なく、常に本文幅の半分の大きさで画像が表示されます。
+</li>
+<li>Starterでは「<code class="inline-code">//image[][][width=40mm]</code>」のように、画像の表示幅を絶対値で指定できます。
+   つまり画像の表示幅を本文の幅とは関係なく指定できます。
+</li>
+<li>画像の幅が本文幅より小さい場合、表示幅を指定せずに画像を表示すると、Re:VIEWではPDFならそのままの大きさで表示されるのに、HTMLでは本文幅いっぱいの大きさで表示されてしまいます。
+   <p class="indent">
+   Starterでは、PDFとHTMLのどちらでもそのままの大きさで画像が表示されます。
+</li>
+<li>Starterでは、画像の挿入位置を指定できます（現在位置、ページ上部、ページ下部、別ページ）。
+</li>
+<li>Starterでは、図のまわりをグレーの線で囲む機能があります。
+   画像のふちが白い場合はこの機能を使うと、画像の境界を明示できます。
+</li>
+<li>画像が次のページに送られたとき、Starterでは後続のテキストを現在位置に流し込まれます。
+   <p class="indent">
+   Re:VIEWでは後続のテキストが現在位置に流し込まれないので、現在位置に大きなスペースが空きます。
+</li>
+<li>「<code class="inline-code">//indepimage</code>」の第2引数に説明文字列を指定した場合、Re:VIEWでは「図：」という接頭辞がつきます。
+   しかし「<code class="inline-code">//indepimage</code>」の使用用途を考えたとき、この接頭辞は邪魔なので、Starterではつけません。
+   もし必要なら自力で「図：」を入れてください。
+</li>
+<li>Starterでは、「<code class="inline-code">//sideimage</code>」を使うと画像の横にテキストを表示できます。
+   <p class="indent">
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-13"></a><span class="secno">A.13</span> 表</h2>
+<ul>
+<li>Starterでは、表の挿入位置を指定できます（現在位置、ページ上部、ページ下部、別ページ）。
+</li>
+<li>Starterでは、表のデータをCSV形式で指定できます。
+</li>
+<li>Starterでは、表のデータを外部ファイルから読み込めます。
+</li>
+<li>Starterでは、行ごとの罫線をオン・オフできます。
+   また行ごとの罫線をオフにしたうえで、指定箇所だけ罫線を引くよう指定できます。
+</li>
+<li>Starterでは、「<code class="inline-code">//table[label][]</code>」のようにラベルだけ指定してキャプションがない場合でも、「表1.1」のような番号がつきます。
+   <p class="indent">
+   Re:VIEWでは、ラベルが指定されてあってもキャプションがなければ番号が表示されません。
+</li>
+<li>Starterでは、「<code class="inline-code">//table[?][]</code>」のように指定すると内部でラベルを自動的に割り当ててくれます。
+   そのおかげで、表を番号つきで表示するのが簡単です。
+   <p class="indent">
+   Re:VIEWではこのような機能がないので、番号つきで表示するには重複しないラベルを必ず指定する必要があり、面倒です。
+</li>
+<li>表のカラムの右寄せや左寄せを指定する「<code class="inline-code">//tsize</code>」を、Starterでは「<code class="inline-code">//tsize[latex][|lcr|]</code>」のように指定できます。
+   <p class="indent">
+   Re:VIEWでは「<code class="inline-code">//tsize[|latex||lcr|]</code>」のように指定するため、読みづらいし分かりにくいです。
+</li>
+<li>Re:VIEWには、項目の区切り文字を変更できる機能があります。
+   <p class="indent">
+   Starterでは未サポートです。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-14"></a><span class="secno">A.14</span> 会話形式</h2>
+<ul>
+<li>Starterでは、アイコン画像つきの会話形式を用意しています。
+</li>
+<li>Starterでは、アイコン画像なしの会話形式も用意しています。
+</li>
+<li>Starterでは、大量の会話形式を入力するときに便利なように、短縮名を登録して短く書ける機能を用意しています。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-15"></a><span class="secno">A.15</span> 用語、索引</h2>
+<ul>
+<li>Starterには、用語を表す「<code class="inline-code">@&lt;term&gt;{}</code>」インライン命令があります。
+   これは「<code class="inline-code">@&lt;idx&gt;{}</code>」と似ていますが、用語をゴシック体で表示する点が違います。
+   用語が初めて登場したときは「<code class="inline-code">@&lt;term&gt;{}</code>」、再登場した場合は「<code class="inline-code">@&lt;idx&gt;{}</code>」を使うことを想定しています。
+</li>
+<li>Starterでは、「<code class="inline-code">@&lt;idx&gt;{}</code>」や「<code class="inline-code">@&lt;term&gt;{}</code>」の中によみがなを指定できます。
+</li>
+<li>Starterでは、親子関係と表示順序が逆転している場合にも「<code class="inline-code">~~~</code>」を使えば対応できます。
+</li>
+<li>Starterでは、索引ページにおいて用語の転送先となる別の用語を指定できます。
+</li>
+<li>Re:VIEWの索引ページは、LaTeXのデフォルトデザインのままです。
+   Starterでは、用語とページ番号の間を連続したドットで埋めたり、用語のグループ化を文字単位から行単位に変更しています。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-16"></a><span class="secno">A.16</span> 表紙、大扉、奥付</h2>
+<ul>
+<li>Starterでは、表紙と裏表紙はPDFファイルで指定します。
+   <p class="indent">
+   Re:VIEWでは、表紙は画像ファイル（PNGやJPG）で指定します。
+</li>
+<li>本のタイトルが長い場合、Starterではタイトルを複数行で指定すれば、改行位置を指定できます。
+   このおかげで、大扉では長いタイトルがきれいに改行されて表示されます。
+   <p class="indent">
+   Re:VIEWではこのような機能はありません。
+</li>
+<li>Starterでは、大扉の裏に免責事項などが書かれています。
+   これは商業誌では一般的ですが、同人誌では入れ忘れることがほとんどなので、あらかじめStarterが用意しています。
+</li>
+<li>Starterでは、奥付が必ず偶数ページ（見開きで左側のページ）になるよう調整します。
+   <p class="indent">
+   Re:VIEWではこのような機能はありません<sup><a id="fnb-id_9h11e" href="#fn-id_9h11e" class="noteref" epub:type="noteref">*1</a></sup>。
+</li>
+</ul>
+<div class="footnote-list">
+<div class="footnote" id="fn-id_9h11e" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*1] </span>TechBoosterのテンプレートでは、Starterと同じように奥付が偶数ページになります。</p></div>
+</div><!--/.footnote-list-->
+
+<h2 class="leftline"><a id="hA-17"></a><span class="secno">A.17</span> PDFファイル</h2>
+<ul>
+<li>Starterでは、印刷用PDFでは白黒に、電子用PDFではカラーにしてくれます。
+   <p class="indent">
+   Re:VIEWではこのような機能はありません。
+</li>
+<li>Starterでは、印刷用PDFでは左右の余白幅を切り替えています。
+   これは本文幅を広げるための工夫であり、商業誌でも一般的です。
+   <p class="indent">
+   Re:VIEWではこのような工夫はされていません。
+</li>
+<li>Re:VIEWでは、印刷用PDFにはハイパーリンクがつかないようになっています。
+   これは入稿時のトラブルをできるだけ減らすための仕様です。
+   <p class="indent">
+   しかしLaTeXではハイパーリンクのある・なしで組版結果が変わることがあります（hyperref.styの仕様）。
+   また最近の印刷所では、ハイパーリンクがついたPDFでも入稿でトラブルになることはなさそうです。
+   そこでStarterでは、印刷用PDFでもハイパーリンクを残したままにしています。
+</li>
+<li>Re:VIEWでは、デフォルトでPDFにトンボがつきます。
+   しかしこれは入稿に慣れてないとトラブルのもとです。
+   入稿先が同人誌向けの印刷会社なら、トンボなしのほうが入稿トラブルは少ないです。
+   <p class="indent">
+   そのため、Starterではトンボはつけません。
+</li>
+<li>Re:VIEWとStarterのどちらとも、印刷用PDFには隠しノンブル（通し番号）がつきます。
+   ただし実装方法はRe:VIEWとStarterとで全く別です。
+   またStarterでは、ノンブルの位置や大きさや色や開始番号を設定ファイルで変更できます。
+</li>
+<li>印刷用PDFに自動でノンブルがつくのは、PDFの作成がRe:VIEWだけで完結している場合は便利ですが、たとえば大扉を別ソフトで作るような場合は逆に不便です。
+   <p class="indent">
+   そこでStarterでは、PDFを生成したあとに隠しノンブルをつけるRakeタスク「<code class="inline-code">rake pdf:nombre</code>」も用意しています。
+   これだと、大扉だけを別ソフトで作るような場合にも対応できます。
+</li>
+<li>Starterでは、PDFファイルにノンブルをつける<a href="https://kauplan.org/pdfoperation/" class="link">別のサービス</a>も用意しています。
+</li>
+<li>Starterでは、PDFのテキストをマウスで選択したときに、行番号や折り返し記号やインデント記号を選択対象にしない機能が用意されています。
+   ただしこの機能はコンパイル時間を大きく増やしてしまうので、デフォルトではオフです。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-18"></a><span class="secno">A.18</span> LaTeX関連</h2>
+<ul>
+<li>Re:VIEWでは、LuaLaTeXとjlreq.clsを積極的に利用しており、採用実績も多いです。
+   <p class="indent">
+   Starterでは、今のところLuaLaTeXとjlreqには対応していません。今後の課題です。
+</li>
+<li>Re:VIEWそのものではありませんが、TechboosterのRe:VIEWテンプレートではtcolorboxを全面的に採用しており、そのおかげでたとえば角丸のブロックを実現できています。
+   <p class="indent">
+   ただしtcolorboxを使うとコンパイル時間がかかるようになるので、Starterでは使わないようにしています。
+   tcolorboxを使うと見栄えのいいデザインができることは確かなので、今後どうするかは検討中です。
+</li>
+<li>Starterでは、環境変数「<code class="inline-code">$STARTER_CHAPTER</code>」を設定することで、特定の章だけをコンパイルできます。
+   こうすると全部の章をコンパイルするよりずっと短い時間でコンパイルできるので、表示の確認が迅速にできます。
+   <p class="indent">
+   Re:VIEWにはこのような機能はありません。
+</li>
+<li>Starterでは、LaTeXのコンパイル回数を減らす工夫をしています。
+  文章を少しだけ変更して再度コンパイルすると、Starterではコンパイル回数がたいてい1回だけで済みます。
+   <p class="indent">
+  Re:VIEWではいつも3回コンパイルされるので、PDF生成に時間がかかります。
+</li>
+<li>Re:VIEWでは、PDFファイルを生成する「<code class="inline-code">review-pdfmaker</code>」コマンドや、ePubファイルを生成する「<code class="inline-code">review-epubmaker</code>」コマンドが用意されています。
+   <p class="indent">
+   Re:VIEWではこれらは使えません。必ず「<code class="inline-code">rake pdf</code>」や「<code class="inline-code">rake epub</code>」を使ってください。
+</li>
+<li>「<code class="inline-code">rake pdf</code>」や「<code class="inline-code">rake web</code>」を実行すると、Starterではコンパイルが必ず実行されます。
+   <p class="indent">
+   Re:VIEWではファイルが更新されていなければコンパイルされません。これは一見便利そうですが、LaTeXのスタイルファイルを変更しただけではコンパイルされないため、トラブルのもとになります。
+</li>
+<li>Starterでは、設定ファイル「<span class="file">config-starter.yml</span>」の内容をLaTeXのスタイルファイルから参照できます。
+   設定によって挙動を変えたい場合に便利です。
+</li>
+<li>Starterでは、名前が「<code class="inline-code">STARTER_</code>」で始まる環境変数の値をLaTeXのスタイルファイルから参照できます。
+   環境変数によって挙動を変えたい場合に便利です。
+</li>
+<li>Starterでは表示を簡潔にするため、LaTeXコンパイル時の出力を捨てています。
+   コンパイルエラーがあった場合は、出力を捨てないようにコマンドオプションを変更してからもう一度コンパイルすることで、エラーメッセージを表示しています。
+   <p class="indent">
+   Re:VIEWでも出力は捨てていますが、コンパイルエラーがあった場合はコンパイル時のログファイルを表示しています。
+   しかしこの方法だとエラメッセージが少し上のほうに流れてしまうので、LaTeXに慣れていない人だとエラーメッセージを見逃してしまいます。
+</li>
+<li>PDFファイルを生成するとき、StarterではもとのPDFファイルを削除せずに上書きする（つまりinodeが変わらない）ようにしています。
+   このおかげで、macOSの<code class="inline-code">open</code>コマンドでPDFファイルを開くと、同じウィンドウのまま表示されます。
+   <p class="indent">
+   これに対し、Re:VIEWではもとのPDFファイルを消してから新しいファイルを作成します（つまりinodeが変わる）。
+   そのせいで、macOSの<code class="inline-code">open</code>コマンドでPDFファイルを開くと毎回新しいウィンドウで表示されてしまい、いちいち前のウィンドウを閉じる必要があるので面倒です。
+</li>
+<li>Starterでは、LaTeXのコンパイル時間を表示します。
+  以前は「<span class="file">/usr/bin/time</span>」コマンドが必要でしたが、現在は必要としません。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-19"></a><span class="secno">A.19</span> エラメッセージ</h2>
+<ul>
+<li>Starterでは、原稿ファイル（<span class="file">*.re</span>）コンパイル時のエラーメッセージを赤い字で表示します。
+   初心者はエラーメッセージが出ても気づかないことが多いので、赤く表示することで気づきやすいようにしました。
+</li>
+<li>Starterでは、原稿ファイル（<span class="file">*.re</span>）のコンパイル時にエラーがあると、すぐにコンパイルをすぐに終了するようにしました。
+   初心者にとっては、このほうがエラーに気づきやすいはずです。
+   <br />
+   Re:VIEWではコンパイルエラーがあっても残りのコンパイルを続けるので、エラーメッセージが流れてしまい、初心者はエラーに気づかない可能性が高いです。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="hA-20"></a><span class="secno">A.20</span> その他</h2>
+<ul>
+<li>Re:VIEWでは、プロジェクトが使っているRe:VIEWのバージョンをアップデートする機能が用意されています。たとえばRe:VIEW 4を使っているプロジェクトをRe:VIEW 5へアップデートしたいときは、ターミナルで「<code class="inline-code">review-update</code>」コマンドを実行します。
+   <br />
+   Starterにはプロジェクトをアップデートする機能はありません。
+</li>
+<li>Starterでは関連プロジェクトとして、PDFに隠しノンブルをつけるサービス「<a href="https://kauplan.org/pdfoperation/" class="link">PDF Operation</a>」を提供しています。
+</li>
+</ul>
+
+        </main>
+        <nav class="page-navi">
+          <a href="06-bestpractice.html" class="page-prev">&#9664;</a>
+          <a href="92-filelist.html" class="page-next">&#9654;</a>
+        </nav>
+        <footer>
+        </footer>
+      </div>
+    </div>
+    <script>
+function rebuildAndReloadForcedly() {
+  fetch('/rebuild.js').then((resp)=>{
+    resp.text().then((text)=>{ eval(text); });
+  });
+}
+    </script>
+    <script src="/rebuild.js?file=91-compare.re"></script>
+  </body>
+</html>
+<!-- layout.html5.erb -->

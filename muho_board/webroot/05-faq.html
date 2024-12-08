@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>FAQ | 【Python】Tkinterで競馬の着順掲示板を作る</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css" />
+    <link rel="next" title="よりよい本づくり" href="06-bestpractice.html">
+    <link rel="prev" title="カスタマイズ" href="04-customize.html">
+    <meta name="generator" content="Re:VIEW Starter">
+  </head>
+  <body>
+    <div class="page-outer">
+      <nav class="side-content">
+                <div class="rebuild">
+          <a href="javascript:void(0)" onclick="rebuildAndReloadForcedly()">Rebuild and Reload</a>
+        </div>
+                <a class="nav-title" href="index.html">【Python】Tkinterで競馬の着順掲示板を作る</a>
+<ul class="toc toc-1">
+    <li class="toc-chapter"><a href="./00-preface.html">まえがき / はじめに</a></li>
+    <li class="toc-chapter"><a href="./01-install.html">1 インストール</a></li>
+    <li class="toc-chapter"><a href="./02-tuto.html">2 チュートリアル</a></li>
+    <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a></li>
+    <li class="toc-chapter"><a href="./02-tutorial.html">4 チュート</a></li>
+    <li class="toc-chapter"><a href="./03-syntax.html">5 記法</a></li>
+    <li class="toc-chapter"><a href="./04-customize.html">6 カスタマイズ</a></li>
+    <li class="toc-chapter"><a href="./05-faq.html">7 FAQ</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h7-1">7.1 コンパイルエラー</a></li>
+        <li class="toc-section"><a href="#h7-2">7.2 本文</a></li>
+        <li class="toc-section"><a href="#h7-3">7.3 プログラムコードとターミナル</a></li>
+        <li class="toc-section"><a href="#h7-4">7.4 画像</a></li>
+        <li class="toc-section"><a href="#h7-5">7.5 ノンブル</a></li>
+        <li class="toc-section"><a href="#h7-6">7.6 LaTeX関連</a></li>
+        <li class="toc-section"><a href="#h7-7">7.7 その他</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./06-bestpractice.html">8 よりよい本づくり</a></li>
+    <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a></li>
+    <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
+    <li class="toc-chapter"><a href="./93-background.html">開発の背景</a></li>
+    <li class="toc-chapter"><a href="./99-postface.html">あとがき / おわりに</a></li>
+</ul>
+      </nav>
+      <div class="page-inner">
+        <header class="page-header">
+        </header>
+        <main class="page-main">
+<h1 class="boldlines center twolines"><a id="h7"></a><span class="secno">第7章</span> <br/>FAQ</h1>
+<div class="abstract">
+<p>よくある質問とその回答(Frequentry Asked Question, FAQ)を紹介します。</p>
+</div>
+
+<h2 id="sec-compileerror" class="leftline"><a id="h7-1"></a><span class="secno">7.1</span> コンパイルエラー</h2>
+
+<h3 class="none"><a id="h7-1-1"></a><span class="secno">7.1.1</span> コンパイルエラーが出たとき</h3>
+<p>PDFファイル生成時のコンパイルエラーについて、対処方法を説明します。</p>
+<p>PDFへのコンパイルは、内部では大きく3つのステージに分かれます。</p>
+<ol class="ol-none">
+<li data-mark="(1)"><span class="li-mark">(1) </span>設定ファイルを読み込む（<span class="file">config.yml</span>、<span class="file">config-starter.yml</span>、<span class="file">catalog.yml</span>）
+</li>
+<li data-mark="(2)"><span class="li-mark">(2) </span>原稿ファイル(<span class="file">*.re</span>)をLaTeXファイルへ変換する
+</li>
+<li data-mark="(3)"><span class="li-mark">(3) </span>LaTeXファイルからPDFファイルを生成する
+</li>
+</ol>
+<p>(1)のステージでは、設定ファイルの書き方に間違いがあるとエラーが発生します。たとえば次のような点に注意してください。</p>
+<ul>
+<li>タブ文字を使ってないか（使っているとエラー）
+</li>
+<li>インデントが揃っているか（揃ってないとエラー）
+</li>
+<li>必要な空白が抜けてないか（「<code class="inline-code">-</code>」や「<code class="inline-code">:</code>」の直後）
+</li>
+</ul>
+<p>(2)のステージでは、インライン命令やブロック命令の書き方に間違いがあるとエラーが発生します。たとえば次のような点に注意してください。</p>
+<ul>
+<li>インライン命令がきちんと閉じているか
+</li>
+<li>ブロック命令の引数が足りているか、多すぎないか
+</li>
+<li>「<code class="inline-code">//}</code>」が足りてないか、または多すぎないか
+</li>
+<li>「<code class="inline-code">@&lt;fn&gt;{}</code>」や「<code class="inline-code">@&lt;img&gt;{}</code>」や「<code class="inline-code">@&lt;table&gt;{}</code>」のラベルが合っているか
+</li>
+<li>「<code class="inline-code">@&lt;chapref&gt;{}</code>」で指定した章IDが合っているか
+</li>
+<li>「<code class="inline-code">@&lt;secref&gt;{}</code>」で指定した節や項が存在するか
+</li>
+<li>脚注の中で「<code class="inline-code">]</code>」を「<code class="inline-code">\]</code>」とエスケープしているか
+</li>
+<li>「<code class="inline-code">//image</code>」で指定した画像ファイルが存在するか
+</li>
+<li>原稿ファイル名を間違っていないか
+</li>
+<li>原稿ファイルの文字コードがUTF-8になっているか
+</li>
+</ul>
+<p>このエラーの場合はエラーメッセージが出るので、それを<span class="bou">注意深く読めば</span>解決の糸口が掴めます。</p>
+<p>(3)のステージでのエラーはあまり発生しないものの、原因がとても分かりにくく、LaTeXに慣れている人でないと解決は難しいです。ときどきキャッシュファイル(<span class="file">*-pdf/</span>)のせいでおかしくなることがあるので、<strong>困ったらキャッシュファイルを消して再コンパイル</strong>してみましょう。</p>
+<div class="cmd-code">
+<span class="caption">困ったらキャッシュファイルを消して再コンパイル</span>
+<pre class="list">$ <span class="userinput">rm -rf mybook-pdf</span> <span class="balloon">← キャッシュファイルを消す</span>
+$ <span class="userinput">rake pdf</span>          <span class="balloon">← または rake docker:pdf</span>
+</pre>
+</div>
+<p>それでもエラーが解決できない場合は、ハッシュタグ「<em>#reviewstarter</em>」をつけてTwitterで聞いてみてください（宛先はなくて構いません）。</p>
+
+<h3 class="none"><a id="h7-1-2"></a><span class="secno">7.1.2</span> 「<code class="inline-code">review-pdfmaker</code>」でPDFが生成できない</h3>
+<p>Starterでは、「<code class="inline-code">review-pdfmaker</code>」や「<code class="inline-code">review-epubmaker</code>」は使えません。かわりに「<code class="inline-code">rake pdf</code>」や「<code class="inline-code">rake epub</code>」を使ってください。</p>
+
+<h2 class="leftline"><a id="h7-2"></a><span class="secno">7.2</span> 本文</h2>
+
+<h3 class="none"><a id="h7-2-1"></a><span class="secno">7.2.1</span> 左右の余白が違う</h3>
+<p>印刷用PDFファイルでは、左右の余白幅を意図的に変えています。これは印刷時の読みやすさを確保したまま、本文の幅を最大限に広げているからです。詳しくは「<a href="06-bestpractice.html#h8-8-1">8.8.1 [PDF] 印刷用では左右の余白幅を充分にとる</a>」を見てください。</p>
+
+<h3 class="none"><a id="h7-2-2"></a><span class="secno">7.2.2</span> 文章中のプログラムコードに背景色をつけたい</h3>
+<p>「<code class="inline-code">@&lt;code&gt;{...}</code>」による文章中のプログラムコードに、背景色をつけられます。そのためには、「<span class="file">config-starter.yml</span>」で「<code class="inline-code">inlinecode_gray: true</code>」を設定してください。</p>
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;」</span>
+<pre class="list">    inlinecode_gray: true
+</pre>
+</div>
+<p>こうすると、<span class="file">sty/starter.sty</span>において次のようなLaTeXマクロが有効になります。背景色を変えたい場合はこのマクロを変更してください。</p>
+<div class="caption-code">
+<span class="caption">ファイル「sty/starter.sty」</span>
+<pre class="list">  \renewcommand{\reviewcode}[1]{%
+    \,%                        % ほんの少しスペースを入れる
+    \colorbox{shadecolor}{%    % 背景色を薄いグレーに変更
+      \texttt{#1}%             % 文字種を等幅フォントに変更
+    }%
+    \,%                        % ほんの少しスペースを入れる
+  }
+</pre>
+</div>
+
+<h3 class="none"><a id="h7-2-3"></a><span class="secno">7.2.3</span> 索引をつけたい</h3>
+<p>Re:VIEWのWikiページを参照してください。</p>
+<ul>
+<li><a href="https://github.com/kmuto/review/blob/master/doc/makeindex.ja.md" class="link">https://github.com/kmuto/review/blob/master/doc/makeindex.ja.md</a>
+</li>
+</ul>
+
+<h2 class="leftline"><a id="h7-3"></a><span class="secno">7.3</span> プログラムコードとターミナル</h2>
+
+<h3 class="none"><a id="h7-3-1"></a><span class="secno">7.3.1</span> プログラムコードの見た目が崩れる</h3>
+<p>おそらく、プログラムコードの中でタブ文字が使われています。タブ文字を半角空白に置き換えてみてください。</p>
+<p>Starterでは、プログラム中のタブ文字は自動的に半角空白に置き換わります。しかしインライン命令があるとどうしてもカラム幅を正しく計算できないので、意図したようには半角空白に置き換わらず、プログラムの見た目が崩れます。</p>
+
+<h3 class="none"><a id="h7-3-2"></a><span class="secno">7.3.2</span> 右端に到達してないのに折り返しされる</h3>
+<p>Starterではプログラム中の長い行が自動的に右端で折り返されます。このとき、右端にはまだ文字が入るだけのスペースがありそうなのに折り返しされることがあります（<span class="imgref"><a href="./05-faq.html#codeblock_rpadding1">図7.1</a></span>）。</p>
+<div id="codeblock_rpadding1" class="image">
+<img src="images/05-faq/codeblock_rpadding1.png" alt="右端にはまだ文字が入るだけのスペースがありそうだが…" class="img width-070per" />
+<p class="caption">
+図7.1: 右端にはまだ文字が入るだけのスペースがありそうだが…
+</p>
+</div>
+<p>このような場合、プログラムやターミナルの表示幅をほんの少し広げるだけで、右端まで文字が埋まるようになります。</p>
+<p>具体的には、ファイル「<span class="file">config-starter.yml</span>」の中の「<code class="inline-code">program_widen: 0.0mm</code>」や「<code class="inline-code">terminal_widen: 0.0mm</code>」を、たとえば「<code class="inline-code">0.3mm</code>」に設定してください（値は各自で調整してください）。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  ## プログラム（//list）の表示幅をほんの少しだけ広げる。
+  <del>program_widen:   0.0mm</del>
+  <b>program_widen:   0.3mm</b>
+
+  ## ターミナル（//terminal, //cmd）の表示幅をほんの少しだけ広げる。
+  <del>terminal_widen:  0.0mm</del>
+  <b>terminal_widen:  0.3mm</b>
+</pre>
+</div>
+<p>こうすると、プログラムやターミナルの表示幅が少しだけ広がり、文字が右端まで埋まるようになります（<span class="imgref"><a href="./05-faq.html#codeblock_rpadding2">図7.2</a></span>）。</p>
+<div id="codeblock_rpadding2" class="image">
+<img src="images/05-faq/codeblock_rpadding2.png" alt="表示幅をほんの少し広げると、右端まで埋まるようになった" class="img width-070per" />
+<p class="caption">
+図7.2: 表示幅をほんの少し広げると、右端まで埋まるようになった
+</p>
+</div>
+
+<h3 class="none"><a id="h7-3-3"></a><span class="secno">7.3.3</span> 全角文字の幅を半角文字2個分にしたい</h3>
+<p>「<code class="inline-code">//list</code>」や「<code class="inline-code">//terminal</code>」の第3引数に「<code class="inline-code">widecharfit=on</code>」を指定すると、全角文字の幅が半角文字2文字分になります。すべての「<code class="inline-code">//list</code>」や「<code class="inline-code">//terminal</code>」でこのオプションを有効化したい場合は、<span class="file">config-starter.yml</span>の「<code class="inline-code">program_default_options:</code>」や「<code class="inline-code">terminal_default_options:</code>」に、「<code class="inline-code">widecharfit: on</code>」を指定してください。</p>
+<p>または英数字の幅が狭いフォントを使うと、半角文字の幅が全角文字の約半分になります（ぴったりにはなりません）。<span class="file">config-starter.yml</span>で、次のうち必要なほうを設定してください。</p>
+<div class="caption-code">
+<pre class="emlist">  ## //list用
+  program_ttfont: inconsolata-narrow
+
+  ## //terminal用
+  terminal_ttfont: inconsolata-narrow
+</pre>
+</div>
+
+<h3 class="none"><a id="h7-3-4"></a><span class="secno">7.3.4</span> ターミナルの出力を折り返しせずに表示したい</h3>
+<p>ターミナルの出力結果を折り返しせずに表示するには、いくつか方法があります。</p>
+
+<h5><a id="h7-3-4-0-1"></a>小さいフォントで表示する</h5>
+<p>「<code class="inline-code">//terminal</code>」や「<code class="inline-code">//list</code>」では、小さいフォントで表示するオプションがあります。フォントサイズは「<code class="inline-code">small</code>」「<code class="inline-code">x-small</code>」「<code class="inline-code">xx-small</code>」の3つが選べます。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//terminal[][小さいフォントで表示する][<b>fontsize=x-small</b>]{
+                              Table &quot;public.customers&quot;
+   Column   |  Type   | Nullable |                Default
+------------+---------+----------+---------------------------------------
+ id         | integer | not null | nextval('customers_id_seq'::regclass)
+ name       | text    | not null |
+ created_on | date    | not null | CURRENT_DATE
+Indexes:
+    &quot;customers_pkey&quot; PRIMARY KEY, btree (id)
+    &quot;customers_name_key&quot; UNIQUE CONSTRAINT, btree (name)
+//}
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div class="cmd-code">
+<span class="caption">小さいフォントで表示する</span>
+<pre class="list">                              Table &quot;public.customers&quot;
+   Column   |  Type   | Nullable |                Default
+------------+---------+----------+---------------------------------------
+ id         | integer | not null | nextval('customers_id_seq'::regclass)
+ name       | text    | not null |
+ created_on | date    | not null | CURRENT_DATE
+Indexes:
+    &quot;customers_pkey&quot; PRIMARY KEY, btree (id)
+    &quot;customers_name_key&quot; UNIQUE CONSTRAINT, btree (name)
+</pre>
+</div>
+</div></div>
+
+<h5><a id="h7-3-4-0-2"></a>幅の狭い等幅フォントを使う</h5>
+<p>Starterでは等幅フォントを複数の中から選べます。このうち「<em>inconsolata-narrow</em>」は文字の表示幅が狭いので、できるだけ折り返しをさせたくない場合に有効です。</p>
+<p>「<span class="file">config-starter.yml</span>」で「<code class="inline-code">terminal_ttfont:</code>」を「<code class="inline-code">inconsolata-narrow</code>」に設定してください。</p>
+
+<h3 class="none"><a id="h7-3-5"></a><span class="secno">7.3.5</span> コードハイライトしたい</h3>
+<p>コードハイライトは、Starterでは未サポートです<sup><a id="fnb-fn-rkpw8" href="#fn-fn-rkpw8" class="noteref" epub:type="noteref">*1</a></sup>。将来的にはサポートする予定ですが、時期は未定です。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-rkpw8" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*1] </span>Re:VIEWではコードハイライトができるそうです。</p></div>
+</div><!--/.footnote-list-->
+
+<h2 class="leftline"><a id="h7-4"></a><span class="secno">7.4</span> 画像</h2>
+
+<h3 class="none"><a id="h7-4-1"></a><span class="secno">7.4.1</span> PDFとHTMLとで画像の表示サイズを変えたい</h3>
+<p>Re:VIEWやStarterでは、PDFとHTMLとで画像の表示サイズを別々に指定できます。たとえば次のサンプルでは、PDF (LaTeX)では本文幅いっぱい、HTMLでは本文幅の半分の大きさで画像を表示します。</p>
+<div class="caption-code">
+<span class="caption">サンプル</span>
+<pre class="list">//image[dummy-image][表示幅を変える][<b>latex::scale=1.0,html::scale=0.5</b>]
+</pre>
+</div>
+<div class="sampleoutput">
+<span class="caption">表示結果</span>
+<div class="sampleoutput-inner">
+<div id="dummy-image" class="image">
+<img src="images/05-faq/dummy-image.png" alt="表示幅を変える" class="img width-050per" />
+<p class="caption">
+図7.3: 表示幅を変える
+</p>
+</div>
+</div></div>
+<p>なお「<code class="inline-code">latex::xxx</code>」や「<code class="inline-code">html::xxx</code>」のような指定方法は、他のオプションやコマンドでも使えます。</p>
+
+<h3 class="none"><a id="h7-4-2"></a><span class="secno">7.4.2</span> 印刷用PDFと電子用PDFとで異なる解像度の画像を使いたい</h3>
+<p>印刷用PDFでは解像度の高い画像を使いたい、けど電子用PDFでは画像の解像度を低くしてデータサイズを小さくしたい、という場合は、「<span class="file">images/</span>」フォルダごと切り替えるのがいいでしょう。具体的には次のようにします。</p>
+<div class="cmd-code">
+<span class="caption">高解像度と低解像度の画像を切り替える（macOSまたはLinuxの場合）</span>
+<pre class="list">### 事前準備
+$ mkdir images_highres  <span class="balloon">← 解像度の高い画像用のフォルダを作る(印刷用)</span>
+$ mkdir images_lowhres  <span class="balloon">← 解像度の低い画像用のフォルダを作る(電子用)</span>
+$ mv images images.bkup <span class="balloon">← 既存のimagesフォルダを削除するか別名にする</span>
+
+### 解像度の高い画像に切り替えて印刷用PDFを生成
+$ rm -f images                  <span class="balloon">← シンボリックリンクを消す</span>
+$ ln -s images_highres images   <span class="balloon">← シンボリックリンクを作る</span>
+$ rake pdf t=pbook              <span class="balloon">← 印刷用PDFを生成する</span>
+
+### 解像度の低い画像に切り替えて電子用PDFを作成
+$ rm -f images                  <span class="balloon">← シンボリックリンクを消す</span>
+$ ln -s images_lowres images    <span class="balloon">← シンボリックリンクを作る</span>
+$ rake pdf t=ebook              <span class="balloon">← 電子用PDFを生成する</span>
+</pre>
+</div>
+<p>切り替え作業が面倒なら、独自のRakeタスクを作成するといいでしょう。「<span class="file">lib/tasks/mytasks.rake</span>」に次のようなタスクを追加してください。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;lib/tasks/mytasks.rake&lt;/span&gt;</span>
+<pre class="list">desc &quot;印刷用PDFを生成&quot;
+task :pbook do
+  rm_f 'images'
+  ln_s 'images_highres', 'images'
+  sh &quot;rake pdf t=pbook&quot;
+  #sh &quot;rake docker:pdf t=pbook&quot;
+end
+
+desc &quot;電子用PDFを生成&quot;
+task :ebook do
+  rm_f 'images'
+  ln_s 'images_rowres', 'images'
+  sh &quot;rake pdf t=ebook&quot;
+  #sh &quot;rake docker:pdf t=ebook&quot;
+end
+</pre>
+</div>
+<p>これにより、「<code class="inline-code">rake pbook</code>」で高解像度の画像を使って印刷用PDFが生成され、また「<code class="inline-code">rake ebook</code>」で低解像度の画像を使って電子用PDFが生成されます。</p>
+
+<h3 class="none"><a id="h7-4-3"></a><span class="secno">7.4.3</span> 画像の解像度はどのくらいにすればいいか</h3>
+<p>画像の「解像度」(Resolution)とは、簡単にいえば画像の「きめ細かさ」です。解像度が高い（＝きめ細かい）ほど画像のドットやギザギザがなくなり、解像度が低いほど画像のドットやギザギザが目立ちます。</p>
+<p>解像度は「dpi」(dot per inch)という単位で表します。この値が大きいほどきめ細かく、低いほど粗くなります。望ましい解像度は用途によって異なります。大雑把には次のように覚えておくといいでしょう。</p>
+<ul>
+<li>安いWindowsノートPCで表示するなら、72dpiで十分
+</li>
+<li>MacbookのRetinaディスプレイできれいに表示するなら、144dpiが必要
+</li>
+<li>高級スマートフォンできれいに表示するなら、216dpi必要
+</li>
+<li>商業印刷で使うなら、カラー画像で350dpi、モノクロ画像で600dpi必要
+</li>
+</ul>
+<p>たとえば安いWindowsノートPCでスクリーンショットを撮ると、画像の解像度が72dpiになります。これをMacbookやスマートフォンで等倍表示すると、必要な解像度に足りないせいで画像のドットが目立ちます<sup><a id="fnb-fn-v6uxm" href="#fn-fn-v6uxm" class="noteref" epub:type="noteref">*2</a></sup>。印刷すれば粗さがもっと目立ちます。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-v6uxm" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*2] </span>等倍で表示すると荒い画像でも、大きい画像を縮小して表示すれば粗さは目立たなくなります。解像度の高い画像を用意できない場合は、かわりに大きい画像を用意して印刷時に縮小するといいでしょう。</p></div>
+</div><!--/.footnote-list-->
+<p>では、技術同人誌では画像の解像度をどのくらいにすればいいでしょうか。すでに説明したように、商業印刷に使う画像は350dpi以上の解像度が必要だとよく言われます。しかし（マンガやイラストの同人誌ではなく）技術系同人誌であれば、そこまで高解像度の画像を用意しなくても大丈夫です。</p>
+<p>実際には、Retinaディスプレイや最近のスマートフォンで画像を等倍表示して気にならない解像度であれば、印刷してもあまり気になりません。つまり画像の解像度が144dpiであれば、印刷しても問題は少ないし、電子用PDFで使っても350dpiと比べてデータサイズをかなり小さくできます。</p>
+<p>印刷用と電子用とで解像度の違う画像を用意するのは面倒なので、画像の解像度を144dpiにして印刷用と電子用とで同じ画像を使うのが簡単かつ妥当な方法でしょう。</p>
+
+<h3 class="none"><a id="h7-4-4"></a><span class="secno">7.4.4</span> 白黒印刷用のPDFにカラー画像を使っても大丈夫か</h3>
+<p>白黒印刷用のPDFにカラー画像を使っても、たいていは大丈夫です。たとえばカラーのスクリーンショット画像を、わざわざモノクロ画像に変換する必要はありません。</p>
+<p>ただし、白黒印刷すれば当然ですがカラーではなくなるので、<strong>色の違いだけで見分けをつけていたものは白黒印刷すると見分けがつかなくなります</strong>。形を変えたり線の種類を変えるなどして、白黒になっても見分けがつくような工夫をしましょう。</p>
+<p>また図の一部を赤い丸や四角で囲んでいる場合、白黒印刷すると赤ではなくなるので、たとえば「赤い丸で囲った部分に注目してください」という文章が読者に通じなくなります。これもよくある失敗なので気をつけましょう。</p>
+
+<h2 id="sec-nombre" class="leftline"><a id="h7-5"></a><span class="secno">7.5</span> ノンブル</h2>
+
+<h3 class="none"><a id="h7-5-1"></a><span class="secno">7.5.1</span> ノンブルとは</h3>
+<p>「ノンブル」とは、すべてのページにつけられた通し番号のことです。ページ番号と似ていますが、次のような違いがあります。</p>
+<dl class="desc-list">
+  <dt class="desc">通し番号</dt>
+  <dd class="desc">
+<ul>
+<li>ページ番号は、まえがきや目次では「i, ii, iii, ...」で、本文が始まると「1, 2, 3, ...」とまる。つまり通し番号になっていない。
+</li>
+<li>ノンブルは、まえがきや目次や本文に関係なく「1, 2, 3, ...」と続く通し番号になっている。
+</li>
+</ul>
+  </dd>
+  <dt class="desc">用途</dt>
+  <dd class="desc">
+<ul>
+<li>ページ番号は、読者が目的のページへ素早くアクセスするために必要。
+</li>
+<li>ノンブルは、印刷所がページの印刷順序を間違わないために必要。
+</li>
+</ul>
+  </dd>
+  <dt class="desc">表示位置</dt>
+  <dd class="desc">
+<ul>
+<li>ページ番号は読者のために存在するので、読者からよく見える位置に置く。
+</li>
+<li>ノンブルは印刷所の人だけが見られればよく、読者からは見えないほうがよい。
+</li>
+</ul>
+  </dd>
+</dl>
+<p>ノンブルは、印刷所へ入稿するときに必要です。印刷しないならノンブルは不要であり、電子用PDFにはノンブルはつけません。</p>
+<p>ノンブルについてもっと知りたい場合は「ノンブル 同人誌」でGoogle検索すると詳しい情報が見つかります。</p>
+
+<h3 class="none"><a id="h7-5-2"></a><span class="secno">7.5.2</span> ノンブルを必要とする印刷所</h3>
+<p>たいていの印刷所では入稿するPDFにノンブルが必要ですが、必要としない印刷所もあります。たとえば技術書典でよく利用される印刷所のうち、「日光企画」ではノンブルが必須で、「ねこのしっぽ」では不要（だけどあると望ましい）です。主な同人誌向け印刷所の情報を<span class="tableref"><a href="./05-faq.html#tbl-uyzhu">表7.1</a></span>にまとめたので参考にしてください。</p>
+<div id="tbl-uyzhu" class="table">
+<p class="caption">表7.1: 同人誌向け印刷所ごとのノンブル必要・不要情報</p>
+<table style="font-size:x-small">
+<tr class="hline"><th>印刷所</th><th>ノンブル</th><th>参考URL</th></tr>
+<tr class="hline"><td>日光企画</td><td>必要</td><td><a href="http://www.nikko-pc.com/qa/yokuaru-shitsumon.html#3-1" class="link">http://www.nikko-pc.com/qa/yokuaru-shitsumon.html#3-1</a></td></tr>
+<tr class="hline"><td>ねこのしっぽ</td><td>不要</td><td><a href="https://www.shippo.co.jp/neko/faq_3.shtml#faq_039" class="link">https://www.shippo.co.jp/neko/faq_3.shtml#faq_039</a></td></tr>
+<tr class="hline"><td>しまや出版</td><td>必要</td><td><a href="https://www.shimaya.net/howto/data-genkou.html#no" class="link">https://www.shimaya.net/howto/data-genkou.html#no</a></td></tr>
+<tr class="hline"><td>栄光</td><td>必要</td><td><a href="https://www.eikou.com/qa/answer/66" class="link">https://www.eikou.com/qa/answer/66</a></td></tr>
+<tr class="hline"><td>サンライズ</td><td>必要</td><td><a href="https://www.sunrisep.co.jp/09_genkou/002genko_kiso.html#title-6" class="link">https://www.sunrisep.co.jp/09_genkou/002genko_kiso.html#title-6</a></td></tr>
+<tr class="hline"><td>オレンジ工房</td><td>必要</td><td><a href="https://www.orangekoubou.com/order/question.php#article05" class="link">https://www.orangekoubou.com/order/question.php#article05</a></td></tr>
+<tr class="hline"><td>太陽出版</td><td>必要</td><td><a href="https://www.taiyoushuppan.co.jp/doujin/howto/nombre.php" class="link">https://www.taiyoushuppan.co.jp/doujin/howto/nombre.php</a></td></tr>
+<tr class="hline"><td>ポプルス</td><td>不要</td><td><a href="https://www2.popls.co.jp/pop/genkou/q_and_a.html#nombre" class="link">https://www2.popls.co.jp/pop/genkou/q_and_a.html#nombre</a></td></tr>
+<tr class="hline"><td>丸正インキ</td><td>必要</td><td><a href="https://www.marusho-ink.co.jp/howto/nombre.html" class="link">https://www.marusho-ink.co.jp/howto/nombre.html</a></td></tr>
+<tr class="hline"><td>トム出版</td><td>必要</td><td><a href="https://www.tomshuppan.co.jp/manual/data.html" class="link">https://www.tomshuppan.co.jp/manual/data.html</a></td></tr>
+<tr class="hline"><td>金沢印刷</td><td>必要</td><td><a href="http://www.kanazawa-p.co.jp/howtodata/howtodata_kihon-rule.html" class="link">http://www.kanazawa-p.co.jp/howtodata/howtodata_kihon-rule.html</a></td></tr>
+<tr class="hline"><td>ケーナイン</td><td>必要</td><td><a href="https://www.k-k9.jp/data/nomble/" class="link">https://www.k-k9.jp/data/nomble/</a></td></tr>
+<tr class="hline"><td>booknext</td><td>必要</td><td><a href="https://booknext.ink/guide/making/" class="link">https://booknext.ink/guide/making/</a></td></tr>
+</table>
+</div>
+<p>このように印刷所によって違いますが、<strong>ノンブル不要の印刷所であってもノンブルをつけるほうが望ましい</strong>です。強い理由がないなら、印刷用PDFにはノンブルをつけましょう。</p>
+
+<h3 id="subsec-addnombre" class="none"><a id="h7-5-3"></a><span class="secno">7.5.3</span> ノンブルのつけ方</h3>
+<p>Re:VIEWとStarterのどちらも、印刷用PDFにはノンブルが自動的につきます（電子用にはつきません）。Starterでは、印刷用PDFならページの右下隅または左下隅に、グレーの通し番号がついているはずです。これがノンブルです。</p>
+<p>ノンブルは印刷所の人だけが見られればいいので、読者からは見えにくい位置（見開きの内側）に置かれます。このように読者から見えにくい位置に置かれたノンブルを、特に「隠しノンブル」といいます。</p>
+<p>またStarterでは、すでに生成済みのPDFに対してあとからノンブルを追加できます。たとえば大扉（タイトルページ）や奥付をIllustratorやKeynoteで作成し<sup><a id="fnb-fn-dv7j2" href="#fn-fn-dv7j2" class="noteref" epub:type="noteref">*3</a></sup>、それを使って印刷用PDFの大扉や奥付のページを手動で入れ替えるような場合は<sup><a id="fnb-fn-5eb1s" href="#fn-fn-5eb1s" class="noteref" epub:type="noteref">*4</a></sup>、入れ替えたページにノンブルがつきません。このような場合は、次のような作業手順になります。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-dv7j2" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*3] </span>大扉（タイトルページ）を別のソフトで作成した例が「<a href="06-bestpractice.html#h8-9-2">8.9.2 大扉を別のソフトで作成する</a>」にあります。</p></div>
+<div class="footnote" id="fn-fn-5eb1s" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*4] </span>昔はこうする必要がありましたが、現在のStarterは大扉と奥付をPDFファイルで用意すればそれを読み込めるので、手動で入れ替える必要はなくなりました。詳しくは「<a href="04-customize.html#h6-6-2">6.6.2 [PDF] 表紙や大扉や奥付となるPDFファイルを指定する</a>」を参照してください。</p></div>
+</div><!--/.footnote-list-->
+<ol class="ol-none">
+<li data-mark="(1)"><span class="li-mark">(1) </span>印刷用PDFをノンブルなしで生成する。
+</li>
+<li data-mark="(2)"><span class="li-mark">(2) </span>手動で大扉や奥付のページを入れ替える。
+</li>
+<li data-mark="(3)"><span class="li-mark">(3) </span>生成済みの印刷用PDFにノンブルをつける。
+</li>
+</ol>
+<p>ここで(1)印刷用PDFをノンブルなしで生成するには、<span class="file">config-starter.yml</span>で「<code class="inline-code">nombre: off</code>」を設定します。また(3)生成済みの印刷用PDFにノンブルをつけるには、ターミナル画面で「<code class="inline-code">rake pdf:nombre</code>」を実行してください。</p>
+<div class="cmd-code">
+<span class="caption">生成済みの印刷用PDFにノンブルをつける</span>
+<pre class="list">$ <span class="userinput">rake pdf:nombre</span>          <span class="balloon">← PDFの全ページにノンブルをつける</span>
+$ <span class="userinput">rake docker:pdf:nombre</span>   <span class="balloon">← Dockerを使っている場合はこちら</span>
+</pre>
+</div>
+<p>このRakeタスクでは、ノンブルをつけたいPDFファイル名と出力先のPDFファイル名を指定できます。たとえば<span class="file">mybook.pdf</span>にノンブルをつけたものを<span class="file">mybook_nombre.pdf</span>として出力するには、次のようにします。</p>
+<div class="cmd-code">
+<span class="caption">生成済みの印刷用PDFにノンブルをつける</span>
+<pre class="list">$ <span class="userinput">rake pdf:nombre <b>file=mybook.pdf</b> <b>out=mybook_nombre.pdf</b></span>
+</pre>
+</div>
+<p>「<code class="inline-code">out=...</code>」が指定されなければ、「<code class="inline-code">file=...</code>」と同じファイル名が使われます。また「<code class="inline-code">file=...</code>」が指定されなければ、「<code class="inline-code">rake pdf</code>」で生成されるPDFファイルの名前が使われます。</p>
+<p>なお「<code class="inline-code">rake pdf:nombre</code>」はノンブルをつけるだけであり、再コンパイルはしないので注意してください。また「<a href="https://kauplan.org/pdfoperation/" class="link">PDFOperation</a>」を使っても、PDFファイルにノンブルが簡単につけられます。</p>
+<div class="note">
+<h5>ノンブル用フォントの埋め込み</h5>
+<p>残念ながら、「<code class="inline-code">rake pdf:nombre</code>」でノンブルをつけるとそのフォントがPDFファイルに埋め込まれません（これはPDFファイルを操作しているライブラリの限界によるものです）。そのため、印刷所へ入稿するまえにフォントを埋め込む必要があります。</p>
+<p>対策方法は<a href="https://kauplan.org/pdfoperation/" class="link">https://kauplan.org/pdfoperation/</a>を見てください。また印刷用PDFにデフォルトでつくノンブルならこのような問題はありません。</p>
+</div>
+
+<h3 class="none"><a id="h7-5-4"></a><span class="secno">7.5.4</span> ノンブルの調整</h3>
+<p>印刷所によっては、ノンブルの位置や大きさを指定される場合があります。その場合は<span class="file">config-starter.yml</span>の中の、ノンブルに関する設定項目を調整してください。なおこの設定は、「<code class="inline-code">rake pdf:nombre</code>」タスクでも使われます。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;：ノンブルに関する設定項目</span>
+<pre class="list">  ## ノンブル（1枚目からの通し番号）の設定
+  nombre:               on       <span class="balloon">← on ならノンブルをつける</span>
+  nombre_sidemargin:    0.5mm    <span class="balloon">← ページ左右からのマージン幅</span>
+  nombre_bottommargin:  2.0mm    <span class="balloon">← ページ下からのマージン高</span>
+  nombre_fontcolor:     gray     <span class="balloon">← 'gray' or 'black'</span>
+  nombre_fontsize:      6pt      <span class="balloon">← フォントサイズ（6〜8pt）</span>
+  nombre_startnumber:   1        <span class="balloon">← ノンブルの開始番号（3から始める流儀もある）</span>
+</pre>
+</div>
+
+<h3 class="none"><a id="h7-5-5"></a><span class="secno">7.5.5</span> ノンブルの注意点</h3>
+<p>印刷所への入稿に慣れていないと、ノンブルに関するトラブルを起こしがちです。初心者の人は次のような点に注意してください。</p>
+<ul>
+<li>すでに説明したように、ノンブルは印刷するときに必要であり、印刷しなければ不要です。
+   Starterでは印刷用PDFにのみ自動でノンブルがつきますが、電子用PDFにはつきません。
+</li>
+<li>ノンブルは、表紙と裏表紙には必要ありません。
+   印刷所へ入稿するとき、表紙と裏表紙の入稿は本文とは別に行います。
+   そのため、表紙と裏表紙にはノンブルをつける必要はありませんし、つけてはいけません。
+</li>
+<li>ノンブルは、表紙と裏表紙を除いたすべてのページに必要です。
+   たとえ空白ページであってもノンブルを省略してはいけません。
+</li>
+<li>別のソフトで作った大扉（タイトルページ）や奥付をPDFに入れた場合は、それらのページにもノンブルをつけることを忘れないでください。
+</li>
+<li>印刷所からノンブルの位置や大きさの指定がある場合は、それに従ってください。
+   ノンブルの調整方法は<span class="file">config-starter.yml</span>で行えます。
+</li>
+<li>ノンブルは「1」から始めることがほとんどですが、印刷所によっては「3」から始めるよう指示されることがあります。
+   その場合は<span class="file">config-starter.yml</span>に「<code class="inline-code">nombre_startnumber: 3</code>」を設定してください。
+</li>
+<li>ノンブルのフォントがPDFに埋め込まれていることを確認してください。
+   ただし本文のフォントほど重要ではないので、もしノンブルのフォントがうまく埋め込めない場合は、そのままで入稿できないか印刷所に相談してみましょう。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="h7-6"></a><span class="secno">7.6</span> LaTeX関連</h2>
+
+<h3 class="none"><a id="h7-6-1"></a><span class="secno">7.6.1</span> LuaLaTeXとjlreqを使いたい</h3>
+<p>Starterでは、LuaLaTeXとjlreq.clsにはまだ対応していません。どうしてもこれらが使いたい場合は、Re:VIEWが対応しているのでそちらを使うといいでしょう。</p>
+<p>LuaLaTeXは好きなフォントが簡単に使えるという大きな利点がありますが、コンパイルが遅くなるという欠点があります。またjlreq.clsはカスタマイズ方法がよく分かっていないので、採用ができません。</p>
+<p>これらの採用は今後の課題です。</p>
+
+<h3 class="none"><a id="h7-6-2"></a><span class="secno">7.6.2</span> LaTeXのスタイルファイルから環境変数を参照する</h3>
+<p>Starterでは、名前が「<em>STARTER_</em>」で始まる環境変数をLaTeXのスタイルファイルから参照できます。</p>
+<p>たとえば「<code class="inline-code">STARTER_FOO_BAR</code>」という環境変数を設定すると、<code class="inline-code">sty/mystyle.sty</code>や<code class="inline-code">sty/starter.sty</code>では「<code class="inline-code">\STARTER@FOO@BAR</code>」という名前で参照できます。この例で分かるように、環境変数名の「<code class="inline-code">_</code>」は「<code class="inline-code">@</code>」に変換されます。</p>
+<div class="cmd-code">
+<span class="caption">環境変数を設定する例(macOS, UNIX)</span>
+<pre class="list">$ <span class="userinput">export STARTER_FOO_BAR=&quot;foobar&quot;</span>
+</pre>
+</div>
+<div class="caption-code">
+<span class="caption">環境変数を参照する例</span>
+<pre class="list">%% ファイル：sty/mystyle.sty
+\newcommand\foobar[0]{%             % 引数なしコマンドを定義
+  \@ifundefined{STARTER@FOO@BAR}{%  % 未定義なら
+    foobar%                         % デフォルト値を使う
+  }{%                               % 定義済みなら
+    \STARTER@FOO@BAR%               % その値を使う
+  }%
+}
+</pre>
+</div>
+<p>この機能を使うと、出力や挙動を少し変更したい場合に環境変数でコントロールできます。また値の中に「<code class="inline-code">$</code>」や「<code class="inline-code">\</code>」が入っていてもエスケープはしないので注意してください。</p>
+
+<h2 class="leftline"><a id="h7-7"></a><span class="secno">7.7</span> その他</h2>
+
+<h3 class="none"><a id="h7-7-1"></a><span class="secno">7.7.1</span> 高度なカスタマイズ</h3>
+<p>設定ファイルやLaTeXスタイルファイルでは対応できないようなカスタマイズが必要になることがあります。たとえば次のような場合です。</p>
+<ul>
+<li>印刷用とタブレット用でPDFファイルの仕様を大きく変えたい。
+</li>
+<li>B5サイズとA5サイズの両方のPDFファイルを生成したい。
+</li>
+<li>β版と本番用とで設定を切り替えたい。
+</li>
+<li>コンパイルするたびに、あるプログラムの実行結果を原稿ファイルに埋め込みたい。
+</li>
+</ul>
+<p>このような要件を、Re:VIEWやStarterの機能を使い倒して実現してもいいですが、それよりも汎用的なやり方で実現しましょう。方針としては、設定ファイルや原稿ファイルを用途に応じて生成するのがいいでしょう。</p>
+<p>ここでは例として「印刷用とタブレット用で<span class="file">config-starter.yml</span>の内容を変える」ことを考えてみます。</p>
+<p><br /></p>
+<p class="noindent">(1) 「<span class="file">config-starter.yml</span>」に拡張子「<span class="file">.eruby</span>」をつけます。</p>
+<div class="cmd-code">
+<pre class="emlist">$ <span class="userinput">mv config-starter.yml config-starter.yml.eruby</span>
+## またはこうでもよい
+$ <span class="userinput">mv config-starter.yml{,.eruby}</span>
+</pre>
+</div>
+<p class="noindent">(2) 次に、そのファイルに次のような条件分岐を埋め込みます。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml.eruby」</span>
+<pre class="list">....(省略)....
+<b>&lt;% if buildmode == 'printing'   # 印刷向け %&gt;</b>
+  target:    pbook
+  pagesize:  B5
+  fontsize:  10pt
+  textwidth: 44zw
+<b>&lt;% elsif buildmode == 'tablet'  # タブレット向け %&gt;</b>
+  target:    tablet
+  pagesize:  A5
+  fontsize:  10pt
+  textwidth: 42zw
+<b>&lt;% else abort &quot;error: buildmode=#{buildmode.inspect}&quot; %&gt;</b>
+<b>&lt;% end %&gt;</b>
+</pre>
+</div>
+<p class="noindent">(3) 「<span class="file">config-starter.yml</span>」を生成するRakeタスクを定義します。ここまでが準備です。</p>
+<div class="source-code">
+<span class="caption">lib/tasks/mytasks.rake</span>
+<pre class="list">def render_eruby_files(param)   # 要 Ruby &gt;= 2.2
+  Dir.glob('**/*.eruby').each do |erubyfile|
+    origfile = erubyfile.sub(/\.eruby$/, '')
+    sh &quot;erb -T 2 -P '#{param}' #{erubyfile} &gt; #{origfile}&quot;
+  end
+end
+
+namespace :setup do
+
+  desc &quot;*印刷用に設定 (B5, 10pt, mono)&quot;
+  task :printing do
+    render_eruby_files('buildmode=printing')
+  end
+
+  desc &quot;*タブレット用に設定 (A5, 10pt, color)&quot;
+  task :tablet do
+    render_eruby_files('buildmode=tablet')
+  end
+
+end
+</pre>
+</div>
+<p class="noindent">(4)「<code class="inline-code">rake setup:printing</code>」または「<code class="inline-code">rake setup:tablet</code>」を実行すると、<span class="file">config-starter.yml</span>が生成されます。そのあとで「<code class="inline-code">rake pdf</code>」を実行すれば、用途に応じたPDFが生成されます。</p>
+<div class="cmd-code">
+<pre class="emlist language-shell-session">$ <b>rake setup:printing  # 印刷用</b>
+$ rake pdf
+$ mv mybook.pdf mybook_printing.pdf
+
+$ <b>rake setup:tablet    # タブレット用</b>
+$ rake pdf
+$ mv mybook.pdf mybook_tablet.pdf
+</pre>
+</div>
+
+        </main>
+        <nav class="page-navi">
+          <a href="04-customize.html" class="page-prev">&#9664;</a>
+          <a href="06-bestpractice.html" class="page-next">&#9654;</a>
+        </nav>
+        <footer>
+        </footer>
+      </div>
+    </div>
+    <script>
+function rebuildAndReloadForcedly() {
+  fetch('/rebuild.js').then((resp)=>{
+    resp.text().then((text)=>{ eval(text); });
+  });
+}
+    </script>
+    <script src="/rebuild.js?file=05-faq.re"></script>
+  </body>
+</html>
+<!-- layout.html5.erb -->

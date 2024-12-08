@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>カスタマイズ | 【Python】Tkinterで競馬の着順掲示板を作る</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css" />
+    <link rel="next" title="FAQ" href="05-faq.html">
+    <link rel="prev" title="記法" href="03-syntax.html">
+    <meta name="generator" content="Re:VIEW Starter">
+  </head>
+  <body>
+    <div class="page-outer">
+      <nav class="side-content">
+                <div class="rebuild">
+          <a href="javascript:void(0)" onclick="rebuildAndReloadForcedly()">Rebuild and Reload</a>
+        </div>
+                <a class="nav-title" href="index.html">【Python】Tkinterで競馬の着順掲示板を作る</a>
+<ul class="toc toc-1">
+    <li class="toc-chapter"><a href="./00-preface.html">まえがき / はじめに</a></li>
+    <li class="toc-chapter"><a href="./01-install.html">1 インストール</a></li>
+    <li class="toc-chapter"><a href="./02-tuto.html">2 チュートリアル</a></li>
+    <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a></li>
+    <li class="toc-chapter"><a href="./02-tutorial.html">4 チュート</a></li>
+    <li class="toc-chapter"><a href="./03-syntax.html">5 記法</a></li>
+    <li class="toc-chapter"><a href="./04-customize.html">6 カスタマイズ</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h6-1">6.1 命令</a></li>
+        <li class="toc-section"><a href="#h6-2">6.2 ページと本文</a></li>
+        <li class="toc-section"><a href="#h6-3">6.3 フォント</a></li>
+        <li class="toc-section"><a href="#h6-4">6.4 プログラムコード</a></li>
+        <li class="toc-section"><a href="#h6-5">6.5 見出し</a></li>
+        <li class="toc-section"><a href="#h6-6">6.6 本</a></li>
+        <li class="toc-section"><a href="#h6-7">6.7 索引</a></li>
+        <li class="toc-section"><a href="#h6-8">6.8 Rakeタスク</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./05-faq.html">7 FAQ</a></li>
+    <li class="toc-chapter"><a href="./06-bestpractice.html">8 よりよい本づくり</a></li>
+    <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a></li>
+    <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
+    <li class="toc-chapter"><a href="./93-background.html">開発の背景</a></li>
+    <li class="toc-chapter"><a href="./99-postface.html">あとがき / おわりに</a></li>
+</ul>
+      </nav>
+      <div class="page-inner">
+        <header class="page-header">
+        </header>
+        <main class="page-main">
+<h1 class="boldlines center twolines"><a id="h6"></a><span class="secno">第6章</span> <br/>カスタマイズ</h1>
+<div class="abstract">
+<p>Starterをカスタマイズする方法を紹介します。</p>
+</div>
+
+<h2 class="leftline"><a id="h6-1"></a><span class="secno">6.1</span> 命令</h2>
+<p>新しい命令を追加するには、ファイル「<span class="file">review-ext.rb</span>」を編集します。</p>
+
+<h3 class="none"><a id="h6-1-1"></a><span class="secno">6.1.1</span> 新しいインライン命令を追加する</h3>
+<p>たとえば次の例では、新しいインライン命令「<code class="inline-code">@&lt;bold&gt;{...}</code>」を追加しています。</p>
+<div class="caption-code">
+<span class="caption">ファイル「review-ext.rb」</span>
+<pre class="list">module ReVIEW
+
+  ## インライン命令「@&lt;bold&gt;{}」を宣言
+  <b>Compiler.definline :bold</b>
+
+  ## LaTeX用の定義
+  <b>class LATEXBuilder</b>
+    <b>def on_inline_bold(&amp;b)</b>  # 入れ子を許す場合
+      return &quot;\\textbf{#{yield}}&quot;
+    end
+    #<b>def inline_bold(str)</b>    # 入れ子をさせない場合
+    #  return &quot;\\textbf{#{escape(str)}}&quot;
+    #end
+  end
+
+  ## HTML（ePub）用の定義
+  <b>class HTMLBuilder</b>
+    <b>def on_inline_bold(&amp;b)</b>  # 入れ子を許す場合
+      return &quot;&lt;b&gt;#{yield}&lt;/b&gt;&quot;
+    end
+    #<b>def inline_bold(str)</b>    # 入れ子をさせない場合
+    #  return &quot;&lt;b&gt;#{escape(str)}&lt;/b&gt;&quot;
+    #end
+  end
+
+end
+</pre>
+</div>
+<p>なお既存のインライン命令を変更するのも、これと同じ方法で行えます。</p>
+
+<h3 class="none"><a id="h6-1-2"></a><span class="secno">6.1.2</span> 新しいブロック命令を追加する</h3>
+<p>たとえば次の例では、新しいブロック命令「<code class="inline-code">//blockquote{ ... //}</code>」を追加しています<sup><a id="fnb-fn-g4he6" href="#fn-fn-g4he6" class="noteref" epub:type="noteref">*1</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-g4he6" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*1] </span>インライン命令のときは「<code class="inline-code">on_inline_xxx()</code>」なのにブロック命令では「<code class="inline-code">on_xxx_block()</code>」なのは、歴史的な事情です。非対称で格好悪いですが、ご了承ください。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">ファイル「review-ext.rb」</span>
+<pre class="list">module ReVIEW
+
+  ## ブロック命令「//blockquote」を宣言（引数は0〜1個）
+  <b>Compiler.defblock :blockquote, 0..1</b>
+
+  ## LaTeX用の定義
+  <b>class LATEXBuilder</b>
+    ## 入れ子を許す場合
+    <b>def on_blockquote_block(arg=nil)</b>
+      if arg.present?
+        puts &quot;\\noindent&quot;
+        puts escape(arg)
+      end
+      puts &quot;\\begin{quotation}&quot;
+      <b>yield</b>
+      puts &quot;\\end{quotation}&quot;
+    end
+    ## 入れ子を許さない場合
+    #<b>def blockquote(lines, arg=nil)</b>
+    #  if arg.present?
+    #    puts &quot;\\noindent&quot;
+    #    puts escape(arg)
+    #  end
+    #  puts &quot;\\begin{quotation}&quot;
+    #  puts lines
+    #  puts &quot;\\end{quotation}&quot;
+    #end
+  end
+
+  ## HTML（ePub）用の定義
+  <b>class HTMLBuilder</b>
+    ## 入れ子を許す場合
+    <b>def on_blockquote_block(arg=nil)</b>
+      if arg.present?
+        puts &quot;&lt;p&gt;&lt;span&gt;#{escape(arg)}&lt;/span&gt;&lt;/p&gt;&quot;
+      end
+      puts &quot;&lt;blockquote&gt;&quot;
+      yield
+      puts &quot;&lt;/blockquote&gt;&quot;
+    end
+    ## 入れ子を許さない場合
+    #<b>def blockquote(lines, arg=nil)</b>
+    #  if arg.present?
+    #    puts &quot;&lt;p&gt;&lt;span&gt;#{escape(arg)}&lt;/span&gt;&lt;/p&gt;&quot;
+    #  end
+    #  puts &quot;&lt;blockquote&gt;&quot;
+    #  puts lines
+    #  puts &quot;&lt;/blockquote&gt;&quot;
+    #end
+  end
+
+end
+</pre>
+</div>
+<p>ブロック命令には「<code class="inline-code">{ ... //}</code>」を使わないタイプのものもあります。その場合は「<code class="inline-code">Compiler.defsingle</code>」を使います。</p>
+<p>たとえば縦方向にスペースを空ける「<code class="inline-code">//verticalspace[タイプ][高さ]</code>」というブロック命令を追加するとしましょう。使い方は次の通りとします。</p>
+<div class="caption-code">
+<pre class="emlist">//verticalspace[latex][5mm]   <span class="balloon">← PDFのときは5mm空ける</span>
+//verticalspace[epub][10mm]   <span class="balloon">← ePubのときは10mm空ける</span>
+//verticalspace[*][15mm]      <span class="balloon">← PDFでもePubでも15mm空ける</span>
+</pre>
+</div>
+<p>このようなブロック命令は、次のように定義します。「<code class="inline-code">Compiler.defblock</code>」ではなく「<code class="inline-code">Compiler.defsingle</code>」を使っている点に注意してください。</p>
+<div class="caption-code">
+<span class="caption">ファイル「review-ext.rb」</span>
+<pre class="list">module ReVIEW
+
+  ## ブロック命令「//verticalspace」を宣言（引数は2個）
+  <b>Compiler.defsingle :verticalspace, 2</b>
+
+  ## LaTeX用の定義
+  <b>class LATEXBuilder</b>
+    ## '{ ... //}' を使わないので入れ子対応にはしない
+    <b>def verticalspace(type, length)</b>
+      if type == 'latex' || type == '*'
+        puts &quot;\\vspace{#{length}}&quot;
+      end
+    end
+  end
+
+  ## HTML（ePub）用の定義
+  <b>class HTMLBuilder</b>
+    ## '{ ... //}' を使わないので入れ子対応にはしない
+    <b>def veritcalspace(type, length)</b>
+      if type == 'html' || type == 'epub' || type == '*'
+        puts &quot;&lt;div style=\&quot;height: #{length}\&quot;&gt;&lt;/div&gt;&quot;
+      end
+    end
+  end
+
+end
+</pre>
+</div>
+<p>なお既存のブロック命令を変更するのも、これらと同じ方法で行えます。</p>
+
+<h2 class="leftline"><a id="h6-2"></a><span class="secno">6.2</span> ページと本文</h2>
+
+<h3 class="none"><a id="h6-2-1"></a><span class="secno">6.2.1</span> [PDF] ページサイズをB5やA5に変更する</h3>
+<p>ページサイズをB5やA5に変更するには、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">pagesize:</code>」を変更します<sup><a id="fnb-fn-yq0ne" href="#fn-fn-yq0ne" class="noteref" epub:type="noteref">*2</a></sup>。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  pagesize: <b>A5</b>    # A5 or B5
+</pre>
+</div>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-yq0ne" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*2] </span>以前は「<span class="file">config.yml</span>」の中の「<code class="inline-code">texdocumentclass:</code>」を変更していましたが、その必要はなくなりました。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 id="subsec-textwidth" class="none"><a id="h6-2-2"></a><span class="secno">6.2.2</span> [PDF] 本文の幅を指定する</h3>
+<p>本文の幅を指定するには、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">textwidth:</code>」を変更します<sup><a id="fnb-fn-ragkm" href="#fn-fn-ragkm" class="noteref" epub:type="noteref">*3</a></sup>。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  textwidth: <b>39zw</b>    # 全角文字数で指定
+</pre>
+</div>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-ragkm" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*3] </span>以前は「<span class="file">sty/mytextsize.sty</span>」を編集していましたが、本文幅を変更するだけならその必要はなくなりました。</p></div>
+</div><!--/.footnote-list-->
+<p>ここで、「<code class="inline-code">zw</code>」は全角1文字分の幅を表す単位です。「<code class="inline-code">39zw</code>」なら全角39文字分の幅（長さ）を表します。</p>
+<p>Starterでは<span class="tableref"><a href="./04-customize.html#tbl-rlsli">表6.1</a></span>のような本文幅を推奨しています。</p>
+<div id="tbl-rlsli" class="table">
+<p class="caption">表6.1: 本文幅の推奨値（タブレット向けを除く）</p>
+<table>
+<tr class="hline"><th>ベージサイズ</th><th>フォントサイズ</th><th>本文幅</th></tr>
+<tr><td>A5</td><td>9pt</td><td>全角38文字か39文字</td></tr>
+<tr><td>A5</td><td>10pt</td><td>全角35文字</td></tr>
+<tr><td>B5</td><td>10pt</td><td>全角44文字か45文字</td></tr>
+<tr><td>B5</td><td>11pt</td><td>全角41文字</td></tr>
+</table>
+</div>
+<p>Starterでは、印刷用PDFではページ左右の余白幅を変えています。これは印刷時の読みやすさを確保したまま、本文の幅を最大限に広げているからです。詳しくは「<a href="06-bestpractice.html#h8-8-1">8.8.1 [PDF] 印刷用では左右の余白幅を充分にとる</a>」を見てください。</p>
+
+<h3 id="subsec-textheight" class="none"><a id="h6-2-3"></a><span class="secno">6.2.3</span> [PDF] 本文の高さを指定する</h3>
+<p>本文の高さを調整するには、「<span class="file">sty/mytextsize.sty</span>」を編集します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「sty/mytextsize.sty」</span>
+<pre class="list">%% 天（ページ上部）の余白を狭め、その分を本文の高さに加える
+\addtolength{\topmargin}{<b>-2\Cvs</b>}  % 上部の余白を2行分減らす
+\addtolength{\textheight}{<b>2\Cvs</b>}  % 本文の高さを2行分増やす
+</pre>
+</div>
+<p>通常は、このような変更は必要ないはずです。</p>
+
+<h3 id="subsec-bleed" class="none"><a id="h6-2-4"></a><span class="secno">6.2.4</span> [PDF] 塗り足しをつける</h3>
+<p>印刷所に入稿するとき、本文の全ページに上下左右3mmの「塗り足し」が必要になることがあります。塗り足しについては次のページなどを参考にしてください。</p>
+<ul>
+<li>原稿作成の基礎知識：塗り足し（同人誌印刷栄光）<br />
+   <a href="https://www.eikou.com/making/basis#nuritashi" class="link">https://www.eikou.com/making/basis#nuritashi</a>
+</li>
+<li>原稿作成マニュアル：印刷範囲と塗り足し（同人誌印刷の緑陽社）<br />
+   <a href="https://www.ryokuyou.co.jp/doujin/manual/basic.html#nuritashi" class="link">https://www.ryokuyou.co.jp/doujin/manual/basic.html#nuritashi</a>
+</li>
+</ul>
+<p>塗り足しは、技術系同人誌の本文ではたいていの場合必要ありませんが、次のような場合は必要です。</p>
+<ul>
+<li>ページ端まで絵や線が描かれている場合
+</li>
+<li>背景色をつけたページがある場合（大扉や章扉など）
+</li>
+</ul>
+<div class="note">
+<h5>技術系同人誌でも表紙と裏表紙には塗り足しが必要</h5>
+<p>同人誌作成の経験がない方のために補足説明をします。</p>
+<ul>
+<li>印刷所に入稿するとき、表紙や裏表紙と、本文とは別のPDFファイルにします。
+   前者はカラー印刷、後者は白黒印刷です。
+</li>
+<li>表紙や裏表紙では背景色をつけることがほとんどなので、塗り足しが必要です。
+</li>
+<li>マンガ系の同人誌では背景色があったりページ端まで絵を描くことがあるので、塗り足しが必要です。
+   同人誌印刷所のサイトで「塗り足しは必須です」と説明されているのは、マンガ同人誌を前提としているからです。
+</li>
+<li>技術系同人誌の本文では背景色をつけないしページ端まで何かを描くこともないので、塗り足しは必要ありません。
+   ただしこれは印刷所によって違う可能性があるので、詳しくは入稿先の印刷所に聞いてみてください。
+</li>
+<li>塗り足しが必要ないのに塗り足しをつけてしまっても、問題ありません。
+</li>
+<li>塗り足しは印刷するときにのみ必要であり、印刷しないなら必要ありません。
+</li>
+</ul>
+</div>
+<p>Starterでは、塗り足しをつける設定が用意されています。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;configi-starter.yml&lt;/span&gt;：塗り足しをつける</span>
+<pre class="list">  ## 上下左右の塗り足し幅（印刷用PDFのみ）
+  bleedsize: 3mm      # 上下左右に3mmの塗り足しをつける
+</pre>
+</div>
+<p>塗り足しがつくのは印刷用PDFのみであり、電子用にはつきません<sup><a id="fnb-fn-alz7r" href="#fn-fn-alz7r" class="noteref" epub:type="noteref">*4</a></sup>。また塗り足しは上下左右につくので、塗り足し幅が3mmだとページサイズの縦と横は6mmずつ増えます。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-alz7r" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*4] </span>印刷用PDFと電子用PDFの違いについては、「<a href="02-tutorial.html#h4-5">4.5 印刷用PDFと電子用PDF</a>」を参照してください。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h6-2-5"></a><span class="secno">6.2.5</span> [PDF] 塗り足しを可視化する</h3>
+<p>塗り足しがどのくらいの幅を取るのか、見た目で確認したい人もいるでしょう。そのような場合は、<span class="file">config-starter.yml</span>で「<code class="inline-code">bleedcolor: blue</code>」のように指定してください。すると塗り足しが可視化されます。色はred/green/blue/yello/grayなどが使えます。</p>
+<p>この機能は、あくまで確認用のみで使ってください。入稿するときは必ず設定を外してください。</p>
+
+<h3 class="none"><a id="h6-2-6"></a><span class="secno">6.2.6</span> [PDF] 章の右ページ始まりをやめる</h3>
+<p>横書きの本では、章(Chapter)を見開きの右ページから始めるのが一般的です。そのため、その前のページが空ページになることがよくあります。この空ページを入れたくないなら、章の右ページ始まりを止めて左右どちらのページからも始めるようにします。</p>
+<p>右ページ始まりをやめるには、「<span class="file">config.yml</span>」の設定項目「<code class="inline-code">texdocumentclass:</code>」を変更します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config.yml」</span>
+<pre class="list">texdocumentclass: [&quot;jsbook&quot;,
+    <del>&quot;dvipdfmx,uplatex,papersize,twoside,<b>openright</b>&quot;</del> <span class="balloon">← 右ページはじまり</span>
+    &quot;dvipdfmx,uplatex,papersize,twoside,<b>openany</b>&quot;   <span class="balloon">← 両ページはじまり</span>
+]
+</pre>
+</div>
+
+<h3 id="subec-miniblockdesign" class="none"><a id="h6-2-7"></a><span class="secno">6.2.7</span> [PDF] 「//info」や「//warning」のデザインを変更する</h3>
+<p>Re:VIEWやStarterでは、「<code class="inline-code">//note</code>」以外にも「<code class="inline-code">//info</code>」や「<code class="inline-code">//warning</code>」が使えます（詳しくは「<a href="03-syntax.html#h5-11-3">5.11.3 ノート以外のミニブロック</a>」を見てください）。</p>
+<p>「<code class="inline-code">//info</code>」や「<code class="inline-code">//warning</code>」で使われているアイコン画像を変更するには、「<span class="file">sty/mystyle.sty</span>」にたとえば次のように書いてください。</p>
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;sty/mystyle.sty&lt;/span&gt;」</span>
+<pre class="list">\def\starter@miniblock@info@imagefile{./images/info-icon.png}
+\def\starter@miniblock@warning@imagefile{./images/warning-icon.png}
+</pre>
+</div>
+<p>アイコン画像の表示サイズや本文のフォントを変更するには、次のように書いてください。</p>
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;sty/mystyle.sty&lt;/span&gt;」</span>
+<pre class="list">\def\starter@miniblock@imagewidth{3zw} % アイコン画像の表示幅
+\def\starter@miniblock@indent{4zw}     % 本文のインデント幅
+\def\starter@miniblock@font{\small}    % 本文のフォント
+</pre>
+</div>
+<p>「<code class="inline-code">//memo</code>」や「<code class="inline-code">//tips</code>」や「<code class="inline-code">//important</code>」などには、デフォルトではアイコン画像はつきません。これらにもアイコン画像をつけるには、たとえば次のように書いてください。</p>
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;sty/mystyle.sty&lt;/span&gt;」</span>
+<pre class="list">%% 「//important」にアイコン画像をつける
+\newenvironment{starterimportant}[1]{%
+  \begin{starter@miniblock}[\starter@miniblock@important@imagefile]{#1}%
+}{%
+  \end{starter@miniblock}%
+}
+\def\starter@miniblock@important@imagefile{./images/info-icon.png}
+</pre>
+</div>
+<p>デザインそのものを変更するには、たとえば次のようにしてください（どんな表示になるかは自分で確かめてください）。</p>
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;sty/mystyle.sty&lt;/span&gt;」</span>
+<pre class="list">%% 「//memo」のデザインを変更する
+\usepackage{ascmac}
+\renewenvironment{startermemo}[1]{%
+  \addvspace{1.5\baselineskip}% 1.5行分空ける
+  \begin{boxnote}%            % 飾り枠で囲む
+    \ifempty{#1}\else%        % 引数（タイトル）があれば
+      {\centering%            % センタリングして
+        \headfont\Large#1\par}% 太字のゴシック体で大きく表示
+      \bigskip%               % 縦方向にスペースを空ける
+    \fi%
+    \setlength{\parindent}{1zw}% 段落の先頭を字下げする
+}{%
+  \end{boxnote}%              % 飾り枠の終わり
+  \addvspace{1.5\baselineskip}% 1.5行分空ける
+}
+</pre>
+</div>
+
+<h2 class="leftline"><a id="h6-3"></a><span class="secno">6.3</span> フォント</h2>
+
+<h3 id="subsec-fontsize" class="none"><a id="h6-3-1"></a><span class="secno">6.3.1</span> [PDF] フォントサイズを変更する</h3>
+<p>本文のフォントのサイズを変更するには、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">fontsize:</code>」を変更します<sup><a id="fnb-fn-fy3mx" href="#fn-fn-fy3mx" class="noteref" epub:type="noteref">*5</a></sup>。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  fontsize:  <b>9pt</b>      # 9pt or 10pt
+</pre>
+</div>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-fy3mx" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*5] </span>以前は「<span class="file">config.yml</span>」の設定項目「<code class="inline-code">texdocumentclass:</code>」を変更していましたが、その必要はなくなりました。</p></div>
+</div><!--/.footnote-list-->
+<p>フォントサイズは、A5サイズなら9pt、B5サイズなら10ptにするのが一般的です。ただし初心者向けの入門書では少し大きくして、A5サイズなら10pt、B5サイズなら11ptにするのがいいでしょう。</p>
+<div class="note">
+<h5>商業誌のフォントサイズと本文幅</h5>
+<p>A5サイズの商業誌で使われているフォントサイズと本文幅を調べました(<span class="tableref"><a href="./04-customize.html#tbl-8jedm">表6.2</a></span>)。参考にしてください。</p>
+<div id="tbl-8jedm" class="table">
+<p class="caption">表6.2: 商業誌のフォントサイズと本文幅</p>
+<table style="font-size:x-small">
+<tr class="hline"><th>出版社</th><th>書籍名</th><th>各種サイズ</th></tr>
+<tr><td>オライリー・ジャパン</td><td>『リーダブルコード』</td><td>A5、9pt、38文字</td></tr>
+<tr class="hline"><td></td><td>『ゼロから作るDeep Learning』</td><td>A5、9pt、38文字</td></tr>
+<tr class="hline"><td>翔泳社</td><td>『達人に学ぶSQL徹底指南書 第2版』</td><td>A5、9pt、38文字</td></tr>
+<tr class="hline"><td>オーム社</td><td>『アジャイル・サムライ』</td><td>A5、10pt、36文字</td></tr>
+<tr><td>技術評論社</td><td>『オブジェクト指向UIデザイン』</td><td>A5、9pt、35文字</td></tr>
+<tr class="hline"><td></td><td>『現場で役立つシステム設計の原則』</td><td>A5、10pt、33文字</td></tr>
+<tr><td>日経BP社</td><td>『独習プログラマー』</td><td>A5、10pt、34文字</td></tr>
+</table>
+</div>
+</div>
+
+<h3 id="subsec-fontfamily" class="none"><a id="h6-3-2"></a><span class="secno">6.3.2</span> [PDF] フォントの種類を変更する</h3>
+<p>本文のフォントを変更するには、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">fontfamily_ja:</code>」と「<code class="inline-code">fontfamily_en:</code>」を変更します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  ## 本文のフォント（注：実験的）
+  ## （Notoフォントが前提なので、Docker環境が必要。MacTeXでは使わないこと）
+  fontfamily_ja: <b>mincho</b>   <span class="balloon">← mincho: 明朝体, gothic: ゴシック体</span>
+  fontfamily_en: <b>roman</b>    <span class="balloon">← roman: ローマン体, sansserif: サンセリフ体</span>
+  fontweight_ja: <b>normal</b>   <span class="balloon">← normal: 通常, light: 細字</span>
+  fontweight_en: <b>normal</b>   <span class="balloon">← normal: 通常, light: 細字</span>
+</pre>
+</div>
+<p>または、「<span class="file">sty/mystyle.sty</span>」に以下を追加します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「sty/mystyle.sty」</span>
+<pre class="list">%% 英数字のフォントをサンセリフ体に変更
+\renewcommand\familydefault{<b>\sfdefault</b>}
+%% 日本語フォントをゴシック体に変更
+\renewcommand\kanjifamilydefault{<b>\gtdefault</b>}
+%% （macOSのみ）日本語フォントを丸ゴシックに変更
+%\renewcommand\kanjifamilydefault{<b>\mgdefault</b>}
+</pre>
+</div>
+
+<h2 class="leftline"><a id="h6-4"></a><span class="secno">6.4</span> プログラムコード</h2>
+
+<h3 id="subsec-needvspace" class="none"><a id="h6-4-1"></a><span class="secno">6.4.1</span> [PDF] 説明文直後での改ページを防ぐ</h3>
+<p>プログラムコードの説明文の直後で改ページされてしまうことがあります。すると説明文とプログラムコードが別ページに離れてしまうため、読みにくくなります（<span class="imgref"><a href="./04-customize.html#caption_pagebreak">図6.1</a></span>）。</p>
+<div id="caption_pagebreak" class="image">
+<img src="images/04-customize/caption_pagebreak.png" alt="説明文の直後で改ページされることがある" class="img width-070per" />
+<p class="caption">
+図6.1: 説明文の直後で改ページされることがある
+</p>
+</div>
+<p>Starterではこれを防ぐための工夫をしていますが、それでも発生してしまうことがあります。もし発生したときは、次の対策のうちどちらを行ってください。</p>
+
+<h5><a id="h6-4-1-0-1"></a>個別対策：「<code class="inline-code">//needvspace[]</code>」を使う</h5>
+<p>たとえば「<code class="inline-code">//needvspace[latex][6zw]</code>」とすると、現在位置に全角6文字分の高さのスペースがあるかを調べ、なければ改ページします。</p>
+<div class="caption-code">
+<span class="caption">全角6文字分の高さのスペースがなければ改行</span>
+<pre class="list"><b>//needvspace[latex][6zw]</b>
+//list[][フィボナッチ数列]{
+def fib(n)
+  n &lt;= 1 ? n : fib(n-1) + fib(n-2)
+end
+//}
+</pre>
+</div>
+
+<h5><a id="h6-4-1-0-2"></a>全体対策：「<code class="inline-code">caption_needspace:</code>」の値を増やす</h5>
+<p><span class="file">config-starter.yml</span>の「<code class="inline-code">caption_needspace:</code>」がたとえば「<code class="inline-code">4.0zh</code>」であれば、プログラムリストの説明文を表示する前に全角4文字分の高さのスペースがあるかを調べ、なければ改ページします。よってこの設定値を増やせば、説明文だけが別ページになるのを防げます。</p>
+<p>ただしこの設定値は、説明文を持つすべてのプログラムリストに影響します。設定値を変える場合は注意してください。</p>
+
+<h3 id="subsec-ttfont" class="none"><a id="h6-4-2"></a><span class="secno">6.4.2</span> [PDF] プログラムコードのフォントを変更する</h3>
+<p>プログラムコードやターミナルのフォントを変更するには、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">program_ttfont:</code>」と「<code class="inline-code">terminal_ttfont:</code>」を変更します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  ## プログラム用（//list）の等幅フォント
+  program_ttfont: <b>beramono</b>
+  ## ターミナル用（//terminal、//cmd）の等幅フォント
+  terminal_ttfont: <b>inconsolata-narrow</b>
+</pre>
+</div>
+<p>どんなフォントが使えるかは、「<span class="file">config-starter.yml</span>」の中に書いてあります。</p>
+
+<h3 class="none"><a id="h6-4-3"></a><span class="secno">6.4.3</span> プログラムコードの枠線</h3>
+<p>プログラムコードに枠線をつける・つけないを変更するには、次の設定を変更してください。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  ## プログラム（//list）を枠で囲むならtrue、囲まないならfalse
+  program_border: true
+</pre>
+</div>
+<p>プログラムコードがページをまたぐときは、枠線つきのほうが分かりやすいです。詳しくは「<a href="06-bestpractice.html#h8-6-9">8.6.9 ページまたぎしていることを可視化する</a>」を見てください。</p>
+
+<h3 id="subsec-defaultopts" class="none"><a id="h6-4-4"></a><span class="secno">6.4.4</span> オプションのデフォルト値</h3>
+<p>「<code class="inline-code">//list</code>」の第3引数には、さまざまなオプションが指定できます。これらのオプションは、デフォルト値が「<span class="file">config-starter.yml</span>」で次のように設定されています。ここで、YAML<sup><a id="fnb-d15gt" href="#fn-d15gt" class="noteref" epub:type="noteref">*6</a></sup>では「<code class="inline-code">on, off, ~</code>」がそれぞれ「<code class="inline-code">true, false, null</code>」と同じ意味になります。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-d15gt" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*6] </span>「YAML」とはデータを構造化して記述する書き方のひとつであり、JSONの親戚みたいなものです。<span class="file">config-starter.yml</span>はYAMLで書かれています。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;</span>
+<pre class="list">  ## プログラム（//list）のデフォルトオプション
+  ## （注：YAMLでは `on, off, ~` は `true, false, null` と同じ）
+  program_default_options:
+    fold:        on        # on なら長い行を右端で折り返す
+    foldmark:    on        # on なら折り返し記号をつける
+    eolmark:     off       # on なら行末に改行記号をつける
+    lineno:      ~         # 1 なら行番号をつける
+    linenowidth: ~         # 行番号の幅を半角文字数で指定する
+    indent:      ~         # インデント幅
+    fontsize:    ~         # small/x-small/xx-smal
+    lang:        ~         # デフォルトのプログラミング言語名
+    #file:       ~         # （使用しない）
+    encoding:    utf-8     # ファイルの文字コード
+</pre>
+</div>
+<p>たとえば「<code class="inline-code">//list</code>」にデフォルトで行番号とインデント記号をつけるには、設定を次のように変更します。</p>
+<div class="caption-code">
+<span class="caption">「&lt;code class=&quot;inline-code&quot;&gt;//list&lt;/code&gt;」にデフォルトで行番号とインデント記号をつける</span>
+<pre class="list">  program_default_options:
+    <span class="weak">#...省略...</span>
+    lineno:      <b>1</b>         # 1 から始まる行番号をつける
+    linenowidth: <b>2</b>         # 行番号を2桁で（0なら自動計算）
+    indent:      <b>4</b>         # インデント幅を半角空白4文字に
+    <span class="weak">#...省略...</span>
+</pre>
+</div>
+<p>このようにデフォルト値を変更すれば、「<code class="inline-code">//list</code>」にオプションを何も指定しなくても、行番号とインデント記号がつくようになります。</p>
+<p>なおこのように設定をしたうえで、特定のプログラムコードでだけ行番号やインデント記号をつけたくない場合は、「<code class="inline-code">//list[][][lineno=<b>off</b>,indent=<b>off</b>]</code>」のように個別の指定をしてください。</p>
+<p>またターミナル画面を表す「<code class="inline-code">//terminal</code>」のオプションも、デフォルト値が<span class="file">config-starter.yml</span>で設定されています。項目名が「<code class="inline-code">terminal_default_options:</code>」であること以外はプログラムコードの場合と同じです。</p>
+
+<h3 id="sec-excluding" class="none"><a id="h6-4-5"></a><span class="secno">6.4.5</span> [PDF] 折り返し記号や行番号をマウス選択の対象から外す</h3>
+<p>PDF中のプログラムコードをマウスで選択してコピーすると、折り返し記号や行番号や改行記号もコピーされてしまいます。これはプログラムコードをコピペするときに不便です。</p>
+<p>Starterでは、これらの記号をマウスの選択対象から外すことができます。そのためには、次のどちらかを設定してください。</p>
+<ul>
+<li><span class="file">config-starter.yml</span>の「<code class="inline-code">exclude_mouseelect:</code>」を<code class="inline-code">true</code>にする。
+</li>
+<li>環境変数「<code class="inline-code">$STARTER_EXCLUDE_MOUSESELECT</code>」を「<code class="inline-code">on</code>」に設定する（「<code class="inline-code">true</code>」ではダメ）。
+</li>
+</ul>
+<p>この設定をしてからPDFを生成すると、以下のものがマウスの選択対象にならなくなります<sup><a id="fnb-y2q8d" href="#fn-y2q8d" class="noteref" epub:type="noteref">*7</a></sup>。</p>
+<ul>
+<li>折り返し記号
+</li>
+<li>行番号
+</li>
+<li>改行記号
+</li>
+</ul>
+<p>なおインデントを表す記号は、文字ではなく図形として縦線を描写しているため、マウスでの選択対象にはなりません。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-y2q8d" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*7] </span>「<code class="inline-code">@&lt;balloon&gt;{}</code>」で埋め込んだコメント文字列は、マウスコピーの対象外<span class="bou">ではありません</span>。これは意図した仕様です。もしこれも対象外にしたい場合は、相談してください。</p></div>
+</div><!--/.footnote-list-->
+<p>ただし、この機能が有効なのはAcrobat Readerのみです。macOSのPreview.appでは効かないので注意してください。</p>
+<p>またこの設定をオンにすると、LaTeXのコンパイル時間が大幅に増えます。そのため、デフォルトではオフになっています。リリース時にだけ環境変数「<code class="inline-code">$STARTER_EXCLUDE_MOUSESELECT</code>」を<code class="inline-code">on</code>にするといいでしょう。</p>
+<div id="id__724410854" class="cmd-code">
+<span class="caption">リスト6.1: リスト6.1: 「&lt;code class=&quot;inline-code&quot;&gt;$STARTER_EXCLUDE_MOUSESELECT&lt;/code&gt;」を&lt;code class=&quot;inline-code&quot;&gt;on&lt;/code&gt;にしてPDFを生成</span>
+<pre class="list">$ STARTER_EXCLUDE_MOUSESELECT=on rake pdf
+</pre>
+</div>
+
+<h2 class="leftline"><a id="h6-5"></a><span class="secno">6.5</span> 見出し</h2>
+
+<h3 class="none"><a id="h6-5-1"></a><span class="secno">6.5.1</span> 章のタイトルデザインを変更する</h3>
+<p>章(Chapter)のタイトルデザインを変更するには、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">capter_decoration:</code>」を変更します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  ## 章 (Chapter) タイトルの装飾
+  ## （none: なし、underline: 下線、boldlines: 上下に太線）
+  chapter_decoration: <b>boldlines</b>
+
+  ## 章 (Chapter) タイトルの左寄せ/右寄せ/中央揃え
+  ## （left: 左寄せ、right: 右寄せ、center: 中央揃え）
+  chapter_align: <b>center</b>
+
+  ## 章 (Chapter) タイトルを1行にする（章番号とタイトルとの間で改行しない）
+  chapter_oneline: <b>false</b>
+</pre>
+</div>
+
+<h3 id="subsec-sectitle" class="none"><a id="h6-5-2"></a><span class="secno">6.5.2</span> 節のタイトルデザインを変更する</h3>
+<p>節(Section)のタイトルデザインを変更するには、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">section_decoration:</code>」を変更します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  ## 節 (Section) タイトルの装飾
+  section_decoration: <b>grayback</b>
+</pre>
+</div>
+<p>どんなデザインが指定できるかは、<span class="imgref"><a href="./04-customize.html#section_decoration_samples">図6.2</a></span>を参照してください。</p>
+<div id="section_decoration_samples" class="image">
+<img src="images/04-customize/section_decoration_samples.png" alt="節タイトルのデザイン" class="img border" style="max-width:99%" />
+<p class="caption">
+図6.2: 節タイトルのデザイン
+</p>
+</div>
+<div class="note">
+<h5>節タイトルが長くて2行になる場合</h5>
+<p>もし節タイトルが長くて2行になることがある場合は、「<code class="inline-code">circle</code>」「<code class="inline-code">leftline</code>」「<code class="inline-code">numbox</code>」のどれかを指定するといいでしょう。それ以外だと、デザインが破綻してしまいます。</p>
+</div>
+
+<h3 id="subsec-paragraphdesign" class="none"><a id="h6-5-3"></a><span class="secno">6.5.3</span> 段見出しのデザインを変更する</h3>
+<p>段(Paragraph)見出しや小段(Paragraph)見出しのデザインを変更するには、「<span class="file">sty/starter-heading.sty</span>」から「<code class="inline-code">\Paragraph@title</code>」や「<code class="inline-code">\Subparagraph@title</code>」の定義を取り出し、「<span class="file">sty/mystyle.sty</span>」にコピーしたうえで変更してください。</p>
+
+<h3 class="none"><a id="h6-5-4"></a><span class="secno">6.5.4</span> [PDF] 章や節のタイトルを独自にデザインする</h3>
+<p>章(Chapter)や節(Section)のタイトルのデザインは、「<span class="file">sty/starter-heading.sty</span>」で定義されています。これらを変更したい場合は、必要な箇所を「<span class="file">sty/mystyle.sty</span>」にコピーしてから変更してください。</p>
+<p>またマクロを上書きする場合は、「<code class="inline-code">\newcommand</code>」ではなく「<code class="inline-code">\renewcommand</code>」を使うことに注意してください。</p>
+
+<h3 class="none"><a id="h6-5-5"></a><span class="secno">6.5.5</span> [PDF] 章扉をつける</h3>
+<p>Starterでは、章(Chapter)ごとにタイトルページをつけられます（<span class="imgref"><a href="./04-customize.html#chaptitlepage_sample">図6.3</a></span>）。これを「章扉」といい、商業誌ではとてもよく見かけます。</p>
+<div id="chaptitlepage_sample" class="image">
+<img src="images/04-customize/chaptitlepage_sample.png" alt="章扉（章の概要と目次つき）" class="img width-050per" />
+<p class="caption">
+図6.3: 章扉（章の概要と目次つき）
+</p>
+</div>
+<p>章扉をつけるには、次のようにします。</p>
+<ul>
+<li>章タイトル直後に「<code class="inline-code">//abstract{ ... //}</code>」で概要を書く（必須）。
+</li>
+<li>そのあとに「<code class="inline-code">//makechaptitlepage[toc=on]</code>」を書く。
+</li>
+<li>これをすべての章に対して行う（まえがきやあとがきは除く）。
+</li>
+</ul>
+<div class="caption-code">
+<span class="caption">章扉をつける</span>
+<pre class="list">= 章タイトル
+
+<b>//abstract{</b>
+...章の概要...
+<b>//}</b>
+
+<b>//makechaptitlepage[toc=on]</b>
+
+== 節タイトル
+</pre>
+</div>
+<p>章扉では、その章に含まれる節(Section)の目次が自動的につきます。これは読者にとって便利なので、特にページ数の多い本では章ごとのタイトルページをつけることをお勧めします。</p>
+
+<h3 class="none"><a id="h6-5-6"></a><span class="secno">6.5.6</span> [PDF] 章扉に背景色をつける</h3>
+<p>章扉には、デフォルトでは背景色がついていませんが、背景色をつけると見栄えがかなりよくなります。</p>
+<p>背景色は<span class="file">sty/config-color.sty</span>において「<code class="inline-code">starter@chaptitlepagecolor</code>」という名前で定義されているので、これを上書き設定すれば変更できます。設定は<span class="file">sty/mystyle.sty</span>で行うといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sty/mystyle.sty&lt;/span&gt;：章扉の背景色を設定する</span>
+<pre class="list">\definecolor{starter@chaptitlepagecolor}{gray}{0.9}% 明るいグレー
+</pre>
+</div>
+<p>また章扉に背景色を設定した場合は、印刷用PDFの上下左右に3mmずつの「塗り足し」をつけるのが望ましいです。そのためには、<span class="file">config-starter.sty</span>で「<code class="inline-code">bleedsize: 3mm</code>」を設定してください。この設定は印刷用PDFでのみ機能し、電子用PDFでは無視されます。詳しくは「<a href="04-customize.html#h6-2-4">6.2.4 [PDF] 塗り足しをつける</a>」を参照してください。</p>
+
+<h3 id="subsec-newpagepersec" class="none"><a id="h6-5-7"></a><span class="secno">6.5.7</span> [PDF] 節ごとに改ページする</h3>
+<p>初心者向けの入門書では、節(Chapter)ごとに改ページするデザインが好まれます。Starterでこれを行うには、「<span class="file">config-starter.yml</span>」で設定項目「<code class="inline-code">section_newpage:</code>」を「<code class="inline-code">true</code>」に設定します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  ## 節 (Section) ごとに改ページするか
+  ## （ただし各章の最初の節は改ページしない）
+  section_newpage: <b>true</b>
+</pre>
+</div>
+
+<h3 id="subsec-subsecnum" class="none"><a id="h6-5-8"></a><span class="secno">6.5.8</span> 項に番号をつける</h3>
+<p>Re:VIEWやStarterでは、デフォルトでは項(Subsection)に番号がつきません。項にも番号をつけるには、「<span class="file">config.yml</span>」の設定項目「<code class="inline-code">secnolevel:</code>」を「<code class="inline-code">3</code>」に変更します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config.yml」</span>
+<pre class="list"># 本文でセクション番号を表示する見出しレベル
+#secnolevel: <b>2</b>    <span class="balloon">← 章 (Chapter) と節 (Section) にだけ番号をつける</span>
+secnolevel: <b>3</b>     <span class="balloon">← 項 (Subsection) にも番号をつける</span>
+</pre>
+</div>
+
+<h3 class="none"><a id="h6-5-9"></a><span class="secno">6.5.9</span> 項を目次に含める</h3>
+<p>項(Subsection)を目次に出すには、「<span class="file">config.yml</span>」の設定項目「<code class="inline-code">toclevel:</code>」を「<code class="inline-code">3</code>」に変更します。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config.yml」</span>
+<pre class="list"># 目次として抽出する見出しレベル
+#toclevel: <b>2</b>      <span class="balloon">← （部と）章と節までを目次に載せる</span>
+toclevel: <b>3</b>       <span class="balloon">← （部と）章と節と項を目次に載せる</span>
+</pre>
+</div>
+
+<h3 id="subsec-parenttitle" class="none"><a id="h6-5-10"></a><span class="secno">6.5.10</span> [PDF] 項への参照に節タイトルを含める</h3>
+<p>項(Subsection)に番号がついていない場合、「<code class="inline-code">@&lt;secref&gt;{...}</code>」で項を参照すると表示が番号なしの項タイトルだけになるので、ユーザはその項を探せません。</p>
+<p>たとえば前の項のタイトルは「項を目次に含める」です。もし</p>
+<blockquote class="blockquote">
+<p class="noindent">詳しくは「4.5.7 項を目次に含める」を参照してください。</p>
+</blockquote>
+<p>と書かれてあれば、項番号を手がかりにして読者はその項を簡単に探せるでしょう。しかし、もし項番号がなくて</p>
+<blockquote class="blockquote">
+<p class="noindent">詳しくは「項を目次に含める」を参照してください。</p>
+</blockquote>
+<p class="noindent">と書かれてると、手がかりがないので読者はその項を探すのに苦労するでしょう。</p>
+<p>このように、本文の中で項を参照しているなら項に番号をつけたほうがいいです。</p>
+<p>Starterでは別の解決策として、「<code class="inline-code">@&lt;secref&gt;{...}</code>」で項(Subsection)を参照したときに親となる節(Section)のタイトルもあわせて表示する機能を用意しています。たとえばこのように：</p>
+<blockquote class="blockquote">
+<p class="noindent">詳しくは「4.5 見出し」の中の「項を目次に含める」を参照してください。</p>
+</blockquote>
+<p>このような表示にするには、「<span class="file">config-starter.yml</span>」の設定項目「<code class="inline-code">secref_parenttitle:</code>」を「<code class="inline-code">true</code>」に設定してください。</p>
+<div class="caption-code">
+<pre class="emlist">  ## @&lt;secref&gt;{}において、親の節のタイトルを含めるか？
+  secref_parenttitle: true # trueなら親の節のタイトルを含める
+</pre>
+</div>
+<p>なお以前は、この値はデフォルトで「<code class="inline-code">true</code>」になっていました。しかし「<code class="inline-code">@&lt;secref&gt;{}</code>」での参照にページ番号がつくこと、また項タイトルにクローバーをつければ項であることがすぐ分かることから、現在ではデフォルトで「<code class="inline-code">false</code>」になっています。</p>
+
+<h3 class="none"><a id="h6-5-11"></a><span class="secno">6.5.11</span> 項タイトルの記号を外す</h3>
+<p>項(Subsection)のタイトル先頭につく記号（クローバー、クラブ）は、「<code class="inline-code">config-starter.yml</code>」でオン・オフできます。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config-starter.yml」</span>
+<pre class="list">  ## 項 (Subsection) タイトルの装飾
+  ## （none: なし、symbol: 先頭にクローバー）
+  subsection_decoration: <b>symbol</b>
+</pre>
+</div>
+
+<h3 class="none"><a id="h6-5-12"></a><span class="secno">6.5.12</span> [PDF] 項タイトルの記号をクローバーから変更する</h3>
+<p>項(Subsection)のタイトル先頭につく記号は、「<code class="inline-code">sty/starter-heading.sty</code>」で次のように定義されています。</p>
+<div class="caption-code">
+<span class="caption">ファイル「sty/starter-heading.sty」</span>
+<pre class="list">\newcommand{\starter@subsection@symbol}{<b>$\clubsuit$</b>}% クローバー
+</pre>
+</div>
+<p>これを変更するには、「<span class="file">sty/mystyle.sty</span>」で上書きしましょう。</p>
+<div class="caption-code">
+<span class="caption">ファイル「sty/mystyle.sty」</span>
+<pre class="list">%% 「\newcommand」ではなく「\renewcommand」を使うことに注意
+\renewcommand{\starter@subsection@symbol}{<b>$\heartsuit$</b>}% ハート
+</pre>
+</div>
+
+<h2 class="leftline"><a id="h6-6"></a><span class="secno">6.6</span> 本</h2>
+
+<h3 class="none"><a id="h6-6-1"></a><span class="secno">6.6.1</span> 本のタイトルや著者名を変更する</h3>
+<p>本のタイトルや著者名は、「<span class="file">config.yml</span>」で設定できます。</p>
+<div class="caption-code">
+<span class="caption">ファイル「config.yml」</span>
+<pre class="list"># 書名
+<b>booktitle: |-</b>
+  Re:VIEW Starter
+  ユーザーズガイド
+<b>subtitle: |-</b>
+  便利な機能を一挙解説！
+
+# 著者名。「, 」で区切って複数指定できる
+<b>aut:</b>
+  - name:    カウプラン機関極東支部
+    file-as: カウプランキカンキョクトウシブ
+</pre>
+</div>
+<p>Starterでは、本のタイトルやサブタイトルを複数行で設定できます。こうすると、大扉（タイトルページ）でも複数行で表示されます。</p>
+
+<h3 id="subsec-coverpdf" class="none"><a id="h6-6-2"></a><span class="secno">6.6.2</span> [PDF] 表紙や大扉や奥付となるPDFファイルを指定する</h3>
+<p>Starterでは、本の表紙や大扉（タイトルページ）や奥付となるPDFファイルを指定できます。<span class="file">config-starter.yml</span>で以下の項目を変更してください<sup><a id="fnb-fn-2l1nn" href="#fn-fn-2l1nn" class="noteref" epub:type="noteref">*8</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-2l1nn" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*8] </span>これらの設定は、以前は<span class="file">config.yml</span>で行っていましたが、現在は<span class="file">config-starter.yml</span>で行うように変更されました。また<span class="file">config.yml</span>に古い設定が残っているとコンパイルエラーになり、「古い設定が残っているので移行するように」というエラーメッセージが出ます。</p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;」</span>
+<pre class="list">  frontcover_pdffile: cover_a5.pdf          <span class="balloon">← 表紙</span>
+  backcover_pdffile:  null                  <span class="balloon">← 裏表紙</span>
+  titlepage_pdffile:  null                  <span class="balloon">← 大扉</span>
+  colophon_pdffile:   null                  <span class="balloon">← 奥付</span>
+  #includepdf_option: &quot;offset=-2.3mm 2.3mm&quot; <span class="balloon">← 位置を微調整する場合</span>
+  includepdf_option:  null                  <span class="balloon">← 通常は無指定でよい</span>
+</pre>
+</div>
+<p>いくつか注意点があります。</p>
+<ul>
+<li>PDFファイルは、「<span class="file">images/</span>」フォルダ直下に置いてください。
+</li>
+<li>画像ファイルは使用できません。必ずPDFファイルを使ってください。
+</li>
+<li>1つのPDFファイルにつき1ページだけにしてください。
+   もしPDFファイルが複数ページを持つ場合は、「<code class="inline-code">cover.pdf&lt;2&gt;</code>」のように取り込むページ番号を指定してください（実験的機能）。
+</li>
+<li>複数のPDFファイルを指定するには、YAMLの配列を使って「<code class="inline-code">[file1.pdf, file2.pdf]</code>」のように指定します。
+   「<code class="inline-code">,</code>」のあとには必ず半角空白を入れてください。
+</li>
+<li>もし位置がずれる場合は、「<code class="inline-code">coverpdf_option:</code>」の値を調整してください（以前は微調整が必要でしたが、現在は必要ないはずです）。
+</li>
+</ul>
+<p>なお表紙と裏表紙がつくのは電子用PDFファイルの場合のみであり、印刷用PDFファイルにはつかない（し、つけてはいけない）ので注意してください。詳しくは「<a href="02-tutorial.html#h4-5">4.5 印刷用PDFと電子用PDF</a>」を参照してください。これに対して大扉と奥付は、指定されれば印刷用PDFでも電子用PDFでもつきます。</p>
+<div class="note">
+<h5>PNGやJPGの画像をPDFに変換する</h5>
+<p>macOSにてPNGやJPGをPDFにするには、画像をプレビュー.appで開き、メニューから「ファイル &gt; 書き出す... &gt; フォーマット:PDF」を選んでください。</p>
+<p>macOS以外の場合は、「画像をPDFに変換」などでGoogle検索すると変換サービスが見つかります。</p>
+</div>
+
+<h3 class="none"><a id="h6-6-3"></a><span class="secno">6.6.3</span> [PDF] 表紙のPDFから塗り足しを除いて取り込む</h3>
+<p>表紙や裏表紙のPDFファイルを印刷所に入稿するには、通常のA5やB5に上下左右3mmずつを加えたサイズのPDFファイルを使います。この上下左右3mmの部分を「塗り足し」といいます<sup><a id="fnb-fn-lmc7a" href="#fn-fn-lmc7a" class="noteref" epub:type="noteref">*9</a></sup>。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-lmc7a" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*9] </span>塗り足しについては「<a href="04-customize.html#h6-2-4">6.2.4 [PDF] 塗り足しをつける</a>」も参照してください。</p></div>
+</div><!--/.footnote-list-->
+<p>つまり印刷用の表紙や裏表紙は、塗り足しの分だけ縦横サイズが少し大きいのです。そのため印刷用の表紙や裏表紙を電子用PDFに取り込むには、塗り足し部分を除いたうえで取り込む必要があります。</p>
+<p>StarterではPDFファイル名の後ろに「<code class="inline-code">*</code>」をつけると、塗り足し部分を除いて取り込んでくれます。PDFのページ番号も一緒に指定する場合は「<code class="inline-code">cover.pdf&lt;2&gt;*</code>」のように指定してください。</p>
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;config-starter.yml&lt;/span&gt;」</span>
+<pre class="list">  frontcover_pdffile: frontcover_a5.pdf<b>*</b>  <span class="balloon">← 塗り足し部分を取り除く</span>
+  backcover_pdffile:  backcover_a5.pdf<b>*</b>   <span class="balloon">← 塗り足し部分を取り除く</span>
+  titlepage_pdffile:  titlepage_a5.pdf    <span class="balloon">← 大扉は塗り足しなし</span>
+  colophon_pdffile:   colophon_a5.pdf     <span class="balloon">← 奥付は塗り足しなし</span>
+</pre>
+</div>
+<p>より正確には次のような動作をします。</p>
+<ul>
+<li>PDFファイル名の最後に「<code class="inline-code">*</code>」がついてなければ、用紙サイズに合わせてPDFを拡大・縮小して、中央に配置します。
+</li>
+<li>PDFファイル名の最後に「<code class="inline-code">*</code>」がついていると、拡大・縮小はせずに<span class="bou">そのままの大きさで中央に配置</span>します。
+   その結果、塗り足し部分だけが用紙からはみ出るので、あたかも塗り足し部分が取り除かれたように見えます。
+</li>
+</ul>
+<div class="note">
+<h5>塗り足しつきで表紙を取り込むと上下に空きが入る理由</h5>
+<p>ファイル名の最後に「<code class="inline-code">*</code>」をつけない場合、用紙サイズに合わせてPDFを拡大または縮小しますが、縦横の比率は変えません。そのため、PDFが用紙より縦長だと上下を揃えようとして左右に空きが入り、PDFが用紙より横長だと左右を揃えようとして上下に空きが入ります。</p>
+<p>塗り足しのついたPDFファイルをそのまま取り込むと上下が少し空くのは、PDFの縦横サイズが塗り足しの分だけ用紙より横長になるからです。</p>
+</div>
+
+<h3 class="none"><a id="h6-6-4"></a><span class="secno">6.6.4</span> [PDF] 大扉のデザインを変更する</h3>
+<p>大扉（タイトルページ）のPDFファイルを指定しなかった場合は、デフォルトデザインの大扉がつきます。このデザインは「<span class="file">sty/mytitlepage.sty</span>」で定義されているので、デザインを変更したい場合はこのファイルを編集してください。編集する前にバックアップを取っておくといいでしょう<sup><a id="fnb-fn-iaa2p" href="#fn-fn-iaa2p" class="noteref" epub:type="noteref">*10</a></sup>。</p>
+<div class="cmd-code">
+<pre class="emlist">$ <span class="userinput">cp sty/mytitlepage.sty sty/mytitlepage.sty.original</span>
+$ <span class="userinput">vi sty/mytitlepage.sty</span>
+</pre>
+</div>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-iaa2p" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*10] </span>Gitなどでバージョン管理している場合は、バックアップする必要はありません。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h6-6-5"></a><span class="secno">6.6.5</span> [PDF] 奥付のデザインを変更する</h3>
+<p>奥付のPDFファイルを指定しなかった場合は、デフォルトデザインの奥付がつきます。このデザインは「<span class="file">sty/mycolophon.sty</span>」で定義されているので、デザインを変更したい場合はこのファイルを編集してください。編集する前にバックアップを取っておくといいでしょう<sup><a id="fnb-fn-evcg1" href="#fn-fn-evcg1" class="noteref" epub:type="noteref">*11</a></sup>。</p>
+<div class="cmd-code">
+<pre class="emlist">$ <span class="userinput">cp sty/mycolophon.sty sty/mycolophon.sty.original</span>
+$ <span class="userinput">vi sty/mycolophon.sty</span>
+</pre>
+</div>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-evcg1" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*11] </span>Gitなどでバージョン管理している場合は、バックアップする必要はありません。</p></div>
+</div><!--/.footnote-list-->
+
+<h3 class="none"><a id="h6-6-6"></a><span class="secno">6.6.6</span> [PDF] 奥付を改ページしない</h3>
+<p>Starterでは、奥付は自動的に最終ページに配置されます（詳しくは「<a href="06-bestpractice.html#h8-10-1">8.10.1 奥付は最後のページに置く</a>」を参照してください）。この自動での配置を止めて手動でコントロールしたい場合は、次のどちらかを行ってください。</p>
+<ul>
+<li>「<span class="file">sty/mycolopho.sty</span>」において、7行目付近にある「<code class="inline-code">\reviewcolophon</code>」の先頭に「<code class="inline-code">%</code>」をつけて「<code class="inline-code">%\reviewcolophon</code>」とする。
+</li>
+<li>「<span class="file">sty/mystyle.sty</span>」に、「<code class="inline-code">\def\reviewcolophon{}</code>」という記述を追加する。
+</li>
+</ul>
+<p>たとえば、最終ページの上半分に著者紹介と過去の著作一覧を表示し、下半分に奥付を表示したいとします。その場合は奥付が自動的に改ページされないよう変更してから、あとがきを次のようにするといいでしょう。</p>
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;contents/99-postface.re&lt;/span&gt;」：あとがき</span>
+<pre class="list">= あとがき
+....文章....
+
+//clearpage     <span class="balloon">← 改ページ</span>
+== 著者紹介
+....紹介文....
+
+ * 『著作1』
+ * 『著作2』
+</pre>
+</div>
+
+<h3 class="none"><a id="h6-6-7"></a><span class="secno">6.6.7</span> [PDF] 奥付に発行者と連絡先を記載する</h3>
+<p>「<a href="https://gishohaku.dev" class="link">技書博</a>」という技術系同人誌イベントでは、奥付に「発行者」と「連絡先」の記載が必要となりました<sup><a id="fnb-fn-13udq" href="#fn-fn-13udq" class="noteref" epub:type="noteref">*12</a></sup>。Starterでは、奥付に発行者と連絡先を載せる設定を用意しています。</p>
+<div class="footnote-list">
+<div class="footnote" id="fn-fn-13udq" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*12] </span><a href="https://esa-pages.io/p/sharing/13039/posts/115/7fbe936149a836eac678.html#%E5%A5%A5%E4%BB%98%E3%81%AE%E8%A8%98%E8%BC%89" class="link">https://esa-pages.io/p/sharing/13039/posts/115/7fbe936149a836eac678.html#%E5%A5%A5%E4%BB%98%E3%81%AE%E8%A8%98%E8%BC%89</a></p></div>
+</div><!--/.footnote-list-->
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;config.yml&lt;/span&gt;」</span>
+<pre class="list">additional:
+  - key:     発行者
+    value:   xxxxx    <span class="balloon">← サークル名ではなく個人名（ペンネーム可）</span>
+  - key:     連絡先
+    value:
+      - xxxxx@example.com          <span class="balloon">← メールアドレス（推奨）</span>
+      - https://www.example.com/   <span class="balloon">← WebサイトURL</span>
+      - &quot;@xxxxx&quot;          <span class="balloon">← Twitterアカウント（頭に '@' が必要）</span>
+</pre>
+</div>
+<p>連絡先にはいくつか補足事項があります。</p>
+<ul>
+<li>連絡先には複数の値が指定できます。技書博によればメールアドレスがお勧めだそうです。
+</li>
+<li>連絡先にURLが指定されると、自動的にリンクになります。
+</li>
+<li>連絡先にTwitterアカウントを指定するには、先頭に「<code class="inline-code">@</code>」をつけてください。
+   またTwitterアカウントも自動的にリンクになります。
+</li>
+<li>発行者や連絡先は、奥付の中では印刷所名の直前に置かれます。
+</li>
+<li>PDFの奥付にのみ表示されます。HTMLやePubへは未対応です。
+</li>
+</ul>
+<p>なおこの設定には、発行者や連絡先以外の項目も追加できます。もし奥付に表示したい項目があれば、ここに追加してください。</p>
+
+<h3 class="none"><a id="h6-6-8"></a><span class="secno">6.6.8</span> [PDF] 注意事項の文章を変更する</h3>
+<p>大扉（タイトルページ）の直後のページには、免責や商標に関する以下のような注意事項が書かれています。</p>
+<blockquote class="blockquote">
+<p class="noindent">■免責<br />本書は情報の提供のみを目的としています。<br />本書の内容を実行・適用・運用したことで何が起きようとも、それは実行・適用・運用した人自身の責任であり、著者や関係者はいかなる責任も負いません。</p>
+<p><br /></p>
+<p class="noindent">■商標<br />本書に登場するシステム名や製品名は、関係各社の商標または登録商標です。<br />また本書では、TM、®、© などのマークは省略しています。</p>
+</blockquote>
+<p>この文言を変更したい場合は、「<span class="file">sty/mytitlepage.sty</span>」を編集してください。</p>
+
+<h3 class="none"><a id="h6-6-9"></a><span class="secno">6.6.9</span> [PDF] 注意事項の文章を出さない</h3>
+<p>大扉（タイトルページ）の裏ページにある注意事項の文章を出さないようにするには、次のどちらかを行ってください。</p>
+<ul>
+<li>「<span class="file">sty/mytitlepage.sty</span>」において、「<code class="inline-code">\newcommand{\mytitlenextpage}</code>」を「<code class="inline-code">\newcommand{\@mytitlenextpage}</code>」に変更する。
+</li>
+<li>「<span class="file">sty/mystyle.sty</span>」において、「<code class="inline-code">\let\mytitlenextpage=\undefined}</code>」という記述を追加する。
+</li>
+</ul>
+
+<h2 id="sec-index" class="leftline"><a id="h6-7"></a><span class="secno">6.7</span> 索引</h2>
+
+<h3 class="none"><a id="h6-7-1"></a><span class="secno">6.7.1</span> [PDF] 用語のグループ化を文字単位にする</h3>
+<p>索引ページでは、用語が「あ か さ た な は ……」のように行単位でグループ化されます。これを「あ い う え お か き ……」のように文字単位でグループ化するには、<span class="file">config.yml</span>の「<code class="inline-code">makeindex_options: &quot;-q -g&quot;</code>」から「<code class="inline-code">-g</code>」を取り除いてください。</p>
+
+<h3 class="none"><a id="h6-7-2"></a><span class="secno">6.7.2</span> [PDF] 連続したピリオドのかわりに空白を使う</h3>
+<p>索引ページにて用語とページ番号との間は、デフォルトでは連続したピリオドで埋めています。これを空白で埋めるよう変更するには、<span class="file">sty/indexsty.ist</span>を編集してください。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sty/indexsty.ist&lt;/span&gt;</span>
+<pre class="list">## 用語とページ番号との間をピリオドで埋める
+#delim_0 &quot;\\quad\\dotfill ~&quot;
+#delim_1 &quot;\\quad\\dotfill ~&quot;
+#delim_2 &quot;\\quad\\dotfill ~&quot;
+
+## 用語とページ番号との間を空白で埋める
+delim_0 &quot;\\quad\\hfill&quot;
+delim_1 &quot;\\quad\\hfill&quot;
+delim_2 &quot;\\quad\\hfill&quot;
+</pre>
+</div>
+<p>なお<span class="file">sty/indexsty.ist</span>の中の設定項目については、<a href="http://tug.ctan.org/info/mendex-doc/mendex.pdf" class="link">mendexコマンドのマニュアル</a>を参照してください。mendexコマンド（またはupmendexコマンド）のオプションについても記載されています。</p>
+
+<h3 class="none"><a id="h6-7-3"></a><span class="secno">6.7.3</span> [PDF] 用語見出しのデザインを変更する</h3>
+<p>索引ページの用語見出しは「■あ」「■か」のようになっています。このデザインは<span class="file">sty/starter-misc.sty</span>の「<code class="inline-code">\starterindexgroup</code>」で設定されています。変更するには「<code class="inline-code">\starterindexgroup</code>」の定義を<span class="file">sty/starter-misc.sty</span>から<span class="file">sty/mystyle.sty</span>にコピーして、「<code class="inline-code">\newcommand</code>」を「<code class="inline-code">\renewcommand</code>」に変更して中身をカスタマイズしてください。</p>
+<div class="caption-code">
+<span class="caption">&lt;span class=&quot;file&quot;&gt;sty/mystyle.sty&lt;/span&gt;</span>
+<pre class="list">\renewcommand{\starterindexgroup}[1]{%  % 索引グループ
+  {%
+    \bfseries%                   % 太字
+    \gtfamily\sffamily%          % ゴシック体
+    ■#1%                        % 例：`■あ`
+  }%
+}
+</pre>
+</div>
+<p>また<span class="file">sty/indexsty.ist</span>を編集すると、別のLaTeXマクロ名を指定できます。</p>
+
+<h3 class="none"><a id="h6-7-4"></a><span class="secno">6.7.4</span> [PDF] その他</h3>
+<ul>
+<li>索引ページにおいて子要素の用語で使う「――」は、<span class="file">sty/starter-misc.sty</span>の「<code class="inline-code">\starterindexplaceholder</code>」で定義されています。
+</li>
+<li>「<code class="inline-code">@&lt;term&gt;{}</code>」で表示するフォントは、<span class="file">sty/starter-misc.sty</span>の「<code class="inline-code">\starterterm</code>」で定義されています。
+   デフォルトではゴシック体にで表示するように定義されています。
+</li>
+<li>用語の転送先を表す「→」を別の記号や文字列に変更するには、<span class="file">sty/mystyle.sty</span>にたとえば「<code class="inline-code">\renewcommand{\seename}{\textit{see: }}</code>」のように書きます。
+</li>
+</ul>
+
+<h2 class="leftline"><a id="h6-8"></a><span class="secno">6.8</span> Rakeタスク</h2>
+
+<h3 class="none"><a id="h6-8-1"></a><span class="secno">6.8.1</span> デフォルトタスクを設定する</h3>
+<p>Starterでは、<code class="inline-code">rake</code>コマンドのデフォルトタスクを環境変数「<em>$RAKE_DEFAULT</em>」で指定できます。</p>
+<div class="cmd-code">
+<span class="caption">rakeのデフォルトタスクを設定する</span>
+<pre class="list">$ <span class="userinput">rake</span>              <span class="balloon">← デフォルトではタスク一覧が表示される</span>
+$ <span class="userinput"><b>export RAKE_DEFAULT=pdf</b></span>  <span class="balloon">← 環境変数を設定</span>
+$ <span class="userinput">rake</span>              <span class="balloon">← 「rake pdf」が実行される</span>
+</pre>
+</div>
+
+<h3 class="none"><a id="h6-8-2"></a><span class="secno">6.8.2</span> 独自のタスクを追加する</h3>
+<p>Starterでは、ユーザ独自のRakeタスクを追加するためのファイル「<span class="file">lib/tasks/mytasks.rake</span>」を用意しています。</p>
+<div class="caption-code">
+<span class="caption">ファイル「lib/tasks/mytasks.rake」</span>
+<pre class="list">## 独自のタスクを追加する
+desc &quot;ZIPファイルを生成する&quot;
+task :zip do
+  rm_rf &quot;mybook&quot;
+  mkdir &quot;mybook&quot;
+  cp_r [&quot;README.md&quot;, &quot;mybook.pdf&quot;], &quot;mybook&quot;
+  sh &quot;zip -r9 mybook.zip mybook&quot;
+end
+</pre>
+</div>
+
+<h3 class="none"><a id="h6-8-3"></a><span class="secno">6.8.3</span> コンパイルの前処理を追加する</h3>
+<p>Starterでは、任意の処理をコンパイルの前に実行できます。</p>
+<div class="caption-code">
+<span class="caption">ファイル「&lt;span class=&quot;file&quot;&gt;lib/tasks/mytasks.rake&lt;/span&gt;」</span>
+<pre class="list">def my_preparation(config)        # 新しい前処理用関数
+  print &quot;...前処理を実行...\n&quot;
+end
+
+PREPARES.unshift :my_preparation  # 前処理の先頭に追加
+</pre>
+</div>
+<p>これを使うと、たとえば以下のようなことができます。</p>
+<ul>
+<li>原稿ファイルをコピーし書き換える。
+</li>
+<li>複数の原稿ファイルを結合して1つにする。
+</li>
+<li>1つの原稿ファイルを複数に分割する。
+</li>
+</ul>
+
+        </main>
+        <nav class="page-navi">
+          <a href="03-syntax.html" class="page-prev">&#9664;</a>
+          <a href="05-faq.html" class="page-next">&#9654;</a>
+        </nav>
+        <footer>
+        </footer>
+      </div>
+    </div>
+    <script>
+function rebuildAndReloadForcedly() {
+  fetch('/rebuild.js').then((resp)=>{
+    resp.text().then((text)=>{ eval(text); });
+  });
+}
+    </script>
+    <script src="/rebuild.js?file=04-customize.re"></script>
+  </body>
+</html>
+<!-- layout.html5.erb -->

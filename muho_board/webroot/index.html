@@ -1,0 +1,193 @@
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title> | 【Python】Tkinterで競馬の着順掲示板を作る</title>
+
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css" />
+
+
+    <link rel="next" title="まえがき / はじめに" href="00-preface.html">
+
+
+    <meta name="generator" content="Re:VIEW Starter">
+  </head>
+  <body>
+    <div class="page-outer">
+
+      <div class="page-inner">
+        <header class="page-header">
+        </header>
+        <main class="page-main">
+
+          <h1>【Python】Tkinterで競馬の着順掲示板を作る</h1>
+<ul class="toc toc-1">
+    <li class="toc-chapter"><a href="./00-preface.html">まえがき / はじめに</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h">凡例</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./01-install.html">1 インストール</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h1-1">1.1 Pythonのインストール</a></li>
+        <li class="toc-section"><a href="#h1-2">1.2 プロジェクトを作成</a></li>
+        <li class="toc-section"><a href="#h1-3">1.3 サンプルのPDFファイルを生成</a></li>
+        <li class="toc-section"><a href="#h1-4">1.4 注意点</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./02-tuto.html">2 チュートリアル</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h2-1">2.1 完成イメージ</a></li>
+        <li class="toc-section"><a href="#h2-2">2.2 ウィンドウの作成</a></li>
+        <li class="toc-section"><a href="#h2-3">2.3 テキストの配置</a></li>
+        <li class="toc-section"><a href="#h2-4">2.4 次の章に向けての下準備</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h3-1">3.1 テキストボックス</a></li>
+        <li class="toc-section"><a href="#h3-2">3.2 プルダウンメニュー</a></li>
+        <li class="toc-section"><a href="#h3-3">3.3 スピンボックス</a></li>
+        <li class="toc-section"><a href="#h3-4">3.4 チェックボックス</a></li>
+        <li class="toc-section"><a href="#h3-5">3.5 ボタン</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./02-tutorial.html">4 チュート</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h4-1">4.1 用語の説明</a></li>
+        <li class="toc-section"><a href="#h4-2">4.2 フォルダとファイルの説明</a></li>
+        <li class="toc-section"><a href="#h4-3">4.3 原稿の追加と変更</a></li>
+        <li class="toc-section"><a href="#h4-4">4.4 基本的な記法</a></li>
+        <li class="toc-section"><a href="#h4-5">4.5 印刷用PDFと電子用PDF</a></li>
+        <li class="toc-section"><a href="#h4-6">4.6 高速プレビュー</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./03-syntax.html">5 記法</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h5-1">5.1 コメント</a></li>
+        <li class="toc-section"><a href="#h5-2">5.2 段落と改行と空行</a></li>
+        <li class="toc-section"><a href="#h5-3">5.3 見出し</a></li>
+        <li class="toc-section"><a href="#h5-4">5.4 箇条書きと定義リスト</a></li>
+        <li class="toc-section"><a href="#h5-5">5.5 インライン命令とブロック命令</a></li>
+        <li class="toc-section"><a href="#h5-6">5.6 強調と装飾</a></li>
+        <li class="toc-section"><a href="#h5-7">5.7 プログラムリスト</a></li>
+        <li class="toc-section"><a href="#h5-8">5.8 行番号</a></li>
+        <li class="toc-section"><a href="#h5-9">5.9 ターミナル</a></li>
+        <li class="toc-section"><a href="#h5-10">5.10 脚注</a></li>
+        <li class="toc-section"><a href="#h5-11">5.11 ノート</a></li>
+        <li class="toc-section"><a href="#h5-12">5.12 コラム</a></li>
+        <li class="toc-section"><a href="#h5-13">5.13 画像</a></li>
+        <li class="toc-section"><a href="#h5-14">5.14 表</a></li>
+        <li class="toc-section"><a href="#h5-15">5.15 数式</a></li>
+        <li class="toc-section"><a href="#h5-16">5.16 会話形式</a></li>
+        <li class="toc-section"><a href="#h5-17">5.17 用語、索引</a></li>
+        <li class="toc-section"><a href="#h5-18">5.18 単語展開</a></li>
+        <li class="toc-section"><a href="#h5-19">5.19 その他</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./04-customize.html">6 カスタマイズ</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h6-1">6.1 命令</a></li>
+        <li class="toc-section"><a href="#h6-2">6.2 ページと本文</a></li>
+        <li class="toc-section"><a href="#h6-3">6.3 フォント</a></li>
+        <li class="toc-section"><a href="#h6-4">6.4 プログラムコード</a></li>
+        <li class="toc-section"><a href="#h6-5">6.5 見出し</a></li>
+        <li class="toc-section"><a href="#h6-6">6.6 本</a></li>
+        <li class="toc-section"><a href="#h6-7">6.7 索引</a></li>
+        <li class="toc-section"><a href="#h6-8">6.8 Rakeタスク</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./05-faq.html">7 FAQ</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h7-1">7.1 コンパイルエラー</a></li>
+        <li class="toc-section"><a href="#h7-2">7.2 本文</a></li>
+        <li class="toc-section"><a href="#h7-3">7.3 プログラムコードとターミナル</a></li>
+        <li class="toc-section"><a href="#h7-4">7.4 画像</a></li>
+        <li class="toc-section"><a href="#h7-5">7.5 ノンブル</a></li>
+        <li class="toc-section"><a href="#h7-6">7.6 LaTeX関連</a></li>
+        <li class="toc-section"><a href="#h7-7">7.7 その他</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./06-bestpractice.html">8 よりよい本づくり</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h8-1">8.1 まえがき</a></li>
+        <li class="toc-section"><a href="#h8-2">8.2 初心者向け入門書</a></li>
+        <li class="toc-section"><a href="#h8-3">8.3 箇条書き</a></li>
+        <li class="toc-section"><a href="#h8-4">8.4 本文</a></li>
+        <li class="toc-section"><a href="#h8-5">8.5 見出し</a></li>
+        <li class="toc-section"><a href="#h8-6">8.6 プログラムコード</a></li>
+        <li class="toc-section"><a href="#h8-7">8.7 図表</a></li>
+        <li class="toc-section"><a href="#h8-8">8.8 ページデザイン</a></li>
+        <li class="toc-section"><a href="#h8-9">8.9 大扉</a></li>
+        <li class="toc-section"><a href="#h8-10">8.10 奥付</a></li>
+        <li class="toc-section"><a href="#h8-11">8.11 textlintによる文章チェック</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h1-1">1.1 まとめ記事</a></li>
+        <li class="toc-section"><a href="#h1-2">1.2 プロジェクト作成</a></li>
+        <li class="toc-section"><a href="#h1-3">1.3 コメント</a></li>
+        <li class="toc-section"><a href="#h1-4">1.4 箇条書き</a></li>
+        <li class="toc-section"><a href="#h1-5">1.5 定義リスト</a></li>
+        <li class="toc-section"><a href="#h1-6">1.6 見出し（章、節、項、目）</a></li>
+        <li class="toc-section"><a href="#h1-7">1.7 インライン命令</a></li>
+        <li class="toc-section"><a href="#h1-8">1.8 ブロック命令</a></li>
+        <li class="toc-section"><a href="#h1-9">1.9 プログラムコード</a></li>
+        <li class="toc-section"><a href="#h1-10">1.10 ターミナル画面</a></li>
+        <li class="toc-section"><a href="#h1-11">1.11 ノート、ミニブロック</a></li>
+        <li class="toc-section"><a href="#h1-12">1.12 図</a></li>
+        <li class="toc-section"><a href="#h1-13">1.13 表</a></li>
+        <li class="toc-section"><a href="#h1-14">1.14 会話形式</a></li>
+        <li class="toc-section"><a href="#h1-15">1.15 用語、索引</a></li>
+        <li class="toc-section"><a href="#h1-16">1.16 表紙、大扉、奥付</a></li>
+        <li class="toc-section"><a href="#h1-17">1.17 PDFファイル</a></li>
+        <li class="toc-section"><a href="#h1-18">1.18 LaTeX関連</a></li>
+        <li class="toc-section"><a href="#h1-19">1.19 エラメッセージ</a></li>
+        <li class="toc-section"><a href="#h1-20">1.20 その他</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
+    <li class="toc-chapter"><a href="./93-background.html">開発の背景</a>
+      <ul class="toc toc-2">
+        <li class="toc-section"><a href="#h3-1">3.1 開発の経緯</a></li>
+        <li class="toc-section"><a href="#h3-2">3.2 開発の転機</a></li>
+        <li class="toc-section"><a href="#h3-3">3.3 開発の障害</a></li>
+        <li class="toc-section"><a href="#h3-4">3.4 開発方針の違い</a></li>
+        <li class="toc-section"><a href="#h3-5">3.5 今後の開発</a></li>
+      </ul>
+    </li>
+    <li class="toc-chapter"><a href="./99-postface.html">あとがき / おわりに</a></li>
+</ul>
+
+
+        </main>
+        <nav class="page-navi">
+
+
+          <a href="00-preface.html" class="page-next">&#9654;</a>
+
+        </nav>
+        <footer>
+
+        </footer>
+      </div>
+    </div>
+
+
+    <script>
+function rebuildAndReloadForcedly() {
+  fetch('/rebuild.js').then((resp)=>{
+    resp.text().then((text)=>{ eval(text); });
+  });
+}
+    </script>
+
+
+    <!--script src="/rebuild.js?file="></script-->
+
+

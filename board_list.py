@@ -134,7 +134,7 @@ box = []
 vc = root.register(validate_input)
 #場名の設定
 labels.append(tk.Label(root, text = '場名'))
-box.append(ttk.Combobox(root,  values=['　　','東京','中山','阪神','京都','中京','小倉','新潟','福島','札幌','函館'], width = 4))
+box.append(ttk.Combobox(root,  values=['　　','札幌','函館','福島','新潟','中山','東京','中京','京都','阪神','小倉'], width = 4))
 
 #レース番号の設定
 labels.append(tk.Label(root, text = 'レース数'))
