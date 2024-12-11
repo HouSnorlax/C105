@@ -2,9 +2,131 @@ import tkinter as tk
 from tkinter import ttk
 import sys
 
+#ラベルのフォントのテンプレート
+def font(size):
+    return ("MSゴシック", str(size), "bold")
+
 #掲示板を作り変える関数
 def createwindow():
-    pass
+    global board
+    if (board == None or not board.winfo_exists()):
+        board = tk.Toplevel()
+        board.geometry('500x850')
+        board.resizable(False, False)
+        board.title('掲示板')
+        board.configure(bg = 'black')
+    
+    #ラベルの宣言
+    #場名
+    course_b = tk.Label(board, text = "\n".join(course.get()), font = font(33), foreground = 'white', bg = 'black')
+    
+    #レース番号
+    race_no_b = tk.Label(board, text = race_no.get(), font = font(70), foreground = 'yellow', bg = 'black' )
+    race_b = tk.Label(board, text = 'R', font = font(40), foreground = 'white', bg = 'black' )
+
+    #着順
+    first_b = tk.Label(board, text = 'Ⅰ', font = font(34), foreground = 'white', bg = 'blue')
+    second_b = tk.Label(board, text = 'Ⅱ', font = font(34), foreground = 'white', bg = 'blue')
+    third_b = tk.Label(board, text = 'Ⅲ', font = font(34), foreground = 'white', bg = 'blue')
+    fourth_b = tk.Label(board, text = 'Ⅳ', font = font(34), foreground = 'white', bg = 'blue')
+    fifth_b = tk.Label(board, text = 'Ⅴ', font = font(34), foreground = 'white', bg = 'blue')
+
+    #馬番
+    first_h_b = tk.Label(board, text = first_h.get(), font = font(70), width = 2, foreground = 'yellow', bg = '#707070', anchor = 'e')
+    second_h_b = tk.Label(board, text = second_h.get(), font = font(70), width = 2, foreground = 'yellow', bg = '#707070', anchor = 'e')
+    third_h_b = tk.Label(board, text = third_h.get(), font = font(70), width = 2, foreground = 'yellow', bg = '#707070', anchor = 'e')
+    fourth_h_b = tk.Label(board, text = fourth_h.get(), font = font(70), width = 2, foreground = 'yellow', bg = '#707070', anchor = 'e')
+    fifth_h_b = tk.Label(board, text = fifth_h.get(), font = font(70), width = 2, foreground = 'yellow', bg = '#707070', anchor = 'e')
+    
+    #着差
+    margin_12_b = tk.Label(board, text = margin_12.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070', anchor = 'center')
+    margin_23_b = tk.Label(board, text = margin_23.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070', anchor = 'center')
+    margin_34_b = tk.Label(board, text = margin_34.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070', anchor = 'center')
+    margin_45_b = tk.Label(board, text = margin_45.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070', anchor = 'center')
+    
+    #馬場状態
+    shiba_b = tk.Label(board, text = '芝', font = font(33), width = 2, foreground = 'white', bg = 'black')
+    shiba_c_b = tk.Label(board, text = shiba_c.get(), font = font(60), width = 3, foreground = 'yellow', bg = '#707070', anchor = 'center')
+    dirt_b = tk.Label(board, text = 'ダート', font = font(33), foreground = 'white', bg = 'black')
+    dirt_c_b = tk.Label(board, text = dirt_c.get(), font = font(60), width = 3, foreground = 'yellow', bg = '#707070', anchor = 'center')
+
+    #確定状況
+    kakutei_b = tk.Label(board, text = ' ', font = font(90), width = 3, foreground = 'white', bg = '#707070')
+
+    #レコード
+    record_b = tk.Label(board, text = ' ', font = font(45), width = 4, foreground = 'red', bg = '#707070')
+
+    #入線タイム
+    time_b = tk.Label(board, text = 'タイム', font = font(27), foreground = 'white', bg = 'black')
+    time_min_b = tk.Label(board, text = time_min.get(), font = font(45), width = 1, foreground = 'yellow', bg = '#707070')
+    dot = tk.Label(board, text = '.', font = font(30), width = 1, foreground = 'white', bg = 'black')
+    time_sec_b = tk.Label(board, text = time_sec.get(), font = font(45), width = 2, foreground = 'yellow', bg = '#707070')
+    dot2 = tk.Label(board, text = '.', font = font(30), width = 1, foreground = 'white', bg = 'black')
+    time_sec10_b = tk.Label(board, text = time_sec10.get(), font = font(45), width = 1, foreground = 'yellow', bg = '#707070')
+    
+    #4ハロン
+    ff_b = tk.Label(board, text = '４Ｆ', font = font(27), foreground = 'white', bg = 'black')
+    ff_sec_b = tk.Label(board, text = ff_sec.get(), font = font(45), width = 2, foreground = 'yellow', bg = '#707070')
+    dot3 = tk.Label(board, text = '.', font = font(30),width = 1, foreground = 'white', bg = 'black')
+    ff_sec10_b = tk.Label(board, text = ff_sec10.get(), font = font(45), width = 1, foreground = 'yellow', bg = '#707070')
+    
+    #3ハロン
+    tf_b = tk.Label(board, text = '３Ｆ', font = font(27), foreground = 'white', bg = 'black')
+    tf_sec_b = tk.Label(board, text = tf_sec.get(), font = font(45), width = 2, foreground = 'yellow', bg = '#707070')
+    dot4 = tk.Label(board,text = '.', font = font(30), width = 1, foreground = 'white', bg = 'black')
+    tf_sec10_b = tk.Label(board, text = tf_sec10.get(), font = font(45), width = 1, foreground = 'yellow', bg = '#707070')
+
+    #ラベルの配置
+    course_b.place(x = 20, y = 10) #場名
+    
+    race_no_b.place(x = 80, y = 11) #レース番号
+    race_b.place(x = 150, y = 35)
+    
+    first_b.place(x = 24, y = 132) #着順
+    second_b.place(x = 24, y = 222)
+    third_b.place(x = 24, y = 312)
+    fourth_b.place(x = 24, y = 402)
+    fifth_b.place(x = 24, y = 492)
+    
+    first_h_b.place(x = 100, y = 125, height = 72) #馬番
+    second_h_b.place(x = 100, y = 215, height = 72)
+    third_h_b.place(x = 100, y = 305, height = 72)
+    fourth_h_b.place(x = 100, y = 395, height = 72)
+    fifth_h_b.place(x = 100, y = 485, height = 72)
+    
+    margin_12_b.place(x = 290, y = 165, height = 60) #着差
+    margin_23_b.place(x = 290, y = 260, height = 60)
+    margin_34_b.place(x = 290, y = 355, height = 60)
+    margin_45_b.place(x = 290, y = 450, height = 60)
+    
+    shiba_b.place(x = 60, y = 560) #馬場状態
+    shiba_c_b.place(x = 15, y = 610, height = 75)
+    dirt_b.place(x = 22, y = 700)
+    dirt_c_b.place(x = 15, y = 750, height = 75)
+    
+    kakutei_b.place(x = 250 , y = 10, height = 120) #確定状況
+
+    record_b.place(x = 290, y = 550, height = 55) #レコード
+    
+    time_b.place(x = 170, y = 645) #入線タイム
+    time_min_b.place(x = 283, y = 630, height = 55)
+    dot.place(x = 323, y = 623, height = 100)
+    time_sec_b.place(x = 350, y = 630, height = 55)
+    dot2.place(x = 425, y = 623, height = 100)
+    time_sec10_b.place(x = 452, y = 630,height = 55)
+
+    ff_b.place(x = 205, y = 715) #4ハロン
+    ff_sec_b.place(x = 350, y = 700, height = 55)
+    dot3.place(x = 425, y = 693, height = 100)
+    ff_sec10_b.place(x = 452, y = 700, height = 55)
+    
+    tf_b.place(x = 205, y = 780) #3ハロン
+    tf_sec_b.place(x = 350, y = 770, height = 55)
+    dot4.place(x = 425, y = 770, height = 78)
+    tf_sec10_b.place(x = 452, y = 770, height = 55)
+
+#サブウィンドウを先に定義する
+board = None
 
 #ウィンドウを作成
 root = tk.Tk()

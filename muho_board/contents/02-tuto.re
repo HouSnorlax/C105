@@ -20,7 +20,7 @@
 はじめに、Pythonのファイルを作成し、@<list>{win1}に示すコードを書き込んでください。
 本書のプログラムは、このファイルのみで完結します。
 
-//list[win1][board.py]{
+//list[win1][arrivalboard.py]{
 import tkinter as tk #TKinterモジュールの読み込み
 
 root = tk.Tk() #インスタンスの作成
@@ -55,7 +55,7 @@ root.mainloop()
 それでは、プログラムを実行してみましょう。
 
 //terminal[exe1][プログラムの実行]{
-$ @<userinput>{python3 board.py}
+$ @<userinput>{python3 arrivalboard.py}
 //}
 
 プログラムを実行すると、@<img>{window1}のように、サイズを変更できないウィンドウのみが表示されるはずです。

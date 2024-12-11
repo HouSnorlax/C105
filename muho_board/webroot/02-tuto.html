@@ -29,11 +29,12 @@
       </ul>
     </li>
     <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a></li>
-    <li class="toc-chapter"><a href="./02-tutorial.html">4 チュート</a></li>
-    <li class="toc-chapter"><a href="./03-syntax.html">5 記法</a></li>
-    <li class="toc-chapter"><a href="./04-customize.html">6 カスタマイズ</a></li>
-    <li class="toc-chapter"><a href="./05-faq.html">7 FAQ</a></li>
-    <li class="toc-chapter"><a href="./06-bestpractice.html">8 よりよい本づくり</a></li>
+    <li class="toc-chapter"><a href="./04-makeboard.html">4 着順掲示板を作る</a></li>
+    <li class="toc-chapter"><a href="./02-tutorial.html">5 チュート</a></li>
+    <li class="toc-chapter"><a href="./03-syntax.html">6 記法</a></li>
+    <li class="toc-chapter"><a href="./04-customize.html">7 カスタマイズ</a></li>
+    <li class="toc-chapter"><a href="./05-faq.html">8 FAQ</a></li>
+    <li class="toc-chapter"><a href="./06-bestpractice.html">9 よりよい本づくり</a></li>
     <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a></li>
     <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
     <li class="toc-chapter"><a href="./93-background.html">開発の背景</a></li>
@@ -56,7 +57,7 @@
 <h2 id="make-window" class="leftline"><a id="h2-2"></a><span class="secno">2.2</span> ウィンドウの作成</h2>
 <p>それではプログラムを書いていきましょう。はじめに、Pythonのファイルを作成し、<span class="listref"><a href="./02-tuto.html#win1">リスト2.1</a></span>に示すコードを書き込んでください。本書のプログラムは、このファイルのみで完結します。</p>
 <div id="win1" class="caption-code">
-<span class="caption">リスト2.1: リスト2.1: board.py</span>
+<span class="caption">リスト2.1: リスト2.1: arrivalboard.py</span>
 <pre class="list">import tkinter as tk #TKinterモジュールの読み込み
 
 root = tk.Tk() #インスタンスの作成
@@ -77,7 +78,7 @@ root.mainloop()
 <p>それでは、プログラムを実行してみましょう。</p>
 <div id="exe1" class="cmd-code">
 <span class="caption">リスト2.2: リスト2.2: プログラムの実行</span>
-<pre class="list">$ <span class="userinput">python3 board.py</span>
+<pre class="list">$ <span class="userinput">python3 arrivalboard.py</span>
 </pre>
 </div>
 <p>プログラムを実行すると、<span class="imgref"><a href="./02-tuto.html#window1">図2.1</a></span>のように、サイズを変更できないウィンドウのみが表示されるはずです。×ボタンを押すとウィンドウが閉じられ、プログラムの実行も終了します。</p>

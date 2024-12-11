@@ -13,6 +13,7 @@ CHAPS:
   - 01-install.re
   - 02-tuto.re
   - 03-configwindow.re
+  - 04-makeboard.re
   - 02-tutorial.re
   - 03-syntax.re
   - 04-customize.re
