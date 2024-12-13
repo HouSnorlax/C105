@@ -6,11 +6,11 @@ import sys
 def createwindow():
     #会場名変更
     joumei.configure(text = "\n".join(box[0].get()))
-    if (len(box[1].get()) == 2):
-        race1.configure(text = box[1].get(),font=("MSゴシック", "50", "bold"))
+    if (len(raceno := box[1].get()) == 2):
+        race1.configure(text = raceno,font=("MSゴシック", "50", "bold"))
         race1.place(x = 75, y = 23)
     else:
-        race1.configure(text = box[1].get(),font=("MSゴシック", "70", "bold"))
+        race1.configure(text = raceno,font=("MSゴシック", "70", "bold"))
         race1.place(x = 85, y = 8)
 
     #馬番変更

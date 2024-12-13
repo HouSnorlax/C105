@@ -21,7 +21,12 @@ def createwindow():
     course_b = tk.Label(board, text = "\n".join(course.get()), font = font(33), foreground = 'white', bg = 'black')
     
     #レース番号
-    race_no_b = tk.Label(board, text = race_no.get(), font = font(70), foreground = 'yellow', bg = 'black' )
+    if (len(number := race_no.get()) == 2):
+        race_no_b = tk.Label(board, text = number, font = font(50), width = 2, foreground = 'yellow', bg = 'black' )
+        race_no_b.place(x = 65, y = 23)
+    else:
+        race_no_b = tk.Label(board, text = number, font = font(70), width = 2, foreground = 'yellow', bg = 'black' )
+        race_no_b.place(x = 65, y = 8)
     race_b = tk.Label(board, text = 'R', font = font(40), foreground = 'white', bg = 'black' )
 
     #着順
@@ -39,23 +44,31 @@ def createwindow():
     fifth_h_b = tk.Label(board, text = fifth_h.get(), font = font(70), width = 2, foreground = 'yellow', bg = '#707070', anchor = 'e')
     
     #着差
-    margin_12_b = tk.Label(board, text = margin_12.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070', anchor = 'center')
-    margin_23_b = tk.Label(board, text = margin_23.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070', anchor = 'center')
-    margin_34_b = tk.Label(board, text = margin_34.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070', anchor = 'center')
-    margin_45_b = tk.Label(board, text = margin_45.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070', anchor = 'center')
+    margin_12_b = tk.Label(board, text = margin_12.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070')
+    margin_23_b = tk.Label(board, text = margin_23.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070')
+    margin_34_b = tk.Label(board, text = margin_34.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070')
+    margin_45_b = tk.Label(board, text = margin_45.get(), font = font(40), width = 4, foreground = 'yellow', bg = '#707070')
     
     #馬場状態
     shiba_b = tk.Label(board, text = '芝', font = font(33), width = 2, foreground = 'white', bg = 'black')
-    shiba_c_b = tk.Label(board, text = shiba_c.get(), font = font(60), width = 3, foreground = 'yellow', bg = '#707070', anchor = 'center')
+    shiba_c_b = tk.Label(board, text = shiba_c.get(), font = font(60), width = 3, foreground = 'yellow', bg = '#707070')
     dirt_b = tk.Label(board, text = 'ダート', font = font(33), foreground = 'white', bg = 'black')
-    dirt_c_b = tk.Label(board, text = dirt_c.get(), font = font(60), width = 3, foreground = 'yellow', bg = '#707070', anchor = 'center')
+    dirt_c_b = tk.Label(board, text = dirt_c.get(), font = font(60), width = 3, foreground = 'yellow', bg = '#707070')
 
     #確定状況
-    kakutei_b = tk.Label(board, text = ' ', font = font(90), width = 3, foreground = 'white', bg = '#707070')
+    if ((text := kakutei.get()) == '確定'):
+        kakutei_b = tk.Label(board, text = text, font = font(90), width = 3, foreground = 'white', bg = 'red')
+    elif (text == '審議'):
+        kakutei_b = tk.Label(board, text = text, font = font(90), width = 3, foreground = 'white', bg = 'blue')
+    else:
+        kakutei_b = tk.Label(board, text = ' ', font = font(90), width = 3, foreground = 'white', bg = '#707070')
 
     #レコード
-    record_b = tk.Label(board, text = ' ', font = font(45), width = 4, foreground = 'red', bg = '#707070')
-
+    if var_record.get():
+        record_b = tk.Label(board, text = 'ﾚｺｰﾄﾞ', font = font(45), width = 4, foreground = 'red', bg = '#707070')
+    else:
+        record_b = tk.Label(board, text = '', font = font(45), width = 4, foreground = 'red', bg = '#707070')
+    
     #入線タイム
     time_b = tk.Label(board, text = 'タイム', font = font(27), foreground = 'white', bg = 'black')
     time_min_b = tk.Label(board, text = time_min.get(), font = font(45), width = 1, foreground = 'yellow', bg = '#707070')
@@ -79,8 +92,7 @@ def createwindow():
     #ラベルの配置
     course_b.place(x = 20, y = 10) #場名
     
-    race_no_b.place(x = 80, y = 11) #レース番号
-    race_b.place(x = 150, y = 35)
+    race_b.place(x = 150, y = 35) #R
     
     first_b.place(x = 24, y = 132) #着順
     second_b.place(x = 24, y = 222)
@@ -124,6 +136,8 @@ def createwindow():
     tf_sec_b.place(x = 350, y = 770, height = 55)
     dot4.place(x = 425, y = 770, height = 78)
     tf_sec10_b.place(x = 452, y = 770, height = 55)
+
+
 
 #サブウィンドウを先に定義する
 board = None
@@ -178,22 +192,23 @@ margin_23 = tk.Entry(root)
 margin_34 = tk.Entry(root)
 margin_45 = tk.Entry(root)
 
-shiba_c = ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4) #馬場状態
-dirt_c = ttk.Combobox(root, state="readonly", values=['　','良','稍重','重','不良'], width = 4)
+shiba_c = ttk.Combobox(root, state = "readonly", values=['　','良','稍重','重','不良'], width = 4) #馬場状態
+dirt_c = ttk.Combobox(root, state = "readonly", values=['　','良','稍重','重','不良'], width = 4)
 
-kakutei = ttk.Combobox(root, state="readonly", values=['　','確定','審議'], width = 4) #確定状況の設定
+kakutei = ttk.Combobox(root, state = "readonly", values=['　','確定','審議'], width = 4) #確定状況の設定
 
-record = tk.Checkbutton(root, text="レコード") #レコードの設定
+var_record = tk.BooleanVar()
+record = tk.Checkbutton(root, text = "レコード", variable = var_record) #レコードの設定
 
-time_min = tk.Spinbox(root, from_ = 0, to = 9, width = 3) #勝ちタイムの設定
-time_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3)
-time_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)
+time_min = tk.Entry(root, width = 3) #勝ちタイムの設定
+time_sec = tk.Entry(root, width = 3)
+time_sec10 = tk.Entry(root, width = 3)
 
-ff_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3) #4Fタイムの設定
-ff_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)
+ff_sec = tk.Entry(root, width = 3) #4Fタイムの設定
+ff_sec10 = tk.Entry(root, width = 3)
 
-tf_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3) #3Fタイムの設定
-tf_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)
+tf_sec = tk.Entry(root, width = 3) #3Fタイムの設定
+tf_sec10 = tk.Entry(root, width = 3)
 
 #設定内容の反映ボタン
 createbutton = tk.Button(root, text = 'create', command = createwindow)

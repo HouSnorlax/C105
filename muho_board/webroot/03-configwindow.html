@@ -63,6 +63,16 @@
 <b>margin_34 = tk.Entry(root)</b>
 <b>margin_45 = tk.Entry(root)</b>
 
+<b>time_min = tk.Entry(root, width = 3) #勝ちタイムの設定</b>
+<b>time_sec = tk.Entry(root, width = 3)</b>
+<b>time_sec10 = tk.Entry(root, width = 3)</b>
+
+<b>ff_sec = tk.Entry(root, width = 3) #4Fタイムの設定</b>
+<b>ff_sec10 = tk.Entry(root, width = 3)</b>
+
+<b>tf_sec = tk.Entry(root, width = 3) #3Fタイムの設定</b>
+<b>tf_sec10 = tk.Entry(root, width = 3)</b>
+
 #テキストの配置
 for i in range(len(labels)):
     labels[i].grid(column = 0, row = i)
@@ -72,10 +82,21 @@ for i in range(len(labels)):
 <b>margin_23.grid(column = 1, row = 8)</b>
 <b>margin_34.grid(column = 1, row = 9)</b>
 <b>margin_45.grid(column = 1, row = 10)</b>
+
+<b>time_min.grid(column = 1, row = 15) #勝ちタイムの設定</b>
+<b>time_sec.grid(column = 1, row = 16)</b>
+<b>time_sec10.grid(column = 1, row = 17)</b>
+
+<b>ff_sec.grid(column = 1, row = 18) #4Fタイムの設定</b>
+<b>ff_sec10.grid(column = 1, row = 19)</b>
+
+<b>tf_sec.grid(column = 1, row = 20) #3Fタイムの設定</b>
+<b>tf_sec10.grid(column = 1, row = 21)</b>
 </pre>
 </div>
 <p>いきなりrow=7となっていますが、ここからは解説の都合でウィジェットの作成順が画面での並びと一致しません。ご了承ください。</p>
 <p>テキストボックスの作成には、<code class="inline-code">Entry()</code>を使用します。引数として表示させたいウィンドウを渡しています。とても単純ですね。</p>
+<p>タイムの設定のコメントがついているボックスは<code class="inline-code">width</code>を使用してメニューの幅を指定しています。このボックスには1桁または2桁の数字しか入力しないので、幅を3に設定しています。</p>
 <p>プログラムを実行し、<span class="imgref"><a href="./03-configwindow.html#margintext">図3.1</a></span>のように表示されていれば成功です。</p>
 <div id="margintext" class="image">
 <img src="images/03-configwindow/margintext.png" alt="作成したテキストボックス" class="img border" />
@@ -115,7 +136,6 @@ margin_12.grid(column = 1, row = 7) #着差の入力
 <p>ここで、ttkという新たなモジュールをインポートしています。より機能が充実したTKinterという風に思っていただければ大丈夫です。</p>
 <p>また、tkと非常に似ているのでプログラムのミスに注意してください。あまりにも紛らわしいのであれば一行目の<code class="inline-code">as tk</code>を削除したり(プログラム中の<code class="inline-code">tk</code>を全て修正することになります)、ttkを別の名前でインポートしても構いません。</p>
 <p>プルダウンメニューの作成には、<code class="inline-code">ttk.Combobox()</code>を使用します。<code class="inline-code">values</code>にリストを代入すると、その要素がそのまま選択肢になります。</p>
-<p><code class="inline-code">width</code>は名前の通り、メニューの幅を指定することができます。選択肢にある競馬場はすべて漢字二文字なので、幅は4に設定しておきます。</p>
 <p>また、メニューの下三角以外の部分をクリックすると、直接文字を入力することができます。本書では中央競馬の掲示板の再現を目的としているので、選択肢には中央競馬場のみ用意しましたが、地方競馬や廃止となってしまった競馬場の名前を入力して楽しむこともできます。</p>
 <p>ここでおことわりなのですが、今回作成する掲示板はレイアウトの都合上三文字の競馬場に対応していません。名古屋競馬ファンの皆様、ごめんなさい・・・</p>
 
@@ -143,6 +163,13 @@ margin_45.grid(column = 1, row = 10)
 
 <b>kakutei.grid(column = 1, row = 13) #確定状況の設定</b>
 </pre>
+</div>
+<p>プログラムを実行して、<span class="imgref"><a href="./03-configwindow.html#pulldowncomp">図3.3</a></span>のようになっていれば大丈夫です。</p>
+<div id="pulldowncomp" class="image">
+<img src="images/03-configwindow/pulldowncomp.png" alt="現時点での完成図" class="img border" />
+<p class="caption">
+図3.3: 現時点での完成図
+</p>
 </div>
 
 <h2 id="spinbox" class="leftline"><a id="h3-3"></a><span class="secno">3.3</span> スピンボックス</h2>
@@ -175,51 +202,19 @@ course.grid(column = 1, row = 0) #レース場名
 </pre>
 </div>
 <p>スピンボックスの作成には、<code class="inline-code">Spinbox()</code>を使用します。<code class="inline-code">from_</code>で数値の下限、<code class="inline-code">to</code>で上限を設定します。</p>
-<p>プログラムを実行してみましょう。<span class="imgref"><a href="./03-configwindow.html#spinbx">図3.3</a></span>のように三角ボタンがついたボックスが連なるはずです。ボタンを押して、レース番号は1~12まで、馬番は1~18までしか変更できないことを確認してみてください。</p>
+<p>プログラムを実行してみましょう。<span class="imgref"><a href="./03-configwindow.html#spinbx">図3.4</a></span>のように三角ボタンがついたボックスが連なるはずです。ボタンを押して、レース番号は1~12まで、馬番は1~18までしか変更できないことを確認してみてください。</p>
 <p>ちなみに、ボックスに直接入力する場合は、設定した上限と下限に収まらない数字や、文字列を入力することもできてしまいます。直接入力を制限したい場合は、<span class="listref"><a href="./03-configwindow.html#denyinput">リスト3.3</a></span>と同様に、<code class="inline-code">state = &quot;readonly&quot;</code>を利用するとよいでしょう。ただし、この場合は馬番を空にすることができなくなります。</p>
 <div id="spinbx" class="image">
 <img src="images/03-configwindow/spinbx.png" alt="作成したスピンボックス" class="img border" />
 <p class="caption">
-図3.3: 作成したスピンボックス
+図3.4: 作成したスピンボックス
 </p>
-</div>
-<p>タイムの設定にも同様にスピンボックスを使用します。</p>
-<div id="spinbremain" class="caption-code">
-<span class="caption">リスト3.5: リスト3.5: タイム設定の追加</span>
-<pre class="list">#メニュー・ボックス・ボタンの作成
-...(省略)...
-kakutei = ttk.Combobox(root, state=&quot;readonly&quot;, values=['　','確定','審議'], width = 4) #確定状況の設定
-
-<b>ime_min = tk.Spinbox(root, from_ = 0, to = 9, width = 3) #勝ちタイムの設定</b>
-<b>time_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3)</b>
-<b>time_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)</b>
-
-<b>ff_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3) #4Fタイムの設定</b>
-<b>ff_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)</b>
-
-<b>tf_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3) #3Fタイムの設定</b>
-<b>tf_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)</b>
-...(省略)...
-#メニュー・ボックス・ボタンの配置
-...(省略)...
-kakutei.grid(column = 1, row = 13) #確定状況の設定
-
-<b>time_min.grid(column = 1, row = 15) #勝ちタイムの設定</b>
-<b>time_sec.grid(column = 1, row = 16)</b>
-<b>time_sec10.grid(column = 1, row = 17)</b>
-
-<b>ff_sec.grid(column = 1, row = 18) #4Fタイムの設定</b>
-<b>ff_sec10.grid(column = 1, row = 19)</b>
-
-<b>tf_sec.grid(column = 1, row = 20) #3Fタイムの設定</b>
-<b>tf_sec10.grid(column = 1, row = 21)</b>
-</pre>
 </div>
 
 <h2 id="checkbox" class="leftline"><a id="h3-4"></a><span class="secno">3.4</span> チェックボックス</h2>
 <p>チェックボックスとは、複数の選択肢から任意の項目を選択する際に使われるウィジェットです。ですが、今回は簡易的なトグル(ON/OFF)スイッチとしてチェックボックスを利用してみます。</p>
 <div id="checkb" class="caption-code">
-<span class="caption">リスト3.6: リスト3.6: チェックボックスの作成</span>
+<span class="caption">リスト3.5: リスト3.5: チェックボックスの作成</span>
 <pre class="list">#メニュー・ボックス・ボタンの作成
 ...(省略)...
 kakutei = ttk.Combobox(root, state=&quot;readonly&quot;, values=['　','確定','審議'], width = 4) #確定状況の設定
@@ -235,18 +230,18 @@ kakutei.grid(column = 1, row = 13) #確定状況の設定
 </pre>
 </div>
 <p>チェックボックスの作成には<code class="inline-code">Checkbutton()</code>を使用します。<code class="inline-code">text</code>でボックスの横に表示するテキストを設定できます。</p>
-<p>プログラムを実行して、<span class="imgref"><a href="./03-configwindow.html#checkbu">図3.4</a></span>のようにチェックの付け外しができるか確認しましょう。</p>
+<p>プログラムを実行して、<span class="imgref"><a href="./03-configwindow.html#checkbu">図3.5</a></span>のようにチェックの付け外しができるか確認しましょう。</p>
 <div id="checkbu" class="image">
 <img src="images/03-configwindow/checkbu.png" alt="作成したチェックボックス" class="img border" />
 <p class="caption">
-図3.4: 作成したチェックボックス
+図3.5: 作成したチェックボックス
 </p>
 </div>
 
 <h2 id="button" class="leftline"><a id="h3-5"></a><span class="secno">3.5</span> ボタン</h2>
 <p>この章の締めとして、任意の関数を実行できるボタンを作成していきます。</p>
 <div id="cbutton" class="caption-code">
-<span class="caption">リスト3.7: リスト3.7: ボタンの作成</span>
+<span class="caption">リスト3.6: リスト3.6: ボタンの作成</span>
 <pre class="list">import tkinter as tk
 from tkinter import ttk
 <b>import sys</b>
@@ -258,7 +253,7 @@ from tkinter import ttk
 ...(省略)...
 #メニュー・ボックス・ボタンの作成
 ...(省略)...
-tf_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)
+tf_sec10 = tk.Entry(root, width = 3)
 
 #設定内容の反映ボタン
 <b>createbutton = tk.Button(root, text = 'create', command = createwindow)</b>
@@ -279,12 +274,12 @@ tf_sec10.grid(column = 1, row = 21)
 <p>このプログラムでは、ボタンを押すと設定内容が掲示板に反映される<code class="inline-code">createbutton</code>、ボタンを押すとプログラムが終了する<code class="inline-code">exitbutton</code>を用意しました。</p>
 <p><code class="inline-code">createbutton</code>用の関数として、新たに<code class="inline-code">createwindow</code>関数を定義しています。関数の中身は次章で作成していくので、現時点では何もしない関数となっています。</p>
 <p>プログラムの終了は、sysモジュールの<code class="inline-code">sys.exit</code>を使用して実装しています。</p>
-<p>現時点での完成イメージを<span class="imgref"><a href="./03-configwindow.html#complete">図3.5</a></span>に示します。createボタンを押下できること、exitボタンを押すとプログラムが終了することを確認してください。</p>
+<p>現時点での完成イメージを<span class="imgref"><a href="./03-configwindow.html#complete">図3.6</a></span>に示します。createボタンを押下できること、exitボタンを押すとプログラムが終了することを確認してください。</p>
 <p>これでこの章は終わりです！</p>
 <div id="complete" class="image">
 <img src="images/03-configwindow/complete.png" alt="この章の完成イメージ" class="img border" />
 <p class="caption">
-図3.5: この章の完成イメージ
+図3.6: この章の完成イメージ
 </p>
 </div>
 

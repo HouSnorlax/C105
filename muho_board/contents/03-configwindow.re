@@ -20,6 +20,16 @@ labels.append(tk.Label(root, text = '3F 1/10'))
 @<b>|margin_34 = tk.Entry(root)|
 @<b>|margin_45 = tk.Entry(root)|
 
+@<b>|time_min = tk.Entry(root, width = 3) #勝ちタイムの設定|
+@<b>|time_sec = tk.Entry(root, width = 3)|
+@<b>|time_sec10 = tk.Entry(root, width = 3)|
+
+@<b>|ff_sec = tk.Entry(root, width = 3) #4Fタイムの設定|
+@<b>|ff_sec10 = tk.Entry(root, width = 3)|
+
+@<b>|tf_sec = tk.Entry(root, width = 3) #3Fタイムの設定|
+@<b>|tf_sec10 = tk.Entry(root, width = 3)|
+
 #テキストの配置
 for i in range(len(labels)):
     labels[i].grid(column = 0, row = i)
@@ -29,6 +39,16 @@ for i in range(len(labels)):
 @<b>|margin_23.grid(column = 1, row = 8)|
 @<b>|margin_34.grid(column = 1, row = 9)|
 @<b>|margin_45.grid(column = 1, row = 10)|
+
+@<b>|time_min.grid(column = 1, row = 15) #勝ちタイムの設定|
+@<b>|time_sec.grid(column = 1, row = 16)|
+@<b>|time_sec10.grid(column = 1, row = 17)|
+
+@<b>|ff_sec.grid(column = 1, row = 18) #4Fタイムの設定|
+@<b>|ff_sec10.grid(column = 1, row = 19)|
+
+@<b>|tf_sec.grid(column = 1, row = 20) #3Fタイムの設定|
+@<b>|tf_sec10.grid(column = 1, row = 21)|
 //}
 
 いきなりrow=7となっていますが、ここからは解説の都合でウィジェットの作成順が画面での並びと一致しません。
@@ -36,6 +56,10 @@ for i in range(len(labels)):
 
 テキストボックスの作成には、@<code>{Entry()}を使用します。
 引数として表示させたいウィンドウを渡しています。とても単純ですね。
+
+タイムの設定のコメントがついているボックスは
+@<code>{width}を使用してメニューの幅を指定しています。
+このボックスには1桁または2桁の数字しか入力しないので、幅を3に設定しています。
 
 プログラムを実行し、@<img>{margintext}のように表示されていれば成功です。
 
@@ -78,9 +102,6 @@ ttkを別の名前でインポートしても構いません。
 プルダウンメニューの作成には、@<code>{ttk.Combobox()}を使用します。
 @<code>{values}にリストを代入すると、その要素がそのまま選択肢になります。
 
-@<code>{width}は名前の通り、メニューの幅を指定することができます。
-選択肢にある競馬場はすべて漢字二文字なので、幅は4に設定しておきます。
-
 また、メニューの下三角以外の部分をクリックすると、直接文字を入力することができます。
 本書では中央競馬の掲示板の再現を目的としているので、選択肢には中央競馬場のみ用意しましたが、
 地方競馬や廃止となってしまった競馬場の名前を入力して楽しむこともできます。
@@ -114,6 +135,10 @@ margin_45.grid(column = 1, row = 10)
 
 @<b>|kakutei.grid(column = 1, row = 13) #確定状況の設定|
 //}
+
+プログラムを実行して、@<img>{pulldowncomp}のようになっていれば大丈夫です。
+
+//image[pulldowncomp][現時点での完成図][border=on]
 
 =={spinbox} スピンボックス
 
@@ -158,38 +183,6 @@ course.grid(column = 1, row = 0) #レース場名
 
 //image[spinbx][作成したスピンボックス][border=on]
 
-タイムの設定にも同様にスピンボックスを使用します。
-
-//list[spinbremain][タイム設定の追加][indent=4]{
-#メニュー・ボックス・ボタンの作成
-...(省略)...
-kakutei = ttk.Combobox(root, state="readonly", values=['　','確定','審議'], width = 4) #確定状況の設定
-
-@<b>|ime_min = tk.Spinbox(root, from_ = 0, to = 9, width = 3) #勝ちタイムの設定|
-@<b>|time_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3)|
-@<b>|time_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)|
-
-@<b>|ff_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3) #4Fタイムの設定|
-@<b>|ff_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)|
-
-@<b>|tf_sec = tk.Spinbox(root, from_ = 0, to = 59, width = 3) #3Fタイムの設定|
-@<b>|tf_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)|
-...(省略)...
-#メニュー・ボックス・ボタンの配置
-...(省略)...
-kakutei.grid(column = 1, row = 13) #確定状況の設定
-
-@<b>|time_min.grid(column = 1, row = 15) #勝ちタイムの設定|
-@<b>|time_sec.grid(column = 1, row = 16)|
-@<b>|time_sec10.grid(column = 1, row = 17)|
-
-@<b>|ff_sec.grid(column = 1, row = 18) #4Fタイムの設定|
-@<b>|ff_sec10.grid(column = 1, row = 19)|
-
-@<b>|tf_sec.grid(column = 1, row = 20) #3Fタイムの設定|
-@<b>|tf_sec10.grid(column = 1, row = 21)|
-//}
-
 =={checkbox} チェックボックス
 
 チェックボックスとは、複数の選択肢から任意の項目を選択する際に使われるウィジェットです。
@@ -233,7 +226,7 @@ from tkinter import ttk
 ...(省略)...
 #メニュー・ボックス・ボタンの作成
 ...(省略)...
-tf_sec10 = tk.Spinbox(root, from_ = 0, to = 9, width = 3)
+tf_sec10 = tk.Entry(root, width = 3)
 
 #設定内容の反映ボタン
 @<b>|createbutton = tk.Button(root, text = 'create', command = createwindow)|
