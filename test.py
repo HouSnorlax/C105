@@ -15,7 +15,11 @@ def createwindow():
         board.resizable(False, False)
         board.title('掲示板')
         board.configure(bg = 'black')
+    else:
+        board.destroy()
+        createwindow()
     
+    canvas = tk.Canvas(board, bg = 'black', height = 850, width = 510 )
     #ラベルの宣言
     #場名
     course_b = tk.Label(board, text = "\n".join(course.get()), font = font(33), foreground = 'white', bg = 'black')
@@ -89,6 +93,26 @@ def createwindow():
     dot4 = tk.Label(board,text = '.', font = font(30), width = 1, foreground = 'white', bg = 'black')
     tf_sec10_b = tk.Label(board, text = tf_sec10.get(), font = font(45), width = 1, foreground = 'yellow', bg = '#707070')
 
+    #着順の後ろに表示する円
+    canvas.create_oval(10,120,90,200,fill = 'blue')
+    canvas.create_oval(10,210,90,290,fill = 'blue')
+    canvas.create_oval(10,300,90,380,fill = 'blue')
+    canvas.create_oval(10,390,90,470,fill = 'blue')
+    canvas.create_oval(10,480,90,560,fill = 'blue')
+
+    #同着の際に表示する図形
+    canvas.create_polygon(235, 161, 295, 185, 295, 200, 235, 176, fill = '#707070', tag = 'same12_u')
+    canvas.create_polygon(235, 226, 295, 205, 295, 220, 235, 241, fill = '#707070', tag = 'same12_d')
+    canvas.create_polygon(235, 255, 295, 279, 295, 294, 235, 270, fill = '#707070', tag = 'same23_u')
+    canvas.create_polygon(235, 320, 295, 299, 295, 314, 235, 335, fill = '#707070', tag = 'same23_d')
+    canvas.create_polygon(235, 349, 295, 373, 295, 388, 235, 364, fill = '#707070', tag = 'same34_u')
+    canvas.create_polygon(235, 414, 295, 393, 295, 408, 235, 429, fill = '#707070', tag = 'same34_d')
+    canvas.create_polygon(235, 443, 295, 467, 295, 482, 235, 458, fill = '#707070', tag = 'same45_u')
+    canvas.create_polygon(235, 508, 295, 487, 295, 502, 235, 523, fill = '#707070', tag = 'same45_d')
+    
+    #図形を配置
+    canvas.pack()
+
     #ラベルの配置
     course_b.place(x = 20, y = 10) #場名
     
@@ -106,10 +130,10 @@ def createwindow():
     fourth_h_b.place(x = 100, y = 395, height = 72)
     fifth_h_b.place(x = 100, y = 485, height = 72)
     
-    margin_12_b.place(x = 290, y = 165, height = 60) #着差
-    margin_23_b.place(x = 290, y = 260, height = 60)
-    margin_34_b.place(x = 290, y = 355, height = 60)
-    margin_45_b.place(x = 290, y = 450, height = 60)
+    margin_12_b.place(x = 310, y = 168, height = 60) #着差
+    margin_23_b.place(x = 310, y = 262, height = 60)
+    margin_34_b.place(x = 310, y = 356, height = 60)
+    margin_45_b.place(x = 310, y = 450, height = 60)
     
     shiba_b.place(x = 60, y = 560) #馬場状態
     shiba_c_b.place(x = 15, y = 610, height = 75)
@@ -137,7 +161,49 @@ def createwindow():
     dot4.place(x = 425, y = 770, height = 78)
     tf_sec10_b.place(x = 452, y = 770, height = 55)
 
+    same = 0 #判定用の変数
+    #同着処理
+    if margin_12.get() == '同着': #1着同着の場合
+        canvas.itemconfig('same12_u', fill = 'yellow')
+        canvas.itemconfig('same12_d', fill = 'yellow')
+        second_b.configure(text = 'Ⅰ')
+        same = 1
 
+    if margin_23.get() == '同着': #2着同着の場合
+        canvas.itemconfig('same23_u', fill = 'yellow')
+        canvas.itemconfig('same23_d', fill = 'yellow')
+        if same == 1:
+            third_b.configure(text = 'Ⅰ') #1~3着同着の場合
+        else:
+            third_b.configure(text = 'Ⅱ')
+            same = 2
+    else:
+        same = 3
+
+    if margin_34.get() == '同着': #3着同着の場合
+        canvas.itemconfig('same34_u', fill = 'yellow')
+        canvas.itemconfig('same34_d', fill = 'yellow')
+        if same == 1:
+            fourth_b.configure(text = 'Ⅰ') #1~4着同着の場合
+        elif same == 2:
+            fourth_b.configure(text = 'Ⅱ') #2~4着同着の場合
+        else:
+            fourth_b.configure(text = 'Ⅲ')
+            same = 3
+    else:
+        same = 4
+
+    if margin_45.get() == '同着': #4着同着の場合
+        canvas.itemconfig('same45_u', fill = 'yellow')
+        canvas.itemconfig('same45_d', fill = 'yellow')
+        if same == 1:
+            fifth_b.configure(text = 'Ⅰ') #1~5着同着の場合
+        elif same == 2:
+            fifth_b.configure(text = 'Ⅱ') #2~5着同着の場合
+        elif same == 3:
+            fifth_b.configure(text = 'Ⅲ') #3~5着同着の場合
+        else:
+            fifth_b.configure(text = 'Ⅳ')
 
 #サブウィンドウを先に定義する
 board = None

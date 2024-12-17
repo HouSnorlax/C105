@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/webstyle.css" />
     <link rel="next" title="チュートリアル" href="02-tuto.html">
-    <link rel="prev" title="まえがき / はじめに" href="00-preface.html">
+    <link rel="prev" title="まえがき" href="00-preface.html">
     <meta name="generator" content="Re:VIEW Starter">
   </head>
   <body>
@@ -18,27 +18,17 @@
         </div>
                 <a class="nav-title" href="index.html">【Python】Tkinterで競馬の着順掲示板を作る</a>
 <ul class="toc toc-1">
-    <li class="toc-chapter"><a href="./00-preface.html">まえがき / はじめに</a></li>
+    <li class="toc-chapter"><a href="./00-preface.html">まえがき</a></li>
     <li class="toc-chapter"><a href="./01-install.html">1 インストール</a>
       <ul class="toc toc-2">
         <li class="toc-section"><a href="#h1-1">1.1 Pythonのインストール</a></li>
-        <li class="toc-section"><a href="#h1-2">1.2 プロジェクトを作成</a></li>
-        <li class="toc-section"><a href="#h1-3">1.3 サンプルのPDFファイルを生成</a></li>
-        <li class="toc-section"><a href="#h1-4">1.4 注意点</a></li>
+        <li class="toc-section"><a href="#h1-2">1.2 Pythonの動作確認</a></li>
       </ul>
     </li>
     <li class="toc-chapter"><a href="./02-tuto.html">2 チュートリアル</a></li>
     <li class="toc-chapter"><a href="./03-configwindow.html">3 設定画面を完成させる</a></li>
     <li class="toc-chapter"><a href="./04-makeboard.html">4 着順掲示板を作る</a></li>
-    <li class="toc-chapter"><a href="./02-tutorial.html">5 チュート</a></li>
-    <li class="toc-chapter"><a href="./03-syntax.html">6 記法</a></li>
-    <li class="toc-chapter"><a href="./04-customize.html">7 カスタマイズ</a></li>
-    <li class="toc-chapter"><a href="./05-faq.html">8 FAQ</a></li>
-    <li class="toc-chapter"><a href="./06-bestpractice.html">9 よりよい本づくり</a></li>
-    <li class="toc-chapter"><a href="./91-compare.html">Re:VIEWとの差分</a></li>
-    <li class="toc-chapter"><a href="./92-filelist.html">ファイルとフォルダ</a></li>
-    <li class="toc-chapter"><a href="./93-background.html">開発の背景</a></li>
-    <li class="toc-chapter"><a href="./99-postface.html">あとがき / おわりに</a></li>
+    <li class="toc-chapter"><a href="./99-postface.html">あとがき</a></li>
 </ul>
       </nav>
       <div class="page-inner">
@@ -51,279 +41,43 @@
 </div>
 
 <h2 class="leftline"><a id="h1-1"></a><span class="secno">1.1</span> Pythonのインストール</h2>
-<p>Re:VIEW StarterでPDFを生成するには、RubyとTeXLiveのインストールが必要です。</p>
-<ul>
-<li>Rubyとは世界中で人気のあるプログラミング言語のことです。
-   原稿ファイル（「<span class="file">*.re</span>」ファイル）を読み込むのに必要です。
-</li>
-<li>TeXLiveとは有名な組版ソフトのひとつです。
-   PDFファイルを生成するのに必要です。
-</li>
-</ul>
-<p>これらのインストール手順を説明します。</p>
-
-<h3 class="none"><a id="h1-1-1"></a><span class="secno">1.1.1</span> Dockerの使い方を知っている場合</h3>
-<p>Dockerとは、簡単に言えば「WindowsやMacでLinuxコマンドを実行するためのソフトウェア」です<sup><a id="fnb-guoes" href="#fn-guoes" class="noteref" epub:type="noteref">*1</a></sup>。</p>
-<div class="footnote-list">
-<div class="footnote" id="fn-guoes" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*1] </span>Dockerについてのこの説明は、技術的にはちっとも正確ではありません。しかしITエンジニア以外に説明するには、このような説明で充分です。</p></div>
-</div><!--/.footnote-list-->
-<p>Dockerの使い方が分かる人は、<a href="https://hub.docker.com/r/kauplan/review2.5/" class="link">kauplan/review2.5</a>のDockerイメージを使ってください。これでRubyとTeXLiveの両方が使えるようになります。</p>
-<div class="cmd-code">
-<span class="caption">Dockerイメージのダウンロードと動作確認</span>
-<pre class="list">$ <span class="userinput">docker pull kauplan/review2.5</span>   <span class="balloon">← 3GB 以上ダウンロードするので注意</span>
-$ <span class="userinput">docker run --rm kauplan/review2.5 ruby --version</span>
-ruby 2.5.1p57 (2018-03-29 revision 63029) [x86_64-linux-gnu]
-$ <span class="userinput">docker run --rm kauplan/review2.5 uplatex --version</span>
-e-upTeX 3.14159265-p3.7.1-u1.22-161114-2.6 (utf8.uptex) (TeX Live 2017/Debian)
-...(省略)...
-</pre>
-</div>
-<p>なおmacOSのようにRubyが使える環境なら、「<code class="inline-code">rake setup:dockerimage</code>」を実行すると自動的に「<code class="inline-code">docker pull kauplan/review2.5</code>」が実行されます。</p>
-
-<h3 class="none"><a id="h1-1-2"></a><span class="secno">1.1.2</span> macOSを使っている場合</h3>
-<p>macOSにおいて、RubyとTeXLiveをインストールする方法を説明します。</p>
-
-<h4><a id="h1-1-2-1"></a>Rubyのインストール</h4>
-<p>macOSには最初からRubyがインストールされているため、Rubyを別途インストールする必要はありません。</p>
-<p>Rubyがインストールされていることを確認するために、Terminal.app<sup><a id="fnb-zp54n" href="#fn-zp54n" class="noteref" epub:type="noteref">*2</a></sup>を起動して以下のコマンドを入力してみましょう。なお各行の先頭にある「<code class="inline-code">$ </code>」は入力せず、下線がついている部分のコマンドを入力してください。</p>
-<div class="footnote-list">
-<div class="footnote" id="fn-zp54n" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*2] </span>Terminal.appは、ファインダで「アプリケーション」フォルダ &gt; 「ユーティリティ」フォルダ &gt; 「ターミナル」をダブルクリックすると起動できます。</p></div>
-</div><!--/.footnote-list-->
-<div class="cmd-code">
-<span class="caption">Rubyがインストールされていることを確認</span>
-<pre class="list">$ <span class="userinput">which ruby</span>     <span class="balloon">← 下線が引かれたコマンドだけを入力すること</span>
-/usr/bin/ruby    <span class="balloon">← このような表示になるはず</span>
-$ <span class="userinput">ruby --version</span> <span class="balloon">← 下線が引かれたコマンドだけを入力すること</span>
-ruby 2.3.7p456 (2018-03-28 revision 63024) [universal.x86_64-darwin18]
-</pre>
-</div>
-<p>実際の出力結果は上と少し違うはずですが、だいたい合っていればOKです。</p>
-<p>また必要なライブラリをインストールするために、以下のコマンドも実行してください（各行の先頭にある「<code class="inline-code">$ </code>」は入力せず、それ以降のコマンドを入力してください）。</p>
-<div class="cmd-code">
-<span class="caption">必要なライブラリをインストール</span>
-<pre class="list">### Rubyに詳しくない初心者向け
-$ <span class="userinput">rake setup:rubygems</span>
-
-### Rubyに詳しい人向け
-$ <span class="userinput">gem install review --version=2.5</span>
-$ <span class="userinput">review version</span>
-2.5.0   <span class="balloon">← 必ず「2.5.0」であること（より新しいバージョンは未サポート）</span>
-</pre>
-</div>
 <div class="note">
-<h5>macOS標準のRubyでは「gem install」がエラーになる</h5>
-<p>macOSには標準でRubyがインストールされていますが、それを使って「<code class="inline-code">gem install</code>」を実行するとエラーになります。</p>
-<div class="cmd-code">
-<span class="caption">macOS標準のRubyではgemがインストールできない</span>
-<pre class="list">$ gem install review --version=2.5
-ERROR:  While executing gem ... (Gem::FilePermissionError)
-    You don't have write permissions for the /Library/Ruby/Gems/2.3.0 directory.
-</pre>
+<p>すでにPythonの環境がある方は<a href="./02-tuto.html">第2章「チュートリアル」</a>に進んでください。</p>
 </div>
-<p>このエラーを回避するには、次のような方法があります。</p>
-<ol class="ol-none">
-<li data-mark="(a)"><span class="li-mark">(a) </span>Homebrewなどを使って別のRubyをインストールする。
-</li>
-<li data-mark="(b)"><span class="li-mark">(b) </span><span class="file">~/.gemrc</span>に「<code class="inline-code">install: --user-install</code>」という行を追加する。
-</li>
-<li data-mark="(c)"><span class="li-mark">(c) </span>「<span class="file">rubygems/</span>」のようなフォルダを作り、そのパスを環境変数<code class="inline-code">$GEM_HOME</code>に設定する。
-</li>
-</ol>
-<p>しかしRubyやコマンドラインに慣れていない初心者にとっては、どの方法も難しいでしょう。</p>
-<p>そこで、(c)に相当する作業を自動的に行えるようにしました。それが、Rubyに詳しくない初心者向けのコマンド「<code class="inline-code">rake setup:rubygems</code>」です。詳しいことは<span class="file">lib/tasks/starter.rake</span>の中の「<code class="inline-code">task :rubygems</code>」の定義を見てください。また環境変数<code class="inline-code">$GEM_HOME</code>を設定するかわりに、<span class="file">Rakefile</span>の冒頭で<code class="inline-code">Gem.path</code>を設定しています。</p>
+<p>はじめに、Pythonの公式サイト(<a href="https://www.python.org/" class="link">https://www.python.org/</a>)にアクセスしてください。</p>
+<p>公式サイトの上部のメニューに<strong>Downloads</strong>という項目があるので、そこにカーソルを合わせると<span class="imgref"><a href="./01-install.html#download">図1.1</a></span>のようにDownload for Windowsというメニューが表示されます。メニューの<strong>Python 3.13.1</strong>と書かれたボタンを押して、インストーラーをダウンロードしてください。</p>
+<div id="download" class="image">
+<img src="images/01-install/download.png" alt="pythonのダウンロード" class="img border" />
+<p class="caption">
+図1.1: pythonのダウンロード
+</p>
 </div>
+<p>インストーラーを起動すると、<span class="imgref"><a href="./01-install.html#path">図1.2</a></span>のようなウィンドウが表示されます。ここで、下部の<strong>Add python.exe to PATHに必ずチェックを入れてください</strong>。チェックを入れないと、Pythonを実行することができません。(ものすごく面倒な設定をすることになります)</p>
+<p>チェックを入れたら、Install Nowを押してPythonをインストールします。</p>
+<div id="path" class="image">
+<img src="images/01-install/path.png" alt="インストーラー" class="img border" />
+<p class="caption">
+図1.2: インストーラー
+</p>
+</div>
+<p>インストールが完了すると、様々なリンクやボタンが表示されたウィンドウが出ますが、それらは全て無視してCloseボタンを押してください。</p>
 
-<h4><a id="h1-1-2-2"></a>MacTeXのインストール</h4>
-<p>次に、MacTeXをダウンロードします。MacTeXとは、macOS用のTeXLiveです。MacTeXはサイズが大きい（約4GB）ので、本家ではなく以下のミラーサイトのどれかを使ってください。</p>
-<ul>
-<li><a href="http://ftp.jaist.ac.jp/pub/CTAN/systems/mac/mactex/" class="link">http://ftp.jaist.ac.jp/pub/CTAN/systems/mac/mactex/</a><br />
-   &gt; <span class="file">mactex-20200407.pkg</span>
-</li>
-<li><a href="http://ftp.kddilabs.jp/pub/ctan/systems/mac/mactex/" class="link">http://ftp.kddilabs.jp/pub/ctan/systems/mac/mactex/</a><br />
-   &gt; <span class="file">mactex-20200407.pkg</span>
-</li>
-<li><a href="http://ftp.riken.go.jp/pub/CTAN/systems/mac/mactex/" class="link">http://ftp.riken.go.jp/pub/CTAN/systems/mac/mactex/</a><br />
-   &gt; <span class="file">mactex-20200407.pkg</span>
-</li>
-</ul>
-<p>ダウンロードができたら、ダブルクリックしてインストールしてください。</p>
-<p>インストールしたらTerminal.appで次のコマンドを入力し、動作を確認してください（各行の先頭にある「<code class="inline-code">$ </code>」は入力せず、それ以降のコマンドを入力してください）。</p>
-<div class="cmd-code">
-<span class="caption">MacTeXのインストールができたことを確認</span>
-<pre class="list">$ <span class="userinput">which uplatex</span>     <span class="balloon">← 下線が引かれたコマンドだけを入力すること</span>
-/Library/TeX/texbin/uplatex
-$ <span class="userinput">uplatex --version</span> <span class="balloon">← 下線が引かれたコマンドだけを入力すること</span>
-e-upTeX 3.14159265-p3.8.1-u1.23-180226-2.6 (utf8.uptex) (TeX Live 2020)
-...（省略）...
+<h2 id="pythontest" class="leftline"><a id="h1-2"></a><span class="secno">1.2</span> Pythonの動作確認</h2>
+<p>Windowsの検索ボックスに<code class="inline-code">cmd</code>と入力して、コマンドプロンプトを起動します。</p>
+<p>コマンドプロンプトを起動したら、<span class="listref"><a href="./01-install.html#wakeuppython">リスト1.1</a></span>のように入力し、pythonを実行します。</p>
+<div id="wakeuppython" class="cmd-code">
+<span class="caption">リスト1.1: リスト1.1: pythonの実行</span>
+<pre class="list">$ C:\Users\username&gt; <span class="userinput">python</span> 
 </pre>
 </div>
-<p>実際の出力結果は上と少し違うはずですが、だいたい合っていればOKです。</p>
-<p>最後に、MacTeXでヒラギノフォントを使うための準備が必要です（これをしないと、PDFファイルの日本語フォントが見るに耐えません）。そのためには、以下のページから「Bibunsho7-patch-1.5-20200511.dmg」<sup><a id="fnb-id_873gn" href="#fn-id_873gn" class="noteref" epub:type="noteref">*3</a></sup>をダウンロードしてください。</p>
-<div class="footnote-list">
-<div class="footnote" id="fn-id_873gn" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*3] </span>日付が最新のものを選んでください。2020年6月時点では「20200511」が最新です。</p></div>
-</div><!--/.footnote-list-->
-<ul>
-<li><a href="https://github.com/munepi/bibunsho7-patch/releases" class="link">https://github.com/munepi/bibunsho7-patch/releases</a>
-</li>
-</ul>
-<p>ダウンロードしたらダブルクリックして解凍し、「Patch.app」をダブルクリックしてください。</p>
-
-<h3 class="none"><a id="h1-1-3"></a><span class="secno">1.1.3</span> Windowsを使っている場合</h3>
-<p>Windowsにおいて、RubyとTeXLiveをインストールする方法を説明します。</p>
-
-<h4><a id="h1-1-3-1"></a>Rubyのインストール</h4>
-<p>以下のページにアクセスし、「Ruby+Devkit 2.7.3-1」をダウンロードしてインストールしてください。x64版とx86版の2つがあるので、お使いのWindowsが64bit版ならx64版を、32bit版または不明ならx86版をダウンロードしてください。</p>
-<ul>
-<li><a href="https://rubyinstaller.org/downloads/" class="link">https://rubyinstaller.org/downloads/</a>
-</li>
-</ul>
-<p>インストールしたら、コマンドプロンプトで以下のコマンドを入力し、Rubyが実行できることを確かめてください。</p>
-<div class="cmd-code">
-<span class="caption">Rubyが実行できることを確認</span>
-<pre class="list">C:\Users\yourname&gt; <span class="userinput">ruby --version</span>  <span class="balloon">← 「ruby --version」だけを入力</span>
-ruby 2.7.3-1 [x64-mingw32]
-</pre>
+<p>実行すると<span class="imgref"><a href="./01-install.html#pythontest">図1.3</a></span>のように、対話モードと呼ばれるものが起動します。試しに<code class="inline-code">print('Hello World!')</code>を実行して、動作を確認しましょう、</p>
+<div id="pythontest" class="image">
+<img src="images/01-install/pythontest.png" alt="Pythonの対話モード" class="img border" />
+<p class="caption">
+図1.3: Pythonの対話モード
+</p>
 </div>
-<p>実際の出力結果は上と少し違うでしょうが、だいたい合っていればOKです。</p>
-<p>また以下のコマンドを実行し、必要なライブラリをインストールします。</p>
-<div class="cmd-code">
-<span class="caption">必要なライブラリをインストール</span>
-<pre class="list">C:\Users\yourname&gt; <span class="userinput">gem install review --version=2.5</span>
-C:\Users\yourname&gt; <span class="userinput">review version</span>
-2.5.0   <span class="balloon">← 必ず「2.5.0」であること（より新しいバージョンは未サポート）</span>
-</pre>
-</div>
-
-<h4><a id="h1-1-3-2"></a>TeXLiveのインストール</h4>
-<p>次に、Windows用のTeXLiveをインストールします。詳しくはこちらのページを参照してください。このうち、手順(16)において右上の「すべて」ボタンを押してください（つまりすべてのパッケージを選ぶ）。</p>
-<ul>
-<li>「TeXLive2020をインストールしてLaTeXを始める」
-   <br /><a href="https://tm23forest.com/contents/texlive2020-install-latex-begin" class="link">https://tm23forest.com/contents/texlive2020-install-latex-begin</a>
-</li>
-</ul>
-<p>インストールできたら、コマンドプロンプトで以下のコマンドを実行してみてください。</p>
-<div class="cmd-code">
-<span class="caption">コマンドが実行できることを確認</span>
-<pre class="list">C:\Users\yourname&gt; <span class="userinput">uplatex --version</span> <span class="balloon">← 「uplatex --version」だけを入力</span>
-e-upTeX 3.14159265-p3.7.1-u1.22-161114-2.6 (utf8.uptex) (TeX Live 2020/W32TeX)
-...（以下省略）...
-</pre>
-</div>
-<p>実際の出力結果は上と少し違うでしょうが、だいたい合っていればOKです。</p>
-
-<h2 class="leftline"><a id="h1-2"></a><span class="secno">1.2</span> プロジェクトを作成</h2>
-<p>RubyとTeXLiveをインストールしたら、次に本を作るための「プロジェクト」を作成しましょう。</p>
-<p>以下のWebサイトにアクセスしてください。</p>
-<ul>
-<li><a href="https://kauplan.org/reviewstarter/" class="link">https://kauplan.org/reviewstarter/</a>
-</li>
-</ul>
-<p>アクセスしたら、画面の指示に従って操作をしてください（詳細は省略します）。するとプロジェクトが作成されて、zipファイルがダウンロードできます。</p>
-<p>以降では、プロジェクトのzipファイル名が「<span class="file">mybook.zip</span>」だったとして説明します。</p>
-
-<h2 id="sec-generatesample" class="leftline"><a id="h1-3"></a><span class="secno">1.3</span> サンプルのPDFファイルを生成</h2>
-<p>プロジェクトのzipファイルをダウンロードしたら、解凍してサンプルのPDFファイルを生成してみましょう。</p>
-
-<h3 id="subsec-indocker" class="none"><a id="h1-3-1"></a><span class="secno">1.3.1</span> Dockerの場合</h3>
-<p>Dockerを使う場合は、次のような手順でサンプルのPDFファイルを生成してみましょう。</p>
-<div class="cmd-code">
-<span class="caption">Dockerを使ってPDFファイルを生成する</span>
-<pre class="list">$ <span class="userinput">unzip mybook.zip</span>           <span class="balloon">← zipファイルを解凍</span>
-$ <span class="userinput">cd mybook/</span>                 <span class="balloon">← ディレクトリを移動</span>
-$ <span class="userinput">docker run --rm -v $PWD:/work -w /work kauplan/review2.5 rake pdf</span>
-$ <span class="userinput">ls *.pdf</span>                   <span class="balloon">← PDFファイルが生成できたことを確認</span>
-mybook.pdf
-</pre>
-</div>
-<p>これでPDFファイルが生成されるはずです。生成できなかった場合は、Twitterで「<em>#reviewstarter</em>」タグをつけて質問してください（相手先不要）。</p>
-<p>Dockerを使ってPDFファイルが作成できることを確認したら、このあとはdockerコマンドを使わずとも「<code class="inline-code">rake docker:pdf</code>」だけでPDFファイルが生成できます。</p>
-<div class="cmd-code">
-<span class="caption">より簡単にPDFファイルを生成する</span>
-<pre class="list">$ <del>docker run --rm -v $PWD:/work -w /work kauplan/review2.5 rake pdf</del>
-$ <span class="userinput"><b>rake docker:pdf</b></span>            <span class="balloon">← これだけでPDFファイルが生成される</span>
-</pre>
-</div>
-<div class="note">
-<h5>もっと簡単にPDFファイルを生成するためのTips</h5>
-<p>環境変数「<code class="inline-code">$RAKE_DEFAULT</code>」を設定すると、引数なしの「<code class="inline-code">rake</code>」コマンドだけでPDFファイルが生成できます。</p>
-<div class="cmd-code">
-<span class="caption">環境変数「&lt;code class=&quot;inline-code&quot;&gt;$RAKE_DEFAULT&lt;/code&gt;」を設定する</span>
-<pre class="list">$ <span class="userinput">export RAKE_DEFAULT=&quot;docker:pdf&quot;</span> <span class="balloon">← 環境変数を設定</span>
-$ <del>rake docker:pdf</del>
-$ <span class="userinput">rake</span>                  <span class="balloon">← 「rake docker:pdf」が実行される</span>
-</pre>
-</div>
-<p>またシェルのエイリアス機能を使うと、コマンドを短縮名で呼び出せます。</p>
-<div class="cmd-code">
-<span class="caption">シェルのエイリアス機能を使う</span>
-<pre class="list">$ <span class="userinput">alias pdf=&quot;rake docker:pdf&quot;</span> <span class="balloon">← エイリアスを設定</span>
-$ <span class="userinput">pdf</span>                   <span class="balloon">← 「rake docker:pdf」が実行される</span>
-</pre>
-</div>
-</div>
-
-<h3 class="none"><a id="h1-3-2"></a><span class="secno">1.3.2</span> macOSの場合</h3>
-<p>macOSを使っている場合は、Terminal.app<sup><a id="fnb-qqyo5" href="#fn-qqyo5" class="noteref" epub:type="noteref">*4</a></sup>を開いて以下のコマンドを実行してください。ここで、各行の先頭にある「<code class="inline-code">$ </code>」は入力せず、それ以降のコマンドを入力してください。</p>
-<div class="footnote-list">
-<div class="footnote" id="fn-qqyo5" epub:type="footnote"><p class="footnote"><span class="footnote-mark">[*4] </span>繰り返しになりますが、Terminal.appはファインダで「アプリケーション」フォルダ &gt; 「ユーティリティ」フォルダ &gt; 「ターミナル」をダブルクリックすると起動できます。</p></div>
-</div><!--/.footnote-list-->
-<div class="cmd-code">
-<span class="caption">PDFファイルを生成する</span>
-<pre class="list">$ <span class="userinput">unzip mybook.zip</span>       <span class="balloon">← zipファイルを解凍し、</span>
-$ <span class="userinput">cd mybook/</span>             <span class="balloon">← ディレクトリを移動</span>
-$ <span class="userinput">rake pdf</span>               <span class="balloon">← PDFファイルを生成</span>
-$ <span class="userinput">ls *.pdf</span>               <span class="balloon">← PDFファイルが生成されたことを確認</span>
-mybook.pdf
-$ <span class="userinput">open mybook.pdf</span>        <span class="balloon">← PDFファイルを開く</span>
-</pre>
-</div>
-<p>これでPDFファイルが生成されるはずです。生成できなかった場合は、Twitterで「<em>#reviewstarter</em>」タグをつけて質問してください（相手先不要）。</p>
-<div class="note">
-<h5>もっと簡単にPDFファイルを生成するためのTips</h5>
-<p>環境変数「<code class="inline-code">$RAKE_DEFAULT</code>」を設定すると、引数なしの「<code class="inline-code">rake</code>」コマンドだけでPDFファイルが生成できます。</p>
-<div class="cmd-code">
-<span class="caption">環境変数「&lt;code class=&quot;inline-code&quot;&gt;$RAKE_DEFAULT&lt;/code&gt;」を設定する</span>
-<pre class="list">$ <span class="userinput">export RAKE_DEFAULT=&quot;pdf&quot;</span> <span class="balloon">← 環境変数を設定</span>
-$ <del>rake pdf</del>
-$ <span class="userinput">rake</span>                      <span class="balloon">← 「rake pdf」が実行される</span>
-</pre>
-</div>
-<p>またシェルのエイリアス機能を使うと、コマンドを短縮名で呼び出せます。</p>
-<div class="cmd-code">
-<span class="caption">シェルのエイリアス機能を使う</span>
-<pre class="list">$ <span class="userinput">alias pdf=&quot;rake pdf&quot;</span>      <span class="balloon">← エイリアスを設定</span>
-$ <span class="userinput">pdf</span>                       <span class="balloon">← 「rake pdf」が実行される</span>
-</pre>
-</div>
-</div>
-
-<h3 class="none"><a id="h1-3-3"></a><span class="secno">1.3.3</span> Windowsの場合</h3>
-<p>Windowsを使っている場合は、まずプロジェクトのzipファイル（<span class="file">mybook.zip</span>）をダブルクリックして解凍してください。</p>
-<p>そしてコマンドプロンプトで以下のコマンドを実行してください。</p>
-<div class="cmd-code">
-<span class="caption">PDFファイルを生成する</span>
-<pre class="list">C:\Users\yourname&gt; <span class="userinput">cd mybook</span>        <span class="balloon">← 解凍してできたフォルダに移動</span>
-C:\Users\yourname\mybook&gt; <span class="userinput">rake pdf</span>  <span class="balloon">← PDFファイルを生成</span>
-C:\Users\yourname\mybook&gt; <span class="userinput">dir *.pdf</span> <span class="balloon">← PDFファイルが生成されたことを確認</span>
-</pre>
-</div>
-<p>これでPDFファイルが生成されるはずです。生成できなかった場合は、Twitterで「<em>#reviewstarter</em>」タグをつけて質問してください（相手先不要）。</p>
-
-<h2 class="leftline"><a id="h1-4"></a><span class="secno">1.4</span> 注意点</h2>
-<p>エラーが発生したときは、「<a href="02-tutorial.html#h5-3-4">5.3.4 コンパイルエラーになったら</a>」の説明を参考にしてください。</p>
-<p>そのほか、次の点に注意してください。</p>
-<ul>
-<li>HTMLファイルを生成するときは「<code class="inline-code">rake web</code>」（または「<code class="inline-code">rake docker:web</code>」）を実行してください。
-</li>
-<li>ePubファイルを生成するときは「<code class="inline-code">rake epub</code>」（または「<code class="inline-code">rake docker:epub</code>」）を実行してください。
-</li>
-<li>Markdownファイルを生成するときは「<code class="inline-code">rake markdown</code>」（または「<code class="inline-code">rake docker:markdown</code>」）を実行してください。
-</li>
-<li>Starterでは「<code class="inline-code">review-pdfmaker</code>」コマンドや「<code class="inline-code">review-epubmaker</code>」コマンドが使えません（実行はできますが望ましい結果にはなりません）。
-   必ず「<code class="inline-code">rake pdf</code>」や「<code class="inline-code">rake epub</code>」を使ってください。
-</li>
-</ul>
-<p>繰り返しになりますが、エラーが発生したときは「<a href="02-tutorial.html#h5-3-4">5.3.4 コンパイルエラーになったら</a>」の説明を読んでみてください。</p>
+<p>これでインストールは終わりです。</p>
 
         </main>
         <nav class="page-navi">

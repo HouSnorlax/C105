@@ -26,47 +26,7 @@ def createwindow():
     third_s.configure(text = box[9].get())
     fourth_s.configure(text = box[10].get())
 
-    #同着処理
-    if box[7].get() == '同着': #1着同着の場合
-        second.configure(text = 'Ⅰ')
-        same = 1
-    else:
-        second.configure(text = 'Ⅱ')
-        same = 0
 
-    if box[8].get() == '同着': #2着同着の場合
-        if same == 1:
-            third.configure(text = 'Ⅰ')
-        elif same == 0:
-            third.configure(text = 'Ⅱ')
-            same = 2
-    else:
-        third.configure(text = 'Ⅲ')
-        same = 0
-
-    if box[9].get() == '同着': #3着同着の場合
-        if same == 1:
-            fourth.configure(text = 'Ⅰ')
-        elif same == 2:
-            fourth.configure(text = 'Ⅱ')
-        elif same == 0:
-            fourth.configure(text = 'Ⅲ')
-            same = 3
-    else:
-        fourth.configure(text = 'Ⅳ')
-        same = 4
-
-    if box[10].get() == '同着': #4着同着の場合
-        if same == 1:
-            fifth.configure(text = 'Ⅰ')
-        elif same == 2:
-            fifth.configure(text = 'Ⅱ')
-        elif same == 3:
-            fifth.configure(text = 'Ⅲ')
-        elif same == 4:
-            fifth.configure(text = 'Ⅳ')
-    else:
-        fifth.configure(text = 'Ⅴ')
 
     #馬場状態変更
     siba2.configure(text = box[11].get())
@@ -126,7 +86,7 @@ root2.geometry('510x850')
 root2.resizable(False, False)
 root2.configure(bg = 'black')
 root2.title('掲示板')
-canvas = tk.Canvas(root2, bg = 'black', height = 900, width = 500 )
+canvas = tk.Canvas(root2, bg = 'black', height = 850, width = 510 )
 
 #root(表示内容の設定)のウィジェット
 labels = []
